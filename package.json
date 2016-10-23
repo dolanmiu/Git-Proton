@@ -4,7 +4,7 @@
     "license": "MIT",
     "angular-cli": {},
     "scripts": {
-        "start": "electron . && ng serve",
+        "start": "ng build && electron .",
         "lint": "tslint \"src/**/*.ts\"",
         "test": "ng test",
         "pree2e": "webdriver-manager update",
