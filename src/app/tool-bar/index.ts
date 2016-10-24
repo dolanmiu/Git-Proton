@@ -3,20 +3,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { ToolbarModule } from './tool-bar';
+import { ToolBarComponent } from './tool-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    ToolBarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    ToolbarModule
+    HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  exports: [ToolBarComponent]
 })
-export class AppModule { }
+export class ToolbarModule { }
