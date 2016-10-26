@@ -22,10 +22,12 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.isVisible = false;
-        console.log("destroying");
+        console.log('destroying');
     }
 
     openDialog() {
-        electron.
+        electron.showOpenDialog({
+            properties: ['openDirectory']
+        });
     }
 }
