@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "~2.0.0",
     "@angular/router": "~3.0.0",
     "core-js": "^2.4.1",
-    "electron": "^1.4.4",
     "font-awesome": "^4.6.3",
     "nodegit": "^0.16.0",
     "octicons": "^4.4.0",
@@ -45,6 +44,7 @@
     "protractor": "4.0.9",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
-    "typescript": "2.0.2"
+    "typescript": "2.0.2",
+    "electron": "^1.4.4"
   }
 }

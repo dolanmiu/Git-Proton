@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, trigger, state, transition, style, animate, Input } from '@angular/core';
-import * as electron from 'electron';
+import { dialog } from 'electron';
 
 @Component({
     selector: 'app-repo-manager',
@@ -26,7 +26,7 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
     }
 
     openDialog() {
-        electron.showOpenDialog({
+        dialog.showOpenDialog({
             properties: ['openDirectory']
         });
     }
