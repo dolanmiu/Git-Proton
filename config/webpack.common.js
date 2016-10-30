@@ -45,6 +45,8 @@ module.exports = {
             template: 'src/index.html'
         }),
 
-        extractCSS
-    ]
+        extractCSS,
+    ],
+
+    target: "electron-renderer"
 };
