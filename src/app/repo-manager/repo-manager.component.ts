@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy, trigger, state, transition, style, animat
 @Component({
     selector: 'app-repo-manager',
     templateUrl: './repo-manager.component.html',
-    //styleUrls: ['./repo-manager.component.scss'],
+    styleUrls: ['./repo-manager.component.scss'],
     animations: [
         trigger('visibilityChanged', [
             state('true', style({ opacity: 1, transform: 'translateY(0%)' })),
