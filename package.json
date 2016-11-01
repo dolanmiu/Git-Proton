@@ -27,11 +27,12 @@
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
     "core-js": "^2.4.1",
-    "rxjs": "5.0.0-beta.12",
-    "zone.js": "^0.6.25",
     "font-awesome": "^4.6.3",
+    "nconf": "^0.8.4",
     "nodegit": "^0.16.0",
-    "octicons": "^4.4.0"
+    "octicons": "^4.4.0",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.25"
   },
   "devDependencies": {
     "angular2-template-loader": "^0.4.0",
