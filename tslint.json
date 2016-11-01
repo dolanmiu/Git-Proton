@@ -1,8 +1,8 @@
 {
   "rulesDirectory": [
-    "node_modules/codelyzer"
   ],
   "rules": {
+    "extends": "tslint:recommended",
     "class-name": true,
     "comment-format": [
       true,

@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy, trigger, state, transition, style, animate, Input } from '@angular/core';
 import { remote } from 'electron';
+import * as fs from 'fs';
+import * as nconf from 'nconf';
+import * as path from 'path';
 
 @Component({
     selector: 'app-repo-manager',
@@ -18,6 +21,7 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.isVisible = true;
+        //nconf.
     }
 
     ngOnDestroy() {
@@ -28,6 +32,41 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
     openDialog() {
         remote.dialog.showOpenDialog({
             properties: ['openDirectory']
+        }, (data) => {
+            if (data) {
+                this.addGitProject(data[0]);
+            }
         });
     }
+
+    private addGitProject(directory: string): OpenGitStatus {
+        try {
+            let stats = fs.statSync(`${directory}/.git`);
+
+            if (stats.isDirectory()) {
+                console.log(stats);
+                return OpenGitStatus.Success;
+            } else {
+                return OpenGitStatus.NotFound;
+            }
+        } catch (e) {
+            return OpenGitStatus.NotFound;
+        }
+        /*nconf.argv().env();
+        nconf.file('projects', { file: 'configuration/projects.json' });
+
+        nconf.set(path.basename(directory), {
+            directory
+        });
+
+        nconf.save('projects', err => {
+            fs.readFile('configuration/projects.json', (err, data) => {
+                console.dir(JSON.parse(data.toString()))
+            });
+        });*/
+    }
+}
+
+enum OpenGitStatus {
+    NotFound, Success
 }
