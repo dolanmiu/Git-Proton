@@ -32,7 +32,8 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
     openDialog() {
         remote.dialog.showOpenDialog({
             properties: ['openDirectory']
-        }, (data) => {
+        }, data => {
+            console.log(data);
             if (data) {
                 this.addGitProject(data[0]);
             }
