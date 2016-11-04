@@ -1,8 +1,8 @@
 {
+  "extends": "tslint:recommended",
   "rulesDirectory": [
   ],
   "rules": {
-    "extends": "tslint:recommended",
     "class-name": true,
     "comment-format": [
       true,
