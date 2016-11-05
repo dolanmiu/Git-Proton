@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { GitWrapper } from './git-wrapper';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,7 +21,15 @@ function createWindow(): void {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         win = null;
-    })
+    });
+
+    let gitWrapper = new GitWrapper();
+
+    ipcMain.on('open-repo', (event, arg) => {
+        console.log(arg)  // prints "ping"
+        event.returnValue = 'pong'
+        gitWrapper.openRepo(arg);
+    });
 };
 
 // This method will be called when Electron has finished

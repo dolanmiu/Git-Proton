@@ -1,5 +1,15 @@
 var webpack = require('webpack');
 var helpers = require('./helpers');
+var fs = require('fs');
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+    .filter(function(x) {
+        return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function(mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
 
 module.exports = {
     devtool: 'source-map',
@@ -25,6 +35,8 @@ module.exports = {
             loaders: ['awesome-typescript-loader']
         }]
     },
+
+    externals: nodeModules,
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

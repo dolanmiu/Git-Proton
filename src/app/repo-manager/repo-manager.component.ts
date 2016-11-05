@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, trigger, state, transition, style, animate, Input } from '@angular/core';
-import { remote } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 import * as fs from 'fs';
 import * as nconf from 'nconf';
 import * as path from 'path';
@@ -46,6 +46,20 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
 
             if (stats.isDirectory()) {
                 console.log(stats);
+                /*nconf.argv().env();
+                nconf.file('projects', { file: 'configuration/projects.json' });
+
+                nconf.set(path.basename(directory), {
+                    directory
+                });
+
+                nconf.save('projects', err => {
+                    fs.readFile('configuration/projects.json', (err, data) => {
+                        console.dir(JSON.parse(data.toString()))
+                    });
+                });*/
+                ipcRenderer.send('open-repo', directory);
+
                 return OpenGitStatus.Success;
             } else {
                 return OpenGitStatus.NotFound;
@@ -53,18 +67,7 @@ export class RepoManagerComponent implements OnInit, OnDestroy {
         } catch (e) {
             return OpenGitStatus.NotFound;
         }
-        /*nconf.argv().env();
-        nconf.file('projects', { file: 'configuration/projects.json' });
 
-        nconf.set(path.basename(directory), {
-            directory
-        });
-
-        nconf.save('projects', err => {
-            fs.readFile('configuration/projects.json', (err, data) => {
-                console.dir(JSON.parse(data.toString()))
-            });
-        });*/
     }
 }
 
