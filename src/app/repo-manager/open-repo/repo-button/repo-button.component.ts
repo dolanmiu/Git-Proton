@@ -20,7 +20,7 @@ export class RepoButtonComponent implements OnInit {
             return;
         }
         this.projectName = path.basename(this.directory);
-        this.parentFolder = path.normalize(`${this.directory}..`);
+        this.parentFolder = path.normalize(`${this.directory}/..`);
     }
 
 }

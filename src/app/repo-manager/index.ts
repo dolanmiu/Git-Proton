@@ -6,17 +6,21 @@ import { HttpModule } from '@angular/http';
 import { RepoManagerComponent } from './repo-manager.component';
 import { RepoButtonComponent } from './open-repo/repo-button/repo-button.component';
 
-// import { AppRoutingModule } from './app-routing.module';
+import { OpenRepoComponent } from './open-repo/open-repo.component';
+
+import { RepoManagerRoutingModule } from './repo-manager-routing.module';
 
 @NgModule({
   declarations: [
     RepoManagerComponent,
-    RepoButtonComponent
+    RepoButtonComponent,
+    OpenRepoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RepoManagerRoutingModule
   ],
   providers: [],
   exports: [RepoManagerComponent]
