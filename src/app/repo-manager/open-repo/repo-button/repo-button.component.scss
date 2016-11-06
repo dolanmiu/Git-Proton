@@ -1,0 +1,8 @@
+@import 'colors';
+.box {
+     :hover {
+        background-color: $button-hover-color;
+        transition: background-color 0.5s ease;
+    }
+    width: 100px;
+}
