@@ -4,6 +4,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 let extractCSS = new ExtractTextPlugin('[name].css');
 var helpers = require('./helpers');
 
+// import 'style!@angular2-material/core/style/core.css';
+// import 'style!@angular2-material/core/overlay/overlay.css';
+
 module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
@@ -33,11 +36,18 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['raw-loader', 'sass-loader']
             },
+            {
+                test: /\.css$/,
+                loaders: ['raw-loader', 'css-loader']
+            }
         ]
     },
 
     sassLoader: {
-        includePaths: [helpers.root('src/global-styles')]
+        includePaths: [
+            helpers.root('src/global-styles'),
+            helpers.root('node_modules/@angular')
+        ]
     },
 
     plugins: [
