@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { remote, ipcRenderer } from 'electron';
 import * as fs from 'fs';
-import * as nconf from 'nconf';
-import * as path from 'path';
+import { Config } from '../../ipc/config.service';
 
 @Component({
     selector: 'app-open-repo',
     templateUrl: './open-repo.component.html',
-    styleUrls: ['./open-repo.component.scss']
+    styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
     repos: Array<string>;
 
-    constructor() {
+    constructor(private config: Config) {
         this.repos = new Array<string>();
     }
 
@@ -22,7 +21,7 @@ export class OpenRepoComponent implements OnInit {
 
     openDialog() {
         remote.dialog.showOpenDialog({
-            properties: ['openDirectory']
+            properties: ['openDirectory'],
         }, data => {
             console.log(data);
             if (data) {
@@ -37,21 +36,10 @@ export class OpenRepoComponent implements OnInit {
 
             if (stats.isDirectory()) {
                 console.log(stats);
-                /*nconf.argv().env();
-                nconf.file('projects', { file: 'configuration/projects.json' });
-
-                nconf.set(path.basename(directory), {
-                    directory
-                });
-
-                nconf.save('projects', err => {
-                    fs.readFile('configuration/projects.json', (err, data) => {
-                        console.dir(JSON.parse(data.toString()))
-                    });
-                });*/
                 this.repos.push(directory);
                 console.log(this.repos);
                 ipcRenderer.send('open-repo', directory);
+                this.config.writeConfig();
 
                 return OpenGitStatus.Success;
             } else {

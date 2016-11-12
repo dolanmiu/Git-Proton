@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { GitWrapper } from './git-wrapper';
+import { Config } from './config';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -26,9 +27,16 @@ function createWindow(): void {
     let gitWrapper = new GitWrapper();
 
     ipcMain.on('open-repo', (event, arg) => {
-        console.log(arg)  // prints "ping"
-        event.returnValue = 'pong'
+        console.log(arg); // prints "ping"
+        event.returnValue = 'pong';
         gitWrapper.openRepo(arg);
+    });
+
+    let configReader = new Config();
+
+    ipcMain.on('write-config', (event, arg) => {
+        console.log(arg);
+        configReader.writeConfig('dench');
     });
 };
 

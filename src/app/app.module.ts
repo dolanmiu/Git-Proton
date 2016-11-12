@@ -9,6 +9,7 @@ import { RepoManagerModule } from './repo-manager';
 import { WorkspaceModule } from './workspace';
 
 import { AppRoutingModule } from './app-routing.module';
+import { IPCModule } from './ipc/ipc.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     WorkspaceModule,
     RepoManagerModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    IPCModule
   ],
   providers: [],
   bootstrap: [AppComponent]
