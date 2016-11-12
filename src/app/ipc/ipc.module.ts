@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Config } from './config.service';
 
-
 @NgModule({
   declarations: [
   ],

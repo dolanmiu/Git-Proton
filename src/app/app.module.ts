@@ -13,7 +13,7 @@ import { IPCModule } from './ipc/ipc.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,9 +23,9 @@ import { IPCModule } from './ipc/ipc.module';
     WorkspaceModule,
     RepoManagerModule,
     MaterialModule.forRoot(),
-    IPCModule
+    IPCModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

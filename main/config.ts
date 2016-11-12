@@ -13,7 +13,7 @@ export class Config {
         });
 
         nconf.save('projects', err => {
-            fs.readFile('configuration/projects.json', (err, data) => {
+            fs.readFile('configuration/projects.json', (error, data) => {
                 console.dir(JSON.parse(data.toString()));
             });
         });
