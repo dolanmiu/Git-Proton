@@ -11,7 +11,7 @@ export class Config {
         });
     }
 
-    private ensureFileExists(fileName: string, callback: () => void) {
+    private ensureFileExists(fileName: string, callback: () => void = () => {}) {
         mkdirp(`${__dirname}/configuration`, err => {
             if (err) {
                 return console.error(err);
