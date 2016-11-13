@@ -3,7 +3,8 @@ import { ipcRenderer } from 'electron';
 
 @Injectable()
 export class Config {
-    public writeConfig() {
-        ipcRenderer.send('write-config', 'test');
+
+    public writeConfig(directory: string) {
+        ipcRenderer.send('write-config', directory);
     }
 }

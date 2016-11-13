@@ -6,24 +6,34 @@ import * as mkdirp from 'mkdirp';
 export class Config {
 
     public writeConfig(directory: string) {
+        this.ensureFileExists('projects.json', () => {
+            this.addProject(directory);
+        });
+    }
+
+    private ensureFileExists(fileName: string, callback: () => void) {
         mkdirp(`${__dirname}/configuration`, err => {
             if (err) {
                 return console.error(err);
             }
 
-            fs.writeFile(`${__dirname}/configuration/projects.json`, '{}', error => {
-                if (err) {
-                    return console.log(err);
+            fs.access(`${__dirname}/configuration/${fileName}`, err => {
+                if (!err) {
+                    return callback();
                 }
-                this.readConfig('fff');
+
+                fs.writeFile(`${__dirname}/configuration/${fileName}`, '{}', err => {
+                    if (err) {
+                        return console.log(err);
+                    }
+
+                    callback();
+                });
             });
-
         });
-
-
     }
 
-    private readConfig(directory: string) {
+    private addProject(directory: string) {
         nconf.argv().env();
         nconf.file('projects', { file: `${__dirname}/configuration/projects.json` });
 

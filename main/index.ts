@@ -36,7 +36,7 @@ function createWindow(): void {
 
     ipcMain.on('write-config', (event, arg) => {
         console.log(arg);
-        configReader.writeConfig('dench');
+        configReader.writeConfig(arg);
     });
 };
 
