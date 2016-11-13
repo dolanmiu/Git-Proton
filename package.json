@@ -32,6 +32,7 @@
     "@angular/router": "~3.1.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.6.3",
+    "mkdirp": "^0.5.1",
     "nconf": "^0.8.4",
     "nodegit": "^0.16.0",
     "octicons": "^4.4.0",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@types/core-js": "^0.9.34",
     "@types/electron": "^1.4.26",
+    "@types/mkdirp": "^0.3.29",
     "@types/nconf": "0.0.32",
     "@types/node": "^6.0.46",
     "angular2-template-loader": "^0.4.0",
