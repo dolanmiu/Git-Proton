@@ -14,15 +14,15 @@ import { RepoManagerRoutingModule } from './repo-manager-routing.module';
   declarations: [
     RepoManagerComponent,
     RepoButtonComponent,
-    OpenRepoComponent
+    OpenRepoComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RepoManagerRoutingModule
+    RepoManagerRoutingModule,
   ],
   providers: [],
-  exports: [RepoManagerComponent]
+  exports: [RepoManagerComponent],
 })
 export class RepoManagerModule { }

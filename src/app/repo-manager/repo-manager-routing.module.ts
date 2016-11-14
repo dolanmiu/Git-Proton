@@ -11,12 +11,12 @@ import { OpenRepoComponent } from './open-repo/open-repo.component';
                 path: '', component: RepoManagerComponent,
                 children: [
                     { path: 'open', component: OpenRepoComponent },
-                ]
-            }
-        ])
+                ],
+            },
+        ]),
     ],
     exports: [
-        RouterModule
-    ]
+        RouterModule,
+    ],
 })
 export class RepoManagerRoutingModule { }

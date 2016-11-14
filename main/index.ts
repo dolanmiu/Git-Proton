@@ -1,12 +1,12 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { GitWrapper } from './git-wrapper';
-import { Config } from './config';
+import * as configManager from './config/config-manager';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: any;
 
-function createWindow(): void {
+let createWindow = () => {
     // Create the browser window.
     win = new BrowserWindow({ width: 800, height: 600 });
 
@@ -32,12 +32,7 @@ function createWindow(): void {
         gitWrapper.openRepo(arg);
     });
 
-    let configReader = new Config();
-
-    ipcMain.on('write-config', (event, arg) => {
-        console.log(arg);
-        configReader.writeConfig(arg);
-    });
+    configManager.load();
 };
 
 // This method will be called when Electron has finished

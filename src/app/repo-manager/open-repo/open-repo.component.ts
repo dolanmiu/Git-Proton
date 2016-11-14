@@ -9,14 +9,18 @@ import { Config } from '../../ipc/config.service';
     styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
-    repos: Array<string>;
+    repos: Array<Repo>;
 
     constructor(private config: Config) {
-        this.repos = new Array<string>();
+        this.repos = new Array<Repo>();
     }
 
     ngOnInit() {
-
+        console.log('getting repos');
+        this.config.loadConfig(repos => {
+            console.log(repos);
+            this.repos = repos;
+        });
     }
 
     openDialog() {
@@ -36,7 +40,6 @@ export class OpenRepoComponent implements OnInit {
 
             if (stats.isDirectory()) {
                 console.log(stats);
-                this.repos.push(directory);
                 console.log(this.repos);
                 ipcRenderer.send('open-repo', directory);
                 this.config.writeConfig(directory);

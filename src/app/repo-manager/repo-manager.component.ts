@@ -8,9 +8,9 @@ import { Component, OnInit, OnDestroy, trigger, state, transition, style, animat
         trigger('visibilityChanged', [
             state('true', style({ opacity: 1, transform: 'translateY(0%)' })),
             state('false', style({ opacity: 0, transform: 'translateY(20%)' })),
-            transition('* => *', animate('.2s ease-out'))
-        ])
-    ]
+            transition('* => *', animate('.2s ease-out')),
+        ]),
+    ],
 })
 export class RepoManagerComponent implements OnInit, OnDestroy {
     @Input() isVisible: boolean;
