@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { remote, ipcRenderer } from 'electron';
 import * as fs from 'fs';
 import { Config } from '../../ipc/config.service';
@@ -9,14 +9,12 @@ import { Config } from '../../ipc/config.service';
     styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
-    repos: Array<Repo>;
+    @Output() repos: Array<Repo>;
 
     constructor(private config: Config) {
-        this.repos = new Array<Repo>();
     }
 
     ngOnInit() {
-        console.log('getting repos');
         this.config.loadConfig(repos => {
             console.log(repos);
             this.repos = repos;

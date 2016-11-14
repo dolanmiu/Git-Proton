@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ipcRenderer } from 'electron';
 
 @Injectable()
 export class Config {
+
+    constructor(private zone: NgZone) {
+    }
 
     public writeConfig(directory: string) {
         ipcRenderer.send('write-config', directory);
@@ -12,7 +15,11 @@ export class Config {
         console.log('loading config');
         ipcRenderer.send('load-config');
         ipcRenderer.once('load-config-reply', (event, arg) => {
-            callback(arg);
+            this.zone.runOutsideAngular(() => {
+                this.zone.run(() => {
+                    callback(arg);
+                });
+            });
         });
     }
 }
