@@ -7,6 +7,8 @@ import { RepoManagerComponent } from './repo-manager.component';
 import { RepoButtonComponent } from './open-repo/repo-button/repo-button.component';
 
 import { OpenRepoComponent } from './open-repo/open-repo.component';
+import { CloneRepoComponent } from './clone-repo/clone-repo.component';
+import { InitRepoComponent } from './init-repo/init-repo.component';
 
 import { RepoManagerRoutingModule } from './repo-manager-routing.module';
 
@@ -15,6 +17,8 @@ import { RepoManagerRoutingModule } from './repo-manager-routing.module';
     RepoManagerComponent,
     RepoButtonComponent,
     OpenRepoComponent,
+    CloneRepoComponent,
+    InitRepoComponent,
   ],
   imports: [
     BrowserModule,
