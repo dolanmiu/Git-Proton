@@ -6,22 +6,24 @@ import { MaterialModule } from '@angular/material';
 
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { WorkspaceComponent } from './workspace.component';
+import { BranchViewComponent } from './branch-view/branch-view.component';
 
 import { WorkspaceRoutingModule } from './workspace-routing.module';
 
 @NgModule({
   declarations: [
     ToolBarComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    BranchViewComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     WorkspaceRoutingModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
   ],
   providers: [],
-  exports: [WorkspaceComponent]
+  exports: [WorkspaceComponent],
 })
 export class WorkspaceModule { }

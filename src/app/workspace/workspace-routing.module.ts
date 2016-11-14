@@ -11,13 +11,13 @@ import { RepoManagerComponent } from '../repo-manager/repo-manager.component';
                 path: '', component: WorkspaceComponent,
                 children: [
                     { path: '' },
-                    { path: 'repo', component: RepoManagerComponent }
-                ]
-            }
-        ])
+                    { path: 'repo', component: RepoManagerComponent },
+                ],
+            },
+        ]),
     ],
     exports: [
-        RouterModule
-    ]
+        RouterModule,
+    ],
 })
 export class WorkspaceRoutingModule { }
