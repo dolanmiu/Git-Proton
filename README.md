@@ -1,5 +1,5 @@
 
-# Angular2 Electron Starter (with Webpack)
+# Git Proton
 forked from [angular2-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter)
 
 
