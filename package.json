@@ -15,7 +15,7 @@
   },
   "licenses": [
     {
-      "type": "MIT",
+      "type": "GPL-3.0",
       "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
     }
   ],
