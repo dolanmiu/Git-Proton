@@ -4,11 +4,12 @@
   "description": "Angular2 Electron Starter",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
-    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "buildmain": "webpack --config config/webpack.main.js --progress --profile --bail",
-    "electron": "npm run build && npm run buildmain && electron .",
+    "build-main": "webpack --config config/webpack.main.js --progress --profile --bail",
+    "build-electron": "webpack --config config/webpack.prod.js --progress --profile --bail",
+    "build": "rimraf dist && npm run build-electron && npm run build-main",
+    "electron": "npm run build && electron .",
     "package": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist App --platform=darwin --arch=all --out=dist-app --overwrite",
-    "electrononly": "electron .",
+    "electron-only": "electron .",
     "karma": "karma start 'config/karma.conf.js'",
     "lint": "tslint --project .",
     "test": "npm run karma && npm run lint"
