@@ -4,19 +4,19 @@
   "description": "Angular2 Electron Starter",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
-    "karma": "karma start 'config/karma.conf.js'",
-    "test": "npm run karma && npm run lint",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
+    "buildmain": "webpack --config config/webpack.main.js --progress --profile --bail",
     "electron": "npm run build && npm run buildmain && electron .",
     "package": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist App --platform=darwin --arch=all --out=dist-app --overwrite",
-    "buildmain": "webpack --config config/webpack.main.js --progress --profile --bail",
     "electrononly": "electron .",
-    "lint": "tslint --project ."
+    "karma": "karma start 'config/karma.conf.js'",
+    "lint": "tslint --project .",
+    "test": "npm run karma && npm run lint"
   },
   "licenses": [
     {
       "type": "GPL-3.0",
-      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+      "url": "https://github.com/dolanmiu/Git-Proton/blob/master/LICENSE"
     }
   ],
   "main": "./dist/main.js",
