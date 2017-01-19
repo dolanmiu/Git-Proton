@@ -4,10 +4,10 @@ import * as path from 'path';
 @Component({
     selector: 'app-repo-button',
     templateUrl: './repo-button.component.html',
-    styleUrls: ['./repo-button.component.scss']
+    styleUrls: ['./repo-button.component.scss'],
 })
 export class RepoButtonComponent implements OnInit {
-    @Input() directory: string
+    @Input() directory: string;
     projectName: string;
     parentFolder: string;
 

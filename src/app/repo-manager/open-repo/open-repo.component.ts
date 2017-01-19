@@ -14,14 +14,14 @@ export class OpenRepoComponent implements OnInit {
     constructor(private config: Config) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.config.loadConfig(repos => {
             console.log(repos);
             this.repos = repos;
         });
     }
 
-    openDialog() {
+    public openDialog(): void {
         remote.dialog.showOpenDialog({
             properties: ['openDirectory'],
         }, data => {
