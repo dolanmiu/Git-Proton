@@ -1,7 +1,7 @@
 {
-  "name": "angular2-electron-starter",
+  "name": "git-proton",
   "version": "0.2.0",
-  "description": "Angular2 Electron Starter",
+  "description": "An open source Electron based Git GUI tool",
   "scripts": {
     "start-web": "webpack-dev-server --open --inline --progress --port 8080",
     "start": "npm run build && electron .",
