@@ -18,6 +18,10 @@ $candy-app-theme: md-light-theme($candy-app-primary, $candy-app-accent, $candy-a
 @include angular-material-theme($candy-app-theme);*/
 
 @import '~material-design-icons/iconfont/material-icons.css';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+@import '~octicons/build/octicons.min.css';
+// @import '~octicons/build/sprite.octicons.svg';
 
 h1 {
     //font-family: courier;

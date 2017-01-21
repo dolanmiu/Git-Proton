@@ -37,7 +37,7 @@
     "mkdirp": "^0.5.1",
     "nconf": "^0.8.4",
     "nodegit": "^0.16.0",
-    "octicons": "^4.4.0",
+    "octicons": "^5.0.1",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.25"
   },
