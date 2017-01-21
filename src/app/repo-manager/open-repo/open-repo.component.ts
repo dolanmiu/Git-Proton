@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { remote, ipcRenderer } from 'electron';
+import { ipcRenderer, remote } from 'electron';
 import * as fs from 'fs';
 import { Config } from '../../ipc/config.service';
 
@@ -9,13 +9,13 @@ import { Config } from '../../ipc/config.service';
     styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
-    @Output() repos: Array<Repo>;
+    @Output() repos: Repo[];
 
     constructor(private config: Config) {
     }
 
     public ngOnInit() {
-        this.config.loadConfig(repos => {
+        this.config.loadConfig((repos) => {
             console.log(repos);
             this.repos = repos;
         });
@@ -24,7 +24,7 @@ export class OpenRepoComponent implements OnInit {
     public openDialog(): void {
         remote.dialog.showOpenDialog({
             properties: ['openDirectory'],
-        }, data => {
+        }, (data) => {
             console.log(data);
             if (data) {
                 this.addGitProject(data[0]);
@@ -41,7 +41,6 @@ export class OpenRepoComponent implements OnInit {
                 console.log(this.repos);
                 ipcRenderer.send('open-repo', directory);
                 this.config.writeConfig(directory);
-
                 return OpenGitStatus.Success;
             } else {
                 return OpenGitStatus.NotFound;

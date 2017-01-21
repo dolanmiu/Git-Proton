@@ -5,8 +5,8 @@
   "scripts": {
     "start-web": "webpack-dev-server --open --inline --progress --port 8080",
     "start": "npm run build && electron .",
-    "build-main": "webpack --config config/webpack.main.js --progress --profile --bail",
-    "build-electron": "webpack --config config/webpack.prod.js --progress --profile --bail",
+    "build-main": "webpack --config config/webpack.main.js --progress --profile --bail --display-error-details",
+    "build-electron": "webpack --config config/webpack.prod.js --progress --profile --bail --display-error-details",
     "build": "rimraf dist && npm run build-electron && npm run build-main",
     "package": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist App --platform=darwin --arch=all --out=dist-app --overwrite",
     "electron": "electron .",
@@ -33,6 +33,7 @@
     "@angular/router": "~3.1.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.6.3",
+    "material-design-icons": "^3.0.1",
     "mkdirp": "^0.5.1",
     "nconf": "^0.8.4",
     "nodegit": "^0.16.0",
