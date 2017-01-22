@@ -3,6 +3,16 @@ var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
+var fs = require('fs');
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+    .filter(function(x) {
+        return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function(mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -15,6 +25,8 @@ module.exports = webpackMerge(commonConfig, {
         filename: '[name].[hash].js',
         chunkFilename: '[id].[hash].chunk.js'
     },
+
+    externals: nodeModules,
 
     htmlLoader: {
         minimize: false // workaround for ng2
