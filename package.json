@@ -44,6 +44,7 @@
   "devDependencies": {
     "@types/core-js": "^0.9.34",
     "@types/electron": "^1.4.26",
+    "@types/jasmine": "^2.5.41",
     "@types/karma": "^0.13.33",
     "@types/mkdirp": "^0.3.29",
     "@types/nconf": "0.0.32",
