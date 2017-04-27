@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { ipcRenderer, remote } from 'electron';
 import * as fs from 'fs';
 import { Config } from '../../ipc/config.service';
-import * as Git from 'nodegit';
+// import * as Git from 'nodegit';
 
 @Component({
     selector: 'app-open-repo',
@@ -41,11 +41,11 @@ export class OpenRepoComponent implements OnInit {
                 console.log(stats);
                 console.log(this.repos);
 
-                Git.Repository.open('test');
+                /*Git.Repository.open('test');
 
                 ipcRenderer.send('open-repo', directory);
                 this.config.writeConfig(directory);
-                return OpenGitStatus.Success;
+                return OpenGitStatus.Success;*/
             } else {
                 return OpenGitStatus.NotFound;
             }

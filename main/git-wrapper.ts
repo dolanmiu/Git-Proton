@@ -3,7 +3,7 @@ import * as Git from 'nodegit';
 export class GitWrapper {
 
     public openRepo(repoName: string) {
-        return new Promise((resolve, reject) => {
+        /*return new Promise<void>((resolve, reject) => {
             Git.Repository.open(repoName)
                 // Open the master branch.
                 .then(function (repo) {
@@ -44,6 +44,6 @@ export class GitWrapper {
                     // Start emitting events.
                     history.start();
                 });
-        });
+        });*/
     }
 }
