@@ -1,3 +1,2 @@
-<p>
-  open-repo works!
-</p>
+<a class="btn btn-primary" (click)="openDialog()">Browse for more Repos</a>
+<app-repo-button *ngFor="let repo of repos" [directory]="repo.directory"></app-repo-button>
