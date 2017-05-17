@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 import { promise as wdpromise } from 'selenium-webdriver';
 
 export class AithexPage {

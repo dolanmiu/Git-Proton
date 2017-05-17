@@ -14,7 +14,7 @@ describe('RepoManagerComponent', () => {
             imports: [
                 NoopAnimationsModule,
                 RouterTestingModule.withRoutes([
-                    { path: '', component: RepoManagerComponent }
+                    { path: '', component: RepoManagerComponent },
                 ]),
             ],
         }).compileComponents();

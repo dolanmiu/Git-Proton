@@ -34,7 +34,7 @@ export class OpenRepoComponent implements OnInit {
     //             console.log(this.repos);
 
     //             /*Git.Repository.open('test');
-        
+
     //             ipcRenderer.send('open-repo', directory);
     //             this.config.writeConfig(directory);
     //             return OpenGitStatus.Success;*/

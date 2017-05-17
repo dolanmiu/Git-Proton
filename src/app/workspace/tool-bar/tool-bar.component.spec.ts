@@ -13,7 +13,7 @@ describe('ToolBarComponent', () => {
             imports: [
                 MdButtonModule,
                 MdMenuModule,
-            ]
+            ],
         }).compileComponents();
     }));
 

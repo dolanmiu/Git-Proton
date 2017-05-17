@@ -8,7 +8,7 @@ describe('CloneRepoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CloneRepoComponent ]
+      declarations: [ CloneRepoComponent ],
     })
     .compileComponents();
   }));
