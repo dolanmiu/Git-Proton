@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OpenRepoComponent } from './open-repo.component';
+import { RepoButtonComponent } from './repo-button/repo-button.component';
 
 describe('OpenRepoComponent', () => {
     let component: OpenRepoComponent;
@@ -8,9 +9,11 @@ describe('OpenRepoComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [OpenRepoComponent],
-        })
-            .compileComponents();
+            declarations: [
+                OpenRepoComponent,
+                RepoButtonComponent,
+            ],
+        }).compileComponents();
     }));
 
     beforeEach(() => {

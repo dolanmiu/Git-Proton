@@ -1,5 +1,6 @@
 [![Chat on Gitter][gitter-image]][gitter-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Build Status][travis-image]][travis-url]
 
 # GitProton
 
@@ -35,3 +36,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [gemnasium-image]: https://gemnasium.com/badges/github.com/dolanmiu/Git-Proton.svg
 [gemnasium-url]: https://gemnasium.com/github.com/dolanmiu/Git-Proton
+
+[travis-image]: https://travis-ci.org/dolanmiu/Git-Proton.svg?branch=master
+[travis-url]: https://travis-ci.org/dolanmiu/Git-Proton
