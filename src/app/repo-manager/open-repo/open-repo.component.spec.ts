@@ -1,11 +1,25 @@
-/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestBed, async } from '@angular/core/testing';
 import { OpenRepoComponent } from './open-repo.component';
 
-describe('Component: RepoPage', () => {
-  it('should create an instance', () => {
-    //let component = new OpenRepoComponent();
-    //expect(component).toBeTruthy();
-  });
+describe('OpenRepoComponent', () => {
+    let component: OpenRepoComponent;
+    let fixture: ComponentFixture<OpenRepoComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [OpenRepoComponent],
+        })
+            .compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(OpenRepoComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

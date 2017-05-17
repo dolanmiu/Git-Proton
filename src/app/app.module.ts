@@ -1,31 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
-
-import { AppComponent } from './app.component';
-import { RepoManagerModule } from './repo-manager';
-import { WorkspaceModule } from './workspace';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { IPCModule } from './ipc/ipc.module';
+import { AppComponent } from './app.component';
+import { RepoManagerModule } from './repo-manager/repo-manager.module';
+import { WorkspaceModule } from './workspace/workspace.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRoutingModule,
-    WorkspaceModule,
-    RepoManagerModule,
-    MaterialModule.forRoot(),
-    IPCModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RepoManagerModule,
+        WorkspaceModule,
+    ],
+    providers: [],
+    bootstrap: [
+        AppComponent,
+    ],
 })
 export class AppModule { }

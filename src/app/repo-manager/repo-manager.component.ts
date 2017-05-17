@@ -1,26 +1,15 @@
-import { Component, OnInit, OnDestroy, trigger, state, transition, style, animate, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-repo-manager',
     templateUrl: './repo-manager.component.html',
     styleUrls: ['./repo-manager.component.scss'],
-    animations: [
-        trigger('visibilityChanged', [
-            state('true', style({ opacity: 1, transform: 'translateY(0%)' })),
-            state('false', style({ opacity: 0, transform: 'translateY(20%)' })),
-            transition('* => *', animate('.2s ease-out')),
-        ]),
-    ],
 })
-export class RepoManagerComponent implements OnInit, OnDestroy {
-    @Input() isVisible: boolean;
+export class RepoManagerComponent implements OnInit {
 
-    ngOnInit() {
-        this.isVisible = true;
+    constructor() { }
+
+    public ngOnInit(): void {
     }
 
-    ngOnDestroy() {
-        this.isVisible = false;
-        console.log('destroying');
-    }
 }

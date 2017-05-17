@@ -1,11 +1,25 @@
-/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestBed, async } from '@angular/core/testing';
 import { CommitViewComponent } from './commit-view.component';
 
-describe('Component: ToolBar', () => {
-  it('should create an instance', () => {
-    let component = new CommitViewComponent();
+describe('CommitViewComponent', () => {
+  let component: CommitViewComponent;
+  let fixture: ComponentFixture<CommitViewComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CommitViewComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CommitViewComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

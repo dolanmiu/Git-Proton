@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as path from 'path';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-repo-button',
@@ -7,20 +6,19 @@ import * as path from 'path';
     styleUrls: ['./repo-button.component.scss'],
 })
 export class RepoButtonComponent implements OnInit {
-    @Input() directory: string;
-    projectName: string;
-    parentFolder: string;
+    @Input() public directory: string;
+    public projectName: string;
+    public parentFolder: string;
 
     constructor() {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         if (!this.directory) {
             console.warn('"directory" is not set as the input!');
             return;
         }
-        this.projectName = path.basename(this.directory);
-        this.parentFolder = path.normalize(`${this.directory}/..`);
+        // this.projectName = path.basename(this.directory);
+        // this.parentFolder = path.normalize(`${this.directory}/..`);
     }
-
 }

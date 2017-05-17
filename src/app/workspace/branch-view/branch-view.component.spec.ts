@@ -1,11 +1,25 @@
-/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestBed, async } from '@angular/core/testing';
 import { BranchViewComponent } from './branch-view.component';
 
-describe('Component: ToolBar', () => {
-  it('should create an instance', () => {
-    let component = new BranchViewComponent();
+describe('BranchViewComponent', () => {
+  let component: BranchViewComponent;
+  let fixture: ComponentFixture<BranchViewComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ BranchViewComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BranchViewComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

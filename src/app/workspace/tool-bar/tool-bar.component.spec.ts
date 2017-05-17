@@ -1,11 +1,29 @@
-/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MdButtonModule, MdMenuModule } from '@angular/material';
 
-import { TestBed, async } from '@angular/core/testing';
 import { ToolBarComponent } from './tool-bar.component';
 
-describe('Component: ToolBar', () => {
-  it('should create an instance', () => {
-    let component = new ToolBarComponent();
-    expect(component).toBeTruthy();
-  });
+describe('ToolBarComponent', () => {
+    let component: ToolBarComponent;
+    let fixture: ComponentFixture<ToolBarComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ToolBarComponent],
+            imports: [
+                MdButtonModule,
+                MdMenuModule,
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ToolBarComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
