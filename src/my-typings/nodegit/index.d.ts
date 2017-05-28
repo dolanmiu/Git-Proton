@@ -5,11 +5,6 @@ declare module "nodegit" {
     }
 }
 
-class Repository {
-    open(path: string): Promise<Repository>;
-    getMasterCommit(): Commit;
-}
-
 interface Commit {
     history(): History;
     sha(): string;
