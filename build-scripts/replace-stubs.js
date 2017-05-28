@@ -13,4 +13,4 @@ glob("src/**/_*.ts", (er, files) => {
         fs.copySync(originalFilePath, newOriginalFilePath)
         fs.copySync(file, originalFilePath);
     }
-})
+});
