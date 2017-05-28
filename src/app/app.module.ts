@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ElectronModule } from './electron/electron.module';
+import { ElectronModule } from './common/electron/electron.module';
 import { RepoManagerModule } from './repo-manager/repo-manager.module';
 import { WorkspaceModule } from './workspace/workspace.module';
 
