@@ -43,3 +43,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [daviddm-image]: https://david-dm.org/dolanmiu/Git-Proton/status.svg
 [daviddm-url]: https://david-dm.org/dolanmiu/Git-Proton
+
+## Development
+
+For MacOS, you need `libgcrypt` for `nodegit` to install, https://github.com/nodegit/nodegit/issues/1156:
+
+```bash
+$ brew install libgcrypt
+```
