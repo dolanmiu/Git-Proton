@@ -8,9 +8,9 @@ glob("src/**/_*.ts", (er, files) => {
         const originalFilename = electronFilename.replace('_', '');
 
         const originalFilePath = path.join(path.dirname(file), originalFilename);
-        const newOriginalFilePath = path.join(path.dirname(file), `${originalFilename}.mock`);
+        const newOriginalFilePath = path.join(path.dirname(file), `${originalFilename}.stub`);
 
-        fs.copySync(originalFilePath, newOriginalFilePath)
+        fs.copySync(originalFilePath, newOriginalFilePath);
         fs.copySync(file, originalFilePath);
     }
 });

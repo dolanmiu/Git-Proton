@@ -13,7 +13,8 @@
     "build-electron": "ng build --base-href .",
     "electron": "npm run build-electron && electron .",
     "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
-    "pre-electron": "node ./build-scripts/replace-stubs.js"
+    "pre-electron": "node ./build-scripts/replace-stubs.js",
+    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js"
   },
   "private": true,
   "dependencies": {
