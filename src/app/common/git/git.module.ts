@@ -8,5 +8,8 @@ import { GitService } from './git.service';
     imports: [
         CommonModule,
     ],
+    providers: [
+        GitService,
+    ],
 })
 export class GitModule { }

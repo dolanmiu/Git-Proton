@@ -18,6 +18,7 @@ import { WorkspaceModule } from './workspace/workspace.module';
         RepoManagerModule,
         WorkspaceModule,
         ElectronModule,
+        GitModule,
     ],
     providers: [],
     bootstrap: [

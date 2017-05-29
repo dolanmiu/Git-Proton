@@ -12,6 +12,8 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "lib": [
       "es2016",
       "dom"
