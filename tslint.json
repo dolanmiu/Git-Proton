@@ -169,6 +169,10 @@
           "typeLiterals": "ignore"
         }
       }
+    ],
+    "array-type": [
+      true,
+      "array-simple"
     ]
   }
 }
