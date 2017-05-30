@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { BranchViewComponent } from './branch-view.component';
+import { DialogService } from './dialog.service';
 
 @NgModule({
     declarations: [
-        BranchViewComponent,
     ],
     imports: [
         CommonModule,
     ],
-    exports: [
-        BranchViewComponent,
+    providers: [
+        DialogService,
     ],
 })
-export class BranchViewModule { }
+export class ElectronModule { }

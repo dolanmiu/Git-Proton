@@ -1,5 +1,6 @@
 [![Chat on Gitter][gitter-image]][gitter-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![dependencies Status][daviddm-image]][daviddm-url]
 [![Build Status][travis-image]][travis-url]
 
 # GitProton
@@ -39,3 +40,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [travis-image]: https://travis-ci.org/dolanmiu/Git-Proton.svg?branch=master
 [travis-url]: https://travis-ci.org/dolanmiu/Git-Proton
+
+[daviddm-image]: https://david-dm.org/dolanmiu/Git-Proton/status.svg
+[daviddm-url]: https://david-dm.org/dolanmiu/Git-Proton
+
+## Development
+
+For MacOS, you need `libgcrypt` for `nodegit` to install, https://github.com/nodegit/nodegit/issues/1156:
+
+```bash
+$ brew install libgcrypt
+```

@@ -1,10 +1,8 @@
 declare module "nodegit" {
-    export var Repository: Repository
-}
-
-interface Repository {
-    open(path: string): Promise<Repository>;
-    getMasterCommit(): Commit;
+    class Repository {
+        static open(path: string): Promise<Repository>;
+        getMasterCommit(): Commit;
+    }
 }
 
 interface Commit {

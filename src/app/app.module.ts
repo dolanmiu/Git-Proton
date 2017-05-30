@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ElectronModule } from './common/electron/electron.module';
+import { GitModule } from './common/git/git.module';
 import { RepoManagerModule } from './repo-manager/repo-manager.module';
 import { WorkspaceModule } from './workspace/workspace.module';
 
@@ -15,6 +17,8 @@ import { WorkspaceModule } from './workspace/workspace.module';
         AppRoutingModule,
         RepoManagerModule,
         WorkspaceModule,
+        ElectronModule,
+        GitModule,
     ],
     providers: [],
     bootstrap: [
