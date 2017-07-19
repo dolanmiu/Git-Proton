@@ -1,17 +1,28 @@
-<app-tool-bar></app-tool-bar>
-<p>
-    workspace works!
-</p>
+<div class="main-container">
+    <app-tool-bar></app-tool-bar>
 
-<h1>
-    <span class="octicon octicon-clippy"></span> Title
-</h1>
+    <div class="workspace-container">
+        <div class="branch-view-container">
+            sdfds
+            <app-branch-view></app-branch-view>
+        </div>
 
-<button md-raised-button color="primary">TOGGLE DARK THEME</button>
-<button md-raised-button color="primary">PRIMARY</button>
-<button md-raised-button color="accent">ACCENT</button>
-<button md-raised-button color="warn">WARN</button>
+        <div class="overview-container">
+            <app-overview></app-overview>
+            <h1>
+                <span class="octicon octicon-clippy"></span> Title
+            </h1>
 
-<app-branch-view></app-branch-view>
-<app-overview></app-overview>
-<app-commit-view></app-commit-view>
+            <button md-raised-button color="primary">TOGGLE DARK THEME</button>
+            <button md-raised-button color="primary">PRIMARY</button>
+            <button md-raised-button color="accent">ACCENT</button>
+            <button md-raised-button color="warn">WARN</button>
+        </div>
+
+        <div class="commit-view-container">
+            <app-commit-view></app-commit-view>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</div>

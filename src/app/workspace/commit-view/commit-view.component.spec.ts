@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MdButtonModule, MdIconModule, MdInputModule, MdListModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CommitViewComponent } from './commit-view.component';
 
@@ -9,6 +11,13 @@ describe('CommitViewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [CommitViewComponent],
+            imports: [
+                NoopAnimationsModule,
+                MdListModule,
+                MdIconModule,
+                MdInputModule,
+                MdButtonModule,
+            ],
         }).compileComponents();
     }));
 
