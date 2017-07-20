@@ -12,6 +12,7 @@ import { RepoManagerComponent } from './repo-manager.component';
             {
                 path: 'repo-manager', component: RepoManagerComponent,
                 children: [
+                    { path: '', redirectTo: 'open', pathMatch: 'full' },
                     { path: 'open', component: OpenRepoComponent },
                     { path: 'clone', component: CloneRepoComponent },
                     { path: 'init', component: InitRepoComponent },
