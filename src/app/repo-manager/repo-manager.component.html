@@ -2,9 +2,15 @@
     <p>
         repo-manager works! <a routerLink="/">Close</a>
     </p>
-    <a routerLink="/repo-manager/open">Open</a>
+    <!-- <a routerLink="/repo-manager/open">Open</a>
     <a routerLink="/repo-manager/clone">Clone</a>
-    <a routerLink="/repo-manager/init">Init</a>
+    <a routerLink="/repo-manager/init">Init</a> -->
+
+    <nav md-tab-nav-bar>
+        <a md-tab-link routerLink="/repo-manager/open" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Open</a>
+        <a md-tab-link routerLink="/repo-manager/clone" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Clone</a>
+        <a md-tab-link routerLink="/repo-manager/init" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Init</a>
+    </nav>
 
     <router-outlet></router-outlet>
 </div>
