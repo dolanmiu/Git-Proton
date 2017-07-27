@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { DialogService } from 'app/common/electron/dialog.service';
 // import { remote } from 'electron';
 
 @Component({
@@ -8,13 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpenRepoComponent implements OnInit {
 
-    constructor() {
+    constructor(private dialogService: DialogService) {
     }
 
     public ngOnInit(): void {
     }
 
     public openDialog(): void {
+        this.dialogService.openDialog();
         // remote.dialog.showOpenDialog({
         //     properties: ['openDirectory'],
         // }, (data) => {
