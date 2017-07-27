@@ -6,7 +6,7 @@ export class GitService {
 
     constructor() { }
 
-    public addGitProject(directory: string): Observable<void> {
+    public addGitProject(directory: string): Observable<{}> {
 
         return Observable.empty();
     }
