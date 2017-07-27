@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 8px 24px 0;
+    padding-left: 24px;
+}
+
+.mat-input-container {
+    flex-grow: 1;
+    font-size: 14px;
+    margin-left: 32px;
+}
+
+.mat-table {
+    overflow: auto;
+}
