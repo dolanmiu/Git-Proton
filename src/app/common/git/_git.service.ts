@@ -9,7 +9,7 @@ export class GitService {
 
     constructor() { }
 
-    private addGitProject(directory: string): Observable<void> {
+    public addGitProject(directory: string): Observable<void> {
         const subject = new Subject<void>();
 
         fs.stat(`${directory}/.git`, (err, stats) => {
