@@ -1,4 +1,7 @@
+import { CdkTableModule } from '@angular/cdk';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MdInputModule, MdTableModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { OverviewComponent } from './overview.component';
 
@@ -9,6 +12,12 @@ describe('OverviewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [OverviewComponent],
+            imports: [
+                NoopAnimationsModule,
+                MdInputModule,
+                MdTableModule,
+                CdkTableModule,
+            ],
         }).compileComponents();
     }));
 

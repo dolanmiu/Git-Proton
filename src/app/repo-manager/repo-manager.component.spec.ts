@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MdTabsModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -16,6 +17,7 @@ describe('RepoManagerComponent', () => {
                 RouterTestingModule.withRoutes([
                     { path: '', component: RepoManagerComponent },
                 ]),
+                MdTabsModule,
             ],
         }).compileComponents();
     }));
