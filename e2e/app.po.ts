@@ -1,7 +1,7 @@
 import { browser, by, element } from 'protractor';
 import { promise as wdpromise } from 'selenium-webdriver';
 
-export class AithexPage {
+export class GitProtonPage {
     public navigateTo(): wdpromise.Promise<Object> {
         return browser.get('/');
     }
