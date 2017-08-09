@@ -10,7 +10,7 @@
     "test": "ng test --watch=false",
     "lint": "ng lint && npm run sass-lint",
     "e2e": "ng e2e",
-    "build-electron": "ng build --base-href .",
+    "build-electron": "nge build",
     "electron": "npm run pre-electron && npm run build-electron && electron .",
     "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
     "pre-electron": "node ./build-scripts/replace-stubs.js",
@@ -59,6 +59,7 @@
     "sass-lint": "^1.10.2",
     "ts-node": "~2.0.0",
     "tslint": "^5.2.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.2.0",
+    "ng-cli-electron": "^1.0.1"
   }
 }
