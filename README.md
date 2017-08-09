@@ -2,10 +2,10 @@
 [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![dependencies Status][daviddm-image]][daviddm-url]
 [![Build Status][travis-image]][travis-url]
+[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 # GitProton
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/dolanmiu/Git-Proton.svg)](https://greenkeeper.io/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
@@ -45,6 +45,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [daviddm-image]: https://david-dm.org/dolanmiu/Git-Proton/status.svg
 [daviddm-url]: https://david-dm.org/dolanmiu/Git-Proton
+
+[greenkeeper-image]: https://badges.greenkeeper.io/dolanmiu/Git-Proton.svg
+[greenkeeper-url]: https://greenkeeper.io/
 
 ## Development
 
