@@ -14,8 +14,7 @@
     "electron": "npm run pre-electron && npm run build-electron && electron .",
     "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
     "pre-electron": "node ./build-scripts/replace-stubs.js",
-    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js",
-    "main": "webpack --config webpack.main.config.js"
+    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js"
   },
   "private": true,
   "dependencies": {
