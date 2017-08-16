@@ -14,7 +14,7 @@ export class NodeGitIPC {
         ipcMain.on('open-repo', (event, arg) => {
             console.log(arg); // prints "ping"
             event.returnValue = 'pong';
-            this.nodeGit.openRepo(arg);
+            this.nodeGit.openRepo(arg).subscribe();
         });
     }
 }
