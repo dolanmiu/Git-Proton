@@ -1,43 +1,56 @@
 import * as Git from 'nodegit';
-// import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
+interface CommitModel {
+    author: {
+        name: string,
+        email: string,
+    };
+    sha: string;
+    message: string;
+    date: Date;
+}
 
 export class GitWrapper {
 
-    public openRepo(repoName: string): Promise<void> {
-        // return Observable.fromPromise(Git.Repository.open(repoName));
-        return new Promise<void>((resolve, reject) => {
+    public openRepo(repoName: string): Observable<CommitModel[]> {
+        const commit$ = new Observable<CommitModel[]>((observer) => {
             Git.Repository.open(repoName)
                 // Open the master branch.
                 .then((repo) => {
                     console.log(repo);
                     return repo.getMasterCommit();
                 })
-                // Display information about commits on master.
                 .then((firstCommitOnMaster) => {
-                    // Create a new history event emitter.
-                    const history = firstCommitOnMaster.history();
-                    // Create a counter to only show up to 9 entries.
-                    let count = 0;
-                    // Listen for commit events from the history.
-                    history.on('commit', (commit) => {
-                        // Disregard commits past 9.
-                        if (++count >= 9) {
-                            return;
+                    const history: any = firstCommitOnMaster.history();
+
+                    history.on('end', (commits: any[]) => {
+                        const data = commits.map<CommitModel>((commit) => {
+                            return {
+                                author: {
+                                    name: commit.author().name(),
+                                    email: commit.author().email(),
+                                },
+                                sha: commit.sha(),
+                                message: commit.message(),
+                                date: commit.date(),
+                            };
+                        });
+                        for (const commit of commits) {
+                            console.log('commit ' + commit.sha());
+                            const author = commit.author();
+                            console.log('Author:\t' + author.name() + ' <' + author.email() + '>');
+                            console.log('Date:\t' + commit.date());
+                            console.log('\n    ' + commit.message());
                         }
-                        // Show the commit sha.
-                        console.log('commit ' + commit.sha());
-                        // Store the author object.
-                        const author = commit.author();
-                        // Display author information.
-                        console.log('Author:\t' + author.name() + ' <' + author.email() + '>');
-                        // Show the commit date.
-                        console.log('Date:\t' + commit.date());
-                        // Give some space and show the message.
-                        console.log('\n    ' + commit.message());
+                        observer.next(data);
+                        observer.complete();
                     });
-                    // Start emitting events.
+
                     history.start();
                 });
         });
+
+        return commit$;
     }
 }
