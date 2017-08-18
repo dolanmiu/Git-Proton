@@ -23,14 +23,6 @@ export class OpenRepoComponent implements OnInit {
             console.log(data);
             return this.gitService.addGitProject(data[0]);
         }).subscribe();
-        // remote.dialog.showOpenDialog({
-        //     properties: ['openDirectory'],
-        // }, (data) => {
-        //     console.log(data);
-        //     if (data) {
-        //         // this.addGitProject(data[0]);
-        //     }
-        // });
     }
 
     // private addGitProject(directory: string): OpenGitStatus {
