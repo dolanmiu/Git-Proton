@@ -21,7 +21,7 @@ export class GitService {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            (ipcRenderer as IpcRenderer).once('open-repo', (event, arg) => {
+            ipcRenderer.once('open-repo', (event, arg) => {
                 console.log(arg);
                 console.log(event);
                 subject.next(arg);
