@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
-import * as Git from 'nodegit';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -11,21 +11,21 @@ export class GitService {
 
     public addGitProject(directory: string): Observable<void> {
         const subject = new Subject<void>();
+        console.log(directory);
 
         fs.stat(`${directory}/.git`, (err, stats) => {
-            if (err !== null) {
+            console.log(err);
+            console.log(stats);
+
+            if (err || !stats.isDirectory()) {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            if (!stats.isDirectory()) {
-                throw new Error(`${directory} is not a Git project`);
-            }
-
-            Git.Repository.open('test').then((repo) => {
-                subject.next();
-            });
-
-            // this.config.writeConfig(directory);
+            (ipcRenderer as IpcRenderer).once('open-repo', (event, arg) => {
+                console.log(arg);
+                console.log(event);
+                subject.next(arg);
+            }).send('open-repo', directory);
         });
 
         return subject.asObservable();

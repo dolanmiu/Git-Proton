@@ -8,7 +8,7 @@ export class DialogService {
 
     public openDialog(): Observable<string[]> {
         console.log('Pretending to open dialog');
-        return new Observable<string[]>();
+        return Observable.empty();
     }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/Rx';
 
 import { DialogService } from 'app/common/electron/dialog.service';
-// import { remote } from 'electron';
+import { GitService } from 'app/common/git/git.service';
 
 @Component({
     selector: 'app-open-repo',
@@ -10,14 +11,18 @@ import { DialogService } from 'app/common/electron/dialog.service';
 })
 export class OpenRepoComponent implements OnInit {
 
-    constructor(private dialogService: DialogService) {
+    constructor(private dialogService: DialogService, private gitService: GitService) {
+        console.log(this.gitService.addGitProject);
     }
 
     public ngOnInit(): void {
     }
 
     public openDialog(): void {
-        this.dialogService.openDialog();
+        this.dialogService.openDialog().flatMap((data) => {
+            console.log(data);
+            return this.gitService.addGitProject(data[0]);
+        }).subscribe();
         // remote.dialog.showOpenDialog({
         //     properties: ['openDirectory'],
         // }, (data) => {
