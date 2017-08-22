@@ -13,7 +13,8 @@
     "electron": "npm run pre-electron && npm run build-electron && electron dist",
     "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
     "pre-electron": "node ./build-scripts/replace-stubs.js",
-    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js"
+    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js",
+    "build-main-only": "nge build --main"
   },
   "private": true,
   "dependencies": {
