@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Observable } from 'rxjs/Rx';
 import * as shell from 'shelljs';
 import * as which from 'which';
@@ -35,16 +36,18 @@ export class GitWrapper {
                 observer.complete();
             });
         }).flatMap((stdout) => {
-            const res = stdout.split('\ncommit').map((commit) => {
-                return `commit${commit}`;
-            });
+            const res = stdout.split('\ncommit');
+            for (let i = 1; i < res.length; i++) {
+                res[i] = `commit${res[i]}`;
+            }
             return res;
         }).map((raw) => {
             const pattern = /commit(.+)\nAuthor:(.+)<(.+)>\nAuthorDate:(.+)\nCommit:(.+)<(.+)>\nCommitDate:(.+)\n\n([\s\S]+)/g;
             const matches = pattern.exec(raw);
             const shas = matches[1].trim().split(' ');
             const currentSha = shas[0];
-            const parentShas = [];
+            const parentShas = _.clone<string[]>(shas);
+            parentShas.shift();
 
             return {
                 author: {
