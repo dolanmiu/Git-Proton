@@ -9,8 +9,8 @@ export class GitService {
 
     constructor() { }
 
-    public addGitProject(directory: string): Observable<void> {
-        const subject = new Subject<void>();
+    public addGitProject(directory: string): Observable<CommitModel[]> {
+        const subject = new Subject<CommitModel[]>();
         console.log(directory);
 
         fs.stat(`${directory}/.git`, (err, stats) => {
@@ -21,7 +21,7 @@ export class GitService {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            ipcRenderer.once('open-repo', (event, arg) => {
+            ipcRenderer.once('open-repo', (event, arg: CommitModel[]) => {
                 console.log(arg);
                 console.log(event);
                 subject.next(arg);
