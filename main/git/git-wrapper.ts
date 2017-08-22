@@ -3,24 +3,6 @@ import { Observable } from 'rxjs/Rx';
 import * as shell from 'shelljs';
 import * as which from 'which';
 
-interface CommitModel {
-    author: {
-        name: string,
-        email: string,
-        date: Date,
-    };
-    commit: {
-        name: string,
-        email: string,
-        date: Date,
-    };
-    sha: {
-        current: string,
-        parents: string[],
-    };
-    message: string;
-}
-
 export class GitWrapper {
 
     constructor() {
