@@ -17,7 +17,11 @@ glob("src/**/_*.ts", (er, files) => {
 
         if (res > 0) {
             console.log(`Copying file: ${file}`);
-            fs.copySync(originalFilePath, newOriginalFilePath);
+            if (!fs.existsSync(path)) {
+                console.log(`Stub already exists, skipping`);
+            } else {
+                fs.copySync(originalFilePath, newOriginalFilePath);
+            }
             fs.copySync(file, originalFilePath);
         } else {
             console.log('Files are the same skipping');
