@@ -13,7 +13,7 @@ export class GitWrapper {
 
     public openRepo(repoName: string): Observable<GitCommitModel[]> {
         const commit$ = new Observable<string>((observer) => {
-            shell.exec(`cd ${repoName} && git log --parents --format=fuller`, (code, stdout, stderr) => {
+            shell.exec(`cd ${repoName} && git log --parents --format=fuller`, { silent: true }, (code, stdout, stderr) => {
                 observer.next(stdout);
                 observer.complete();
             });
