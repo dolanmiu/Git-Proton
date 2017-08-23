@@ -34,12 +34,12 @@ export class GitWrapper {
                 author: {
                     name: matches[2].trim(),
                     email: matches[3].trim(),
-                    date: new Date(matches[4]),
+                    date: matches[4].trim(),
                 },
                 commit: {
                     name: matches[5].trim(),
                     email: matches[6].trim(),
-                    date: new Date(matches[7]),
+                    date: matches[7].trim(),
                 },
                 sha: {
                     current: currentSha,
