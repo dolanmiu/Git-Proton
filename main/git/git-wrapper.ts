@@ -23,7 +23,8 @@ export class GitWrapper {
             }
             return res;
         }).map((raw) => {
-            const pattern = /commit(.+)\nAuthor:(.+)<(.+)>\nAuthorDate:(.+)\nCommit:(.+)<(.+)>\nCommitDate:(.+)\n\n([\s\S]+)/g;
+            // tslint:disable-next-line:max-line-length
+            const pattern = /commit(.+)\n(?:Merge: (?:.+)\n)?Author:(.+)<(.+)>\nAuthorDate:(.+)\nCommit:(.+)<(.+)>\nCommitDate:(.+)\n([\s\S]*)/g;
             const matches = pattern.exec(raw);
             const shas = matches[1].trim().split(' ');
             const currentSha = shas[0];
