@@ -8,7 +8,6 @@ export class GitWrapper {
     constructor() {
         const resolved = which.sync('node');
         shell.config.execPath = resolved; // Replace this with the real path
-
     }
 
     public openRepo(repoName: string): Observable<GitCommitModel[]> {
