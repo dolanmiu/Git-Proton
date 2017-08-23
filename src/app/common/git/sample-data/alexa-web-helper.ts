@@ -1,4 +1,4 @@
-export const SAMPLE_DATA: GitCommitModel[] = [
+export const ALEXA_WEB_HELPER: GitCommitModel[] = [
     {
       'author': {
         'date': '2017-07-12T19:22:13.000Z',
