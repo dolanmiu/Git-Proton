@@ -1,5 +1,11 @@
 import * as _ from 'lodash';
 
+import { CommitModel } from './commit-model';
+
+interface TreeNode {
+    commit: CommitModel;
+}
+
 export class TreeRow {
     private row: TreeNode[];
 
@@ -16,5 +22,15 @@ export class TreeRow {
         }
 
         this.row[index] = node;
+    }
+
+    public get ColumnIndex(): number {
+        for (let i = 0; i < this.row.length; i++) {
+            if (this.row[i] !== undefined && this.row[i].commit instanceof CommitModel) {
+                return i;
+            }
+        }
+
+        throw new Error('Cannot find CommitModel');
     }
 }

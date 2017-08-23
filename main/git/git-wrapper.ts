@@ -11,7 +11,7 @@ export class GitWrapper {
 
     }
 
-    public openRepo(repoName: string): Observable<CommitModel[]> {
+    public openRepo(repoName: string): Observable<GitCommitModel[]> {
         const commit$ = new Observable<string>((observer) => {
             shell.exec(`cd ${repoName} && git log --parents --format=fuller`, (code, stdout, stderr) => {
                 observer.next(stdout);
@@ -47,7 +47,7 @@ export class GitWrapper {
                     parents: parentShas,
                 },
                 message: matches[8].trim(),
-            } as CommitModel;
+            } as GitCommitModel;
         }).toArray();
 
         return commit$;

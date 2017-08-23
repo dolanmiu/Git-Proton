@@ -1,4 +1,4 @@
-interface CommitModel {
+interface GitCommitModel {
     author: {
         name: string,
         email: string,

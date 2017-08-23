@@ -1,4 +1,4 @@
-export const SAMPLE_DATA: CommitModel[] = [
+export const SAMPLE_DATA: GitCommitModel[] = [
     {
       'author': {
         'date': '2017-07-12T19:22:13.000Z',
