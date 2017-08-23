@@ -1,0 +1,3 @@
+interface TreeNode {
+    commit: CommitModel;
+}
