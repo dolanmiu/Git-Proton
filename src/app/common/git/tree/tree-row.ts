@@ -1,19 +1,16 @@
 import * as _ from 'lodash';
 
 import { CommitModel } from './commit-model';
-
-interface TreeNode {
-    commit: CommitModel;
-}
+import { TreeElement } from './tree-element';
 
 export class TreeRow {
-    private row: TreeNode[];
+    private row: TreeElement[];
 
     constructor() {
         this.row = [];
     }
 
-    public addElement(index: number, node: TreeNode): void {
+    public addElement(index: number, node: TreeElement): void {
         const currentMaxIndex = this.row.length - 1;
 
         if (index > currentMaxIndex) {
@@ -26,7 +23,7 @@ export class TreeRow {
 
     public get ColumnIndex(): number {
         for (let i = 0; i < this.row.length; i++) {
-            if (this.row[i] !== undefined && this.row[i].commit instanceof CommitModel) {
+            if (this.row[i] !== undefined && this.row[i] instanceof CommitModel) {
                 return i;
             }
         }
