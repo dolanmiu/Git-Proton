@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { CommitModel } from './commit-model';
-import { TreeElement } from './tree-element';
+import { TreeElement } from './path-finding/tree-element';
 
 export class TreeRow {
     private row: TreeElement[];

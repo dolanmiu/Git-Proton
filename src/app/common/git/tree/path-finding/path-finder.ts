@@ -1,11 +1,7 @@
-import { TreeElement } from '../tree-element';
 import { Grid } from './grid';
-
-interface PathDataCache {
-    node: TreeElement;
-    distance: number;
-    location: Vector;
-}
+import { PathDataCache } from './path-data-cache';
+import { SortedArray } from './sorted-array';
+import { TreeElement, TreeElementType } from './tree-element';
 
 interface Path {
     nodes: Vector[];
@@ -14,22 +10,39 @@ interface Path {
 export class PathFinder {
 
     public run(grid: Grid, start?: TreeElement): Path {
-        const nodes: Map<PathDataCache, PathDataCache> = new Map<PathDataCache, PathDataCache>();
+        const path: Map<PathDataCache, PathDataCache> = new Map<PathDataCache, PathDataCache>();
 
-        if (start === undefined) {
-            return { nodes: [{ x: 0, y: 0 }] };
-        }
+        const openList = new SortedArray();
+        const closedList: PathDataCache[] = [];
+        openList.push({
+            node: start,
+            distance: 0,
+        });
 
         const coordinates = grid.getCoordinates(start);
 
-        nodes.set({
+        path.set({
             node: start,
             distance: 0,
-            location: {
-                x: coordinates.x,
-                y: coordinates.y,
-            },
         }, undefined);
 
+    }
+
+    private pass(grid: Grid, path: Map<PathDataCache, PathDataCache>, openList: PathDataCache[], closedList: PathDataCache[]): void {
+        const currentNode = openList.pop();
+        const neighbours = grid.findNeighbours(currentNode.node);
+
+        for (const node of neighbours) {
+            if (node.Type === TreeElementType.PIPE) {
+                continue;
+            }
+
+            openList.push({
+                node: node,
+                distance: currentNode.distance + 1,
+            });
+        }
+
+        closedList.push(currentNode);
     }
 }
