@@ -1,6 +1,6 @@
 import { PathDataCache } from './path-data-cache';
 
-export class SortedArray extends Array<PathDataCache> {
+export class PriorityQueue extends Array<PathDataCache> {
 
     public push(item: PathDataCache): number {
         const amount = super.push(item);

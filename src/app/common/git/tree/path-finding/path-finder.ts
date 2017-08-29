@@ -1,6 +1,6 @@
 import { Grid } from './grid';
 import { PathDataCache } from './path-data-cache';
-import { SortedArray } from './sorted-array';
+import { PriorityQueue } from './priority-queue';
 import { TreeElement, TreeElementType } from './tree-element';
 
 interface Path {
@@ -12,7 +12,7 @@ export class PathFinder {
     public run(grid: Grid, start?: TreeElement): Path {
         const path: Map<PathDataCache, PathDataCache> = new Map<PathDataCache, PathDataCache>();
 
-        const openList = new SortedArray();
+        const openList = new PriorityQueue();
         const closedList: PathDataCache[] = [];
         openList.push({
             node: start,
