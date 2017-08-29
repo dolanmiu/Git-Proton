@@ -12,10 +12,10 @@ export class Grid {
 
     public get(x: number, y: number): TreeElement {
         if (x > this.elements.length - 1) {
-            const diff = x - this.elements.length;
+            const diff = x - (this.elements.length - 1);
             const rows = _.times(diff, _.constant(this.createRow()));
 
-            this.elements.concat(rows);
+            this.elements = this.elements.concat(rows);
         }
 
         return this.elements[y][x];
@@ -61,6 +61,16 @@ export class Grid {
         }
 
         return arr;
+    }
+
+    public isOnTop(node: TreeElement): boolean {
+        const position = this.getCoordinates(node);
+
+        return position.y === this.elements.length - 1;
+    }
+
+    public get StartNode(): TreeElement {
+        return this.get(0, 0);
     }
 
     private createRow(): TreeElement[] {
