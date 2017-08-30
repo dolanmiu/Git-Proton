@@ -19,13 +19,10 @@ export class Grid {
     }
 
     public getCoordinates(node: TreeElement): Vector {
-        for (let i = 0; i < this.elements.length; i++) {
-            for (let j = 0; j < this.elements[i].length; j++) {
-                if (node === this.elements[i][j]) {
-                    return {
-                        x: j,
-                        y: i,
-                    };
+        for (let y = 0; y < this.elements.length; y++) {
+            for (let x = 0; x < this.elements[y].length; x++) {
+                if (node === this.elements[y][x]) {
+                    return { x, y };
                 }
             }
         }

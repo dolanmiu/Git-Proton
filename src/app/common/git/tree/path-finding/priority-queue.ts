@@ -20,7 +20,7 @@ export class PriorityQueue {
         });
 
         this.array.sort((a, b) => {
-            return a.weight > b.weight ? 1 : -1;
+            return a.weight > b.weight ? -1 : 1;
         });
     }
 
