@@ -22,6 +22,7 @@ export class TreeGeneratorService {
         for (const commit of commits) {
             grid.addRow();
             this.pathFinder.run(grid, commit, commit.parents[0]);
+            console.log(grid.toString());
         }
 
     }

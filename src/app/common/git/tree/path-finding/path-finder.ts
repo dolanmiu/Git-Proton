@@ -23,6 +23,14 @@ export class PathFinder {
         while (openList.HasItems) {
             const nextCurrentNode = openList.deQueue();
 
+            if (grid.isOnTop(nextCurrentNode)) {
+                const coordinates = grid.getCoordinates(nextCurrentNode);
+                grid.set(coordinates.x, coordinates.y, commitToPlace);
+                // Creeate Path
+
+                break;
+            }
+
             closedList.push(nextCurrentNode);
             this.pass(grid, path, openList, distances, nextCurrentNode);
         }

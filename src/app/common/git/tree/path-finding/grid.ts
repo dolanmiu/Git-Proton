@@ -15,7 +15,7 @@ export class Grid {
     }
 
     public set(x: number, y: number, element: TreeElement): void {
-
+        this.elements[y][x] = element;
     }
 
     public getCoordinates(node: TreeElement): Vector {
@@ -77,6 +77,9 @@ export class Grid {
                         break;
                     case TreeElementType.PIPE:
                         type = '|';
+                        break;
+                    case TreeElementType.NODE:
+                        type = 'o';
                         break;
                 }
                 str += type;

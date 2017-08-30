@@ -19,7 +19,7 @@ export class CommitModel extends TreeElement {
     public message: string;
 
     constructor(commit: GitCommitModel) {
-        super(TreeElementType.NONE);
+        super(TreeElementType.NODE);
 
         this.author = {
             name: commit.author.name,
