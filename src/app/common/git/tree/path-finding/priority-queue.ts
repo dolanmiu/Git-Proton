@@ -1,14 +1,34 @@
-import { PathDataCache } from './path-data-cache';
 
-export class PriorityQueue extends Array<PathDataCache> {
+import { TreeElement } from './tree-element';
 
-    public push(item: PathDataCache): number {
-        const amount = super.push(item);
+interface WeightedNode {
+    node: TreeElement;
+    weight: number;
+}
 
-        this.sort((a, b) => {
-            return a.distance > b.distance ? 1 : -1;
+export class PriorityQueue {
+    private array: WeightedNode[];
+
+    constructor() {
+        this.array = [];
+    }
+
+    public enQueue(item: TreeElement, weight: number): void {
+        this.array.push({
+            node: item,
+            weight: weight,
         });
 
-        return amount;
+        this.array.sort((a, b) => {
+            return a.weight > b.weight ? 1 : -1;
+        });
+    }
+
+    public deQueue(): TreeElement {
+        return this.array.pop().node;
+    }
+
+    public get HasItems(): boolean {
+        return this.array.length !== 0;
     }
 }

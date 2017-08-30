@@ -1,5 +1,5 @@
+import { CommitModel } from '../commit-model';
 import { Grid } from './grid';
-import { PathDataCache } from './path-data-cache';
 import { PriorityQueue } from './priority-queue';
 import { TreeElement, TreeElementType } from './tree-element';
 
@@ -9,77 +9,62 @@ interface Path {
 
 export class PathFinder {
 
-    public run(grid: Grid, start?: TreeElement): Path {
-        const path: Map<PathDataCache, PathDataCache> = new Map<PathDataCache, PathDataCache>();
-
+    public run(grid: Grid, commitToPlace: CommitModel, start?: TreeElement): Path {
+        const path = new Map<TreeElement, TreeElement>();
         const openList = new PriorityQueue();
-        const closedList: PathDataCache[] = [];
-        openList.push({
-            node: start,
-            distance: 0,
-        });
+        const closedList: TreeElement[] = [];
+        const distances = new Map<TreeElement, number>();
 
-        path.set({
-            node: start,
-            distance: 0,
-        }, undefined);
+        const startNode = start ? start : grid.get(0, 0);
 
-        const currentNode = openList.pop();
-        this.pass(grid, path, openList, closedList, currentNode);
+        openList.enQueue(startNode, 0);
+        distances.set(startNode, 0);
+
+        while (openList.HasItems) {
+            const nextCurrentNode = openList.deQueue();
+
+            closedList.push(nextCurrentNode);
+            this.pass(grid, path, openList, distances, nextCurrentNode);
+        }
 
         return undefined;
     }
 
     // tslint:disable-next-line:max-line-length
-    private pass(grid: Grid, path: Map<PathDataCache, PathDataCache>, openList: PathDataCache[], closedList: PathDataCache[], currentNode: PathDataCache): void {
-        if (grid.isOnTop(currentNode.node)) {
-            return;
-        }
+    private pass(grid: Grid, path: Map<TreeElement, TreeElement>, openList: PriorityQueue, distances: Map<TreeElement, number>, currentNode: TreeElement): void {
+        const neighbours = grid.findNeighbours(currentNode);
 
-        const neighbours = grid.findNeighbours(currentNode.node);
-
-        for (const node of neighbours) {
-            if (node.Type === TreeElementType.PIPE) {
+        for (const neighbour of neighbours) {
+            if (neighbour.Type === TreeElementType.PIPE) {
                 continue;
             }
 
-            if (currentNode.distance + 1 > this.getDistance(openList, closedList, node)) {
+            const currentDistance = this.getDistance(distances, currentNode);
+            const newDistance = currentDistance + 1;
+            const neighbourDistance = this.getDistance(distances, neighbour);
+            if (newDistance > neighbourDistance) {
                 continue;
             }
 
-            const cache = {
-                node: node,
-                distance: currentNode.distance + 1,
-            };
-
-            openList.push(cache);
-            path.set(currentNode, cache);
-        }
-
-        closedList.push(currentNode);
-
-        for (let i = 0; i < openList.length; i++) {
-            const nextCurrentNode = openList.pop();
-            this.pass(grid, path, openList, closedList, nextCurrentNode);
+            openList.enQueue(neighbour, newDistance);
+            distances.set(neighbour, newDistance);
+            path.set(currentNode, neighbour);
         }
     }
 
-    private getDistance(openList: PathDataCache[], closedList: PathDataCache[], node: TreeElement): number {
-        for (const data of openList) {
-            if (data.node === node) {
-                return data.distance;
-            }
-        }
+    private getDistance(distances: Map<TreeElement, number>, node: TreeElement): number {
+        const distance = distances.get(node);
 
-        for (const data of openList) {
-            if (data.node === node) {
-                return data.distance;
-            }
-        }
-
-        return Number.MAX_SAFE_INTEGER;
+        return distance !== undefined ? distance : Number.MAX_SAFE_INTEGER;
     }
 
-    // private convertToPath(map: Map<PathDataCache, PathDataCache>, ): Path {
+    // private convertToPath(map: Map<PathDataCache, PathDataCache>, start: PathDataCache): Path {
+    //     const path: Vector[] = [];
+    //     const currentNode = start;
+
+    //     while (map.get(currentNode)) {
+    //         path.push(currentNode.node);
+    //         smallest = previous[smallest];
+    //     }
     // }
 }

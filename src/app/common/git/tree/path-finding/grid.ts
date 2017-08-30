@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 import { EmptyNode } from './empty-node';
-import { TreeElement } from './tree-element';
+import { TreeElement, TreeElementType } from './tree-element';
 
 export class Grid {
     private elements: TreeElement[][];
@@ -11,13 +11,6 @@ export class Grid {
     }
 
     public get(x: number, y: number): TreeElement {
-        if (x > this.elements.length - 1) {
-            const diff = x - (this.elements.length - 1);
-            const rows = _.times(diff, _.constant(this.createRow()));
-
-            this.elements = this.elements.concat(rows);
-        }
-
         return this.elements[y][x];
     }
 
@@ -30,8 +23,8 @@ export class Grid {
             for (let j = 0; j < this.elements[i].length; j++) {
                 if (node === this.elements[i][j]) {
                     return {
-                        x: i,
-                        y: j,
+                        x: j,
+                        y: i,
                     };
                 }
             }
@@ -48,16 +41,12 @@ export class Grid {
             arr.push(this.elements[position.y + 1][position.x]);
         }
 
-        if (this.elements[position.y - 1] && this.elements[position.y - 1][position.x]) {
-            arr.push(this.elements[position.y + 1][position.x]);
-        }
-
         if (this.elements[position.y] && this.elements[position.y][position.x + 1]) {
-            arr.push(this.elements[position.y + 1][position.x]);
+            arr.push(this.elements[position.y][position.x + 1]);
         }
 
         if (this.elements[position.y] && this.elements[position.y][position.x - 1]) {
-            arr.push(this.elements[position.y + 1][position.x]);
+            arr.push(this.elements[position.y][position.x - 1]);
         }
 
         return arr;
@@ -69,12 +58,43 @@ export class Grid {
         return position.y === this.elements.length - 1;
     }
 
+    public addRow(): void {
+        this.elements.push(this.createRow());
+    }
+
+    public toString(): string {
+        let str = '';
+
+        for (let i = 0; i < this.elements.length; i++) {
+            for (let j = 0; j < this.elements[i].length; j++) {
+                let type: string;
+                switch (this.elements[i][j].Type) {
+                    case TreeElementType.LINE:
+                        type = '.';
+                        break;
+                    case TreeElementType.NONE:
+                        type = ' ';
+                        break;
+                    case TreeElementType.PIPE:
+                        type = '|';
+                        break;
+                }
+                str += type;
+            }
+            str += '\n';
+        }
+
+        return str;
+    }
+
     public get StartNode(): TreeElement {
         return this.get(0, 0);
     }
 
     private createRow(): TreeElement[] {
         // TODO - dynamic width generation
-        return _.times(20, _.constant(new EmptyNode));
+        return _.times(20, () => {
+            return new EmptyNode();
+        });
     }
 }

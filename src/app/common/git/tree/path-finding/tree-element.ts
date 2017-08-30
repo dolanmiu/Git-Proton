@@ -1,5 +1,5 @@
 export const enum TreeElementType {
-    NONE, PIPE, CORNER,
+    NONE, PIPE, LINE,
 }
 
 export class TreeElement {
