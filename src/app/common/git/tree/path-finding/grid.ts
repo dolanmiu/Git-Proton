@@ -1,24 +1,26 @@
 import * as _ from 'lodash';
 
-import { EmptyNode } from './empty-node';
-import { TreeElement, TreeElementType } from './tree-element';
+import { CommitModel } from '../commit-model';
+import { EmptyNode } from './nodes';
+import { Node, NodeType } from './nodes';
+import { Path } from './path';
 
 export class Grid {
-    private elements: TreeElement[][];
+    private elements: Node[][];
 
     constructor() {
         this.elements = [];
     }
 
-    public get(x: number, y: number): TreeElement {
+    public get(x: number, y: number): Node {
         return this.elements[y][x];
     }
 
-    public set(x: number, y: number, element: TreeElement): void {
-        this.elements[y][x] = element;
+    public set(position: Vector, element: Node): void {
+        this.elements[position.y][position.x] = element;
     }
 
-    public getCoordinates(node: TreeElement): Vector {
+    public getCoordinates(node: Node): Vector {
         for (let y = 0; y < this.elements.length; y++) {
             for (let x = 0; x < this.elements[y].length; x++) {
                 if (node === this.elements[y][x]) {
@@ -30,8 +32,20 @@ export class Grid {
         throw new Error('Node not found');
     }
 
-    public findNeighbours(node: TreeElement): TreeElement[] {
-        const arr: TreeElement[] = [];
+    public checkIfNodeExists(node: Node): boolean {
+        for (let y = 0; y < this.elements.length; y++) {
+            for (let x = 0; x < this.elements[y].length; x++) {
+                if (node === this.elements[y][x]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public findNeighbours(node: Node): Node[] {
+        const arr: Node[] = [];
         const position = this.getCoordinates(node);
 
         if (this.elements[position.y + 1] && this.elements[position.y + 1][position.x]) {
@@ -49,7 +63,7 @@ export class Grid {
         return arr;
     }
 
-    public isOnTop(node: TreeElement): boolean {
+    public isOnTop(node: Node): boolean {
         const position = this.getCoordinates(node);
 
         return position.y === this.elements.length - 1;
@@ -59,39 +73,45 @@ export class Grid {
         this.elements.push(this.createRow());
     }
 
+    public linkCommitFromPath(path: Path, commit: CommitModel): void {
+
+    }
+
     public toString(): string {
         let str = '';
 
         for (let i = 0; i < this.elements.length; i++) {
+            let commit: CommitModel;
             for (let j = 0; j < this.elements[i].length; j++) {
                 let type: string;
                 switch (this.elements[i][j].Type) {
-                    case TreeElementType.LINE:
+                    case NodeType.LINE:
                         type = '.';
                         break;
-                    case TreeElementType.NONE:
+                    case NodeType.NONE:
                         type = ' ';
                         break;
-                    case TreeElementType.PIPE:
+                    case NodeType.PIPE:
                         type = '|';
                         break;
-                    case TreeElementType.NODE:
+                    case NodeType.NODE:
+                        commit = this.elements[i][j] as CommitModel;
                         type = 'o';
                         break;
                 }
                 str += type;
             }
-            str += '\n';
+            str += `\t${commit.message}\n`;
         }
 
         return str;
     }
 
-    public get StartNode(): TreeElement {
+    public get StartNode(): Node {
         return this.get(0, 0);
     }
 
-    private createRow(): TreeElement[] {
+    private createRow(): Node[] {
         // TODO - dynamic width generation
         return _.times(20, () => {
             return new EmptyNode();

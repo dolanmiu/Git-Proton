@@ -1,49 +1,39 @@
-import { CommitModel } from '../commit-model';
 import { Grid } from './grid';
+import { Node, NodeType } from './nodes';
+import { Path } from './path';
 import { PriorityQueue } from './priority-queue';
-import { TreeElement, TreeElementType } from './tree-element';
-
-interface Path {
-    nodes: Vector[];
-}
 
 export class PathFinder {
 
-    public run(grid: Grid, commitToPlace: CommitModel, start?: TreeElement): Path {
-        const path = new Map<TreeElement, TreeElement>();
+    public run(grid: Grid, start?: Node): Path {
+        const map = new Map<Node, Node>();
         const openList = new PriorityQueue();
-        const closedList: TreeElement[] = [];
-        const distances = new Map<TreeElement, number>();
-
+        const distances = new Map<Node, number>();
         const startNode = start ? start : grid.get(0, 0);
+
+        if (!grid.checkIfNodeExists(startNode)) {
+            throw new Error('start node not found');
+        }
 
         openList.enQueue(startNode, 0);
         distances.set(startNode, 0);
 
-        while (openList.HasItems) {
-            const nextCurrentNode = openList.deQueue();
-
-            if (grid.isOnTop(nextCurrentNode)) {
-                const coordinates = grid.getCoordinates(nextCurrentNode);
-                grid.set(coordinates.x, coordinates.y, commitToPlace);
-                // Creeate Path
-
-                break;
-            }
-
-            closedList.push(nextCurrentNode);
-            this.pass(grid, path, openList, distances, nextCurrentNode);
+        let nextCurrentNode: Node;
+        do {
+            nextCurrentNode = openList.deQueue();
+            this.pass(grid, map, openList, distances, nextCurrentNode);
         }
+        while (!grid.isOnTop(nextCurrentNode));
 
-        return undefined;
+        return this.convertToPath(grid, map, nextCurrentNode);
     }
 
     // tslint:disable-next-line:max-line-length
-    private pass(grid: Grid, path: Map<TreeElement, TreeElement>, openList: PriorityQueue, distances: Map<TreeElement, number>, currentNode: TreeElement): void {
+    private pass(grid: Grid, map: Map<Node, Node>, openList: PriorityQueue, distances: Map<Node, number>, currentNode: Node): void {
         const neighbours = grid.findNeighbours(currentNode);
 
         for (const neighbour of neighbours) {
-            if (neighbour.Type === TreeElementType.PIPE) {
+            if (neighbour.Type === NodeType.PIPE || neighbour.Type === NodeType.NODE) {
                 continue;
             }
 
@@ -56,23 +46,27 @@ export class PathFinder {
 
             openList.enQueue(neighbour, newDistance);
             distances.set(neighbour, newDistance);
-            path.set(currentNode, neighbour);
+            map.set(neighbour, currentNode);
         }
     }
 
-    private getDistance(distances: Map<TreeElement, number>, node: TreeElement): number {
+    private getDistance(distances: Map<Node, number>, node: Node): number {
         const distance = distances.get(node);
 
         return distance !== undefined ? distance : Number.MAX_SAFE_INTEGER;
     }
 
-    // private convertToPath(map: Map<PathDataCache, PathDataCache>, start: PathDataCache): Path {
-    //     const path: Vector[] = [];
-    //     const currentNode = start;
+    private convertToPath(grid: Grid, map: Map<Node, Node>, start: Node): Path {
+        const path = new Path();
+        let currentNode = start;
 
-    //     while (map.get(currentNode)) {
-    //         path.push(currentNode.node);
-    //         smallest = previous[smallest];
-    //     }
-    // }
+        path.push(grid.getCoordinates(currentNode));
+
+        while (map.get(currentNode)) {
+            currentNode = map.get(currentNode);
+            path.push(grid.getCoordinates(currentNode));
+        }
+
+        return path;
+    }
 }

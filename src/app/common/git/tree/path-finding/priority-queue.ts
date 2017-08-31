@@ -1,8 +1,8 @@
 
-import { TreeElement } from './tree-element';
+import { Node } from './nodes';
 
 interface WeightedNode {
-    node: TreeElement;
+    node: Node;
     weight: number;
 }
 
@@ -13,7 +13,7 @@ export class PriorityQueue {
         this.array = [];
     }
 
-    public enQueue(item: TreeElement, weight: number): void {
+    public enQueue(item: Node, weight: number): void {
         this.array.push({
             node: item,
             weight: weight,
@@ -24,7 +24,7 @@ export class PriorityQueue {
         });
     }
 
-    public deQueue(): TreeElement {
+    public deQueue(): Node {
         return this.array.pop().node;
     }
 
