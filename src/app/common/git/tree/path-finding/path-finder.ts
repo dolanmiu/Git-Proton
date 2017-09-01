@@ -5,11 +5,11 @@ import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
 
-    public run(grid: Grid, start?: Node): Path {
+    public run(grid: Grid, start?: Node[]): Path {
         const map = new Map<Node, Node>();
         const openList = new PriorityQueue();
         const distances = new Map<Node, number>();
-        const startNode = start ? start : grid.get(0, 0);
+        const startNode = start ? start[0] : grid.get(0, 0);
 
         if (!grid.checkIfNodeExists(startNode)) {
             throw new Error('start node not found');
