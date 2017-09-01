@@ -1,59 +1,69 @@
+import { DistanceMap } from './distance-map';
 import { Grid } from './grid';
 import { Node, NodeType } from './nodes';
 import { Path } from './path';
+import { PathMap } from './path-map';
 import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
 
-    public run(grid: Grid, starts: Node[]): Path[] {
+    public run(grid: Grid, parents: Node[]): Path[] {
         const paths: Path[] = [];
+        let endNode: Node;
 
-        if (starts.length === 0) {
-            paths.push(this.findPath(grid));
+        if (parents.length === 0) {
+            paths.push(this.findPath(grid, grid.get(0, 0)));
         }
 
-        for (const node of starts) {
-            paths.push(this.findPath(grid, node));
+        for (const node of parents) {
+            paths.push(this.findPath(grid, node, endNode));
+
+            if (!endNode) {
+                endNode = grid.findNode(paths[0].EndPosition);
+            }
         }
 
         return paths;
     }
 
-    private findPath(grid: Grid, start?: Node): Path {
-        const map = new Map<Node, Node>();
+    private findPath(grid: Grid, start: Node, end?: Node): Path {
+        const map = new PathMap();
         const openList = new PriorityQueue();
-        const distances = new Map<Node, number>();
-        const startNode = start ? start : grid.get(0, 0);
+        const distances = new DistanceMap();
 
-        if (!grid.checkIfNodeExists(startNode)) {
+        if (!grid.checkIfNodeExists(start)) {
             throw new Error('start node not found');
         }
 
-        openList.enQueue(startNode, 0);
-        distances.set(startNode, 0);
+        openList.enQueue(start, 0);
+        distances.set(start, 0);
 
         let nextCurrentNode: Node;
         do {
             nextCurrentNode = openList.deQueue();
-            this.pass(grid, map, openList, distances, nextCurrentNode);
+            this.pass(grid, map, openList, distances, nextCurrentNode, end);
         }
-        while (!grid.isOnTop(nextCurrentNode));
+        while (end ? nextCurrentNode !== end : !grid.isOnTop(nextCurrentNode));
 
-        return this.convertToPath(grid, map, nextCurrentNode);
+        return map.convertToPath(grid, nextCurrentNode);
     }
 
     // tslint:disable-next-line:max-line-length
-    private pass(grid: Grid, map: Map<Node, Node>, openList: PriorityQueue, distances: Map<Node, number>, currentNode: Node): void {
+    private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: Node, exclusion?: Node): void {
         const neighbours = grid.findNeighbours(currentNode);
 
         for (const neighbour of neighbours) {
-            if (neighbour.Type === NodeType.PIPE || neighbour.Type === NodeType.NODE) {
+            if (neighbour.Type === NodeType.VERTICAL) {
                 continue;
             }
 
-            const currentDistance = this.getDistance(distances, currentNode);
-            const newDistance = currentDistance + 1;
-            const neighbourDistance = this.getDistance(distances, neighbour);
+            if (neighbour.Type === NodeType.NODE) {
+                continue;
+            }
+
+            const currentDistance = distances.getDistance(currentNode);
+            const newDistance = currentDistance + neighbour.Cost;
+            const neighbourDistance = distances.getDistance(neighbour);
             if (newDistance > neighbourDistance) {
                 continue;
             }
@@ -62,25 +72,5 @@ export class PathFinder {
             distances.set(neighbour, newDistance);
             map.set(neighbour, currentNode);
         }
-    }
-
-    private getDistance(distances: Map<Node, number>, node: Node): number {
-        const distance = distances.get(node);
-
-        return distance !== undefined ? distance : Number.MAX_SAFE_INTEGER;
-    }
-
-    private convertToPath(grid: Grid, map: Map<Node, Node>, start: Node): Path {
-        const path = new Path();
-        let currentNode = start;
-
-        path.push(grid.getCoordinates(currentNode));
-
-        while (map.get(currentNode)) {
-            currentNode = map.get(currentNode);
-            path.push(grid.getCoordinates(currentNode));
-        }
-
-        return path;
     }
 }

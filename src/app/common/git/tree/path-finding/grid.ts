@@ -32,6 +32,16 @@ export class Grid {
         throw new Error('Node not found');
     }
 
+    public findNode(position: Vector): Node {
+        const node = this.elements[position.y][position.x];
+
+        if (!node) {
+            throw new Error('Node not found');
+        }
+
+        return node;
+    }
+
     public checkIfNodeExists(node: Node): boolean {
         for (let y = 0; y < this.elements.length; y++) {
             for (let x = 0; x < this.elements[y].length; x++) {
@@ -85,13 +95,13 @@ export class Grid {
             for (let j = 0; j < this.elements[i].length; j++) {
                 let type: string;
                 switch (this.elements[i][j].Type) {
-                    case NodeType.LINE:
+                    case NodeType.HORIZONTAL:
                         type = '.';
                         break;
                     case NodeType.NONE:
                         type = ' ';
                         break;
-                    case NodeType.PIPE:
+                    case NodeType.VERTICAL:
                         type = '|';
                         break;
                     case NodeType.NODE:
@@ -101,7 +111,12 @@ export class Grid {
                 }
                 str += type;
             }
-            str += `\t${commit.message}\n`;
+
+            if (commit) {
+                str += `\t${commit.message}\n`;
+            } else {
+                str += '\n';
+            }
         }
 
         return str;

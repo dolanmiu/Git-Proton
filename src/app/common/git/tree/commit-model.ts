@@ -19,7 +19,7 @@ export class CommitModel extends Node {
     public message: string;
 
     constructor(commit: GitCommitModel) {
-        super(NodeType.NODE);
+        super(NodeType.NODE, 1);
 
         this.author = {
             name: commit.author.name,

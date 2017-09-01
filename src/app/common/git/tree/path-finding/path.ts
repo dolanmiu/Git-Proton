@@ -37,6 +37,10 @@ export class Path {
         return array;
     }
 
+    public get EndPosition(): Vector {
+        return this.positions[0];
+    }
+
     private createNode(index: number, commit: Node): Node {
         const currentPosition = this.positions[index];
         const nextPosition = this.positions[index + 1];
