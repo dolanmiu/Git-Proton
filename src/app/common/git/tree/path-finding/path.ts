@@ -25,6 +25,9 @@ export class Path {
         positions.reverse();
 
         for (let i = 0; i < positions.length; i++) {
+            if (positions.length > 1 && i === 0) {
+                continue;
+            }
             array.push({
                 position: positions[i],
                 node: this.createNode(i, commit),
