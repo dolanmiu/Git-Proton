@@ -3,6 +3,6 @@ import { Node, NodeType } from './node';
 export class VerticalNode extends Node {
 
     constructor() {
-        super(NodeType.VERTICAL, 100);
+        super(NodeType.VERTICAL, 10);
     }
 }

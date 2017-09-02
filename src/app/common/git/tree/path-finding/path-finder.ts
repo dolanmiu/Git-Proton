@@ -53,10 +53,6 @@ export class PathFinder {
         const neighbours = grid.findNeighbours(currentNode);
 
         for (const neighbour of neighbours) {
-            if (neighbour.Type === NodeType.VERTICAL) {
-                continue;
-            }
-
             if (neighbour.Type === NodeType.NODE) {
                 continue;
             }
