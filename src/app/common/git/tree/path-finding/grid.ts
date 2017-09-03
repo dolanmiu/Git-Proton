@@ -6,18 +6,15 @@ import { Node, NodeType } from './nodes';
 import { Path } from './path';
 
 export class Grid {
-    private elements: Node[][];
+    private elementsCache: Node[][];
+    private paths: Path[];
 
     constructor() {
-        this.elements = [];
+        this.paths = [];
     }
 
-    public get(x: number, y: number): Node {
-        return this.elements[y][x];
-    }
-
-    public set(position: Vector, element: Node): void {
-        this.elements[position.y][position.x] = element;
+    public get(position: Vector): Node {
+        return this.elements[position.y][position.x];
     }
 
     public getCoordinates(node: Node): Vector {
@@ -83,8 +80,9 @@ export class Grid {
         this.elements.push(this.createRow());
     }
 
-    public linkCommitFromPath(path: Path, commit: CommitModel): void {
-
+    public addPath(path: Path): void {
+        this.paths.push(path);
+        this.elementsCache = undefined;
     }
 
     public toString(): string {
@@ -123,7 +121,7 @@ export class Grid {
     }
 
     public get StartNode(): Node {
-        return this.get(0, 0);
+        return this.get({ x: 0, y: 0 });
     }
 
     private createRow(): Node[] {
@@ -131,5 +129,37 @@ export class Grid {
         return _.times(20, () => {
             return new EmptyNode();
         });
+    }
+
+    private get elements(): Node[][] {
+        if (this.elementsCache) {
+            return this.elementsCache;
+        }
+
+        let elements: Node[][] = [];
+
+        for (const path of this.paths) {
+            for (const pathElement of path.createPathNodes()) {
+                elements = this.padElements(elements, pathElement.position);
+                elements[pathElement.position.y][pathElement.position.x] = pathElement.node;
+            }
+        }
+
+        elements.push(this.createRow());
+
+        this.elementsCache = elements;
+
+        return elements;
+    }
+
+    private padElements(elements: Node[][], position: Vector): Node[][] {
+        if (position.y > elements.length - 1) {
+            const diff = position.y - (elements.length - 1);
+            const rows = _.times(diff, _.constant(this.createRow()));
+
+            return elements.concat(rows);
+        }
+
+        return elements;
     }
 }

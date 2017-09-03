@@ -24,7 +24,8 @@ export class TreeGeneratorService {
             grid.addRow();
             const paths = this.pathFinder.run(grid, commit.parents);
             for (const path of paths) {
-                this.addNodesToGrid(grid, path, commit);
+                path.Destination = commit;
+                this.addNodesToGrid(grid, path);
                 console.log(path);
             }
             console.log(grid.toString());
@@ -32,10 +33,8 @@ export class TreeGeneratorService {
 
     }
 
-    private addNodesToGrid(grid: Grid, path: Path, commit: CommitModel): void {
-        for (const data of path.createPathNodes(commit)) {
-            grid.set(data.position, data.node);
-        }
+    private addNodesToGrid(grid: Grid, path: Path): void {
+        grid.addPath(path);
     }
 
 }

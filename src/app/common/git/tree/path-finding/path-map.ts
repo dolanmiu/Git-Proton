@@ -14,6 +14,7 @@ export class PathMap {
     }
 
     public convertToPath(grid: Grid, start: Node): Path {
+        // TODO - Add destination in constructor;
         const path = new Path();
         let currentNode = start;
 

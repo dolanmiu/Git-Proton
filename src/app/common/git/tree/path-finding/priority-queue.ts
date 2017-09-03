@@ -25,7 +25,13 @@ export class PriorityQueue {
     }
 
     public deQueue(): Node {
-        return this.array.pop().node;
+        const weightedNode = this.array.pop();
+
+        if (!weightedNode) {
+            throw new Error('Cannot de-queue empty queue');
+        }
+
+        return weightedNode.node;
     }
 
     public get HasItems(): boolean {

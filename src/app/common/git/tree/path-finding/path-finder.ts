@@ -12,7 +12,7 @@ export class PathFinder {
         let endNode: Node;
 
         if (parents.length === 0) {
-            paths.push(this.findPath(grid, grid.get(0, 0)));
+            paths.push(this.findPath(grid, grid.StartNode));
         }
 
         for (const node of parents) {

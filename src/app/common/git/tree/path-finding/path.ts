@@ -9,6 +9,7 @@ interface PathNode {
 }
 export class Path {
     private positions: Vector[];
+    private destination: Node;
 
     constructor() {
         this.positions = [];
@@ -18,7 +19,11 @@ export class Path {
         this.positions.push(position);
     }
 
-    public createPathNodes(commit: Node): PathNode[] {
+    public createPathNodes(): PathNode[] {
+        if (!this.destination) {
+            throw new Error('There is no destination for the path');
+        }
+
         const positions = _.cloneDeep(this.positions);
         const array: PathNode[] = [];
 
@@ -30,7 +35,7 @@ export class Path {
             }
             array.push({
                 position: positions[i],
-                node: this.createNode(i, commit),
+                node: this.createNode(i, this.destination),
             });
         }
 
@@ -39,6 +44,10 @@ export class Path {
 
     public get EndPosition(): Vector {
         return this.positions[0];
+    }
+
+    public set Destination(node: Node) {
+        this.destination = node;
     }
 
     private createNode(index: number, commit: Node): Node {
