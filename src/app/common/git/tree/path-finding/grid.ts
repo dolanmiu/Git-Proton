@@ -155,7 +155,7 @@ export class Grid {
     private padElements(elements: Node[][], position: Vector): Node[][] {
         if (position.y > elements.length - 1) {
             const diff = position.y - (elements.length - 1);
-            const rows = _.times(diff, _.constant(this.createRow()));
+            const rows = _.times(diff, () => this.createRow());
 
             return elements.concat(rows);
         }
