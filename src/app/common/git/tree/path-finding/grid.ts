@@ -86,9 +86,11 @@ export class Grid {
     }
 
     public toString(): string {
-        let str = '';
+        const strs: string[] = [];
 
         for (let i = 0; i < this.elements.length; i++) {
+            let str = '';
+
             let commit: CommitModel;
             for (let j = 0; j < this.elements[i].length; j++) {
                 let type: string;
@@ -115,9 +117,11 @@ export class Grid {
             } else {
                 str += '\n';
             }
+
+            strs.push(str);
         }
 
-        return str;
+        return strs.reverse().join('');
     }
 
     public get StartNode(): Node {
@@ -144,8 +148,6 @@ export class Grid {
                 elements[pathElement.position.y][pathElement.position.x] = pathElement.node;
             }
         }
-
-        elements.push(this.createRow());
 
         this.elementsCache = elements;
 
