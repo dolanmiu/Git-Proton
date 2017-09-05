@@ -7,13 +7,25 @@ import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
 
-    public run(grid: Grid, parents: Node[]): Path[] {
+    public run(grid: Grid, end: Node, parents: Node[]): Path[] {
+        if (parents.length === 0) {
+            return this.runForNoParent(grid);
+        } else {
+            return this.runForParents(grid, parents);
+        }
+    }
+
+    private runForNoParent(grid: Grid): Path[] {
+        const paths: Path[] = [];
+
+        paths.push(this.findPath(grid, grid.StartNode));
+
+        return paths;
+    }
+
+    private runForParents(grid: Grid, parents: Node[]): Path[] {
         const paths: Path[] = [];
         let endNode: Node;
-
-        if (parents.length === 0) {
-            paths.push(this.findPath(grid, grid.StartNode));
-        }
 
         for (const node of parents) {
             paths.push(this.findPath(grid, node, endNode));
