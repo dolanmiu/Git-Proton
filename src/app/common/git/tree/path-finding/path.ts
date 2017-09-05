@@ -7,19 +7,16 @@ interface PathNode {
     position: Vector;
     node: Node;
 }
+
 export class Path {
-    private positions: Vector[];
     private destination: Node;
+    private nodes: PathNode[];
 
-    constructor() {
-        this.positions = [];
+    constructor(private positions: Vector[]) {
+        // this.nodes = this.createPathNodes();
     }
 
-    public push(position: Vector): void {
-        this.positions.push(position);
-    }
-
-    public createPathNodes(): PathNode[] {
+    private createPathNodes(): PathNode[] {
         if (!this.destination) {
             throw new Error('There is no destination for the path');
         }
@@ -48,6 +45,11 @@ export class Path {
 
     public set Destination(node: Node) {
         this.destination = node;
+        this.nodes = this.createPathNodes();
+    }
+
+    public get Nodes(): PathNode[] {
+        return this.nodes;
     }
 
     private createNode(index: number, commit: Node): Node {

@@ -15,7 +15,7 @@ export class PathMap {
 
     public convertToPath(grid: Grid, start: Node): Path {
         // TODO - Add destination in constructor;
-        const path = new Path();
+        const path = [];
         let currentNode = start;
 
         path.push(grid.getCoordinates(currentNode));
@@ -25,6 +25,6 @@ export class PathMap {
             path.push(grid.getCoordinates(currentNode));
         }
 
-        return path;
+        return new Path(path);
     }
 }

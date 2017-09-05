@@ -21,7 +21,6 @@ export class TreeGeneratorService {
         const grid = new Grid();
 
         for (const commit of commits) {
-            grid.addRow();
             const paths = this.pathFinder.run(grid, commit.parents);
             for (const path of paths) {
                 path.Destination = commit;
