@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 
 import { CommitModel } from './commit-model';
 import { Grid } from './path-finding/grid';
-import { Path } from './path-finding/path';
 import { PathFinder } from './path-finding/path-finder';
 
 @Injectable()
