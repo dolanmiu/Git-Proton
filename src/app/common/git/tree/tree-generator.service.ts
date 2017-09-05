@@ -24,16 +24,11 @@ export class TreeGeneratorService {
             const paths = this.pathFinder.run(grid, commit.parents);
             for (const path of paths) {
                 path.Destination = commit;
-                this.addNodesToGrid(grid, path);
+                grid.addPath(path);
                 console.log(path);
             }
             console.log(grid.toString());
         }
 
     }
-
-    private addNodesToGrid(grid: Grid, path: Path): void {
-        grid.addPath(path);
-    }
-
 }
