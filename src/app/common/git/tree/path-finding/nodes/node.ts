@@ -4,7 +4,6 @@ export const enum NodeType {
 
 export class Node {
     constructor(private type: NodeType, private cost: number) {
-
     }
 
     public get Type(): NodeType {

@@ -89,23 +89,11 @@ export class Grid {
 
             let commit: CommitModel;
             for (let j = 0; j < this.elements[i].length; j++) {
-                let type: string;
-                switch (this.elements[i][j].Combined.Type) {
-                    case NodeType.HORIZONTAL:
-                        type = '.';
-                        break;
-                    case NodeType.NONE:
-                        type = ' ';
-                        break;
-                    case NodeType.VERTICAL:
-                        type = '|';
-                        break;
-                    case NodeType.NODE:
-                        commit = this.elements[i][j].Combined as CommitModel;
-                        type = 'o';
-                        break;
+                if (this.elements[i][j].Combined.Type === NodeType.NODE) {
+                    commit = this.elements[i][j].Combined as CommitModel;
                 }
-                str += type;
+
+                str += this.elements[i][j].Combined.toString();
             }
 
             if (commit) {
