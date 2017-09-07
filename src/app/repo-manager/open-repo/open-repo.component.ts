@@ -20,29 +20,11 @@ export class OpenRepoComponent implements OnInit {
 
     public openDialog(): void {
         this.dialogService.openDialog().flatMap((data) => {
+            const folderPath = data[0];
+
+            return this.gitService.addGitProject(folderPath);
+        }).do((data) => {
             console.log(data);
-            return this.gitService.addGitProject(data[0]);
         }).subscribe();
     }
-
-    // private addGitProject(directory: string): OpenGitStatus {
-    //     try {
-    //         let stats = fs.statSync(`${directory}/.git`);
-
-    //         if (stats.isDirectory()) {
-    //             console.log(stats);
-    //             console.log(this.repos);
-
-    //             /*Git.Repository.open('test');
-
-    //             ipcRenderer.send('open-repo', directory);
-    //             this.config.writeConfig(directory);
-    //             return OpenGitStatus.Success;*/
-    //         } else {
-    //             return OpenGitStatus.NotFound;
-    //         }
-    //     } catch (e) {
-    //         return OpenGitStatus.NotFound;
-    //     }
-    // }
 }

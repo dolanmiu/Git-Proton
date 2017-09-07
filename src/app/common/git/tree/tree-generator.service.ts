@@ -14,7 +14,7 @@ export class TreeGeneratorService {
         this.pathFinder = new PathFinder();
     }
 
-    public createTree(commits: CommitModel[]): void {
+    public createTree(commits: CommitModel[]): Grid {
         commits = _.clone(commits).reverse();
 
         const grid = new Grid();
@@ -29,5 +29,6 @@ export class TreeGeneratorService {
             console.log(grid.toString());
         }
 
+        return grid;
     }
 }
