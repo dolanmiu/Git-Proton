@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ElectronModule } from './common/electron/electron.module';
 import { GitModule } from './common/git/git.module';
 import { RepoManagerModule } from './repo-manager/repo-manager.module';
+import { AppStoreModule } from './store/app-store.module';
 import { WorkspaceModule } from './workspace/workspace.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { WorkspaceModule } from './workspace/workspace.module';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        AppStoreModule,
         RepoManagerModule,
         WorkspaceModule,
         ElectronModule,
