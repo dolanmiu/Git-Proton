@@ -7,7 +7,7 @@
     "build": "ng build --prod",
     "start": "npm run pre-ng-cli && ng serve",
     "test": "ng test --watch=false",
-    "lint": "ng lint && npm run sass-lint",
+    "lint": "ng lint",
     "e2e": "ng e2e",
     "build-electron": "nge build",
     "electron": "npm run pre-electron && npm run build-electron && electron dist",
