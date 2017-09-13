@@ -12,7 +12,6 @@ import { GitService } from 'app/common/git/git.service';
 export class OpenRepoComponent implements OnInit {
 
     constructor(private dialogService: DialogService, private gitService: GitService) {
-        console.log(this.gitService.addGitProject);
     }
 
     public ngOnInit(): void {
