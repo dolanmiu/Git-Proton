@@ -29,6 +29,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@ngrx/effects": "^4.0.5",
     "@ngrx/store": "^4.0.0",
     "@types/lodash": "^4.14.74",
     "@types/nodegit": "^0.18.1",
