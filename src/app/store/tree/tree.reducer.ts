@@ -5,9 +5,7 @@ import { ADD_DATA } from './tree.actions';
 export function treeReducer(state: any, action: Action): any {
     switch (action.type) {
         case ADD_DATA:
-            return [
-                ...state,
-            ];
+            return state;
         default:
             return state;
     }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import 'rxjs/Rx';
 
 import { DialogService } from 'app/common/electron/dialog.service';
 import { GitService } from 'app/common/git/git.service';
+import { AddDataAction } from 'app/store/tree';
 
 @Component({
     selector: 'app-open-repo',
@@ -11,7 +13,7 @@ import { GitService } from 'app/common/git/git.service';
 })
 export class OpenRepoComponent implements OnInit {
 
-    constructor(private dialogService: DialogService, private gitService: GitService) {
+    constructor(private dialogService: DialogService, private gitService: GitService, private store: Store<AppState>) {
     }
 
     public ngOnInit(): void {
@@ -24,6 +26,7 @@ export class OpenRepoComponent implements OnInit {
             return this.gitService.addGitProject(folderPath);
         }).do((data) => {
             console.log(data);
+            this.store.dispatch(new AddDataAction(data));
         }).subscribe();
     }
 }
