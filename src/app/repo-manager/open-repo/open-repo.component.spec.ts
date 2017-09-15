@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { ElectronModule } from 'app/common/electron/electron.module';
 import { GitModule } from 'app/common/git/git.module';
@@ -18,6 +19,7 @@ describe('OpenRepoComponent', () => {
             imports: [
                 ElectronModule,
                 GitModule,
+                StoreModule.forRoot({}),
             ],
         }).compileComponents();
     }));

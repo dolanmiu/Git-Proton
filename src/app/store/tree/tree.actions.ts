@@ -10,3 +10,5 @@ export class AddDataAction implements Action {
     constructor(public payload: TreeModel) {
     }
 }
+
+export type Actions = AddDataAction;

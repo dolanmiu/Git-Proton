@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
+
+import { AppState, TreeModel } from 'app/store';
 
 @Component({
     selector: 'app-overview',
@@ -6,8 +10,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
+    public tree$: Observable<TreeModel>;
 
-    constructor() { }
+    constructor(store: Store<AppState>) {
+        this.tree$ = store.select('tree');
+    }
 
     public ngOnInit(): void {
     }

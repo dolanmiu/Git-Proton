@@ -4,7 +4,6 @@
             <input mdInput #filter placeholder="Filter users">
         </md-input-container>
     </div>
-
     <!-- <md-table #table>
 
         <ng-container cdkColumnDef="userId">
@@ -30,4 +29,8 @@
         <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
     </md-table> -->
+</div>
+
+<div *ngIf="tree$ | async; let tree">
+    {{tree | json}}
 </div>

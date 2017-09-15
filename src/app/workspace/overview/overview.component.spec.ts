@@ -2,6 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MdInputModule, MdTableModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 
 import { OverviewComponent } from './overview.component';
 
@@ -17,6 +18,7 @@ describe('OverviewComponent', () => {
                 MdInputModule,
                 MdTableModule,
                 CdkTableModule,
+                StoreModule.forRoot({}),
             ],
         }).compileComponents();
     }));
