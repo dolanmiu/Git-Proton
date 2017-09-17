@@ -1,8 +1,7 @@
 import { EmptyNode, Node } from './nodes';
 
 export class NodeStack {
-    public nodes: Node[];
-    public combined: Node;
+    private nodes: Node[];
 
     constructor() {
         this.nodes = [];
