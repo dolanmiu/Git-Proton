@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MdInputModule, MdTableModule } from '@angular/material';
 
 import { OverviewComponent } from './overview.component';
+import { TableModule } from './table/table.module';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { OverviewComponent } from './overview.component';
         MdInputModule,
         MdTableModule,
         CdkTableModule,
+        TableModule,
     ],
     exports: [
         OverviewComponent,

@@ -108,6 +108,10 @@ export class Grid {
         return strs.reverse().join('');
     }
 
+    public convertToModel(): void {
+        // TODO
+    }
+
     public get StartNode(): Node {
         return this.get({ x: 0, y: 0 });
     }
@@ -119,7 +123,7 @@ export class Grid {
         });
     }
 
-    private get elements(): NodeStack[][] {
+    public get elements(): NodeStack[][] {
         if (this.elementsCache) {
             return this.elementsCache;
         }

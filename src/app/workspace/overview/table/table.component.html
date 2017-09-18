@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+    </tr>
+    <tr *ngFor="let row of data">
+        <td>
+            <div class="flex-container">
+                <div class="node" *ngFor="let nodeStack of row">
+                    <app-element [nodeStack]="nodeStack"></app-element>
+                </div>
+            </div>
+
+        </td>
+        <td>Commit</td>
+    </tr>
+</table>

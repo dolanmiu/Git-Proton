@@ -32,5 +32,6 @@
 </div>
 
 <div *ngIf="tree$ | async; let tree">
-    {{tree | json}}
+    {{tree.toString()}}
+    <app-table [data]="tree.elements"></app-table>
 </div>
