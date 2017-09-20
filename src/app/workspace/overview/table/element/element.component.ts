@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { NodeStack } from 'app/common/git/tree/path-finding';
 
@@ -6,6 +6,7 @@ import { NodeStack } from 'app/common/git/tree/path-finding';
     selector: 'app-element',
     templateUrl: './element.component.html',
     styleUrls: ['./element.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ElementComponent implements OnInit {
     @Input() public nodeStack: NodeStack;

@@ -4,15 +4,15 @@
         <th>Lastname</th>
         <th>Age</th>
     </tr>
-    <tr *ngFor="let row of data">
+    <tr *ngFor="let row of rows">
         <td>
             <div class="flex-container">
-                <div class="node" *ngFor="let nodeStack of row">
+                <div class="node" *ngFor="let nodeStack of row.nodes">
                     <app-element [nodeStack]="nodeStack"></app-element>
                 </div>
             </div>
 
         </td>
-        <td>Commit</td>
+        <td>{{row.commitNode.message}}</td>
     </tr>
 </table>

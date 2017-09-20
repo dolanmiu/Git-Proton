@@ -1,4 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { NodeStack } from 'app/common/git/tree/path-finding';
+import { CommitNode } from 'app/common/git/tree/path-finding/nodes';
+
+interface Row {
+    nodes: NodeStack[];
+    commitNode: CommitNode;
+}
 
 @Component({
     selector: 'app-table',
@@ -8,12 +15,28 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class TableComponent implements OnInit {
 
-    // tslint:disable-next-line:no-any
-    @Input() public data: any;
+    public rows: Row[];
 
     constructor() { }
 
     public ngOnInit(): void {
+
     }
 
+    @Input() public set data(nodeStacks: NodeStack[][]) {
+        const rows: Row[] = [];
+
+        for (const row of nodeStacks) {
+            const currentNodeStack = row.find((node) => node.HasCommitNode);
+            if (!currentNodeStack) {
+                continue;
+            }
+            rows.push({
+                nodes: row,
+                commitNode: currentNodeStack.CommitNode,
+            });
+        }
+
+        this.rows = rows.reverse();
+    }
 }
