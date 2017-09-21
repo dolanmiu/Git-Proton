@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { CommitModel } from 'app/common/git/tree/commit-model';
 import { NodeStack } from 'app/common/git/tree/path-finding';
-import { CommitNode } from 'app/common/git/tree/path-finding/nodes';
+import { DataNode } from 'app/common/git/tree/path-finding/nodes';
 
 interface Row {
     nodes: NodeStack[];
-    commitNode: CommitNode;
+    commitNode: DataNode<CommitModel>;
 }
 
 @Component({

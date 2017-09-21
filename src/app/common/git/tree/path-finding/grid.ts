@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import { CommitModel } from '../commit-model';
 import { NodeStack } from './node-stack';
-import { Node, NodeType } from './nodes';
+import { DataNode, Node, NodeType } from './nodes';
 import { Path } from './path';
 
 export class Grid {
@@ -87,17 +87,17 @@ export class Grid {
         for (let i = 0; i < this.elements.length; i++) {
             let str = '';
 
-            let commit: CommitModel;
+            let commit: DataNode<CommitModel>;
             for (let j = 0; j < this.elements[i].length; j++) {
                 if (this.elements[i][j].Combined.Type === NodeType.NODE) {
-                    commit = this.elements[i][j].Combined as CommitModel;
+                    commit = this.elements[i][j].Combined as DataNode<CommitModel>;
                 }
 
                 str += this.elements[i][j].Combined.toString();
             }
 
             if (commit) {
-                str += `\t${commit.message}\n`;
+                str += `\t${commit.commit.message}\n`;
             } else {
                 str += '\n';
             }
@@ -110,6 +110,11 @@ export class Grid {
 
     public convertToModel(): void {
         // TODO
+    }
+
+    public findNodeFromCommit(commit: CommitModel): Node {
+        // TODO
+        return undefined;
     }
 
     public get StartNode(): Node {

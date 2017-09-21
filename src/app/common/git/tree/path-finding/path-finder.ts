@@ -7,7 +7,7 @@ import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
 
-    public run(grid: Grid, end: Node, parents: Node[]): Path[] {
+    public run(grid: Grid, parents: Node[]): Path[] {
         if (parents.length === 0) {
             return this.runForNoParent(grid);
         } else {
@@ -60,7 +60,6 @@ export class PathFinder {
         return map.convertToPath(grid, nextCurrentNode);
     }
 
-    // tslint:disable-next-line:max-line-length
     private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: Node, exclusion?: Node): void {
         const neighbours = grid.findNeighbours(currentNode);
 
