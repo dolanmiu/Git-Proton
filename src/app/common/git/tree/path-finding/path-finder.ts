@@ -18,7 +18,7 @@ export class PathFinder {
     private runForNoParent(grid: Grid): Path[] {
         const paths: Path[] = [];
 
-        paths.push(this.findPath(grid, grid.StartNode));
+        paths.push(this.findPath(grid, grid.StartNode.Combined));
 
         return paths;
     }

@@ -13,8 +13,8 @@ export class Grid {
         this.paths = [];
     }
 
-    public get(position: Vector): Node {
-        return this.elements[position.y][position.x].Combined;
+    public get(position: Vector): NodeStack {
+        return this.elements[position.y][position.x];
     }
 
     public getCoordinates(node: Node): Vector {
@@ -117,7 +117,7 @@ export class Grid {
         return undefined;
     }
 
-    public get StartNode(): Node {
+    public get StartNode(): NodeStack {
         return this.get({ x: 0, y: 0 });
     }
 
