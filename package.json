@@ -35,7 +35,7 @@
     "@types/nodegit": "^0.18.1",
     "@types/shelljs": "^0.7.4",
     "core-js": "^2.4.1",
-    "electron": "^1.7.6",
+    "electron": "^1.7.8",
     "lodash": "^4.17.4",
     "material-design-icons": "^3.0.1",
     "ng-cli-electron": "^1.1.1",
