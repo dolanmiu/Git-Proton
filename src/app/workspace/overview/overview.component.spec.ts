@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 
 import { OverviewComponent } from './overview.component';
+import { TableModule } from './table/table.module';
 
 describe('OverviewComponent', () => {
     let component: OverviewComponent;
@@ -19,6 +20,7 @@ describe('OverviewComponent', () => {
                 MdTableModule,
                 CdkTableModule,
                 StoreModule.forRoot({}),
+                TableModule,
             ],
         }).compileComponents();
     }));
