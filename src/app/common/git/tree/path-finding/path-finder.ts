@@ -1,13 +1,13 @@
 import { DistanceMap } from './distance-map';
 import { Grid } from './grid';
-import { Node, NodeType } from './nodes';
+import { NodeStack } from './node-stack';
 import { Path } from './path';
 import { PathMap } from './path-map';
 import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
 
-    public run(grid: Grid, parents: Node[]): Path[] {
+    public run(grid: Grid, parents: NodeStack[]): Path[] {
         if (parents.length === 0) {
             return this.runForNoParent(grid);
         } else {
@@ -18,14 +18,14 @@ export class PathFinder {
     private runForNoParent(grid: Grid): Path[] {
         const paths: Path[] = [];
 
-        paths.push(this.findPath(grid, grid.StartNode.Combined));
+        paths.push(this.findPath(grid, grid.StartNode));
 
         return paths;
     }
 
-    private runForParents(grid: Grid, parents: Node[]): Path[] {
+    private runForParents(grid: Grid, parents: NodeStack[]): Path[] {
         const paths: Path[] = [];
-        let endNode: Node;
+        let endNode: NodeStack;
 
         for (const node of parents) {
             paths.push(this.findPath(grid, node, endNode));
@@ -38,7 +38,7 @@ export class PathFinder {
         return paths;
     }
 
-    private findPath(grid: Grid, start: Node, end?: Node): Path {
+    private findPath(grid: Grid, start: NodeStack, end?: NodeStack): Path {
         const map = new PathMap();
         const openList = new PriorityQueue();
         const distances = new DistanceMap();
@@ -50,7 +50,7 @@ export class PathFinder {
         openList.enQueue(start, 0);
         distances.set(start, 0);
 
-        let nextCurrentNode: Node;
+        let nextCurrentNode: NodeStack;
         do {
             nextCurrentNode = openList.deQueue();
             this.pass(grid, map, openList, distances, nextCurrentNode, end);
@@ -60,11 +60,12 @@ export class PathFinder {
         return map.convertToPath(grid, nextCurrentNode);
     }
 
-    private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: Node, exclusion?: Node): void {
+    // tslint:disable-next-line:max-line-length
+    private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: NodeStack, exclusion?: NodeStack): void {
         const neighbours = grid.findNeighbours(currentNode);
 
         for (const neighbour of neighbours) {
-            if (neighbour.Type === NodeType.NODE) {
+            if (neighbour.CommitNode) {
                 continue;
             }
 

@@ -28,7 +28,7 @@ export class TableComponent implements OnInit {
         const rows: Row[] = [];
 
         for (const row of nodeStacks) {
-            const currentNodeStack = row.find((node) => node.HasCommitNode);
+            const currentNodeStack = row.find((node) => node.CommitNode !== undefined);
             if (!currentNodeStack) {
                 continue;
             }

@@ -16,11 +16,11 @@ export class Node {
         const currentPosition = this.path.getCoordinates(this);
         const neighbours = this.path.findNeighbouringNodes(this);
 
-        if (neighbours.next.position === undefined) {
+        if (neighbours.next === undefined) {
             return NodeType.NODE;
         }
 
-        if (neighbours.previous.position === undefined) {
+        if (neighbours.previous === undefined) {
             // Need fixing
             return NodeType.VERTICAL;
         }

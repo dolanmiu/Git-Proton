@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import { CommitModel } from '../commit-model';
 import { NodeStack } from './node-stack';
-import { DataNode, Node, NodeType } from './nodes';
+import { DataNode } from './nodes';
 import { Path } from './path';
 
 export class Grid {
@@ -17,10 +17,10 @@ export class Grid {
         return this.elements[position.y][position.x];
     }
 
-    public getCoordinates(node: Node): Vector {
+    public getCoordinates(node: NodeStack): Vector {
         for (let y = 0; y < this.elements.length; y++) {
             for (let x = 0; x < this.elements[y].length; x++) {
-                if (this.elements[y][x].Nodes.includes(node)) {
+                if (this.elements[y][x] === node) {
                     return { x, y };
                 }
             }
@@ -29,20 +29,20 @@ export class Grid {
         throw new Error('Node not found');
     }
 
-    public findNode(position: Vector): Node {
+    public findNode(position: Vector): NodeStack {
         const stack = this.elements[position.y][position.x];
 
         if (!stack) {
             throw new Error('Node not found');
         }
 
-        return stack.Combined;
+        return stack;
     }
 
-    public checkIfNodeExists(node: Node): boolean {
+    public checkIfNodeExists(node: NodeStack): boolean {
         for (let y = 0; y < this.elements.length; y++) {
             for (let x = 0; x < this.elements[y].length; x++) {
-                if (this.elements[y][x].Nodes.includes(node)) {
+                if (this.elements[y][x] === node) {
                     return true;
                 }
             }
@@ -51,26 +51,26 @@ export class Grid {
         return false;
     }
 
-    public findNeighbours(node: Node): Node[] {
-        const arr: Node[] = [];
+    public findNeighbours(node: NodeStack): NodeStack[] {
+        const arr: NodeStack[] = [];
         const position = this.getCoordinates(node);
 
         if (this.elements[position.y + 1] && this.elements[position.y + 1][position.x]) {
-            arr.push(this.elements[position.y + 1][position.x].Combined);
+            arr.push(this.elements[position.y + 1][position.x]);
         }
 
         if (this.elements[position.y] && this.elements[position.y][position.x + 1]) {
-            arr.push(this.elements[position.y][position.x + 1].Combined);
+            arr.push(this.elements[position.y][position.x + 1]);
         }
 
         if (this.elements[position.y] && this.elements[position.y][position.x - 1]) {
-            arr.push(this.elements[position.y][position.x - 1].Combined);
+            arr.push(this.elements[position.y][position.x - 1]);
         }
 
         return arr;
     }
 
-    public isOnTop(node: Node): boolean {
+    public isOnTop(node: NodeStack): boolean {
         const position = this.getCoordinates(node);
 
         return position.y === this.elements.length - 1;
@@ -89,11 +89,11 @@ export class Grid {
 
             let commit: DataNode<CommitModel>;
             for (let j = 0; j < this.elements[i].length; j++) {
-                if (this.elements[i][j].Combined.Type === NodeType.NODE) {
-                    commit = this.elements[i][j].Combined as DataNode<CommitModel>;
+                if (this.elements[i][j].CommitNode) {
+                    commit = this.elements[i][j].CommitNode;
                 }
 
-                str += this.elements[i][j].Combined.toString();
+                str += this.elements[i][j].toString();
             }
 
             if (commit) {
@@ -112,9 +112,16 @@ export class Grid {
         // TODO
     }
 
-    public findNodeFromCommit(commit: CommitModel): Node {
-        // TODO
-        return undefined;
+    public findNodeFromCommit(commit: CommitModel): NodeStack {
+        for (let y = 0; y < this.elements.length; y++) {
+            for (let x = 0; x < this.elements[y].length; x++) {
+                if (this.elements[y][x].CommitNode && this.elements[y][x].CommitNode.commit === commit) {
+                    return this.elements[y][x];
+                }
+            }
+        }
+
+        throw new Error('Node not found');
     }
 
     public get StartNode(): NodeStack {

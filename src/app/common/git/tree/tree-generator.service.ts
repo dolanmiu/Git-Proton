@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 import { CommitModel } from './commit-model';
 import { Grid } from './path-finding/grid';
-import { Node } from './path-finding/nodes';
+import { NodeStack } from './path-finding/node-stack';
 import { PathFinder } from './path-finding/path-finder';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class TreeGeneratorService {
         const grid = new Grid();
 
         for (const commit of commits) {
-            const commitNodes: Node[] = [];
+            const commitNodes: NodeStack[] = [];
 
             for (const parent of commit.parents) {
                 commitNodes.push(grid.findNodeFromCommit(parent));

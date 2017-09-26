@@ -1,8 +1,8 @@
 
-import { Node } from './nodes';
+import { NodeStack } from './node-stack';
 
 interface WeightedNode {
-    node: Node;
+    node: NodeStack;
     weight: number;
 }
 
@@ -13,7 +13,7 @@ export class PriorityQueue {
         this.array = [];
     }
 
-    public enQueue(item: Node, weight: number): void {
+    public enQueue(item: NodeStack, weight: number): void {
         this.array.push({
             node: item,
             weight: weight,
@@ -24,7 +24,7 @@ export class PriorityQueue {
         });
     }
 
-    public deQueue(): Node {
+    public deQueue(): NodeStack {
         const weightedNode = this.array.pop();
 
         if (!weightedNode) {
