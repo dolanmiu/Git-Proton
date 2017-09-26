@@ -1,13 +1,13 @@
 import { Path } from '../path';
 import { Node } from './node';
 
-export class DataNode<T> extends Node {
+export class EdgeNode extends Node {
 
-    constructor(path: Path, public readonly commit: T) {
+    constructor(path: Path) {
         super(path, 1);
     }
 
     public toString(): string {
-        return 'o';
+        return '.';
     }
 }

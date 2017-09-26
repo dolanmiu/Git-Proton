@@ -1,6 +1,5 @@
-import { CommitNode } from './path-finding/nodes';
 
-export class CommitModel extends CommitNode {
+export class CommitModel {
     public parents: CommitModel[];
     public author: {
         name: string,
@@ -19,7 +18,6 @@ export class CommitModel extends CommitNode {
     public message: string;
 
     constructor(commit: GitCommitModel) {
-        super();
         this.author = {
             name: commit.author.name,
             email: commit.author.email,

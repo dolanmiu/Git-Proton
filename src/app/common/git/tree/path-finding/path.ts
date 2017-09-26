@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
-import { HorizontalNode, VerticalNode } from './nodes';
-import { Node } from './nodes';
+import { CommitModel } from '../commit-model';
+import { DataNode, EdgeNode, Node } from './nodes';
 
 interface PathNode {
     position: Vector;
@@ -13,7 +13,29 @@ export class Path {
     private nodes: PathNode[];
 
     constructor(private positions: Vector[]) {
-        // this.nodes = this.createPathNodes();
+    }
+
+    public findNeighbouringNodes(node: Node): { previous: PathNode, next: PathNode } {
+        const index = _.findIndex(this.nodes, (o) => { return o.node === node; });
+
+        if (index === -1) {
+            throw new Error('Node is not in path');
+        }
+
+        return {
+            previous: this.nodes[index - 1],
+            next: this.nodes[index + 1],
+        };
+    }
+
+    public getCoordinates(node: Node): Vector {
+        const pathNode = this.nodes.find((n) => n.node === node);
+
+        if (!pathNode) {
+            throw new Error('Node is not in path');
+        }
+
+        return pathNode.position;
     }
 
     private createPathNodes(): PathNode[] {
@@ -32,7 +54,7 @@ export class Path {
             }
             array.push({
                 position: positions[i],
-                node: this.createNode(i, this.destination),
+                node: this.positions[i + 1] === undefined ? this.destination : new EdgeNode(this),
             });
         }
 
@@ -43,41 +65,12 @@ export class Path {
         return this.positions[0];
     }
 
-    public set Destination(node: Node) {
-        this.destination = node;
+    public set Destination(commit: CommitModel) {
+        this.destination = new DataNode(this, commit);
         this.nodes = this.createPathNodes();
     }
 
     public get Nodes(): PathNode[] {
         return this.nodes;
     }
-
-    private createNode(index: number, commit: Node): Node {
-        const currentPosition = this.positions[index];
-        const nextPosition = this.positions[index + 1];
-        const previousPosition = this.positions[index - 1];
-
-        if (nextPosition === undefined) {
-            return commit;
-        }
-
-        if (previousPosition === undefined) {
-            // Need fixing
-            return new VerticalNode();
-        }
-
-        const previousXDelta = previousPosition.x - currentPosition.x;
-        const nextXDelta = nextPosition.x - currentPosition.x;
-        const previousYDelta = previousPosition.y - currentPosition.y;
-        const nextYDelta = nextPosition.y - currentPosition.y;
-
-        if (Math.abs(previousXDelta) && Math.abs(nextXDelta)) {
-            return new HorizontalNode();
-        } else if (Math.abs(previousYDelta) && Math.abs(nextYDelta)) {
-            return new VerticalNode();
-        } else {
-            return new HorizontalNode();
-        }
-    }
-
 }
