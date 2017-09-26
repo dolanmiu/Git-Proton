@@ -11,7 +11,6 @@ export class TreeEffects {
     @Effect() public addTreeData$: Observable<void> = this.actions$.ofType(TreeActions.ADD_DATA)
         .map(toPayload)
         .flatMap((payload) => {
-            console.log('DENCH EFFECT');
             console.log(payload);
             return Observable.empty();
         });
