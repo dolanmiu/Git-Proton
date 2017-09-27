@@ -31,7 +31,7 @@
     "@angular/router": "^4.4.3",
     "@ngrx/effects": "^4.0.5",
     "@ngrx/store": "^4.0.0",
-    "@types/lodash": "^4.14.74",
+    "@types/lodash": "^4.14.76",
     "@types/shelljs": "^0.7.4",
     "core-js": "^2.4.1",
     "electron": "^1.7.6",
