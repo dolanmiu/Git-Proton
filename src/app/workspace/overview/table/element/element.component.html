@@ -1,6 +1,6 @@
 <div class="stack" *ngFor="let node of nodeStack.Nodes">
     <div [ngSwitch]="node.Type">
-        <svg *ngSwitchCase="2" width="100" height="100" viewBox="0 0 100 100">
+        <!-- <svg *ngSwitchCase="2" width="100" height="100" viewBox="0 0 100 100">
             <rect width="20" height="2" style="fill:rgb(0,0,255);" />
         </svg>
         <svg *ngSwitchCase="1" width="100" height="100" viewBox="0 0 100 100">
@@ -8,7 +8,28 @@
         </svg>
         <svg *ngSwitchCase="3" width="100" height="100" viewBox="0 0 100 100">
             <rect width="20" height="20" style="fill:rgb(0,255,0);" />
-        </svg>
+        </svg> -->
+        <div *ngSwitchCase="1">
+            ║
+        </div>
+        <div *ngSwitchCase="2">
+            ═
+        </div>
+        <div *ngSwitchCase="3">
+            o
+        </div>
+        <div *ngSwitchCase="4">
+            ╔
+        </div>
+        <div *ngSwitchCase="5">
+            ╗
+        </div>
+        <div *ngSwitchCase="6">
+            ╚
+        </div>
+        <div *ngSwitchCase="7">
+            ╝
+        </div>
     </div>
 </div>
 

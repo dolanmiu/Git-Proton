@@ -1,11 +1,11 @@
 import { Path } from '../path';
 
 export const enum NodeType {
-    NONE, VERTICAL, HORIZONTAL, NODE,
+    NONE = 0, VERTICAL = 1, HORIZONTAL = 2, NODE = 3, BOTTOM_RIGHT = 4, BOTTOM_LEFT = 5, TOP_RIGHT = 6, TOP_LEFT = 7,
 }
 
 export class Node {
-    constructor(protected path: Path, private cost: number) {
+    constructor(private path: Path, private cost: number) {
     }
 
     public get Cost(): number {
@@ -25,17 +25,99 @@ export class Node {
             return NodeType.VERTICAL;
         }
 
-        const previousXDelta = neighbours.previous.position.x - currentPosition.x;
-        const nextXDelta = neighbours.next.position.x - currentPosition.x;
-        const previousYDelta = neighbours.previous.position.y - currentPosition.y;
-        const nextYDelta = neighbours.next.position.y - currentPosition.y;
+        const previousDelta: Vector = {
+            x: neighbours.previous.position.x - currentPosition.x,
+            y: neighbours.previous.position.y - currentPosition.y,
+        };
 
-        if (Math.abs(previousXDelta) && Math.abs(nextXDelta)) {
-            return NodeType.HORIZONTAL;
-        } else if (Math.abs(previousYDelta) && Math.abs(nextYDelta)) {
-            return NodeType.VERTICAL;
-        } else {
+        const nextDelta: Vector = {
+            x: neighbours.next.position.x - currentPosition.x,
+            y: neighbours.next.position.y - currentPosition.y,
+        };
+
+        if (previousDelta.y === 0 && nextDelta.y === 0) {
             return NodeType.HORIZONTAL;
         }
+
+        if (previousDelta.x === 0 && nextDelta.x === 0) {
+            return NodeType.VERTICAL;
+        }
+
+        if (this.checkIfBottomLeftCorner(previousDelta, nextDelta)) {
+            return NodeType.BOTTOM_LEFT;
+        }
+
+        if (this.checkIfBottomRightCorner(previousDelta, nextDelta)) {
+            return NodeType.BOTTOM_RIGHT;
+        }
+
+        if (this.checkIfTopLeftCorner(previousDelta, nextDelta)) {
+            return NodeType.TOP_LEFT;
+        }
+
+        if (this.checkIfTopRightCorner(previousDelta, nextDelta)) {
+            return NodeType.TOP_RIGHT;
+        }
+
+        throw new Error('Cannot find node type');
+    }
+
+    private checkIfBottomLeftCorner(previous: Vector, next: Vector): boolean {
+        const result = this.doubleCheck(previous, next, (p, n) => {
+            if (p.x < 0 && n.y < 0) {
+                return true;
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+
+    private checkIfBottomRightCorner(previous: Vector, next: Vector): boolean {
+        const result = this.doubleCheck(previous, next, (p, n) => {
+            if (p.x > 0 && n.y < 0) {
+                return true;
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+
+    private checkIfTopLeftCorner(previous: Vector, next: Vector): boolean {
+        const result = this.doubleCheck(previous, next, (p, n) => {
+            if (p.x < 0 && n.y > 0) {
+                return true;
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+
+    private checkIfTopRightCorner(previous: Vector, next: Vector): boolean {
+        const result = this.doubleCheck(previous, next, (p, n) => {
+            if (p.x > 0 && n.y > 0) {
+                return true;
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+
+    private doubleCheck(previous: Vector, next: Vector, checkFunc: (x: Vector, y: Vector) => boolean): boolean {
+        const firstResult = checkFunc(previous, next);
+        const secondResult = checkFunc(next, previous);
+
+        if (firstResult || secondResult) {
+            return true;
+        }
+
+        return false;
     }
 }
