@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ElementComponent } from './element/element.component';
 import { TableComponent } from './table.component';
+import { BottomRightComponent } from './element/bottom-right/bottom-right.component';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { TableComponent } from './table.component';
     declarations: [
         TableComponent,
         ElementComponent,
+        BottomRightComponent,
     ],
     exports: [
         TableComponent,
