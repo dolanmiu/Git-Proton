@@ -20,15 +20,19 @@ export class Node {
             return NodeType.NODE;
         }
 
-        if (neighbours.previous === undefined) {
-            // Need fixing
-            return NodeType.VERTICAL;
-        }
+        let previousDelta: Vector;
 
-        const previousDelta: Vector = {
-            x: neighbours.previous.position.x - currentPosition.x,
-            y: neighbours.previous.position.y - currentPosition.y,
-        };
+        if (neighbours.previous === undefined) {
+            previousDelta = {
+                x: this.path.PreviousDestination.x - currentPosition.x,
+                y: this.path.PreviousDestination.y - currentPosition.y,
+            };
+        } else {
+            previousDelta = {
+                x: neighbours.previous.position.x - currentPosition.x,
+                y: neighbours.previous.position.y - currentPosition.y,
+            };
+        }
 
         const nextDelta: Vector = {
             x: neighbours.next.position.x - currentPosition.x,

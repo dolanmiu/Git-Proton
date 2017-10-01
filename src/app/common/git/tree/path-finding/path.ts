@@ -11,6 +11,7 @@ interface PathNode {
 export class Path {
     private destination: Node;
     private nodes: PathNode[];
+    private previousDestination: Vector;
 
     constructor(private positions: Vector[]) {
     }
@@ -68,6 +69,14 @@ export class Path {
     public set Destination(commit: CommitModel) {
         this.destination = new DataNode(this, commit);
         this.nodes = this.createPathNodes();
+    }
+
+    public get PreviousDestination(): Vector {
+        return this.previousDestination;
+    }
+
+    public set PreviousDestination(position: Vector) {
+        this.previousDestination = position;
     }
 
     public get Nodes(): PathNode[] {

@@ -27,8 +27,10 @@ export class PathFinder {
         const paths: Path[] = [];
         let endNode: NodeStack;
 
-        for (const node of parents) {
-            paths.push(this.findPath(grid, node, endNode));
+        for (const parent of parents) {
+            const path = this.findPath(grid, parent, endNode);
+            path.PreviousDestination = grid.getCoordinates(parent);
+            paths.push(path);
 
             if (!endNode) {
                 endNode = grid.findNode(paths[0].EndPosition);
