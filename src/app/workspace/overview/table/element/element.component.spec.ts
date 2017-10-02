@@ -1,7 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NodeStack } from 'app/common/git/tree/path-finding';
+import { BottomRightComponent } from './bottom-right/bottom-right.component';
 import { ElementComponent } from './element.component';
+import { HorizontalComponent } from './horizontal/horizontal.component';
+import { TopLeftComponent } from './top-left/top-left.component';
+import { TopRightComponent } from './top-right/top-right.component';
+import { VerticalComponent } from './vertical/vertical.component';
 
 describe('ElementComponent', () => {
     let component: ElementComponent;
@@ -9,7 +14,14 @@ describe('ElementComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ElementComponent],
+            declarations: [
+                ElementComponent,
+                BottomRightComponent,
+                VerticalComponent,
+                TopLeftComponent,
+                TopRightComponent,
+                HorizontalComponent,
+            ],
         })
             .compileComponents();
     }));
