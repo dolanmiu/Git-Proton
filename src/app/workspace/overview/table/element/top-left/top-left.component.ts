@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-    selector: 'app-vertical',
-    templateUrl: './vertical.component.html',
-    styleUrls: ['./vertical.component.scss'],
+    selector: 'app-top-left',
+    templateUrl: './top-left.component.html',
+    styleUrls: ['./top-left.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VerticalComponent {
+export class TopLeftComponent {
 
     constructor() { }
+
 }
