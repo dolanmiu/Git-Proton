@@ -19,7 +19,6 @@ export class PathFinder {
 
         for (const startNode of startNodes) {
             const path = this.findPath(grid, startNode, endNode);
-            path.PreviousDestination = grid.getCoordinates(startNode);
             paths.push(path);
 
             if (!endNode) {
@@ -49,7 +48,7 @@ export class PathFinder {
         }
         while (end ? nextCurrentNode !== end : !grid.isOnTop(nextCurrentNode));
 
-        return map.convertToPath(grid, nextCurrentNode);
+        return map.convertToPath(grid, nextCurrentNode, start);
     }
 
     // tslint:disable-next-line:max-line-length

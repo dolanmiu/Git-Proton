@@ -11,9 +11,8 @@ interface PathNode {
 export class Path {
     private destination: Node;
     private nodes: PathNode[];
-    private previousDestination: Vector;
 
-    constructor(private positions: Vector[]) {
+    constructor(private positions: Vector[], private previousDestination: Vector) {
     }
 
     public findNeighbouringNodes(node: Node): { previous: PathNode, next: PathNode } {
@@ -73,10 +72,6 @@ export class Path {
 
     public get PreviousDestination(): Vector {
         return this.previousDestination;
-    }
-
-    public set PreviousDestination(position: Vector) {
-        this.previousDestination = position;
     }
 
     public get Nodes(): PathNode[] {
