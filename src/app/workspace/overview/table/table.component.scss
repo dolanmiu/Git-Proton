@@ -6,3 +6,11 @@
 .flex-container {
     display: flex;
 }
+
+table {
+    border-spacing: 0;
+
+    td {
+        padding: 0;
+    }
+}

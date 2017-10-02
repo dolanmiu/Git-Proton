@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ElementComponent } from './element/element.component';
 import { TableComponent } from './table.component';
 import { BottomRightComponent } from './element/bottom-right/bottom-right.component';
+import { VerticalComponent } from './element/vertical/vertical.component';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { BottomRightComponent } from './element/bottom-right/bottom-right.compon
         TableComponent,
         ElementComponent,
         BottomRightComponent,
+        VerticalComponent,
     ],
     exports: [
         TableComponent,
