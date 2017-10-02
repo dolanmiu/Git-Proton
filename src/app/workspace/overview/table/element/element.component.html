@@ -1,24 +1,24 @@
 <div class="stack" *ngFor="let node of nodeStack.Nodes">
-    <div [ngSwitch]="node.Type">
-        <div *ngSwitchCase="1">
+    <div [ngSwitch]="node.Type" class="element-wrapper">
+        <div *ngSwitchCase="1" class="element">
             <app-vertical></app-vertical>
         </div>
-        <div *ngSwitchCase="2">
+        <div *ngSwitchCase="2" class="element">
             <app-horizontal></app-horizontal>
         </div>
-        <div *ngSwitchCase="3">
-            o
+        <div *ngSwitchCase="3" class="element">
+            <app-data></app-data>
         </div>
-        <div *ngSwitchCase="4">
+        <div *ngSwitchCase="4" class="element">
             <app-bottom-right></app-bottom-right>
         </div>
-        <div *ngSwitchCase="5">
+        <div *ngSwitchCase="5" class="element">
             <app-bottom-left></app-bottom-left>
         </div>
-        <div *ngSwitchCase="6">
+        <div *ngSwitchCase="6" class="element">
             <app-top-right></app-top-right>
         </div>
-        <div *ngSwitchCase="7">
+        <div *ngSwitchCase="7" class="element">
             <app-top-left></app-top-left>
         </div>
     </div>

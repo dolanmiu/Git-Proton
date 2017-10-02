@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeStack } from 'app/common/git/tree/path-finding';
 import { BottomLeftComponent } from './bottom-left/bottom-left.component';
 import { BottomRightComponent } from './bottom-right/bottom-right.component';
+import { DataComponent } from './data/data.component';
 import { ElementComponent } from './element.component';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 import { TopLeftComponent } from './top-left/top-left.component';
@@ -23,6 +24,7 @@ describe('ElementComponent', () => {
                 TopRightComponent,
                 HorizontalComponent,
                 BottomLeftComponent,
+                DataComponent,
             ],
         })
             .compileComponents();

@@ -1,5 +1,6 @@
 :host {
     display: block;
+    height: 100%;
     position: relative;
 }
 
@@ -9,4 +10,12 @@
     position: absolute;
     top: 0;
     width: 100%;
+
+    .element-wrapper {
+        height: 100%;
+
+        .element {
+            height: 100%;
+        }
+    }
 }

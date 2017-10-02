@@ -1,0 +1,10 @@
+$border-color: #f00;
+
+:host {
+    border: 3px solid $border-color;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    position: relative;
+}
