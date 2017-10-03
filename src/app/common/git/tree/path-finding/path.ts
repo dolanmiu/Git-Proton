@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 
-import { CommitModel } from '../commit-model';
 import { DataNode, EdgeNode, Node } from './nodes';
 
 interface PathNode {
@@ -38,9 +37,14 @@ export class Path {
         return pathNode.position;
     }
 
+    public setData<T>(data: T): void {
+        this.destination = new DataNode(this, data);
+        this.nodes = this.createPathNodes();
+    }
+
     private createPathNodes(): PathNode[] {
         if (!this.destination) {
-            throw new Error('There is no destination for the path');
+            throw new Error('There is no destination for the path. Set data first');
         }
 
         const positions = _.cloneDeep(this.positions);
@@ -63,11 +67,6 @@ export class Path {
 
     public get EndPosition(): Vector {
         return this.positions[0];
-    }
-
-    public set Destination(commit: CommitModel) {
-        this.destination = new DataNode(this, commit);
-        this.nodes = this.createPathNodes();
     }
 
     public get PreviousDestination(): Vector {
