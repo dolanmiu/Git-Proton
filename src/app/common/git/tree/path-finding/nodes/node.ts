@@ -5,7 +5,7 @@ export const enum NodeType {
 }
 
 export class Node {
-    constructor(private path: Path, private cost: number) {
+    constructor(protected path: Path, private cost: number) {
     }
 
     public get Cost(): number {
