@@ -1,5 +1,13 @@
-<div class="circle-wrapper">
-    <div class="circle">
+<div class="stack">
+    <div [ngSwitch]="node.Type" class="element-wrapper">
+        <div *ngSwitchCase="8" class="element">
+            --
+        </div>
+    </div>
 
+    <div class="circle-wrapper">
+        <div class="circle">
+
+        </div>
     </div>
 </div>

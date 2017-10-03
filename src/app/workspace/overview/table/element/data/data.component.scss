@@ -6,14 +6,33 @@ $border-color: #f00;
     position: relative;
 }
 
-.circle-wrapper {
-    height: calc(100% - 10px);
-    padding: 5px;
+.stack {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
 
-    .circle {
-        border: 3px solid $border-color;
-        border-radius: 50%;
-        box-sizing: border-box;
+    .element-wrapper {
         height: 100%;
+        position: absolute;
+        width: inherit;
+
+        .element {
+            height: 100%;
+        }
+    }
+
+    .circle-wrapper {
+        height: calc(100% - 10px);
+        padding: 5px;
+        position: absolute;
+        width: calc(100% - 10px);
+
+        .circle {
+            border: 3px solid $border-color;
+            border-radius: 50%;
+            box-sizing: border-box;
+            height: 100%;
+        }
     }
 }
