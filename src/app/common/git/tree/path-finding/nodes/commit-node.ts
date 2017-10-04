@@ -7,7 +7,7 @@ export const enum NodeDirection {
 
 export class DataNode<T> extends Node {
 
-    constructor(path: Path, public readonly commit: T) {
+    constructor(path: Path<T>, public readonly commit: T) {
         super(path, 1);
     }
 

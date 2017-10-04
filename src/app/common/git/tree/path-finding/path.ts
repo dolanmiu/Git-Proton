@@ -7,11 +7,13 @@ interface PathNode {
     node: Node;
 }
 
-export class Path {
-    private destination: Node;
+export class Path<T> {
+    private destination: DataNode<T>;
     private nodes: PathNode[];
 
-    constructor(private positions: Vector[], private previousDestination: Vector) {
+    constructor(private positions: Vector[], private previousDestination: Vector, data: T) {
+        this.destination = new DataNode(this, data);
+        this.nodes = this.createPathNodes();
     }
 
     public findNeighbouringNodes(node: Node): { previous: PathNode, next: PathNode } {
@@ -28,6 +30,7 @@ export class Path {
     }
 
     public getCoordinates(node: Node): Vector {
+        console.log(node);
         const pathNode = this.nodes.find((n) => n.node === node);
 
         if (!pathNode) {
@@ -35,11 +38,6 @@ export class Path {
         }
 
         return pathNode.position;
-    }
-
-    public setData<T>(data: T): void {
-        this.destination = new DataNode(this, data);
-        this.nodes = this.createPathNodes();
     }
 
     private createPathNodes(): PathNode[] {
@@ -75,5 +73,9 @@ export class Path {
 
     public get Nodes(): PathNode[] {
         return this.nodes;
+    }
+
+    public get Destination(): DataNode<T> {
+        return this.destination;
     }
 }

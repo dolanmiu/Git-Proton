@@ -15,7 +15,7 @@ export class PathMap {
         this.checkForCycles();
     }
 
-    public convertToPath(grid: Grid, start: NodeStack, previousNode: NodeStack): Path {
+    public convertToPath<T>(grid: Grid, start: NodeStack, previousNode: NodeStack, data: T): Path<T> {
         // TODO - Add destination in constructor;
         const path: Vector[] = [];
         let currentNode = start;
@@ -27,7 +27,7 @@ export class PathMap {
             path.push(grid.getCoordinates(currentNode));
         }
 
-        return new Path(path, grid.getCoordinates(previousNode));
+        return new Path(path, grid.getCoordinates(previousNode), data);
     }
 
     private checkForCycles(): void {
