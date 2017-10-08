@@ -7,7 +7,7 @@ import { Path } from './path';
 
 export class Grid {
     private elementsCache: NodeStack[][];
-    private paths: Path[];
+    private paths: Path<CommitModel>[];
 
     constructor() {
         this.paths = [];
@@ -76,7 +76,7 @@ export class Grid {
         return position.y === this.elements.length - 1;
     }
 
-    public addPath(path: Path): void {
+    public addPath(path: Path<CommitModel>): void {
         this.paths.push(path);
         this.elementsCache = undefined;
     }

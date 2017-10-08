@@ -3,7 +3,7 @@ import { Node } from './node';
 
 export class EdgeNode extends Node {
 
-    constructor(path: Path) {
+    constructor(path: Path<any>) {
         super(path, 1);
     }
 
