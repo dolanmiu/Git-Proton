@@ -8,7 +8,11 @@ export const enum NodeDirection {
 export class DataNode<T> extends Node {
 
     constructor(path: Path<T>, public readonly commit: T) {
+
         super(path, 1);
+        if (!commit) {
+            throw new Error('Data needs to be defined');
+        }
     }
 
     public toString(): string {

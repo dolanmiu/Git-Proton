@@ -8,11 +8,9 @@ interface PathNode {
 }
 
 export class Path<T> {
-    private destination: DataNode<T>;
     private nodes: PathNode[];
 
-    constructor(private positions: Vector[], private previousDestination: Vector, data: T) {
-        this.destination = new DataNode(this, data);
+    constructor(private positions: Vector[], private previousDestination: Vector, private data: T) {
         this.nodes = this.createPathNodes();
     }
 
@@ -30,7 +28,6 @@ export class Path<T> {
     }
 
     public getCoordinates(node: Node): Vector {
-        console.log(node);
         const pathNode = this.nodes.find((n) => n.node === node);
 
         if (!pathNode) {
@@ -41,10 +38,6 @@ export class Path<T> {
     }
 
     private createPathNodes(): PathNode[] {
-        if (!this.destination) {
-            throw new Error('There is no destination for the path. Set data first');
-        }
-
         const positions = _.cloneDeep(this.positions);
         const array: PathNode[] = [];
 
@@ -56,7 +49,7 @@ export class Path<T> {
             }
             array.push({
                 position: positions[i],
-                node: this.positions[i + 1] === undefined ? this.destination : new EdgeNode(this),
+                node: this.positions[i + 1] === undefined ? new DataNode(this, this.data) : new EdgeNode(this),
             });
         }
 
@@ -76,6 +69,6 @@ export class Path<T> {
     }
 
     public get Destination(): DataNode<T> {
-        return this.destination;
+        return this.nodes[this.nodes.length - 1].node as DataNode<T>;
     }
 }
