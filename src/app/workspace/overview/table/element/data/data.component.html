@@ -1,7 +1,19 @@
 <div class="stack">
     <div [ngSwitch]="node.Direction" class="element-wrapper">
-        <div *ngSwitchCase="8" class="element">
-            --
+        <div *ngSwitchCase="0" class="element">
+            <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+                <path d="M0,50 L50,50" style="stroke:#660000; fill:none;" stroke-width="10"/>
+            </svg>
+        </div>
+        <div *ngSwitchCase="1" class="element">
+            <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+                <path d="M50,50 L100,50" style="stroke:#660000; fill:none;" stroke-width="10"/>
+            </svg>
+        </div>
+        <div *ngSwitchCase="2" class="element">
+            <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+                <path d="M50,50 L50,100" style="stroke:#660000; fill:none;" stroke-width="10"/>
+            </svg>
         </div>
     </div>
 
