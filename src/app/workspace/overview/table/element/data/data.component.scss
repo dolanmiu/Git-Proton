@@ -15,11 +15,24 @@ $border-color: #f00;
     .element-wrapper {
         height: 100%;
         position: absolute;
-        top: 25%;
         width: inherit;
 
         .element {
             height: 100%;
+            position: absolute;
+            width: inherit;
+        }
+
+        .bottom-element {
+            top: 25%;
+        }
+
+        .left-element {
+            right: 25%;
+        }
+
+        .right-element {
+            left: 25%;
         }
     }
 
