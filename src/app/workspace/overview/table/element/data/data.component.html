@@ -16,7 +16,6 @@
             </svg>
         </div>
     </div>
-    {{node.NextDirection}}
     <div [ngSwitch]="node.NextDirection" class="element-wrapper">
         <div *ngSwitchCase="0" class="element left-element">
             <svg preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -33,7 +32,7 @@
                 <path d="M50,50 L50,100" style="stroke:#660000; fill:none;" stroke-width="20"/>
             </svg>
         </div>
-        <div *ngSwitchCase="3" class="element bottom-element">
+        <div *ngSwitchCase="3" class="element up-element">
             <svg preserveAspectRatio="none" viewBox="0 0 100 100">
                 <path d="M50,0 L50,50" style="stroke:#660000; fill:none;" stroke-width="20"/>
             </svg>
