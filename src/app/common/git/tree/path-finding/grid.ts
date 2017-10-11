@@ -108,10 +108,6 @@ export class Grid {
         return strs.reverse().join('');
     }
 
-    public convertToModel(): void {
-        // TODO
-    }
-
     public findNodeFromCommit(commit: CommitModel): NodeStack {
         for (let y = 0; y < this.elements.length; y++) {
             for (let x = 0; x < this.elements[y].length; x++) {
