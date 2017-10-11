@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommitModel } from 'app/common/git/tree/commit-model';
+import { DataNode } from 'app/common/git/tree/path-finding/nodes';
 import { Path } from 'app/common/git/tree/path-finding/path';
 import { DataComponent } from './data.component';
 
@@ -48,7 +49,7 @@ describe('DataComponent', () => {
             y: 0,
         }, commit);
 
-        component.node = path.Destination;
+        component.node = path.Nodes[path.Nodes.length - 1].node as DataNode<CommitModel>;
         fixture.detectChanges();
     });
 
