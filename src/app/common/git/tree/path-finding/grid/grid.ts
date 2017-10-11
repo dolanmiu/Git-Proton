@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 import { CommitModel } from '../../commit-model';
 import { NodeStack } from '../node-stack';
 import { DataNode } from '../nodes';
@@ -9,7 +7,7 @@ import { GridRenderer } from './grid-renderer';
 export class Grid {
     private elementsCache: NodeStack[][];
     private paths: Path<CommitModel>[];
-    private renderer: GridRenderer;
+    private renderer: GridRenderer<CommitModel>;
 
     constructor() {
         this.renderer = new GridRenderer();
@@ -139,42 +137,13 @@ export class Grid {
         return this.get({ x: 0, y: 0 });
     }
 
-    private createRow(): NodeStack[] {
-        // TODO - dynamic width generation
-        return _.times(20, () => {
-            return new NodeStack();
-        });
-    }
-
     public get Elements(): NodeStack[][] {
         if (this.elementsCache) {
             return this.elementsCache;
         }
 
-        let elements: NodeStack[][] = [];
+        this.elementsCache = this.renderer.render(this.paths);
 
-        for (const path of this.paths) {
-            for (const pathElement of path.Nodes) {
-                elements = this.padElements(elements, pathElement.position);
-                elements[pathElement.position.y][pathElement.position.x].addNode(pathElement.node);
-            }
-        }
-
-        elements.push(this.createRow());
-
-        this.elementsCache = elements;
-
-        return elements;
-    }
-
-    private padElements(elements: NodeStack[][], position: Vector): NodeStack[][] {
-        if (position.y > elements.length - 1) {
-            const diff = position.y - (elements.length - 1);
-            const rows = _.times(diff, () => this.createRow());
-
-            return elements.concat(rows);
-        }
-
-        return elements;
+        return this.elementsCache;
     }
 }
