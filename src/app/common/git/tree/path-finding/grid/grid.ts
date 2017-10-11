@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
 
-import { CommitModel } from '../commit-model';
-import { NodeStack } from './node-stack';
-import { DataNode } from './nodes';
-import { Path } from './path';
+import { CommitModel } from '../../commit-model';
+import { NodeStack } from '../node-stack';
+import { DataNode } from '../nodes';
+import { Path } from '../path';
 
 export class Grid {
     private elementsCache: NodeStack[][];
