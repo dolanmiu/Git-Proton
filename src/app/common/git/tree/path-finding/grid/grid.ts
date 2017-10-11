@@ -4,12 +4,15 @@ import { CommitModel } from '../../commit-model';
 import { NodeStack } from '../node-stack';
 import { DataNode } from '../nodes';
 import { Path } from '../path';
+import { GridRenderer } from './grid-renderer';
 
 export class Grid {
     private elementsCache: NodeStack[][];
     private paths: Path<CommitModel>[];
+    private renderer: GridRenderer;
 
     constructor() {
+        this.renderer = new GridRenderer();
         this.paths = [];
     }
 
