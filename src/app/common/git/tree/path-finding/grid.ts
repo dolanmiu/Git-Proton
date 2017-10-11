@@ -14,13 +14,13 @@ export class Grid {
     }
 
     public get(position: Vector): NodeStack {
-        return this.elements[position.y][position.x];
+        return this.Elements[position.y][position.x];
     }
 
     public getCoordinates(node: NodeStack): Vector {
-        for (let y = 0; y < this.elements.length; y++) {
-            for (let x = 0; x < this.elements[y].length; x++) {
-                if (this.elements[y][x] === node) {
+        for (let y = 0; y < this.Elements.length; y++) {
+            for (let x = 0; x < this.Elements[y].length; x++) {
+                if (this.Elements[y][x] === node) {
                     return { x, y };
                 }
             }
@@ -30,7 +30,7 @@ export class Grid {
     }
 
     public findNode(position: Vector): NodeStack {
-        const stack = this.elements[position.y][position.x];
+        const stack = this.Elements[position.y][position.x];
 
         if (!stack) {
             throw new Error('Node not found');
@@ -40,9 +40,9 @@ export class Grid {
     }
 
     public checkIfNodeExists(node: NodeStack): boolean {
-        for (let y = 0; y < this.elements.length; y++) {
-            for (let x = 0; x < this.elements[y].length; x++) {
-                if (this.elements[y][x] === node) {
+        for (let y = 0; y < this.Elements.length; y++) {
+            for (let x = 0; x < this.Elements[y].length; x++) {
+                if (this.Elements[y][x] === node) {
                     return true;
                 }
             }
@@ -55,16 +55,16 @@ export class Grid {
         const arr: NodeStack[] = [];
         const position = this.getCoordinates(node);
 
-        if (this.elements[position.y + 1] && this.elements[position.y + 1][position.x]) {
-            arr.push(this.elements[position.y + 1][position.x]);
+        if (this.Elements[position.y + 1] && this.Elements[position.y + 1][position.x]) {
+            arr.push(this.Elements[position.y + 1][position.x]);
         }
 
-        if (this.elements[position.y] && this.elements[position.y][position.x + 1]) {
-            arr.push(this.elements[position.y][position.x + 1]);
+        if (this.Elements[position.y] && this.Elements[position.y][position.x + 1]) {
+            arr.push(this.Elements[position.y][position.x + 1]);
         }
 
-        if (this.elements[position.y] && this.elements[position.y][position.x - 1]) {
-            arr.push(this.elements[position.y][position.x - 1]);
+        if (this.Elements[position.y] && this.Elements[position.y][position.x - 1]) {
+            arr.push(this.Elements[position.y][position.x - 1]);
         }
 
         return arr;
@@ -73,7 +73,7 @@ export class Grid {
     public isOnTop(node: NodeStack): boolean {
         const position = this.getCoordinates(node);
 
-        return position.y === this.elements.length - 1;
+        return position.y === this.Elements.length - 1;
     }
 
     public addPath(path: Path<CommitModel>): void {
@@ -84,16 +84,16 @@ export class Grid {
     public toString(): string {
         const strs: string[] = [];
 
-        for (let i = 0; i < this.elements.length; i++) {
+        for (let i = 0; i < this.Elements.length; i++) {
             let str = '';
 
             let commit: DataNode<CommitModel>;
-            for (let j = 0; j < this.elements[i].length; j++) {
-                if (this.elements[i][j].CommitNode) {
-                    commit = this.elements[i][j].CommitNode;
+            for (let j = 0; j < this.Elements[i].length; j++) {
+                if (this.Elements[i][j].CommitNode) {
+                    commit = this.Elements[i][j].CommitNode;
                 }
 
-                str += this.elements[i][j].toString();
+                str += this.Elements[i][j].toString();
             }
 
             if (commit) {
@@ -109,10 +109,10 @@ export class Grid {
     }
 
     public findNodeFromCommit(commit: CommitModel): NodeStack {
-        for (let y = 0; y < this.elements.length; y++) {
-            for (let x = 0; x < this.elements[y].length; x++) {
-                if (this.elements[y][x].CommitNode && this.elements[y][x].CommitNode.commit === commit) {
-                    return this.elements[y][x];
+        for (let y = 0; y < this.Elements.length; y++) {
+            for (let x = 0; x < this.Elements[y].length; x++) {
+                if (this.Elements[y][x].CommitNode && this.Elements[y][x].CommitNode.commit === commit) {
+                    return this.Elements[y][x];
                 }
             }
         }
@@ -143,7 +143,7 @@ export class Grid {
         });
     }
 
-    public get elements(): NodeStack[][] {
+    public get Elements(): NodeStack[][] {
         if (this.elementsCache) {
             return this.elementsCache;
         }
