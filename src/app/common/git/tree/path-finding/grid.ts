@@ -120,6 +120,18 @@ export class Grid {
         throw new Error('Node not found');
     }
 
+    public patchPaths(): void {
+        for (const path of this.paths) {
+            const destination = path.Destination;
+            for (const checkPath of this.paths) {
+                if (checkPath.PreviousDestination.x === destination.x && checkPath.PreviousDestination.y === destination.y) {
+                    path.NextSource = checkPath.PreviousDestination;
+                    break;
+                }
+            }
+        }
+    }
+
     public get StartNode(): NodeStack {
         return this.get({ x: 0, y: 0 });
     }

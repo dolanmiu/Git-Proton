@@ -9,6 +9,7 @@ interface PathNode {
 
 export class Path<T> {
     private nodes: PathNode[];
+    private nextSource: Vector;
 
     constructor(private positions: Vector[], private previousDestination: Vector, private data: T) {
         this.nodes = this.createPathNodes();
@@ -68,7 +69,15 @@ export class Path<T> {
         return this.nodes;
     }
 
-    public get Destination(): DataNode<T> {
-        return this.nodes[this.nodes.length - 1].node as DataNode<T>;
+    public set NextSource(vector: Vector) {
+        this.nextSource = vector;
+    }
+
+    public get NextSource(): Vector {
+        return this.nextSource;
+    }
+
+    public get Destination(): Vector {
+        return this.nodes[this.nodes.length - 1].position;
     }
 }

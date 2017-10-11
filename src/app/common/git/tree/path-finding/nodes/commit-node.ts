@@ -2,7 +2,7 @@ import { Path } from '../path';
 import { Node } from './node';
 
 export const enum NodeDirection {
-    LEFT = 0, RIGHT = 1, DOWN = 2,
+    LEFT = 0, RIGHT = 1, DOWN = 2, UP = 3, NONE = 4,
 }
 
 export class DataNode<T> extends Node {
@@ -49,6 +49,38 @@ export class DataNode<T> extends Node {
             return NodeDirection.DOWN;
         }
 
-        throw new Error('Error in direction of Node');
+        return NodeDirection.NONE;
+    }
+
+    public get NextDirection(): NodeDirection {
+        const currentPosition = this.path.getCoordinates(this);
+
+        if (!this.path.NextSource) {
+            return NodeDirection.NONE;
+        }
+
+        const previousDelta = {
+            x: this.path.NextSource.x - currentPosition.x,
+            y: this.path.NextSource.y - currentPosition.y,
+        };
+
+        if (previousDelta.x < 0) {
+            return NodeDirection.LEFT;
+        }
+
+        if (previousDelta.x > 0) {
+            return NodeDirection.RIGHT;
+        }
+
+        if (previousDelta.y < 0) {
+            return NodeDirection.DOWN;
+        }
+
+        if (previousDelta.y > 0) {
+            return NodeDirection.UP;
+        }
+
+        return NodeDirection.NONE;
+        // throw new Error('Error in direction of Node');
     }
 }
