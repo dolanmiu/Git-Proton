@@ -43,12 +43,18 @@ export class GridRenderer<T> {
     private patchPaths(paths: Path<T>[]): void {
         for (const path of paths) {
             const destination = path.Destination;
-            for (const checkPath of paths) {
-                if (checkPath.PreviousDestination.x === destination.x && checkPath.PreviousDestination.y === destination.y) {
-                    path.addNextSource(checkPath.Nodes[0].position);
+            for (const potentialNextPath of paths) {
+                if (potentialNextPath === path) {
+                    continue;
+                }
+
+                if (potentialNextPath.PreviousDestination.x === destination.x
+                    && potentialNextPath.PreviousDestination.y === destination.y) {
+                    path.addNextSource(potentialNextPath.Nodes[0].position);
                     // break;
                 }
             }
+            console.log(path.NextSources);
         }
     }
 }

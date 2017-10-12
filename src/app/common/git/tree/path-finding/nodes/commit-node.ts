@@ -52,12 +52,9 @@ export class DataNode<T> extends Node {
         return NodeDirection.NONE;
     }
 
-    public get NextDirection(): NodeDirection {
+    public get NextDirections(): NodeDirection[] {
         const currentPosition = this.path.getCoordinates(this);
-
-        if (this.path.NextSources.length === 0) {
-            return NodeDirection.NONE;
-        }
+        const output = [];
 
         for (const nextSource of this.path.NextSources) {
             const previousDelta = {
@@ -66,22 +63,22 @@ export class DataNode<T> extends Node {
             };
 
             if (previousDelta.x < 0) {
-                return NodeDirection.LEFT;
+                output.push(NodeDirection.LEFT);
             }
 
             if (previousDelta.x > 0) {
-                return NodeDirection.RIGHT;
+                output.push( NodeDirection.RIGHT);
             }
 
             if (previousDelta.y < 0) {
-                return NodeDirection.DOWN;
+                output.push( NodeDirection.DOWN);
             }
 
             if (previousDelta.y > 0) {
-                return NodeDirection.UP;
+                output.push( NodeDirection.UP);
             }
-
-            return NodeDirection.NONE;
         }
+
+        return output;
     }
 }
