@@ -17,6 +17,8 @@ export class GridRenderer<T> {
 
         elements.push(this.createRow());
 
+        this.patchPaths(paths);
+
         return elements;
     }
 
@@ -36,5 +38,17 @@ export class GridRenderer<T> {
         return _.times(20, () => {
             return new NodeStack();
         });
+    }
+
+    private patchPaths(paths: Path<T>[]): void {
+        for (const path of paths) {
+            const destination = path.Destination;
+            for (const checkPath of paths) {
+                if (checkPath.PreviousDestination.x === destination.x && checkPath.PreviousDestination.y === destination.y) {
+                    path.addNextSource(checkPath.Nodes[0].position);
+                    // break;
+                }
+            }
+        }
     }
 }

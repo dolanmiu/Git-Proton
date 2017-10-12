@@ -32,7 +32,6 @@ export class TreeGeneratorService {
                 grid.addPath(path);
                 console.log(path);
             }
-            grid.patchPaths();
             console.log(grid.toString());
         }
 
