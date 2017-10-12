@@ -126,7 +126,7 @@ export class Grid {
             const destination = path.Destination;
             for (const checkPath of this.paths) {
                 if (checkPath.PreviousDestination.x === destination.x && checkPath.PreviousDestination.y === destination.y) {
-                    path.NextSource = checkPath.Nodes[0].position;
+                    path.addNextSource(checkPath.Nodes[0].position);
                     break;
                 }
             }

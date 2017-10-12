@@ -9,10 +9,11 @@ interface PathNode {
 
 export class Path<T> {
     private nodes: PathNode[];
-    private nextSource: Vector;
+    private nextSources: Vector[];
 
     constructor(private positions: Vector[], private previousDestination: Vector, private data: T) {
         this.nodes = this.createPathNodes();
+        this.nextSources = [];
     }
 
     public findNeighbouringNodes(node: Node): { previous: PathNode, next: PathNode } {
@@ -36,6 +37,10 @@ export class Path<T> {
         }
 
         return pathNode.position;
+    }
+
+    public addNextSource(vector: Vector): void {
+        this.nextSources.push(vector);
     }
 
     private createPathNodes(): PathNode[] {
@@ -69,12 +74,8 @@ export class Path<T> {
         return this.nodes;
     }
 
-    public set NextSource(vector: Vector) {
-        this.nextSource = vector;
-    }
-
-    public get NextSource(): Vector {
-        return this.nextSource;
+    public get NextSources(): Vector[] {
+        return this.nextSources;
     }
 
     public get Destination(): Vector {

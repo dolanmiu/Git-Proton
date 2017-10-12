@@ -55,32 +55,33 @@ export class DataNode<T> extends Node {
     public get NextDirection(): NodeDirection {
         const currentPosition = this.path.getCoordinates(this);
 
-        if (!this.path.NextSource) {
+        if (this.path.NextSources.length === 0) {
             return NodeDirection.NONE;
         }
 
-        const previousDelta = {
-            x: this.path.NextSource.x - currentPosition.x,
-            y: this.path.NextSource.y - currentPosition.y,
-        };
+        for (const nextSource of this.path.NextSources) {
+            const previousDelta = {
+                x: nextSource.x - currentPosition.x,
+                y: nextSource.y - currentPosition.y,
+            };
 
-        if (previousDelta.x < 0) {
-            return NodeDirection.LEFT;
+            if (previousDelta.x < 0) {
+                return NodeDirection.LEFT;
+            }
+
+            if (previousDelta.x > 0) {
+                return NodeDirection.RIGHT;
+            }
+
+            if (previousDelta.y < 0) {
+                return NodeDirection.DOWN;
+            }
+
+            if (previousDelta.y > 0) {
+                return NodeDirection.UP;
+            }
+
+            return NodeDirection.NONE;
         }
-
-        if (previousDelta.x > 0) {
-            return NodeDirection.RIGHT;
-        }
-
-        if (previousDelta.y < 0) {
-            return NodeDirection.DOWN;
-        }
-
-        if (previousDelta.y > 0) {
-            return NodeDirection.UP;
-        }
-
-        return NodeDirection.NONE;
-        // throw new Error('Error in direction of Node');
     }
 }
