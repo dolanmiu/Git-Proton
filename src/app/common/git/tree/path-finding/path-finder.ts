@@ -23,7 +23,7 @@ export class PathFinder {
             paths.push(path);
 
             if (!endNode) {
-                endNode = grid.findNode(paths[0].EndPosition);
+                endNode = grid.get(paths[0].EndPosition);
             }
         }
 

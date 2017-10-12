@@ -15,7 +15,13 @@ export class Grid {
     }
 
     public get(position: Vector): NodeStack {
-        return this.Elements[position.y][position.x];
+        const stack = this.Elements[position.y][position.x];
+
+        if (!stack) {
+            throw new Error('Node not found');
+        }
+
+        return stack;
     }
 
     public getCoordinates(node: NodeStack): Vector {
@@ -28,16 +34,6 @@ export class Grid {
         }
 
         throw new Error('Node not found');
-    }
-
-    public findNode(position: Vector): NodeStack {
-        const stack = this.Elements[position.y][position.x];
-
-        if (!stack) {
-            throw new Error('Node not found');
-        }
-
-        return stack;
     }
 
     public checkIfNodeExists(node: NodeStack): boolean {
