@@ -5,6 +5,7 @@ export const enum NodeType {
 }
 
 export class Node {
+    // tslint:disable-next-line:no-any
     constructor(protected path: Path<any>, private cost: number) {
     }
 
