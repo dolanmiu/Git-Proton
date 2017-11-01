@@ -26,7 +26,7 @@
     "@angular/forms": "^4.4.3",
     "@angular/http": "^4.4.3",
     "@angular/material": "^2.0.0-beta.10",
-    "@angular/platform-browser": "^4.4.3",
+    "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^4.4.3",
     "@angular/router": "^4.4.3",
     "@ngrx/effects": "^4.0.5",
