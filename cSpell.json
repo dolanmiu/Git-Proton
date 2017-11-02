@@ -5,7 +5,8 @@
         "Truthy",
         "Injectable",
         "ngrx",
-        "gitignore"
+        "gitignore",
+        "repo"
     ],
     "ignorePaths": [
         ".gitignore"

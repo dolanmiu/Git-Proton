@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import 'rxjs/Rx';
 
 import { DialogService } from 'app/common/electron/dialog.service';
 import { GitService } from 'app/common/git/git.service';

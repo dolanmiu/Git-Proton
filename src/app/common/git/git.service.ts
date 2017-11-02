@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import { NG_CLI_ELECTRON } from './sample-data';
 import { CommitModelFactoryService } from './tree/commit-model-factory.service';

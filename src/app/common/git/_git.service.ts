@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class GitService {

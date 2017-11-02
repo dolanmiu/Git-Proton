@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import * as shell from 'shelljs';
 import * as which from 'which';
 
