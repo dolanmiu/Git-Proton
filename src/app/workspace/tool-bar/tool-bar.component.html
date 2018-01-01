@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
-    <button md-icon-button routerLink="/repo-manager"><i class="material-icons">folder</i></button>
-    <button md-icon-button [matMenuTriggerFor]="menu"><i class="material-icons">face</i></button>
+    <button mat-icon-button routerLink="/repo-manager"><i class="material-icons">folder</i></button>
+    <button mat-icon-button [matMenuTriggerFor]="menu"><i class="material-icons">face</i></button>
 
     <mat-menu #menu="matMenu">
-        <button md-menu-item> Refresh </button>
-        <button md-menu-item> Settings </button>
-        <button md-menu-item> Help </button>
-        <button md-menu-item disabled> Sign Out </button>
+        <button mat-menu-item> Refresh </button>
+        <button mat-menu-item> Settings </button>
+        <button mat-menu-item> Help </button>
+        <button mat-menu-item disabled> Sign Out </button>
     </mat-menu>
 </mat-toolbar>
