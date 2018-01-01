@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MdButtonModule, MdIconModule, MdInputModule, MdListModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule, MatListModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CommitViewComponent } from './commit-view.component';
@@ -13,10 +13,10 @@ describe('CommitViewComponent', () => {
             declarations: [CommitViewComponent],
             imports: [
                 NoopAnimationsModule,
-                MdListModule,
-                MdIconModule,
-                MdInputModule,
-                MdButtonModule,
+                MatListModule,
+                MatIconModule,
+                MatInputModule,
+                MatButtonModule,
             ],
         }).compileComponents();
     }));

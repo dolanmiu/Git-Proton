@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MdButtonModule, MdIconModule, MdInputModule, MdListModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule, MatListModule } from '@angular/material';
 
 import { CommitViewComponent } from './commit-view.component';
 
@@ -10,10 +10,10 @@ import { CommitViewComponent } from './commit-view.component';
     ],
     imports: [
         CommonModule,
-        MdListModule,
-        MdIconModule,
-        MdInputModule,
-        MdButtonModule,
+        MatListModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
     ],
     exports: [
         CommitViewComponent,

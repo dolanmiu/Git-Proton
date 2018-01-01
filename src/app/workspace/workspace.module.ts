@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MdButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BranchViewModule } from './branch-view/branch-view.module';
@@ -19,7 +19,7 @@ import { WorkspaceComponent } from './workspace.component';
         BrowserAnimationsModule,
         CommonModule,
         WorkspaceRoutingModule,
-        MdButtonModule,
+        MatButtonModule,
         ToolBarModule,
         BranchViewModule,
         CommitViewModule,

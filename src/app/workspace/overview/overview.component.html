@@ -1,10 +1,10 @@
 <div class="container mat-elevation-z8">
     <div class="header">
-        <md-input-container floatPlaceholder="never">
-            <input mdInput #filter placeholder="Filter users">
-        </md-input-container>
+        <mat-input-container floatPlaceholder="never">
+            <input matInput #filter placeholder="Filter users">
+        </mat-input-container>
     </div>
-    <!-- <md-table #table>
+    <!-- <mat-table #table>
 
         <ng-container cdkColumnDef="userId">
             <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
@@ -28,7 +28,7 @@
 
         <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table> -->
+    </mat-table> -->
 </div>
 
 <div *ngIf="tree$ | async; let tree">
