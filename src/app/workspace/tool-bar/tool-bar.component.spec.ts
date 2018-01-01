@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatToolbarModule } from '@angular/material';
 
 import { ToolBarComponent } from './tool-bar.component';
 
@@ -13,6 +13,7 @@ describe('ToolBarComponent', () => {
             imports: [
                 MatButtonModule,
                 MatMenuModule,
+                MatToolbarModule,
             ],
         }).compileComponents();
     }));
