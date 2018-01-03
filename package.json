@@ -47,7 +47,7 @@
     "@angular/cli": "1.5.5",
     "@angular/compiler-cli": "^5.1.2",
     "@types/jasmine": "2.8.2",
-    "@types/node": "~8.0.31",
+    "@types/node": "~8.5.4",
     "codelyzer": "^4.0.0",
     "fs-extra": "^4.0.1",
     "glob": "^7.1.2",
