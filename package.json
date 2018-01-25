@@ -29,7 +29,7 @@
     "@angular/platform-browser": "^5.1.2",
     "@angular/platform-browser-dynamic": "^5.1.2",
     "@angular/router": "^5.1.2",
-    "@ngrx/effects": "^4.0.5",
+    "@ngrx/effects": "^5.0.1",
     "@ngrx/store": "^5.0.0",
     "@types/lodash": "^4.14.94",
     "@types/shelljs": "^0.7.4",
