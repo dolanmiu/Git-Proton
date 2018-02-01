@@ -14,7 +14,9 @@
     "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
     "pre-electron": "node ./build-scripts/replace-stubs.js",
     "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js",
-    "build-main-only": "nge build --main"
+    "build-main-only": "nge build --main",
+    "spell": "cspell \"src/**/*.ts\"",
+    "style": "prettier -l --trailing-comma all --print-width 100 \"src/**/*.ts\""
   },
   "private": true,
   "dependencies": {
@@ -49,6 +51,7 @@
     "@types/jasmine": "2.8.6",
     "@types/node": "~9.4.0",
     "codelyzer": "^4.0.0",
+    "cspell": "^2.1.1",
     "fs-extra": "^4.0.1",
     "glob": "^7.1.2",
     "jasmine-core": "~2.9.0",
@@ -60,6 +63,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-cli-electron": "^1.0.1",
+    "prettier": "^1.10.2",
     "protractor": "~5.3.0",
     "sass-lint": "^1.11.1",
     "ts-node": "~3.3.0",
