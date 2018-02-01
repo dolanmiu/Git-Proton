@@ -16,7 +16,7 @@ export class Path<T> {
         this.nextSources = [];
     }
 
-    public findNeighbouringNodes(node: Node): { previous: PathNode, next: PathNode } {
+    public findNeighboringNodes(node: Node): { previous: PathNode, next: PathNode } {
         const index = _.findIndex(this.nodes, (o) => { return o.node === node; });
 
         if (index === -1) {

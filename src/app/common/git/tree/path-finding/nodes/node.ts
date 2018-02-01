@@ -15,29 +15,29 @@ export class Node {
 
     public get Type(): NodeType {
         const currentPosition = this.path.getCoordinates(this);
-        const neighbours = this.path.findNeighbouringNodes(this);
+        const neighbors = this.path.findNeighboringNodes(this);
 
-        if (neighbours.next === undefined) {
+        if (neighbors.next === undefined) {
             return NodeType.NODE;
         }
 
         let previousDelta: Vector;
 
-        if (neighbours.previous === undefined) {
+        if (neighbors.previous === undefined) {
             previousDelta = {
                 x: this.path.PreviousDestination.x - currentPosition.x,
                 y: this.path.PreviousDestination.y - currentPosition.y,
             };
         } else {
             previousDelta = {
-                x: neighbours.previous.position.x - currentPosition.x,
-                y: neighbours.previous.position.y - currentPosition.y,
+                x: neighbors.previous.position.x - currentPosition.x,
+                y: neighbors.previous.position.y - currentPosition.y,
             };
         }
 
         const nextDelta: Vector = {
-            x: neighbours.next.position.x - currentPosition.x,
-            y: neighbours.next.position.y - currentPosition.y,
+            x: neighbors.next.position.x - currentPosition.x,
+            y: neighbors.next.position.y - currentPosition.y,
         };
 
         if (previousDelta.y === 0 && nextDelta.y === 0) {

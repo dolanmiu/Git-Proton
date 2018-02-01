@@ -1,4 +1,5 @@
 // tslint:disable:max-line-length
+// cSpell:disable
 export const NG_CLI_ELECTRON: GitCommitModel[] = [
     {
         'author': {

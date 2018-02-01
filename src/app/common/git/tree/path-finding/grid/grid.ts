@@ -48,7 +48,7 @@ export class Grid {
         return false;
     }
 
-    public findNeighbours(node: NodeStack): NodeStack[] {
+    public findNeighbors(node: NodeStack): NodeStack[] {
         const arr: NodeStack[] = [];
         const position = this.getCoordinates(node);
 
@@ -79,7 +79,7 @@ export class Grid {
     }
 
     public toString(): string {
-        const strs: string[] = [];
+        const stringArray: string[] = [];
 
         for (let i = 0; i < this.Elements.length; i++) {
             let str = '';
@@ -99,10 +99,10 @@ export class Grid {
                 str += '\n';
             }
 
-            strs.push(str);
+            stringArray.push(str);
         }
 
-        return strs.reverse().join('');
+        return stringArray.reverse().join('');
     }
 
     public findNodeFromCommit(commit: CommitModel): NodeStack {

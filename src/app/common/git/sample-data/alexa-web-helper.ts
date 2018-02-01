@@ -1,3 +1,4 @@
+// cSpell:disable
 export const ALEXA_WEB_HELPER: GitCommitModel[] = [
     {
       'author': {

@@ -54,23 +54,23 @@ export class PathFinder {
 
     // tslint:disable-next-line:max-line-length
     private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: NodeStack, exclusion?: NodeStack): void {
-        const neighbours = grid.findNeighbours(currentNode);
+        const neighbors = grid.findNeighbors(currentNode);
 
-        for (const neighbour of neighbours) {
-            if (neighbour.CommitNode) {
+        for (const neighbor of neighbors) {
+            if (neighbor.CommitNode) {
                 continue;
             }
 
             const currentDistance = distances.getDistance(currentNode);
-            const newDistance = currentDistance + neighbour.Cost;
-            const neighbourDistance = distances.getDistance(neighbour);
-            if (newDistance > neighbourDistance) {
+            const newDistance = currentDistance + neighbor.Cost;
+            const neighborDistance = distances.getDistance(neighbor);
+            if (newDistance > neighborDistance) {
                 continue;
             }
 
-            openList.enQueue(neighbour, newDistance);
-            distances.set(neighbour, newDistance);
-            map.set(neighbour, currentNode);
+            openList.enQueue(neighbor, newDistance);
+            distances.set(neighbor, newDistance);
+            map.set(neighbor, currentNode);
         }
     }
 }

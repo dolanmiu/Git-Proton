@@ -21,19 +21,19 @@ export class DataNode<T> extends Node {
 
     public get Direction(): NodeDirection {
         const currentPosition = this.path.getCoordinates(this);
-        const neighbours = this.path.findNeighbouringNodes(this);
+        const neighbors = this.path.findNeighboringNodes(this);
 
         let previousDelta: Vector;
 
-        if (neighbours.previous === undefined) {
+        if (neighbors.previous === undefined) {
             previousDelta = {
                 x: this.path.PreviousDestination.x - currentPosition.x,
                 y: this.path.PreviousDestination.y - currentPosition.y,
             };
         } else {
             previousDelta = {
-                x: neighbours.previous.position.x - currentPosition.x,
-                y: neighbours.previous.position.y - currentPosition.y,
+                x: neighbors.previous.position.x - currentPosition.x,
+                y: neighbors.previous.position.y - currentPosition.y,
             };
         }
 
