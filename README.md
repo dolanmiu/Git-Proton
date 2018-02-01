@@ -3,6 +3,7 @@
 [![dependencies Status][daviddm-image]][daviddm-url]
 [![Build Status][travis-image]][travis-url]
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![code style: prettier][prettier-image]][prettier-url]
 
 # GitProton
 
@@ -34,6 +35,18 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Development
+
+For MacOS, you need `libgcrypt` for `nodegit` to install, https://github.com/nodegit/nodegit/issues/1156:
+
+```bash
+$ brew install libgcrypt
+```
+
+-----
+
+Made with 💖
+
 [gitter-image]: https://badges.gitter.im/dolanmiu/awesome-alexa.svg
 [gitter-url]: https://gitter.im/awesome-alexa/Lobby
 
@@ -49,10 +62,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 [greenkeeper-image]: https://badges.greenkeeper.io/dolanmiu/Git-Proton.svg
 [greenkeeper-url]: https://greenkeeper.io/
 
-## Development
-
-For MacOS, you need `libgcrypt` for `nodegit` to install, https://github.com/nodegit/nodegit/issues/1156:
-
-```bash
-$ brew install libgcrypt
-```
+[prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
+[prettier-url]: https://github.com/prettier/prettier
