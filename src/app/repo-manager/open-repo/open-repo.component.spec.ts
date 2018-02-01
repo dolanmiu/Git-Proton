@@ -10,19 +10,14 @@ describe('OpenRepoComponent', () => {
     let component: OpenRepoComponent;
     let fixture: ComponentFixture<OpenRepoComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                OpenRepoComponent,
-                RepoButtonComponent,
-            ],
-            imports: [
-                ElectronModule,
-                GitModule,
-                StoreModule.forRoot({}),
-            ],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [OpenRepoComponent, RepoButtonComponent],
+                imports: [ElectronModule, GitModule, StoreModule.forRoot({})],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OpenRepoComponent);

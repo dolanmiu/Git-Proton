@@ -2,13 +2,15 @@ import { Path } from '../path';
 import { Node } from './node';
 
 export const enum NodeDirection {
-    LEFT = 0, RIGHT = 1, DOWN = 2, UP = 3, NONE = 4,
+    LEFT = 0,
+    RIGHT = 1,
+    DOWN = 2,
+    UP = 3,
+    NONE = 4,
 }
 
 export class DataNode<T> extends Node {
-
     constructor(path: Path<T>, public readonly commit: T) {
-
         super(path, 1);
         if (!commit) {
             throw new Error('Data needs to be defined');
@@ -67,15 +69,15 @@ export class DataNode<T> extends Node {
             }
 
             if (previousDelta.x > 0) {
-                output.push( NodeDirection.RIGHT);
+                output.push(NodeDirection.RIGHT);
             }
 
             if (previousDelta.y < 0) {
-                output.push( NodeDirection.DOWN);
+                output.push(NodeDirection.DOWN);
             }
 
             if (previousDelta.y > 0) {
-                output.push( NodeDirection.UP);
+                output.push(NodeDirection.UP);
             }
         }
 

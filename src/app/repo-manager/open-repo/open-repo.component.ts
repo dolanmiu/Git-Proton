@@ -12,21 +12,22 @@ import { AddDataAction } from 'app/store/tree';
     styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
+    constructor(private dialogService: DialogService, private gitService: GitService, private store: Store<AppState>) {}
 
-    constructor(private dialogService: DialogService, private gitService: GitService, private store: Store<AppState>) {
-    }
-
-    public ngOnInit(): void {
-    }
+    public ngOnInit(): void {}
 
     public openDialog(): void {
-        this.dialogService.openDialog().flatMap((data) => {
-            const folderPath = data[0];
+        this.dialogService
+            .openDialog()
+            .flatMap((data) => {
+                const folderPath = data[0];
 
-            return this.gitService.addGitProject(folderPath);
-        }).do((data) => {
-            console.log(data);
-            this.store.dispatch(new AddDataAction(data));
-        }).subscribe();
+                return this.gitService.addGitProject(folderPath);
+            })
+            .do((data) => {
+                console.log(data);
+                this.store.dispatch(new AddDataAction(data));
+            })
+            .subscribe();
     }
 }

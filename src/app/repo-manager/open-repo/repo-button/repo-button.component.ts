@@ -10,8 +10,7 @@ export class RepoButtonComponent implements OnInit {
     public projectName: string;
     public parentFolder: string;
 
-    constructor() {
-    }
+    constructor() {}
 
     public ngOnInit(): void {
         if (!this.directory) {

@@ -9,7 +9,10 @@ describe('CommitModelFactoryService', () => {
         });
     });
 
-    it('should be created', inject([CommitModelFactoryService], (service: CommitModelFactoryService) => {
-        expect(service).toBeTruthy();
-    }));
+    it(
+        'should be created',
+        inject([CommitModelFactoryService], (service: CommitModelFactoryService) => {
+            expect(service).toBeTruthy();
+        }),
+    );
 });

@@ -10,21 +10,9 @@ import { AppStoreModule } from './store/app-store.module';
 import { WorkspaceModule } from './workspace/workspace.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AppStoreModule,
-        RepoManagerModule,
-        WorkspaceModule,
-        ElectronModule,
-        GitModule,
-    ],
+    declarations: [AppComponent],
+    imports: [BrowserModule, AppRoutingModule, AppStoreModule, RepoManagerModule, WorkspaceModule, ElectronModule, GitModule],
     providers: [],
-    bootstrap: [
-        AppComponent,
-    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

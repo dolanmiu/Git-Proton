@@ -6,13 +6,14 @@ import * as TreeActions from './tree.actions';
 
 @Injectable()
 export class TreeEffects {
-    @Effect() public addTreeData$: Observable<void> = this.actions$.ofType(TreeActions.ADD_DATA)
+    @Effect()
+    public addTreeData$: Observable<void> = this.actions$
+        .ofType(TreeActions.ADD_DATA)
         .map(toPayload)
         .flatMap((payload) => {
             console.log(payload);
             return Observable.empty();
         });
 
-    constructor(private actions$: Actions) {
-    }
+    constructor(private actions$: Actions) {}
 }

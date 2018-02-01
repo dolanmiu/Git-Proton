@@ -9,7 +9,10 @@ describe('DialogService', () => {
         });
     });
 
-    it('should ...', inject([DialogService], (service: DialogService) => {
-        expect(service).toBeTruthy();
-    }));
+    it(
+        'should ...',
+        inject([DialogService], (service: DialogService) => {
+            expect(service).toBeTruthy();
+        }),
+    );
 });

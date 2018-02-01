@@ -7,12 +7,11 @@ import { WorkspaceComponent } from './workspace.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'workspace', component: WorkspaceComponent,
+                path: 'workspace',
+                component: WorkspaceComponent,
             },
         ]),
     ],
-    exports: [
-        RouterModule,
-    ],
+    exports: [RouterModule],
 })
-export class WorkspaceRoutingModule { }
+export class WorkspaceRoutingModule {}

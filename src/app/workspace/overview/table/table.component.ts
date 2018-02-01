@@ -15,16 +15,14 @@ interface Row {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit {
-
     public rows: Row[];
 
-    constructor() { }
+    constructor() {}
 
-    public ngOnInit(): void {
+    public ngOnInit(): void {}
 
-    }
-
-    @Input() public set data(nodeStacks: NodeStack[][]) {
+    @Input()
+    public set data(nodeStacks: NodeStack[][]) {
         const rows: Row[] = [];
 
         for (const row of nodeStacks) {

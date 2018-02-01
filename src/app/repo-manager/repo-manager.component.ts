@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./repo-manager.component.scss'],
 })
 export class RepoManagerComponent implements OnInit {
+    constructor() {}
 
-    constructor() { }
-
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

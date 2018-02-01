@@ -5,8 +5,7 @@ import { CommitModel } from './commit-model';
 
 @Injectable()
 export class CommitModelFactoryService {
-
-    constructor() { }
+    constructor() {}
 
     public create(commits: GitCommitModel[]): CommitModel[] {
         const map = this.createCommitMap(commits);
@@ -41,5 +40,4 @@ export class CommitModelFactoryService {
 
         return map;
     }
-
 }

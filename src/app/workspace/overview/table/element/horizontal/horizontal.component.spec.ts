@@ -6,12 +6,13 @@ describe('HorizontalComponent', () => {
     let component: HorizontalComponent;
     let fixture: ComponentFixture<HorizontalComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [HorizontalComponent],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [HorizontalComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HorizontalComponent);

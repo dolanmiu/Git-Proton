@@ -8,18 +8,14 @@ describe('CommitViewComponent', () => {
     let component: CommitViewComponent;
     let fixture: ComponentFixture<CommitViewComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [CommitViewComponent],
-            imports: [
-                NoopAnimationsModule,
-                MatListModule,
-                MatIconModule,
-                MatInputModule,
-                MatButtonModule,
-            ],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [CommitViewComponent],
+                imports: [NoopAnimationsModule, MatListModule, MatIconModule, MatInputModule, MatButtonModule],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CommitViewComponent);

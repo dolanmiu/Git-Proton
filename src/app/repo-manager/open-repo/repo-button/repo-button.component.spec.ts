@@ -6,11 +6,13 @@ describe('RepoButtonComponent', () => {
     let component: RepoButtonComponent;
     let fixture: ComponentFixture<RepoButtonComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [RepoButtonComponent],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [RepoButtonComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(RepoButtonComponent);

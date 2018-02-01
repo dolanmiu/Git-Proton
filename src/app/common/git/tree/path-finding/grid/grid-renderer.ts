@@ -4,7 +4,6 @@ import { NodeStack } from '../node-stack';
 import { Path } from '../path';
 
 export class GridRenderer<T> {
-
     public render(paths: Path<T>[]): NodeStack[][] {
         let elements: NodeStack[][] = [];
 
@@ -48,8 +47,10 @@ export class GridRenderer<T> {
                     continue;
                 }
 
-                if (potentialNextPath.PreviousDestination.x === destination.x
-                    && potentialNextPath.PreviousDestination.y === destination.y) {
+                if (
+                    potentialNextPath.PreviousDestination.x === destination.x &&
+                    potentialNextPath.PreviousDestination.y === destination.y
+                ) {
                     path.addNextSource(potentialNextPath.Nodes[0].position);
                     // break;
                 }

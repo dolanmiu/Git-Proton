@@ -8,8 +8,7 @@ import { TreeGeneratorService } from './tree/tree-generator.service';
 
 @Injectable()
 export class GitService {
-
-    constructor(private treeBuilder: TreeGeneratorService, private modelFactory: CommitModelFactoryService) { }
+    constructor(private treeBuilder: TreeGeneratorService, private modelFactory: CommitModelFactoryService) {}
 
     public addGitProject(directory: string): Observable<Grid> {
         const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);

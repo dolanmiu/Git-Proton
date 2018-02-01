@@ -12,9 +12,7 @@ import { VerticalComponent } from './element/vertical/vertical.component';
 import { TableComponent } from './table.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-    ],
+    imports: [CommonModule],
     declarations: [
         TableComponent,
         ElementComponent,
@@ -26,8 +24,6 @@ import { TableComponent } from './table.component';
         BottomLeftComponent,
         DataComponent,
     ],
-    exports: [
-        TableComponent,
-    ],
+    exports: [TableComponent],
 })
-export class TableModule { }
+export class TableModule {}

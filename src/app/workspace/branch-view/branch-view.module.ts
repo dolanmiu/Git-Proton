@@ -4,14 +4,8 @@ import { NgModule } from '@angular/core';
 import { BranchViewComponent } from './branch-view.component';
 
 @NgModule({
-    declarations: [
-        BranchViewComponent,
-    ],
-    imports: [
-        CommonModule,
-    ],
-    exports: [
-        BranchViewComponent,
-    ],
+    declarations: [BranchViewComponent],
+    imports: [CommonModule],
+    exports: [BranchViewComponent],
 })
-export class BranchViewModule { }
+export class BranchViewModule {}

@@ -16,7 +16,5 @@ export class OverviewComponent implements OnInit {
         this.tree$ = store.select('tree');
     }
 
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

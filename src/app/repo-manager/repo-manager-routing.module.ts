@@ -10,7 +10,8 @@ import { RepoManagerComponent } from './repo-manager.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'repo-manager', component: RepoManagerComponent,
+                path: 'repo-manager',
+                component: RepoManagerComponent,
                 children: [
                     { path: '', redirectTo: 'open', pathMatch: 'full' },
                     { path: 'open', component: OpenRepoComponent },
@@ -20,8 +21,6 @@ import { RepoManagerComponent } from './repo-manager.component';
             },
         ]),
     ],
-    exports: [
-        RouterModule,
-    ],
+    exports: [RouterModule],
 })
-export class RepoManagerRoutingModule { }
+export class RepoManagerRoutingModule {}

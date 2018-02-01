@@ -8,7 +8,6 @@ import { PathFinder } from './path-finding/path-finder';
 
 @Injectable()
 export class TreeGeneratorService {
-
     private pathFinder: PathFinder;
 
     constructor() {

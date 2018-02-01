@@ -14,22 +14,23 @@ describe('TableComponent', () => {
     let component: TableComponent;
     let fixture: ComponentFixture<TableComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                TableComponent,
-                ElementComponent,
-                BottomRightComponent,
-                VerticalComponent,
-                TopLeftComponent,
-                TopRightComponent,
-                HorizontalComponent,
-                BottomLeftComponent,
-                DataComponent,
-            ],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [
+                    TableComponent,
+                    ElementComponent,
+                    BottomRightComponent,
+                    VerticalComponent,
+                    TopLeftComponent,
+                    TopRightComponent,
+                    HorizontalComponent,
+                    BottomLeftComponent,
+                    DataComponent,
+                ],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableComponent);

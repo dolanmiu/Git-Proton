@@ -4,13 +4,8 @@ import { NgModule } from '@angular/core';
 import { DialogService } from './dialog.service';
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-        CommonModule,
-    ],
-    providers: [
-        DialogService,
-    ],
+    declarations: [],
+    imports: [CommonModule],
+    providers: [DialogService],
 })
-export class ElectronModule { }
+export class ElectronModule {}

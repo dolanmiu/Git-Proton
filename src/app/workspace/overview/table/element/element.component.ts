@@ -11,9 +11,7 @@ import { NodeStack } from 'app/common/git/tree/path-finding';
 export class ElementComponent implements OnInit {
     @Input() public nodeStack: NodeStack;
 
-    constructor() { }
+    constructor() {}
 
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

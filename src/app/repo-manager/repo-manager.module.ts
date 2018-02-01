@@ -10,9 +10,7 @@ import { RepoManagerRoutingModule } from './repo-manager-routing.module';
 import { RepoManagerComponent } from './repo-manager.component';
 
 @NgModule({
-    declarations: [
-        RepoManagerComponent,
-    ],
+    declarations: [RepoManagerComponent],
     imports: [
         BrowserAnimationsModule,
         CommonModule,
@@ -23,4 +21,4 @@ import { RepoManagerComponent } from './repo-manager.component';
         MatTabsModule,
     ],
 })
-export class RepoManagerModule { }
+export class RepoManagerModule {}

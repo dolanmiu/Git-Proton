@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./branch-view.component.scss'],
 })
 export class BranchViewComponent implements OnInit {
+    constructor() {}
 
-    constructor() { }
-
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

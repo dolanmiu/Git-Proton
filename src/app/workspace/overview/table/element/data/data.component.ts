@@ -12,9 +12,7 @@ import { DataNode } from 'app/common/git/tree/path-finding/nodes';
 export class DataComponent implements OnInit {
     @Input() public node: DataNode<CommitModel>;
 
-    constructor() { }
+    constructor() {}
 
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

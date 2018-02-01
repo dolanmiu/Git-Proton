@@ -3,12 +3,10 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DialogService {
-
-    constructor() { }
+    constructor() {}
 
     public openDialog(): Observable<string[]> {
         console.log('Pretending to open dialog');
         return Observable.of([]);
     }
-
 }

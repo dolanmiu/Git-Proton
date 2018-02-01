@@ -6,11 +6,13 @@ describe('InitRepoComponent', () => {
     let component: InitRepoComponent;
     let fixture: ComponentFixture<InitRepoComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [InitRepoComponent],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [InitRepoComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InitRepoComponent);

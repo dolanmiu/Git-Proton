@@ -11,19 +11,14 @@ describe('OverviewComponent', () => {
     let component: OverviewComponent;
     let fixture: ComponentFixture<OverviewComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [OverviewComponent],
-            imports: [
-                NoopAnimationsModule,
-                MatInputModule,
-                MatTableModule,
-                CdkTableModule,
-                StoreModule.forRoot({}),
-                TableModule,
-            ],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [OverviewComponent],
+                imports: [NoopAnimationsModule, MatInputModule, MatTableModule, CdkTableModule, StoreModule.forRoot({}), TableModule],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OverviewComponent);

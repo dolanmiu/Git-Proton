@@ -6,12 +6,13 @@ describe('BottomRightComponent', () => {
     let component: BottomRightComponent;
     let fixture: ComponentFixture<BottomRightComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [BottomRightComponent],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [BottomRightComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BottomRightComponent);

@@ -7,15 +7,7 @@ import { ToolBarComponent } from './tool-bar.component';
 
 @NgModule({
     declarations: [ToolBarComponent],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatMenuModule,
-        RouterModule,
-    ],
-    exports: [
-        ToolBarComponent,
-    ],
+    imports: [CommonModule, MatButtonModule, MatToolbarModule, MatMenuModule, RouterModule],
+    exports: [ToolBarComponent],
 })
-export class ToolBarModule { }
+export class ToolBarModule {}

@@ -6,8 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class GitService {
-
-    constructor() { }
+    constructor() {}
 
     public addGitProject(directory: string): Observable<GitCommitModel[]> {
         const subject = new Subject<GitCommitModel[]>();
@@ -21,11 +20,13 @@ export class GitService {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            ipcRenderer.once('open-repo', (event, arg: GitCommitModel[]) => {
-                console.log(arg);
-                console.log(event);
-                subject.next(arg);
-            }).send('open-repo', directory);
+            ipcRenderer
+                .once('open-repo', (event, arg: GitCommitModel[]) => {
+                    console.log(arg);
+                    console.log(event);
+                    subject.next(arg);
+                })
+                .send('open-repo', directory);
         });
 
         return subject.asObservable();

@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./commit-view.component.scss'],
 })
 export class CommitViewComponent implements OnInit {
+    constructor() {}
 
-    constructor() { }
-
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }

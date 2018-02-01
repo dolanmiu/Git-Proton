@@ -7,16 +7,14 @@ describe('ToolBarComponent', () => {
     let component: ToolBarComponent;
     let fixture: ComponentFixture<ToolBarComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [ToolBarComponent],
-            imports: [
-                MatButtonModule,
-                MatMenuModule,
-                MatToolbarModule,
-            ],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [ToolBarComponent],
+                imports: [MatButtonModule, MatMenuModule, MatToolbarModule],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ToolBarComponent);

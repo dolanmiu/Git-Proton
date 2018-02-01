@@ -7,7 +7,6 @@ import { PathMap } from './path-map';
 import { PriorityQueue } from './priority-queue';
 
 export class PathFinder {
-
     public run(grid: Grid, parents: NodeStack[], data: CommitModel): Path<CommitModel>[] {
         const startNodes = parents.length === 0 ? [grid.StartNode] : parents;
 
@@ -46,14 +45,20 @@ export class PathFinder {
         do {
             nextCurrentNode = openList.deQueue();
             this.pass(grid, map, openList, distances, nextCurrentNode, end);
-        }
-        while (end ? nextCurrentNode !== end : !grid.isOnTop(nextCurrentNode));
+        } while (end ? nextCurrentNode !== end : !grid.isOnTop(nextCurrentNode));
 
         return map.convertToPath(grid, nextCurrentNode, start, data);
     }
 
     // tslint:disable-next-line:max-line-length
-    private pass(grid: Grid, map: PathMap, openList: PriorityQueue, distances: DistanceMap, currentNode: NodeStack, exclusion?: NodeStack): void {
+    private pass(
+        grid: Grid,
+        map: PathMap,
+        openList: PriorityQueue,
+        distances: DistanceMap,
+        currentNode: NodeStack,
+        exclusion?: NodeStack,
+    ): void {
         const neighbors = grid.findNeighbors(currentNode);
 
         for (const neighbor of neighbors) {

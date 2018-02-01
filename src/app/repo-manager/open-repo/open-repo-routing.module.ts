@@ -7,12 +7,11 @@ import { OpenRepoComponent } from './open-repo.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'open', component: OpenRepoComponent,
+                path: 'open',
+                component: OpenRepoComponent,
             },
         ]),
     ],
-    exports: [
-        RouterModule,
-    ],
+    exports: [RouterModule],
 })
-export class OpenRepoRoutingModule { }
+export class OpenRepoRoutingModule {}

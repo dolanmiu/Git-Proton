@@ -12,9 +12,7 @@ import { WorkspaceRoutingModule } from './workspace-routing.module';
 import { WorkspaceComponent } from './workspace.component';
 
 @NgModule({
-    declarations: [
-        WorkspaceComponent,
-    ],
+    declarations: [WorkspaceComponent],
     imports: [
         BrowserAnimationsModule,
         CommonModule,
@@ -27,4 +25,4 @@ import { WorkspaceComponent } from './workspace.component';
         FooterModule,
     ],
 })
-export class WorkspaceModule { }
+export class WorkspaceModule {}

@@ -16,8 +16,10 @@ export class Path<T> {
         this.nextSources = [];
     }
 
-    public findNeighboringNodes(node: Node): { previous: PathNode, next: PathNode } {
-        const index = _.findIndex(this.nodes, (o) => { return o.node === node; });
+    public findNeighboringNodes(node: Node): { previous: PathNode; next: PathNode } {
+        const index = _.findIndex(this.nodes, (o) => {
+            return o.node === node;
+        });
 
         if (index === -1) {
             throw new Error('Node is not in path');

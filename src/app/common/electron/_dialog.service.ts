@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DialogService {
-
-    constructor() { }
+    constructor() {}
 
     public openDialog(): Observable<string[]> {
         const openDialog = Observable.bindCallback(remote.dialog.showOpenDialog);
@@ -13,5 +12,4 @@ export class DialogService {
             properties: ['openDirectory'],
         });
     }
-
 }

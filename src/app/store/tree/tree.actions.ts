@@ -7,8 +7,7 @@ export const ADD_DATA = '[Tree] ADD_DATA';
 export class AddDataAction implements Action {
     public readonly type = ADD_DATA;
 
-    constructor(public payload: TreeModel) {
-    }
+    constructor(public payload: TreeModel) {}
 }
 
 export type Actions = AddDataAction;

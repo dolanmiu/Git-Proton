@@ -6,12 +6,13 @@ describe('TopRightComponent', () => {
     let component: TopRightComponent;
     let fixture: ComponentFixture<TopRightComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TopRightComponent],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [TopRightComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TopRightComponent);

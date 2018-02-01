@@ -6,11 +6,13 @@ describe('BranchViewComponent', () => {
     let component: BranchViewComponent;
     let fixture: ComponentFixture<BranchViewComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [BranchViewComponent],
-        }).compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [BranchViewComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BranchViewComponent);

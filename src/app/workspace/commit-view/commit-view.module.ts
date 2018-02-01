@@ -5,18 +5,8 @@ import { MatButtonModule, MatIconModule, MatInputModule, MatListModule } from '@
 import { CommitViewComponent } from './commit-view.component';
 
 @NgModule({
-    declarations: [
-        CommitViewComponent,
-    ],
-    imports: [
-        CommonModule,
-        MatListModule,
-        MatIconModule,
-        MatInputModule,
-        MatButtonModule,
-    ],
-    exports: [
-        CommitViewComponent,
-    ],
+    declarations: [CommitViewComponent],
+    imports: [CommonModule, MatListModule, MatIconModule, MatInputModule, MatButtonModule],
+    exports: [CommitViewComponent],
 })
-export class CommitViewModule { }
+export class CommitViewModule {}

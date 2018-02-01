@@ -1,4 +1,3 @@
-
 import { NodeStack } from './node-stack';
 
 interface WeightedNode {

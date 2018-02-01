@@ -1,13 +1,19 @@
 import { Path } from '../path';
 
 export const enum NodeType {
-    NONE = 0, VERTICAL = 1, HORIZONTAL = 2, NODE = 3, BOTTOM_RIGHT = 4, BOTTOM_LEFT = 5, TOP_RIGHT = 6, TOP_LEFT = 7,
+    NONE = 0,
+    VERTICAL = 1,
+    HORIZONTAL = 2,
+    NODE = 3,
+    BOTTOM_RIGHT = 4,
+    BOTTOM_LEFT = 5,
+    TOP_RIGHT = 6,
+    TOP_LEFT = 7,
 }
 
 export class Node {
     // tslint:disable-next-line:no-any
-    constructor(protected path: Path<any>, private cost: number) {
-    }
+    constructor(protected path: Path<any>, private cost: number) {}
 
     public get Cost(): number {
         return this.cost;

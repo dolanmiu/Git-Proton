@@ -7,18 +7,8 @@ import { OverviewComponent } from './overview.component';
 import { TableModule } from './table/table.module';
 
 @NgModule({
-    declarations: [
-        OverviewComponent,
-    ],
-    imports: [
-        CommonModule,
-        MatInputModule,
-        MatTableModule,
-        CdkTableModule,
-        TableModule,
-    ],
-    exports: [
-        OverviewComponent,
-    ],
+    declarations: [OverviewComponent],
+    imports: [CommonModule, MatInputModule, MatTableModule, CdkTableModule, TableModule],
+    exports: [OverviewComponent],
 })
-export class OverviewModule { }
+export class OverviewModule {}

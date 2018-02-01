@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-clone-repo',
-  templateUrl: './clone-repo.component.html',
-  styleUrls: ['./clone-repo.component.scss'],
+    selector: 'app-clone-repo',
+    templateUrl: './clone-repo.component.html',
+    styleUrls: ['./clone-repo.component.scss'],
 })
 export class CloneRepoComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  public ngOnInit(): void {
-  }
-
+    public ngOnInit(): void {}
 }

@@ -9,12 +9,13 @@ describe('DataComponent', () => {
     let component: DataComponent;
     let fixture: ComponentFixture<DataComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [DataComponent],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [DataComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataComponent);
@@ -38,16 +39,23 @@ describe('DataComponent', () => {
             message: 'string',
         });
 
-        const path = new Path([{
-            x: 0,
-            y: 0,
-        }, {
-            x: 0,
-            y: 1,
-        }], {
-            x: 0,
-            y: 0,
-        }, commit);
+        const path = new Path(
+            [
+                {
+                    x: 0,
+                    y: 0,
+                },
+                {
+                    x: 0,
+                    y: 1,
+                },
+            ],
+            {
+                x: 0,
+                y: 0,
+            },
+            commit,
+        );
 
         component.node = path.Nodes[path.Nodes.length - 1].node as DataNode<CommitModel>;
         fixture.detectChanges();

@@ -1,19 +1,18 @@
-
 export class CommitModel {
     public parents: CommitModel[];
     public author: {
-        name: string,
-        email: string,
-        date: Date,
+        name: string;
+        email: string;
+        date: Date;
     };
     public commit: {
-        name: string,
-        email: string,
-        date: Date,
+        name: string;
+        email: string;
+        date: Date;
     };
     public sha: {
-        current: string,
-        parents: string[],
+        current: string;
+        parents: string[];
     };
     public message: string;
 

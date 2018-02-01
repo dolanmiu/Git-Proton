@@ -6,12 +6,7 @@ import { TreeModule } from './tree/tree.module';
 
 @NgModule({
     declarations: [],
-    imports: [
-        CommonModule,
-        TreeModule,
-    ],
-    providers: [
-        GitService,
-    ],
+    imports: [CommonModule, TreeModule],
+    providers: [GitService],
 })
-export class GitModule { }
+export class GitModule {}

@@ -7,17 +7,8 @@ import { OpenRepoComponent } from './open-repo.component';
 import { RepoButtonComponent } from './repo-button/repo-button.component';
 
 @NgModule({
-    declarations: [
-        OpenRepoComponent,
-        RepoButtonComponent,
-    ],
-    imports: [
-        CommonModule,
-        OpenRepoRoutingModule,
-        ElectronModule,
-    ],
-    exports: [
-        OpenRepoComponent,
-    ],
+    declarations: [OpenRepoComponent, RepoButtonComponent],
+    imports: [CommonModule, OpenRepoRoutingModule, ElectronModule],
+    exports: [OpenRepoComponent],
 })
-export class OpenRepoModule { }
+export class OpenRepoModule {}

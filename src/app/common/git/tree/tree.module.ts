@@ -5,12 +5,7 @@ import { CommitModelFactoryService } from './commit-model-factory.service';
 import { TreeGeneratorService } from './tree-generator.service';
 
 @NgModule({
-    imports: [
-        CommonModule,
-    ],
-    providers: [
-        CommitModelFactoryService,
-        TreeGeneratorService,
-    ],
+    imports: [CommonModule],
+    providers: [CommitModelFactoryService, TreeGeneratorService],
 })
-export class TreeModule { }
+export class TreeModule {}

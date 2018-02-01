@@ -9,7 +9,10 @@ describe('TreeGeneratorService', () => {
         });
     });
 
-    it('should be created', inject([TreeGeneratorService], (service: TreeGeneratorService) => {
-        expect(service).toBeTruthy();
-    }));
+    it(
+        'should be created',
+        inject([TreeGeneratorService], (service: TreeGeneratorService) => {
+            expect(service).toBeTruthy();
+        }),
+    );
 });

@@ -6,11 +6,7 @@ import { REDUCERS } from './reducers';
 import { TreeEffects } from './tree/tree.effects';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        StoreModule.forRoot(REDUCERS),
-        EffectsModule.forRoot([TreeEffects]),
-    ],
+    imports: [CommonModule, StoreModule.forRoot(REDUCERS), EffectsModule.forRoot([TreeEffects])],
     declarations: [],
 })
-export class AppStoreModule { }
+export class AppStoreModule {}
