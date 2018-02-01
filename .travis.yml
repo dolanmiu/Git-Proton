@@ -19,6 +19,8 @@ script:
 - npm run lint
 - npm run sass-lint
 - npm run test
+- npm run style
+- npm run spell
 # - npm run e2e
 - npm run build
 after_success:
