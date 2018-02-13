@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatIconModule, MatInputModule, MatListModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from 'app/material.module';
 import { CommitViewComponent } from './commit-view.component';
 
 describe('CommitViewComponent', () => {
@@ -12,7 +12,7 @@ describe('CommitViewComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [CommitViewComponent],
-                imports: [NoopAnimationsModule, MatListModule, MatIconModule, MatInputModule, MatButtonModule],
+                imports: [NoopAnimationsModule, MaterialModule],
             }).compileComponents();
         }),
     );

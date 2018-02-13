@@ -18,7 +18,7 @@ before_install:
 script:
 - npm run lint
 - npm run sass-lint
-- npm run test
+- npm run ng test -- --watch=false
 - npm run style
 - npm run spell
 # - npm run e2e

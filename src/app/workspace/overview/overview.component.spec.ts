@@ -1,9 +1,8 @@
-import { CdkTableModule } from '@angular/cdk/table';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatInputModule, MatTableModule } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 
+import { MaterialModule } from 'app/material.module';
 import { OverviewComponent } from './overview.component';
 import { TableModule } from './table/table.module';
 
@@ -15,7 +14,7 @@ describe('OverviewComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [OverviewComponent],
-                imports: [NoopAnimationsModule, MatInputModule, MatTableModule, CdkTableModule, StoreModule.forRoot({}), TableModule],
+                imports: [NoopAnimationsModule, MaterialModule, StoreModule.forRoot({}), TableModule],
             }).compileComponents();
         }),
     );
