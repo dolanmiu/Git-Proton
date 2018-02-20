@@ -1,13 +1,13 @@
-<div class="main-container">
+<div class="main-container" fxLayout="column">
     <app-tool-bar></app-tool-bar>
 
-    <div class="workspace-container">
-        <div class="branch-view-container">
+    <div class="workspace-container" fxLayout="row" fxFlex="1 1 auto">
+        <div class="branch-view-container" fxFlex="0 0 200px">
             sdfds
             <app-branch-view></app-branch-view>
         </div>
 
-        <div class="overview-container">
+        <div class="overview-container" fxFlex="1 1 auto">
             <app-overview></app-overview>
             <h1>
                 Title
@@ -19,7 +19,7 @@
             <button mat-raised-button color="warn">WARN</button>
         </div>
 
-        <div class="commit-view-container">
+        <div class="commit-view-container" fxFlex="0 1 300px">
             <app-commit-view></app-commit-view>
         </div>
     </div>

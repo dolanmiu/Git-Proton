@@ -7,25 +7,18 @@ $branch-view-color: #f00;
 
 .branch-view-container {
     background-color: $branch-view-color;
-    flex: 0 0 200px;
 }
 
 .workspace-container {
-    display: flex;
-    flex-direction: row;
     height: 100%;
 }
 
-.overview-container {
-    flex: 1 1 auto;
-}
+// .overview-container {
+// }
 
-.commit-view-container {
-    flex: 0 1 300px;
-}
+// .commit-view-container {
+// }
 
 .main-container {
-    display: flex;
-    flex-flow: column;
     height: 100%;
 }

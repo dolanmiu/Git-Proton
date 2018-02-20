@@ -1,13 +1,10 @@
 .container {
-    display: flex;
-    flex-direction: column;
     max-height: 500px;
     min-width: 300px;
 }
 
 .header {
     align-items: center;
-    display: flex;
     font-size: 20px;
     justify-content: space-between;
     min-height: 64px;
@@ -16,7 +13,6 @@
 }
 
 .mat-input-container {
-    flex-grow: 1;
     font-size: 14px;
     margin-left: 32px;
 }

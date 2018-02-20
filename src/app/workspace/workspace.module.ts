@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from 'app/material.module';
@@ -16,6 +17,7 @@ import { WorkspaceComponent } from './workspace.component';
     imports: [
         BrowserAnimationsModule,
         CommonModule,
+        FlexLayoutModule,
         WorkspaceRoutingModule,
         MaterialModule,
         ToolBarModule,
