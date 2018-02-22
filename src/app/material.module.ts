@@ -2,6 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
+    MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -22,6 +23,7 @@ const MODULES = [
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
+    MatExpansionModule,
 ];
 
 @NgModule({

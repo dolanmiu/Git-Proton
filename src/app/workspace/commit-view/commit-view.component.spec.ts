@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from 'app/material.module';
 import { CommitViewComponent } from './commit-view.component';
+import { FileSelectComponent } from './file-select/file-select.component';
 
 describe('CommitViewComponent', () => {
     let component: CommitViewComponent;
@@ -11,7 +12,7 @@ describe('CommitViewComponent', () => {
     beforeEach(
         async(() => {
             TestBed.configureTestingModule({
-                declarations: [CommitViewComponent],
+                declarations: [CommitViewComponent, FileSelectComponent],
                 imports: [NoopAnimationsModule, MaterialModule],
             }).compileComponents();
         }),

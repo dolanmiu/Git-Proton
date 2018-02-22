@@ -1,6 +1,39 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button routerLink="/repo-manager"><i class="material-icons">folder</i></button>
-    <button mat-icon-button [matMenuTriggerFor]="menu"><i class="material-icons">face</i></button>
+    <button mat-icon-button routerLink="/repo-manager">
+        <i class="material-icons">folder</i>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <i class="material-icons">face</i>
+    </button>
+
+    <button mat-button color="accent">
+        <mat-icon>favorite</mat-icon>
+        <span>Push</span>
+    </button>
+
+    <button mat-button color="accent">
+        <mat-icon>favorite</mat-icon>
+        <span>Pull</span>
+    </button>
+
+    <button mat-button color="accent">
+        <mat-icon>favorite</mat-icon>
+        <span>Branch</span>
+    </button>
+
+    <button mat-button color="accent">
+        <mat-icon>favorite</mat-icon>
+        <span>Stash</span>
+    </button>
+
+    <button mat-button color="accent">
+        <mat-icon>favorite</mat-icon>
+        <span>Tag</span>
+    </button>
+
+    <button mat-icon-button color="warn">
+        <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+    </button>
 
     <mat-menu #menu="matMenu">
         <button mat-menu-item> Refresh </button>
@@ -8,4 +41,9 @@
         <button mat-menu-item> Help </button>
         <button mat-menu-item disabled> Sign Out </button>
     </mat-menu>
+    <span fxFlex></span>
+
+    <button mat-icon-button routerLink="/repo-manager">
+        <i class="material-icons">settings</i>
+    </button>
 </mat-toolbar>
