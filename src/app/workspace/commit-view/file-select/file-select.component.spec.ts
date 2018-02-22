@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MaterialModule } from '../../../material.module';
 import { FileSelectComponent } from './file-select.component';
 
 describe('FileSelectComponent', () => {
@@ -10,6 +11,7 @@ describe('FileSelectComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [FileSelectComponent],
+                imports: [MaterialModule],
             }).compileComponents();
         }),
     );

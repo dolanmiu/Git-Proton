@@ -1,3 +1,13 @@
-<select multiple>
-    <option>test</option>
-</select>
+<mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef>File</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-checkbox>{{element.name}}</mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
