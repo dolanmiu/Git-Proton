@@ -7,11 +7,11 @@ import { ElectronModule } from './common/electron/electron.module';
 import { GitModule } from './common/git/git.module';
 import { RepoManagerModule } from './repo-manager/repo-manager.module';
 import { AppStoreModule } from './store/app-store.module';
-import { WorkspaceModule } from './workspace/workspace.module';
+import { WorkspaceContainerModule } from './workspace-container/workspace-container.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, AppStoreModule, RepoManagerModule, WorkspaceModule, ElectronModule, GitModule],
+    imports: [BrowserModule, AppRoutingModule, AppStoreModule, RepoManagerModule, WorkspaceContainerModule, ElectronModule, GitModule],
     providers: [],
     bootstrap: [AppComponent],
 })

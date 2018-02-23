@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from 'app/material.module';
 import { BranchViewComponent } from './branch-view.component';
 
 @NgModule({
