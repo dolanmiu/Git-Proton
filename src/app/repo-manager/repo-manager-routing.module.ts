@@ -18,6 +18,9 @@ import { RepoManagerComponent } from './repo-manager.component';
                     { path: 'clone', component: CloneRepoComponent },
                     { path: 'init', component: InitRepoComponent },
                 ],
+                data: {
+                    page: 'repo-manager',
+                },
             },
         ]),
     ],
