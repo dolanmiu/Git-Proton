@@ -1,6 +1,6 @@
-<button [routerLink]="['/workspace']">test</button>
-<button [routerLink]="['/workspace/a']">test</button>
-
+<button *ngFor="let tab of tabs" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]">{{tab.name}}</button>
+<!-- <button [routerLink]="['/workspace/a']">test</button> -->
+{{pageState}}
 <mat-tab-group>
     <mat-tab label="Tab 1" [routerLink]="['/workspace/a']"></mat-tab>
     <mat-tab label="Tab 2" routerLink="/workspace"></mat-tab>
@@ -12,7 +12,6 @@
     <mat-tab label="Tab 2"></mat-tab>
 </mat-tab-group>
 
-<div [@animRoutes]="getPage(appOutlet)">
+<div [@animRoutes]="pageState">
     <router-outlet #appOutlet="outlet"></router-outlet>
 </div>
-
