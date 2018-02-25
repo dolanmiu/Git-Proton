@@ -1,7 +1,8 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { WorkspaceComponent } from './workspace/workspace.component';
 
 interface Tab {
     link: string;
@@ -68,7 +69,11 @@ export class WorkspaceContainerComponent {
     public currentTab: Tab;
     public pageState: string;
 
-    constructor(private location: Location) {}
+    constructor(private location: Location, router: Router) {
+        router.config.push({ path: 'workspace/a', component: WorkspaceComponent });
+        router.config.push({ path: 'workspace/b', component: WorkspaceComponent });
+        router.config.push({ path: 'workspace/c', component: WorkspaceComponent });
+    }
 
     public getPage(outlet: RouterOutlet): void {
         const selectedTabIndex = this.tabs.indexOf(this.selectedTab);

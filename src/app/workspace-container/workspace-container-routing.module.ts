@@ -12,15 +12,15 @@ import { WorkspaceComponent } from './workspace/workspace.component';
                 component: WorkspaceContainerComponent,
                 children: [
                     {
-                        path: '',
+                        path: 'new',
                         component: WorkspaceComponent,
                         data: { page: 'blank' },
                     },
-                    {
-                        path: '**',
-                        component: WorkspaceComponent,
-                        data: { page: 'workspace' },
-                    },
+                    // {
+                    //     path: '**',
+                    //     redirectTo: 'new',
+                    //     data: { page: 'workspace' },
+                    // },
                 ],
             },
         ]),
