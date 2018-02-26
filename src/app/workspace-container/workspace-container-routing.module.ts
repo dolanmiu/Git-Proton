@@ -16,11 +16,11 @@ import { WorkspaceComponent } from './workspace/workspace.component';
                         component: WorkspaceComponent,
                         data: { page: 'blank' },
                     },
-                    // {
-                    //     path: '**',
-                    //     redirectTo: 'new',
-                    //     data: { page: 'workspace' },
-                    // },
+                    {
+                        path: '**',
+                        redirectTo: 'new',
+                        data: { page: 'workspace' },
+                    },
                 ],
             },
         ]),

@@ -9,43 +9,40 @@ interface Tab {
     name: string;
 }
 
+const left = [
+    query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+    group([
+        query(':enter', [style({ transform: 'translateX(-100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
+            optional: true,
+        }),
+        query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(100%)' }))], {
+            optional: true,
+        }),
+    ]),
+];
+
+const right = [
+    query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+    group([
+        query(':enter', [style({ transform: 'translateX(100%)' }), animate('.3s ease-out', style({ transform: 'translateX(0%)' }))], {
+            optional: true,
+        }),
+        query(':leave', [style({ transform: 'translateX(0%)' }), animate('.3s ease-out', style({ transform: 'translateX(-100%)' }))], {
+            optional: true,
+        }),
+    ]),
+];
+
 @Component({
     selector: 'app-workspace-container',
     templateUrl: './workspace-container.component.html',
     styleUrls: ['./workspace-container.component.scss'],
     animations: [
         trigger('animRoutes', [
-            transition('* <=> *', [
-                query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-                group([
-                    query(
-                        ':enter',
-                        [style({ transform: 'translateX(100%)' }), animate('.6s ease-out', style({ transform: 'translateX(0%)' }))],
-                        { optional: true },
-                    ),
-                    query(
-                        ':leave',
-                        [style({ transform: 'translateX(0%)' }), animate('.6s ease-out', style({ transform: 'translateX(-100%)' }))],
-                        { optional: true },
-                    ),
-                ]),
-            ]),
-
-            transition('left => *', [
-                query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-                group([
-                    query(
-                        ':enter',
-                        [style({ transform: 'translateX(-100%)' }), animate('.6s ease-out', style({ transform: 'translateX(0%)' }))],
-                        { optional: true },
-                    ),
-                    query(
-                        ':leave',
-                        [style({ transform: 'translateX(0%)' }), animate('.6s ease-out', style({ transform: 'translateX(100%)' }))],
-                        { optional: true },
-                    ),
-                ]),
-            ]),
+            transition('* => right', right),
+            transition('* => left', left),
+            transition('* => right1', right),
+            transition('* => left1', left),
         ]),
     ],
 })
@@ -70,9 +67,10 @@ export class WorkspaceContainerComponent {
     public pageState: string;
 
     constructor(private location: Location, router: Router) {
-        router.config.push({ path: 'workspace/a', component: WorkspaceComponent });
-        router.config.push({ path: 'workspace/b', component: WorkspaceComponent });
-        router.config.push({ path: 'workspace/c', component: WorkspaceComponent });
+        router.config[3].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
+        router.config[3].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
+        router.config[3].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
+        console.log(router.config);
     }
 
     public getPage(outlet: RouterOutlet): void {
@@ -81,17 +79,14 @@ export class WorkspaceContainerComponent {
             .path()
             .split('/')
             .slice(-1)[0];
-        console.log(this.currentTab);
+
+        this.currentTab = this.tabs.find((x) => x.link === workspaceName);
         const currentTabIndex = this.tabs.indexOf(this.currentTab);
 
-        this.currentTab = this.tabs.find((x) => {
-            return x.link === workspaceName;
-        });
-
         if (selectedTabIndex <= currentTabIndex) {
-            this.pageState = 'left';
+            this.pageState = this.pageState === 'left' ? 'left1' : 'left';
         } else {
-            this.pageState = 'right';
+            this.pageState = this.pageState === 'right' ? 'right1' : 'right';
         }
     }
 
