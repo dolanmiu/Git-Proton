@@ -1,4 +1,4 @@
-<button *ngFor="let tab of tabs" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]">{{tab.name}}</button>
+<button *ngFor="let tab of tabs" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
 {{pageState}}
 
 <div [@animRoutes]="pageState">
