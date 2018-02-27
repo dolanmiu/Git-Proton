@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { WorkspaceContainerComponent } from './workspace-container.component';
-import { WorkspaceComponent } from './workspace/workspace.component';
 
 @NgModule({
     imports: [
@@ -13,8 +12,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
                 children: [
                     {
                         path: 'new',
-                        component: WorkspaceComponent,
-                        data: { page: 'blank' },
+                        loadChildren: './repo-manager/repo-manager.module#RepoManagerModule',
                     },
                     {
                         path: '**',

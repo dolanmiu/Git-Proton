@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CloneRepoComponent } from './clone-repo/clone-repo.component';
-import { InitRepoComponent } from './init-repo/init-repo.component';
-import { OpenRepoComponent } from './open-repo/open-repo.component';
 import { RepoManagerComponent } from './repo-manager.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: 'repo-manager',
+                path: '',
                 component: RepoManagerComponent,
                 children: [
                     { path: '', redirectTo: 'open', pathMatch: 'full' },
-                    { path: 'open', component: OpenRepoComponent },
-                    { path: 'clone', component: CloneRepoComponent },
-                    { path: 'init', component: InitRepoComponent },
+                    { path: 'open', loadChildren: './open-repo/open-repo.module#OpenRepoModule' },
+                    { path: 'clone', loadChildren: './clone-repo/clone-repo.module#CloneRepoModule' },
+                    { path: 'init', loadChildren: './init-repo/init-repo.module#InitRepoModule' },
                 ],
                 data: {
                     page: 'repo-manager',

@@ -7,7 +7,7 @@ import { OpenRepoComponent } from './open-repo.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'open',
+                path: '',
                 component: OpenRepoComponent,
             },
         ]),

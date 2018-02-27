@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from 'app/material.module';
 import { CloneRepoModule } from './clone-repo/clone-repo.module';
@@ -12,7 +11,6 @@ import { RepoManagerComponent } from './repo-manager.component';
 @NgModule({
     declarations: [RepoManagerComponent],
     imports: [
-        BrowserAnimationsModule,
         CommonModule,
         RepoManagerRoutingModule,
         OpenRepoModule,

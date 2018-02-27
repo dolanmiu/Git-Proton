@@ -1,0 +1,11 @@
+<nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="./open" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Open</a>
+    <a mat-tab-link routerLink="./clone" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Clone</a>
+    <a mat-tab-link routerLink="./init" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Init</a>
+</nav>
+
+<router-outlet></router-outlet>
+<p>
+    repo-manager works!
+    <a routerLink="/">Close</a>
+</p>

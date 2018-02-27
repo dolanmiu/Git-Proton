@@ -24,5 +24,6 @@ import { WorkspaceComponent } from './workspace.component';
         OverviewModule,
         FooterModule,
     ],
+    entryComponents: [WorkspaceComponent],
 })
 export class WorkspaceModule {}

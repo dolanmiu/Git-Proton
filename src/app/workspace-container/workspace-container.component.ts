@@ -67,10 +67,10 @@ export class WorkspaceContainerComponent {
     public pageState: string;
 
     constructor(private location: Location, router: Router) {
-        router.config[3].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
-        router.config[3].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
-        router.config[3].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
         console.log(router.config);
+        router.config[1].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
+        router.config[1].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
+        router.config[1].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
     }
 
     public getPage(outlet: RouterOutlet): void {
