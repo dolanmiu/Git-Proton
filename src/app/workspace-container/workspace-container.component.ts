@@ -2,7 +2,7 @@ import { animate, group, query, style, transition, trigger } from '@angular/anim
 import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { WorkspaceComponent } from './workspace/workspace.component';
+// import { WorkspaceComponent } from './workspace/workspace.component';
 
 interface Tab {
     link: string;
@@ -68,9 +68,9 @@ export class WorkspaceContainerComponent {
 
     constructor(private location: Location, router: Router) {
         console.log(router.config);
-        router.config[1].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
-        router.config[1].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
-        router.config[1].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
+        // router.config[1].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
+        // router.config[1].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
+        // router.config[1].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
     }
 
     public getPage(outlet: RouterOutlet): void {
@@ -88,6 +88,10 @@ export class WorkspaceContainerComponent {
         } else {
             this.pageState = this.pageState === 'right' ? 'right1' : 'right';
         }
+    }
+
+    public goToAdd(): void {
+        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
     }
 
     public switchTab(tab: Tab): void {
