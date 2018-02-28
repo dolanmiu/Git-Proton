@@ -10,13 +10,6 @@ import { RepoManagerComponent } from './repo-manager.component';
 
 @NgModule({
     declarations: [RepoManagerComponent],
-    imports: [
-        CommonModule,
-        RepoManagerRoutingModule,
-        OpenRepoModule,
-        InitRepoModule,
-        CloneRepoModule,
-        MaterialModule,
-    ],
+    imports: [CommonModule, RepoManagerRoutingModule, OpenRepoModule, InitRepoModule, CloneRepoModule, MaterialModule],
 })
 export class RepoManagerModule {}

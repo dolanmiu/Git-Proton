@@ -90,6 +90,10 @@ export class WorkspaceContainerComponent {
         }
     }
 
+    public goToAdd(): void {
+        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
+    }
+
     public switchTab(tab: Tab): void {
         this.selectedTab = tab;
         this.getPage(this.appOutlet);
