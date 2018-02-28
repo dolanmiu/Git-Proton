@@ -1,7 +1,6 @@
 import * as TreeActions from './tree.actions';
-import { TreeModel } from './tree.model';
 
-export function treeReducer(state: TreeModel, action: TreeActions.Actions): TreeModel {
+export function treeReducer(state: TreeState, action: TreeActions.Actions): TreeState {
     switch (action.type) {
         case TreeActions.ADD_DATA:
             return action.payload;

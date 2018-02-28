@@ -1,0 +1,3 @@
+interface ProjectState {
+    name: string;
+}
