@@ -1,3 +1,1 @@
-interface TreeState {
-
-}
+interface TreeState {}

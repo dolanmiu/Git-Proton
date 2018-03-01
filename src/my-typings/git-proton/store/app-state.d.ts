@@ -1,4 +1,4 @@
 interface AppState {
     tree: TreeState;
-    projects: ProjectsState
+    projects: ProjectsState;
 }
