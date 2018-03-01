@@ -1,7 +1,7 @@
-<button *ngFor="let tab of tabs" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
+<button *ngFor="let tab of (tabs$ | async)" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
 <button routerLink="/workspace/new" (click)="switchTab(tab)" routerLinkActive="active">+</button>
-{{pageState}}
+{{pageState}} {{tabs$ | async | json}}
 
 <div [@animRoutes]="pageState">
-    <router-outlet #appOutlet="outlet"></router-outlet>
+    <router-outlet></router-outlet>
 </div>

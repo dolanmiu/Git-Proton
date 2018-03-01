@@ -1,8 +1,8 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { WorkspaceComponent } from './workspace/workspace.component';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 interface Tab {
     link: string;
@@ -47,51 +47,47 @@ const right = [
     ],
 })
 export class WorkspaceContainerComponent {
-    public tabs: Tab[] = [
-        {
-            name: 'hey',
-            link: 'a',
-        },
-        {
-            name: 'sister',
-            link: 'b',
-        },
-        {
-            name: 'soul',
-            link: 'c',
-        },
-    ];
-    @ViewChild('appOutlet') public appOutlet: RouterOutlet;
+    public tabs$: Observable<Tab[]>;
+
     public selectedTab: Tab;
     public currentTab: Tab;
     public pageState: string;
 
-    constructor(private location: Location, router: Router) {
-        console.log(router.config);
-        router.config[1].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
-        router.config[1].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
-        router.config[1].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
-    }
-
-    public getPage(outlet: RouterOutlet): void {
-        const selectedTabIndex = this.tabs.indexOf(this.selectedTab);
-        const workspaceName = this.location
-            .path()
-            .split('/')
-            .slice(-1)[0];
-
-        this.currentTab = this.tabs.find((x) => x.link === workspaceName);
-        const currentTabIndex = this.tabs.indexOf(this.currentTab);
-
-        if (selectedTabIndex <= currentTabIndex) {
-            this.pageState = this.pageState === 'left' ? 'left1' : 'left';
-        } else {
-            this.pageState = this.pageState === 'right' ? 'right1' : 'right';
-        }
+    constructor(private location: Location, store: Store<AppState>) {
+        this.tabs$ = store
+            .select('projects')
+            .map((project) => {
+                return Object.keys(project).map((i) => project[i]);
+            })
+            .flatMap((projects) => projects)
+            .map((project) => {
+                return {
+                    name: project.name,
+                    link: project.name,
+                };
+            })
+            .zip();
     }
 
     public switchTab(tab: Tab): void {
         this.selectedTab = tab;
-        this.getPage(this.appOutlet);
+        this.tabs$
+            .do((tabs) => {
+                const selectedTabIndex = tabs.indexOf(this.selectedTab);
+                const workspaceName = this.location
+                    .path()
+                    .split('/')
+                    .slice(-1)[0];
+
+                this.currentTab = tabs.find((x) => x.link === workspaceName);
+                const currentTabIndex = tabs.indexOf(this.currentTab);
+
+                if (selectedTabIndex <= currentTabIndex) {
+                    this.pageState = this.pageState === 'left' ? 'left1' : 'left';
+                } else {
+                    this.pageState = this.pageState === 'right' ? 'right1' : 'right';
+                }
+            })
+            .subscribe();
     }
 }
