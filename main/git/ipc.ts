@@ -2,6 +2,7 @@
 import { ipcMain } from 'electron';
 
 import { GitWrapper } from './git-wrapper';
+import walk from './walk';
 
 export class NodeGitIPC {
     private nodeGit: GitWrapper;
@@ -13,9 +14,10 @@ export class NodeGitIPC {
     public listen(): void {
         ipcMain.on('open-repo', (event, arg) => {
             // console.log(arg); // prints "ping"
-            this.nodeGit.openRepo(arg).subscribe((data) => {
-                event.sender.send('open-repo', data);
-            });
+            // this.nodeGit.openRepo(arg).subscribe((data) => {
+            //     event.sender.send('open-repo', data);
+            // });
+            walk();
         });
     }
 }
