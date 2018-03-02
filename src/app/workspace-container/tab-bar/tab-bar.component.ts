@@ -19,7 +19,7 @@ export class TabBarComponent {
     public selectedTab: Tab;
     public currentTab: Tab;
     public pageState: string;
-    @Output() public pageStateChanged  = new EventEmitter();
+    @Output() public pageStateChanged = new EventEmitter();
 
     constructor(private location: Location, store: Store<AppState>) {
         this.tabs$ = store
@@ -58,5 +58,10 @@ export class TabBarComponent {
                 this.pageStateChanged.emit(this.pageState);
             })
             .subscribe();
+    }
+
+    public switchToAdd(): void {
+        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
+        this.pageStateChanged.emit(this.pageState);
     }
 }
