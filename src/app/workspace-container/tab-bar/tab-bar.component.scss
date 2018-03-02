@@ -1,7 +1,10 @@
 :host {
-    // sass-lint: disable no-vendor-prefixes;
-    -webkit-app-region: drag;
     display: block;
+}
+
+.draggable {
+    -webkit-app-region: drag; // sass-lint:disable-line no-vendor-prefixes;
+    height: inherit;
 }
 
 .active {
