@@ -21,6 +21,10 @@ export default function walk(): void {
                 console.log('\n    ' + commit.message());
             });
 
+            history.on('end', (commits) => {
+                // Use commits
+            });
+
             // Don't forget to call `start()`!
             history.start();
         })
