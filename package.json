@@ -9,14 +9,15 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-electron": "nge build",
-    "electron": "npm run pre-electron && npm run build-electron && electron dist",
-    "sass-lint": "sass-lint \"src/**/*.scss\" -v -q",
+    "start.electron": "electron dist",
+    "build.electron": "nge build",
+    "build.electron.main": "nge build --main",
+    "electron": "npm run pre-electron && npm run build.electron && electron dist",
+    "sass-lint": "sass-lint src/**/*.scss -v -q",
     "pre-electron": "node ./build-scripts/replace-stubs.js",
     "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js",
-    "build-main-only": "nge build --main",
-    "spell": "cspell \"src/**/*.ts\"",
-    "style": "prettier -l \"src/**/*.ts\""
+    "spell": "cspell src/**/*.ts",
+    "style": "prettier -l src/**/*.ts"
   },
   "private": true,
   "dependencies": {
