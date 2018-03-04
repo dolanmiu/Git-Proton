@@ -10,11 +10,11 @@ import * as ProjectsActions from './projects.actions';
 export class ProjectsEffects {
     @Effect({ dispatch: false })
     public addProjectToTab$: Observable<void> = this.actions$
-        .ofType(ProjectsActions.ADD_PROJECT)
-        .map((action: ProjectsActions.AddProjectAction) => action.payload)
-        .flatMap((payload) => {
+        .ofType(ProjectsActions.ProjectsActionTypes.ADD_PROJECT)
+        .map((action: ProjectsActions.AddProjectAction) => action.projectName)
+        .flatMap((projectName) => {
             const route = this.router.config.find((page) => page.path === 'workspace');
-            route.children.splice(1, 0, { path: payload.name, component: WorkspaceComponent });
+            route.children.splice(1, 0, { path: projectName, component: WorkspaceComponent });
 
             return Observable.empty();
         });

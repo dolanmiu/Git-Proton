@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 import { NG_CLI_ELECTRON } from './sample-data';
 import { CommitModelFactoryService } from './tree/commit-model-factory.service';
@@ -10,9 +9,8 @@ import { TreeGeneratorService } from './tree/tree-generator.service';
 export class GitService {
     constructor(private treeBuilder: TreeGeneratorService, private modelFactory: CommitModelFactoryService) {}
 
-    public addGitProject(directory: string): Observable<Grid> {
+    public addGitProject(directory: string): void {
         const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
         const tree = this.treeBuilder.createTree(commitModel);
-        return Observable.of(tree);
     }
 }

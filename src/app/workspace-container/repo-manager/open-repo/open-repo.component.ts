@@ -18,18 +18,13 @@ export class OpenRepoComponent implements OnInit {
     public openDialog(): void {
         this.dialogService
             .openDialog()
-            .flatMap((data) => {
-                const folderPath = data[0];
-
-                return this.gitService.addGitProject(folderPath);
+            .map((data) => data[0])
+            .do((folderPath) => {
+                console.log(folderPath);
+                this.store.dispatch(new AddProjectAction(folderPath));
             })
-            .do((data) => {
-                console.log(data);
-                this.store.dispatch(
-                    new AddProjectAction({
-                        name: 'cool',
-                    }),
-                );
+            .do((folderPath) => {
+                this.gitService.addGitProject(folderPath);
             })
             .subscribe();
     }

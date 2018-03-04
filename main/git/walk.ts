@@ -1,7 +1,7 @@
 import * as nodegit from 'nodegit';
-import * as path from 'path';
 
-export default function walk(directory: string): void {
+// tslint:disable-next-line:no-any
+export default function walk(directory: string, commitFn: (commit: any) => void): void {
     // This code walks the history of the master branch and prints results
     // that look very similar to calling `git log` from the command line
 
@@ -20,6 +20,7 @@ export default function walk(directory: string): void {
                 // console.log('Author:', commit.author().name() + ' <' + commit.author().email() + '>');
                 // console.log('Date:', commit.date());
                 // console.log('\n    ' + commit.message());
+                commitFn(commit);
             });
 
             history.on('end', (commits) => {

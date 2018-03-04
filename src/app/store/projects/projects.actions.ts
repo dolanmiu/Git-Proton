@@ -1,11 +1,21 @@
 import { Action } from '@ngrx/store';
 
-export const ADD_PROJECT = '[Projects] ADD_PROJECT';
-
-export class AddProjectAction implements Action {
-    public readonly type = ADD_PROJECT;
-
-    constructor(public payload: ProjectState) {}
+export enum ProjectsActionTypes {
+    ADD_PROJECT = '[Projects] ADD_PROJECT',
+    ADD_COMMIT = '[User] ADD_PROJECT_COMMIT',
 }
 
-export type Actions = AddProjectAction;
+export class AddProjectAction implements Action {
+    public readonly type = ProjectsActionTypes.ADD_PROJECT;
+
+    constructor(public projectName: string) {}
+}
+
+export class AddCommitAction implements Action {
+    public readonly type = ProjectsActionTypes.ADD_COMMIT;
+
+    // tslint:disable-next-line:no-any
+    constructor(public projectName: string, public commit: any) {}
+}
+
+export type Actions = AddProjectAction | AddCommitAction;

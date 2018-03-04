@@ -1,15 +1,23 @@
+// tslint:disable:no-any
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+
+import { AddCommitAction } from 'app/store/projects/projects.actions';
 
 @Injectable()
 export class GitService {
-    constructor() {}
+    constructor(store: Store<AppState>) {
 
-    public addGitProject(directory: string): Observable<GitCommitModel[]> {
-        const subject = new Subject<GitCommitModel[]>();
+        ipcRenderer.on('commit', (event, arg: any) => {
+            console.log(arg);
+            console.log(event);
+            store.dispatch(new AddCommitAction(arg.projectName, arg.commit));
+        });
+    }
+
+    public addGitProject(directory: string): void {
         console.log(directory);
 
         fs.stat(`${directory}/.git`, (err, stats) => {
@@ -20,15 +28,7 @@ export class GitService {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            ipcRenderer
-                .once('open-repo', (event, arg: GitCommitModel[]) => {
-                    console.log(arg);
-                    console.log(event);
-                    subject.next(arg);
-                })
-                .send('open-repo', directory);
+            ipcRenderer.send('open-repo', directory);
         });
-
-        return subject.asObservable();
     }
 }
