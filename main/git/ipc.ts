@@ -17,7 +17,7 @@ export class NodeGitIPC {
             // this.nodeGit.openRepo(arg).subscribe((data) => {
             //     event.sender.send('open-repo', data);
             // });
-            walk();
+            walk(arg);
         });
     }
 }
