@@ -9,7 +9,6 @@ import { AddCommitAction } from 'app/store/projects/projects.actions';
 @Injectable()
 export class GitService {
     constructor(store: Store<AppState>) {
-
         ipcRenderer.on('commit', (event, arg: any) => {
             console.log(arg);
             console.log(event);
