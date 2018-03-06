@@ -39,7 +39,7 @@
     "@types/lodash": "^4.14.94",
     "@types/shelljs": "^0.7.4",
     "core-js": "^2.4.1",
-    "electron": "^1.8.2",
+    "electron": "^1.7.12",
     "lodash": "^4.17.4",
     "material-design-icons": "^3.0.1",
     "nodegit": "^0.21.0",
@@ -73,6 +73,7 @@
     "sass-lint": "^1.11.1",
     "ts-node": "~5.0.0",
     "tslint": "^5.7.0",
-    "typescript": "2.6.1"
+    "typescript": "2.6.1",
+    "webpack": "^3.11.0"
   }
 }
