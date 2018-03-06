@@ -43,9 +43,9 @@ export class WorkspaceContainerComponent {
 
     public setPageState(pageState: string): void {
         this.pageState = pageState;
-    public goToAdd(): void {
-        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
     }
 
+    public goToAdd(): void {
+        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
     }
 }

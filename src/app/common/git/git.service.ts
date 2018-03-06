@@ -12,5 +12,7 @@ export class GitService {
     public addGitProject(directory: string): void {
         const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
         const tree = this.treeBuilder.createTree(commitModel);
+        console.log(tree);
+        console.log(Grid);
     }
 }
