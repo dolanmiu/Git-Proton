@@ -12,7 +12,7 @@ export class DialogService {
         return openDialog({
             properties: ['openDirectory'],
         }).switchMap((directories) => {
-            if (directories.length === 0) {
+            if (!directories || directories.length === 0) {
                 return Observable.empty();
             }
 
