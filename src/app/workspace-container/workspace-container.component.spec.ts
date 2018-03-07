@@ -24,7 +24,7 @@ describe('WorkspaceContainerComponent', () => {
                             select: () => Observable.empty(),
                         },
                     },
-                ]
+                ],
             }).compileComponents();
         }),
     );
