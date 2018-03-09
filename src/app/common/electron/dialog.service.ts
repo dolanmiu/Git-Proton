@@ -7,7 +7,7 @@ const FAKE_DIALOGS = [{ path: '', name: 'First Project' }, { path: '', name: 'Se
 
 @Injectable()
 export class DialogService {
-    public remote: typeof remote;
+    private remote: typeof remote;
     private accessCounter: number;
 
     constructor() {
@@ -17,7 +17,15 @@ export class DialogService {
         this.accessCounter = 0;
     }
 
-    public openDialogElectron(): Observable<{ path: string; name: string }> {
+    public openDialog(): Observable<{ path: string; name: string }> {
+        if (this.isElectron()) {
+            return this.openDialogElectron();
+        } else {
+            return this.openDialogWeb();
+        }
+    }
+
+    private openDialogElectron(): Observable<{ path: string; name: string }> {
         const openDialog = Observable.bindCallback(this.remote.dialog.showOpenDialog);
         return openDialog({
             properties: ['openDirectory'],
@@ -33,20 +41,12 @@ export class DialogService {
         });
     }
 
-    public openDialogWeb(): Observable<{ path: string; name: string }> {
+    private openDialogWeb(): Observable<{ path: string; name: string }> {
         console.log('Pretending to open dialog');
         const observable$ = Observable.of(FAKE_DIALOGS[this.accessCounter]);
         this.accessCounter++;
 
         return observable$;
-    }
-
-    public openDialog(): Observable<{ path: string; name: string }> {
-        if (this.isElectron()) {
-            return this.openDialogElectron();
-        } else {
-            return this.openDialogWeb();
-        }
     }
 
     private isElectron(): void {
