@@ -18,8 +18,6 @@
     "build.electron.renderer": "nge build --renderer",
     "electron": "npm run pre-electron && npm run build.electron && electron dist --serve",
     "sass-lint": "sass-lint src/**/*.scss -v -q",
-    "pre-electron": "node ./build-scripts/replace-stubs.js",
-    "pre-ng-cli": "node ./build-scripts/replace-stubs-back.js",
     "spell": "cspell src/**/*.ts",
     "style": "prettier -l src/**/*.ts",
     "electron-rebuild": "electron-rebuild"
