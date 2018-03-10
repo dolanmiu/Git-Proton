@@ -3,29 +3,29 @@ import { remote } from 'electron';
 import * as path from 'path';
 import { Observable } from 'rxjs/Observable';
 
+import { ElectronSwitchService } from '../electron-switch.service';
+
 const FAKE_DIALOGS = [{ path: '', name: 'First Project' }, { path: '', name: 'Second Project' }, { path: '', name: 'Third Project' }];
 
 @Injectable()
-export class DialogService {
+export class DialogService extends ElectronSwitchService<Observable<{ path: string; name: string }>> {
     private remote: typeof remote;
     private accessCounter: number;
 
     constructor() {
-        if (this.isElectron()) {
+        super();
+
+        if (this.IsElectron) {
             this.remote = window.require('electron').remote;
         }
         this.accessCounter = 0;
     }
 
     public openDialog(): Observable<{ path: string; name: string }> {
-        if (this.isElectron()) {
-            return this.openDialogElectron();
-        } else {
-            return this.openDialogWeb();
-        }
+        return this.switch();
     }
 
-    private openDialogElectron(): Observable<{ path: string; name: string }> {
+    protected electron(): Observable<{ path: string; name: string }> {
         const openDialog = Observable.bindCallback(this.remote.dialog.showOpenDialog);
         return openDialog({
             properties: ['openDirectory'],
@@ -41,15 +41,11 @@ export class DialogService {
         });
     }
 
-    private openDialogWeb(): Observable<{ path: string; name: string }> {
+    protected web(): Observable<{ path: string; name: string }> {
         console.log('Pretending to open dialog');
         const observable$ = Observable.of(FAKE_DIALOGS[this.accessCounter]);
         this.accessCounter++;
 
         return observable$;
-    }
-
-    private isElectron(): void {
-        return window && window.process && window.process.type;
     }
 }
