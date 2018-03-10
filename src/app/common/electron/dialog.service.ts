@@ -13,12 +13,14 @@ export class DialogService extends ElectronSwitchService<Observable<{ path: stri
     private accessCounter: number;
 
     constructor() {
-        super();
-
-        if (this.IsElectron) {
-            this.remote = window.require('electron').remote;
-        }
-        this.accessCounter = 0;
+        super(
+            () => {
+                this.remote = window.require('electron').remote;
+            },
+            () => {
+                this.accessCounter = 0;
+            },
+        );
     }
 
     public openDialog(): Observable<{ path: string; name: string }> {

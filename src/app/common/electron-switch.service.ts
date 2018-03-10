@@ -1,5 +1,17 @@
 export abstract class ElectronSwitchService<T, R = void, S = void> {
-    protected get IsElectron(): void {
+    constructor(electronContructor?: () => void, webContstructor?: () => void) {
+        if (this.IsElectron) {
+            if (webContstructor) {
+                electronContructor();
+            }
+        } else {
+            if (webContstructor) {
+                webContstructor();
+            }
+        }
+    }
+
+    private get IsElectron(): void {
         return window && window.process && window.process.type;
     }
 
