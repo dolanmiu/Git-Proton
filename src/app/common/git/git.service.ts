@@ -13,7 +13,8 @@ export class GitService extends ElectronSwitchService<void, string> {
     private fs: typeof fs;
 
     constructor(store: Store<AppState>) {
-        super(() => {
+        super();
+        if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
             this.fs = window.require('fs');
 
@@ -22,7 +23,7 @@ export class GitService extends ElectronSwitchService<void, string> {
                 console.log(event);
                 store.dispatch(new AddCommitAction(arg.projectName, arg.commit));
             });
-        });
+        }
     }
 
     public addGitProject(directory: string): void {
