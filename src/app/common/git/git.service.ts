@@ -15,13 +15,13 @@ export class GitService {
         if (this.isElectron()) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
             this.fs = window.require('fs');
-        }
 
-        this.ipcRenderer.on('commit', (event, arg: any) => {
-            console.log(arg);
-            console.log(event);
-            store.dispatch(new AddCommitAction(arg.projectName, arg.commit));
-        });
+            this.ipcRenderer.on('commit', (event, arg: any) => {
+                console.log(arg);
+                console.log(event);
+                store.dispatch(new AddCommitAction(arg.projectName, arg.commit));
+            });
+        }
     }
 
     public addGitProject(directory: string): void {
