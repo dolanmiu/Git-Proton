@@ -16,15 +16,10 @@ export class OpenRepoComponent implements OnInit {
     public ngOnInit(): void {}
 
     public openDialog(): void {
-        this.dialogService
-            .openDialog()
-            .do((folderDetails) => {
-                console.log(folderDetails);
-                this.store.dispatch(new AddProjectAction(folderDetails.name));
-            })
-            .do((folderDetails) => {
-                this.gitService.addGitProject(folderDetails.path);
-            })
-            .subscribe();
+        this.dialogService.openDialog((folderDetails) => {
+            console.log(folderDetails);
+            this.store.dispatch(new AddProjectAction(folderDetails.name));
+            this.gitService.addGitProject(folderDetails.path);
+        });
     }
 }

@@ -1,18 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { remote } from 'electron';
 import * as path from 'path';
-import { Observable } from 'rxjs/Observable';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 
-const FAKE_DIALOGS = [{ path: '', name: 'First Project' }, { path: '', name: 'Second Project' }, { path: '', name: 'Third Project' }];
+const FAKE_DIALOGS: PathDetails[] = [
+    { path: '', name: 'First Project' },
+    { path: '', name: 'Second Project' },
+    { path: '', name: 'Third Project' },
+];
+
+interface PathDetails {
+    path: string;
+    name: string;
+}
 
 @Injectable()
-export class DialogService extends ElectronSwitchService<Observable<{ path: string; name: string }>> {
+export class DialogService extends ElectronSwitchService<void, (details: PathDetails) => void> {
     private remote: typeof remote;
     private accessCounter: number;
 
-    constructor() {
+    constructor(private zone: NgZone) {
         super();
 
         if (this.IsElectron) {
@@ -21,31 +29,33 @@ export class DialogService extends ElectronSwitchService<Observable<{ path: stri
         this.accessCounter = 0;
     }
 
-    public openDialog(): Observable<{ path: string; name: string }> {
-        return this.switch();
+    public openDialog(cb: (details: PathDetails) => void): void {
+        return this.switch(cb);
     }
 
-    protected electron(): Observable<{ path: string; name: string }> {
-        const openDialog = Observable.bindCallback(this.remote.dialog.showOpenDialog);
-        return openDialog({
-            properties: ['openDirectory'],
-        }).switchMap((directories) => {
-            if (!directories || directories.length === 0) {
-                return Observable.empty();
-            }
+    protected electron(cb: (details: PathDetails) => void): void {
+        this.remote.dialog.showOpenDialog(
+            {
+                properties: ['openDirectory'],
+            },
+            (directories) => {
+                if (!directories || directories.length === 0) {
+                    return;
+                }
 
-            const fullPath = directories[0];
-            const projectName = path.basename(fullPath);
-
-            return Observable.of({ path: fullPath, name: projectName });
-        });
+                const fullPath = directories[0];
+                const projectName = path.basename(fullPath);
+                this.zone.run(() => {
+                    cb({ path: fullPath, name: projectName });
+                });
+            },
+        );
     }
 
-    protected web(): Observable<{ path: string; name: string }> {
+    protected web(cb: (details: PathDetails) => void): void {
         console.log('Pretending to open dialog');
-        const observable$ = Observable.of(FAKE_DIALOGS[this.accessCounter]);
-        this.accessCounter++;
+        cb(FAKE_DIALOGS[this.accessCounter]);
 
-        return observable$;
+        this.accessCounter++;
     }
 }
