@@ -27,14 +27,14 @@ export class TabBarComponent {
             .map((project) => {
                 return Object.keys(project).map((i) => project[i]);
             })
-            .flatMap((projects) => projects)
-            .map((project) => {
-                return {
-                    name: project.name,
-                    link: project.name,
-                };
-            })
-            .zip();
+            .map((projects) => {
+                return projects.map((project) => {
+                    return {
+                        name: project.name,
+                        link: project.name,
+                    };
+                });
+            });
     }
 
     public switchTab(tab: Tab): void {
