@@ -18,6 +18,7 @@ interface PathDetails {
 @Injectable()
 export class DialogService extends ElectronSwitchService<void, (details: PathDetails) => void> {
     private remote: typeof remote;
+    private path: typeof path;
     private accessCounter: number;
 
     constructor(private zone: NgZone) {
@@ -25,6 +26,7 @@ export class DialogService extends ElectronSwitchService<void, (details: PathDet
 
         if (this.IsElectron) {
             this.remote = window.require('electron').remote;
+            this.path = window.require('path');
         }
         this.accessCounter = 0;
     }
@@ -44,7 +46,7 @@ export class DialogService extends ElectronSwitchService<void, (details: PathDet
                 }
 
                 const fullPath = directories[0];
-                const projectName = path.basename(fullPath);
+                const projectName = this.path.basename(fullPath);
                 this.zone.run(() => {
                     cb({ path: fullPath, name: projectName });
                 });
