@@ -1,4 +1,3 @@
-// tslint:disable:no-any
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ipcRenderer } from 'electron';
@@ -6,22 +5,21 @@ import * as fs from 'fs';
 
 import { AddCommitAction } from 'app/store/projects/projects.actions';
 import { ElectronSwitchService } from '../electron-switch.service';
+import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitService extends ElectronSwitchService<void, string> {
     private ipcRenderer: typeof ipcRenderer;
     private fs: typeof fs;
 
-    constructor(store: Store<AppState>) {
+    constructor(store: Store<AppState>, private projectPathService: ProjectPathService) {
         super();
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
             this.fs = window.require('fs');
 
-            this.ipcRenderer.on('commit', (event, arg: any) => {
-                console.log(arg);
-                console.log(event);
-                store.dispatch(new AddCommitAction(arg.projectName, arg.commit));
+            this.ipcRenderer.on('commit', (event, data: CommitIPCData) => {
+                store.dispatch(new AddCommitAction(data.projectName, data.commit));
             });
         }
     }
@@ -41,7 +39,9 @@ export class GitService extends ElectronSwitchService<void, string> {
                 throw new Error(`${directory} is not a Git project`);
             }
 
-            this.ipcRenderer.send('open-repo', directory);
+            const projectDetails = this.projectPathService.getProjectDetails(directory);
+
+            this.ipcRenderer.send('open-repo', projectDetails);
         });
     }
 

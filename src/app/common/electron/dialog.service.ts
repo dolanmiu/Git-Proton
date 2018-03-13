@@ -1,41 +1,34 @@
 import { Injectable, NgZone } from '@angular/core';
 import { remote } from 'electron';
-import * as path from 'path';
 
 import { ElectronSwitchService } from '../electron-switch.service';
+import { ProjectPathService } from '../project-path.service';
 
-const FAKE_DIALOGS: PathDetails[] = [
+const FAKE_DIALOGS: ProjectPathDetails[] = [
     { path: '', name: 'First Project' },
     { path: '', name: 'Second Project' },
     { path: '', name: 'Third Project' },
 ];
 
-interface PathDetails {
-    path: string;
-    name: string;
-}
-
 @Injectable()
-export class DialogService extends ElectronSwitchService<void, (details: PathDetails) => void> {
+export class DialogService extends ElectronSwitchService<void, (details: ProjectPathDetails) => void> {
     private remote: typeof remote;
-    private path: typeof path;
     private accessCounter: number;
 
-    constructor(private zone: NgZone) {
+    constructor(private zone: NgZone, private projectPathService: ProjectPathService) {
         super();
 
         if (this.IsElectron) {
             this.remote = window.require('electron').remote;
-            this.path = window.require('path');
         }
         this.accessCounter = 0;
     }
 
-    public openDialog(cb: (details: PathDetails) => void): void {
+    public openDialog(cb: (details: ProjectPathDetails) => void): void {
         return this.switch(cb);
     }
 
-    protected electron(cb: (details: PathDetails) => void): void {
+    protected electron(cb: (details: ProjectPathDetails) => void): void {
         this.remote.dialog.showOpenDialog(
             {
                 properties: ['openDirectory'],
@@ -46,15 +39,15 @@ export class DialogService extends ElectronSwitchService<void, (details: PathDet
                 }
 
                 const fullPath = directories[0];
-                const projectName = this.path.basename(fullPath);
+                const projectPathDetails = this.projectPathService.getProjectDetails(fullPath);
                 this.zone.run(() => {
-                    cb({ path: fullPath, name: projectName });
+                    cb(projectPathDetails);
                 });
             },
         );
     }
 
-    protected web(cb: (details: PathDetails) => void): void {
+    protected web(cb: (details: ProjectPathDetails) => void): void {
         console.log('Pretending to open dialog');
         cb(FAKE_DIALOGS[this.accessCounter]);
 

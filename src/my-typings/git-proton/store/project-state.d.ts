@@ -1,4 +1,4 @@
 interface ProjectState {
     name: string;
-    commits: any[];
+    commits: GitCommitModel[];
 }
