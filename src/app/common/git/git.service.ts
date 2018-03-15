@@ -21,10 +21,14 @@ export class GitService extends ElectronSwitchService<void, string> {
             this.ipcRenderer.on('commit', (event, data: CommitIPCData) => {
                 store.dispatch(new AddCommitAction(data.projectName, data.commit));
             });
+
+            this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
+                console.log(data);
+            });
         }
     }
 
-    public addGitProject(directory: string): void {
+    public getCommits(directory: string): void {
         return this.switch(directory);
     }
 
