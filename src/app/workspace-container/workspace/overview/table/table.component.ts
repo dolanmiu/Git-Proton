@@ -1,15 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { CommitModel } from 'app/common/git/tree/commit-model';
-import { NodeStack } from 'app/common/git/tree/path-finding';
-import { DataNode } from 'app/common/git/tree/path-finding/nodes';
-
-interface Row {
-    nodes: NodeStack[];
-    commitNode: DataNode<CommitModel>;
-}
+import { getCurrentProject } from 'app/store';
 
 @Component({
     selector: 'app-table',
@@ -18,11 +11,10 @@ interface Row {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
+    public displayedColumns = ['description', 'date', 'name', 'sha'];
     public dataSource$: Observable<GitCommitModel[]>;
 
     constructor(store: Store<AppState>) {
-        this.dataSource$ = store
-            .select('projects')
-            .map((projects) => projects['docx'].commits);
+        this.dataSource$ = store.select(getCurrentProject).do(console.log).map((project) => project.commits);
     }
 }
