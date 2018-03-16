@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
 import { OverviewComponent } from './overview.component';
@@ -14,7 +15,17 @@ describe('OverviewComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [OverviewComponent],
-                imports: [NoopAnimationsModule, MaterialModule, StoreModule.forRoot({}), TableModule],
+                imports: [NoopAnimationsModule, MaterialModule, TableModule],
+                providers: [
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => {
+                                return Observable.never();
+                            },
+                        },
+                    },
+                ],
             }).compileComponents();
         }),
     );

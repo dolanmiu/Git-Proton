@@ -1,4 +1,5 @@
 <div fxLayout="column">
+    {{statuses$ | async | json}}
     <app-file-select></app-file-select>
     <app-file-select></app-file-select>
     <mat-list>

@@ -37,7 +37,7 @@ describe('TableComponent', () => {
                         provide: Store,
                         useValue: {
                             select: () => {
-                                return Observable.empty();
+                                return Observable.never();
                             },
                         },
                     },

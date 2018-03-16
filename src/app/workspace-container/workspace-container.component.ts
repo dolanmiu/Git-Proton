@@ -1,5 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
+import { GitStatusService } from 'app/common/git/git-status.service';
 
 const left = [
     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -37,9 +39,16 @@ const right = [
             transition('* => left1', left),
         ]),
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkspaceContainerComponent {
+export class WorkspaceContainerComponent implements OnInit {
     public pageState: string;
+
+    constructor(private statusService: GitStatusService) {}
+
+    public ngOnInit(): void {
+        this.statusService.getStatus();
+    }
 
     public setPageState(pageState: string): void {
         this.pageState = pageState;
