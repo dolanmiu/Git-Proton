@@ -45,6 +45,7 @@
     "@types/shelljs": "^0.7.4",
     "core-js": "^2.4.1",
     "electron": "^1.7.12",
+    "electron-settings": "^3.1.4",
     "lodash": "^4.17.4",
     "material-design-icons": "^3.0.1",
     "nodegit": "^0.21.1",
