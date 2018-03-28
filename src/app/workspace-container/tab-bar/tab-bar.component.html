@@ -1,4 +1,6 @@
-<button class="tab" *ngFor="let tab of (tabs$ | async)" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
-<button class="tab" routerLink="/workspace/new" (click)="switchToAdd()" routerLinkActive="active">+</button>
-
+<div fxLayout="row">
+    <app-tab *ngFor="let tab of (tabs$ | async)" [routerLink]="['/workspace/'+tab.link]" [text]="tab.name" (click)="switchTab(tab)"
+        routerLinkActive="active"></app-tab>
+    <app-new-tab class="tab" routerLink="/workspace/new" (click)="switchToAdd()" routerLinkActive="active"></app-new-tab>
+</div>
 <div class="draggable"></div>

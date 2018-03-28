@@ -1,0 +1,12 @@
+$background-color: rgb(240, 87, 163);
+
+:host {
+    background-color: $background-color;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: default;
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    width: 50px;
+}
