@@ -7,17 +7,30 @@ import { NodeGitIPC } from './git/ipc';
 let win;
 const nodeIPC = new NodeGitIPC();
 
+const args = process.argv.slice(1);
+const serve = args.some((val) => {
+    return val === '--serve';
+});
+
 const createWindow = () => {
     // Create the browser window.
-    win = new BrowserWindow({ width: 800, height: 600 });
+    // win = new BrowserWindow({ width: 1024, height: 768, titleBarStyle: 'hidden-inset', frame: false });
+    win = new BrowserWindow({ width: 1024, height: 768 });
 
     // and load the index.html of the app.
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true,
-    }));
-
+    if (serve) {
+        // tslint:disable-next-line:no-require-imports
+        require('electron-reload')(__dirname, {});
+        win.loadURL('http://localhost:4200');
+    } else {
+        win.loadURL(
+            url.format({
+                pathname: path.join(__dirname, 'index.html'),
+                protocol: 'file:',
+                slashes: true,
+            }),
+        );
+    }
     // Open the DevTools.
     win.webContents.openDevTools();
 

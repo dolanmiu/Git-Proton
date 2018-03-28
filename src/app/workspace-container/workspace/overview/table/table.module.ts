@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { MaterialModule } from 'app/material.module';
 import { BottomLeftComponent } from './element/bottom-left/bottom-left.component';
 import { BottomRightComponent } from './element/bottom-right/bottom-right.component';
 import { DataComponent } from './element/data/data.component';
@@ -12,7 +13,7 @@ import { VerticalComponent } from './element/vertical/vertical.component';
 import { TableComponent } from './table.component';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, MaterialModule],
     declarations: [
         TableComponent,
         ElementComponent,

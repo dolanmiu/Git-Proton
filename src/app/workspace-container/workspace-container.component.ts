@@ -1,13 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Location } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-// import { WorkspaceComponent } from './workspace/workspace.component';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-interface Tab {
-    link: string;
-    name: string;
-}
+import { GitStatusService } from 'app/common/git/git-status.service';
 
 const left = [
     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -45,57 +39,22 @@ const right = [
             transition('* => left1', left),
         ]),
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkspaceContainerComponent {
-    public tabs: Tab[] = [
-        {
-            name: 'hey',
-            link: 'a',
-        },
-        {
-            name: 'sister',
-            link: 'b',
-        },
-        {
-            name: 'soul',
-            link: 'c',
-        },
-    ];
-    @ViewChild('appOutlet') public appOutlet: RouterOutlet;
-    public selectedTab: Tab;
-    public currentTab: Tab;
+export class WorkspaceContainerComponent implements OnInit {
     public pageState: string;
 
-    constructor(private location: Location, router: Router) {
-        console.log(router.config);
-        // router.config[1].children.splice(1, 0, { path: 'a', component: WorkspaceComponent });
-        // router.config[1].children.splice(1, 0, { path: 'b', component: WorkspaceComponent });
-        // router.config[1].children.splice(1, 0, { path: 'c', component: WorkspaceComponent });
+    constructor(private statusService: GitStatusService) {}
+
+    public ngOnInit(): void {
+        this.statusService.getStatus();
     }
 
-    public getPage(outlet: RouterOutlet): void {
-        const selectedTabIndex = this.tabs.indexOf(this.selectedTab);
-        const workspaceName = this.location
-            .path()
-            .split('/')
-            .slice(-1)[0];
-
-        this.currentTab = this.tabs.find((x) => x.link === workspaceName);
-        const currentTabIndex = this.tabs.indexOf(this.currentTab);
-
-        if (selectedTabIndex <= currentTabIndex) {
-            this.pageState = this.pageState === 'left' ? 'left1' : 'left';
-        } else {
-            this.pageState = this.pageState === 'right' ? 'right1' : 'right';
-        }
+    public setPageState(pageState: string): void {
+        this.pageState = pageState;
     }
 
     public goToAdd(): void {
         this.pageState = this.pageState === 'right' ? 'right1' : 'right';
-    }
-
-    public switchTab(tab: Tab): void {
-        this.selectedTab = tab;
-        this.getPage(this.appOutlet);
     }
 }

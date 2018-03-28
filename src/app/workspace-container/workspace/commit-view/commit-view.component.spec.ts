@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
 import { CommitViewComponent } from './commit-view.component';
@@ -14,6 +16,14 @@ describe('CommitViewComponent', () => {
             TestBed.configureTestingModule({
                 declarations: [CommitViewComponent, FileSelectComponent],
                 imports: [NoopAnimationsModule, MaterialModule],
+                providers: [
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => Observable.empty(),
+                        },
+                    },
+                ],
             }).compileComponents();
         }),
     );

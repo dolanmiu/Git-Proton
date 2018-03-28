@@ -1,18 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { ipcRenderer } from 'electron';
+import * as fs from 'fs';
 
-import { NG_CLI_ELECTRON } from './sample-data';
-import { CommitModelFactoryService } from './tree/commit-model-factory.service';
-import { Grid } from './tree/path-finding/grid';
-import { TreeGeneratorService } from './tree/tree-generator.service';
+import { AddCommitAction, SetStatusesAction } from 'app/store/projects/projects.actions';
+import { ElectronSwitchService } from '../electron-switch.service';
+import { ElectronSwitcheroo } from '../electron-switcheroo';
+import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
-export class GitService {
-    constructor(private treeBuilder: TreeGeneratorService, private modelFactory: CommitModelFactoryService) {}
+export class GitService extends ElectronSwitchService {
+    private ipcRenderer: typeof ipcRenderer;
+    private fs: typeof fs;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
-    public addGitProject(directory: string): Observable<Grid> {
-        const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
-        const tree = this.treeBuilder.createTree(commitModel);
-        return Observable.of(tree);
+    constructor(store: Store<AppState>, private projectPathService: ProjectPathService) {
+        super();
+        if (this.IsElectron) {
+            this.ipcRenderer = window.require('electron').ipcRenderer;
+            this.fs = window.require('fs');
+
+            this.ipcRenderer.on('commit', (event, data: CommitIPCData) => {
+                store.dispatch(new AddCommitAction(data.projectName, data.commit));
+            });
+
+            this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
+                console.log(data);
+                store.dispatch(new SetStatusesAction(data.projectName, data.statuses));
+            });
+        }
+
+        this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
+            (directory) => {
+                console.log(directory);
+
+                this.fs.stat(`${directory}/.git`, (err, stats) => {
+                    console.log(err);
+                    console.log(stats);
+
+                    if (err || !stats.isDirectory()) {
+                        throw new Error(`${directory} is not a Git project`);
+                    }
+
+                    const projectDetails = this.projectPathService.getProjectDetails(directory);
+
+                    this.ipcRenderer.send('open-repo', projectDetails);
+                });
+            },
+            (directory) => {
+                // const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
+                // const tree = this.treeBuilder.createTree(commitModel);
+            },
+        );
+    }
+
+    public getCommits(directory: string): void {
+        return this.ipcRendererSwitcheroo.execute(directory);
     }
 }

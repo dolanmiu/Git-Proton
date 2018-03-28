@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { DialogService } from 'app/common/electron/dialog.service';
 import { GitService } from 'app/common/git/git.service';
-import { AppState } from 'app/store/app-state';
-import { AddDataAction } from 'app/store/tree';
+import { AddProjectAction } from 'app/store/projects/projects.actions';
 
 @Component({
     selector: 'app-open-repo',
@@ -17,17 +16,10 @@ export class OpenRepoComponent implements OnInit {
     public ngOnInit(): void {}
 
     public openDialog(): void {
-        this.dialogService
-            .openDialog()
-            .flatMap((data) => {
-                const folderPath = data[0];
-
-                return this.gitService.addGitProject(folderPath);
-            })
-            .do((data) => {
-                console.log(data);
-                this.store.dispatch(new AddDataAction(data));
-            })
-            .subscribe();
+        this.dialogService.openDialog((folderDetails) => {
+            console.log(folderDetails);
+            this.store.dispatch(new AddProjectAction(folderDetails.name, folderDetails.path));
+            this.gitService.getCommits(folderDetails.path);
+        });
     }
 }

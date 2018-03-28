@@ -20,12 +20,12 @@ export class CommitModel {
         this.author = {
             name: commit.author.name,
             email: commit.author.email,
-            date: new Date(commit.author.date),
+            date: new Date(commit.date),
         };
         this.commit = {
-            name: commit.commit.name,
-            email: commit.commit.email,
-            date: new Date(commit.author.date),
+            name: commit.committer.name,
+            email: commit.committer.email,
+            date: new Date(commit.date),
         };
         this.sha = {
             current: commit.sha.current,

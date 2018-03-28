@@ -4,34 +4,9 @@
             <input matInput #filter placeholder="Filter users">
         </mat-input-container>
     </div>
-    <!-- <mat-table #table>
-
-        <ng-container cdkColumnDef="userId">
-            <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
-        </ng-container>
-
-        <ng-container cdkColumnDef="progress">
-            <md-header-cell *cdkHeaderCellDef> Progress </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.progress}}% </md-cell>
-        </ng-container>
-
-        <ng-container cdkColumnDef="userName">
-            <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
-        </ng-container>
-
-        <ng-container cdkColumnDef="color">
-            <md-header-cell *cdkHeaderCellDef> Color </md-header-cell>
-            <md-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.color}} </md-cell>
-        </ng-container>
-
-        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </mat-table> -->
 </div>
 
 <div *ngIf="tree$ | async; let tree">
     {{tree.toString()}}
-    <app-table [data]="tree.Elements"></app-table>
 </div>
+<app-table></app-table>

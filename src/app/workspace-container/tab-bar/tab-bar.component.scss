@@ -1,0 +1,22 @@
+
+:host {
+    display: block;
+    position: relative;
+}
+
+.draggable {
+    -webkit-app-region: drag; // sass-lint:disable-line no-vendor-prefixes;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -100;
+}
+
+.active {
+    pointer-events: none;
+}
+
+.tab {
+    -webkit-app-region: no-drag; // sass-lint:disable-line no-vendor-prefixes;
+}

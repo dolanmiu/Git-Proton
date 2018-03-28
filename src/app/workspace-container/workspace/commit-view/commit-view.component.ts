@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import { getCurrentProject } from 'app/store';
 
 @Component({
     selector: 'app-commit-view',
@@ -6,7 +10,17 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./commit-view.component.scss'],
 })
 export class CommitViewComponent implements OnInit {
-    constructor() {}
+    public statuses$: Observable<StatusData[]>;
+
+    constructor(store: Store<AppState>) {
+        this.statuses$ = store.select(getCurrentProject).map((project) => {
+            if (!project) {
+                return [];
+            }
+            console.log(project.statuses);
+            return project.statuses;
+        });
+    }
 
     public ngOnInit(): void {}
 }

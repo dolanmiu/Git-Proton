@@ -1,0 +1,4 @@
+<button class="tab" *ngFor="let tab of (tabs$ | async)" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
+<button class="tab" routerLink="/workspace/new" (click)="switchToAdd()" routerLinkActive="active">+</button>
+
+<div class="draggable"></div>

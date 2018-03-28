@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
+import { MaterialModule } from 'app/material.module';
 import { BottomLeftComponent } from './element/bottom-left/bottom-left.component';
 import { BottomRightComponent } from './element/bottom-right/bottom-right.component';
 import { DataComponent } from './element/data/data.component';
@@ -27,6 +30,17 @@ describe('TableComponent', () => {
                     HorizontalComponent,
                     BottomLeftComponent,
                     DataComponent,
+                ],
+                imports: [MaterialModule],
+                providers: [
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => {
+                                return Observable.never();
+                            },
+                        },
+                    },
                 ],
             }).compileComponents();
         }),

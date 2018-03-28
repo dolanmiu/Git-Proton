@@ -1,18 +1,27 @@
-<table>
-    <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Age</th>
-    </tr>
-    <tr *ngFor="let row of rows">
-        <td>
-            <div class="flex-container">
-                <div class="node" *ngFor="let nodeStack of row.nodes">
-                    <app-element [nodeStack]="nodeStack"></app-element>
-                </div>
-            </div>
+<div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource$">
 
-        </td>
-        <td>{{row.commitNode.message}}</td>
-    </tr>
-</table>
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.message}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.author.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sha">
+            <mat-header-cell *matHeaderCellDef> Commit </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.sha.current}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

@@ -4,7 +4,7 @@ import { DataNode } from '../nodes';
 import { Path } from '../path';
 import { GridRenderer } from './grid-renderer';
 
-export class Grid {
+export class Grid implements TreeState {
     private elementsCache: NodeStack[][];
     private paths: Path<CommitModel>[];
     private renderer: GridRenderer<CommitModel>;

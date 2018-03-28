@@ -1,7 +1,4 @@
-<button *ngFor="let tab of tabs" (click)="switchTab(tab)" [routerLink]="['/workspace/'+tab.link]" routerLinkActive="active">{{tab.name}}</button>
-<button routerLink="/workspace/new" (click)="goToAdd()" routerLinkActive="active">+</button>
-{{pageState}}
-
+<app-tab-bar (pageStateChanged)="setPageState($event)"></app-tab-bar>
 <div [@animRoutes]="pageState">
-    <router-outlet #appOutlet="outlet"></router-outlet>
+    <router-outlet></router-outlet>
 </div>

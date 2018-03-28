@@ -12,10 +12,15 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 
 import 'rxjs/add/observable/bindCallback';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/never';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/zip';
 
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
 declare var __karma__: any;

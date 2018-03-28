@@ -2,16 +2,15 @@ interface GitCommitModel {
     author: {
         name: string;
         email: string;
-        date: string;
     };
-    commit: {
+    committer: {
         name: string;
         email: string;
-        date: string;
     };
     sha: {
         current: string;
         parents: string[];
     };
     message: string;
+    date: Date;
 }

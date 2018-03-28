@@ -1,20 +1,25 @@
-
 import { ipcMain } from 'electron';
 
-import { GitWrapper } from './git-wrapper';
+import status from './status';
+import walk from './walk';
 
 export class NodeGitIPC {
-    private nodeGit: GitWrapper;
-
-    constructor() {
-        this.nodeGit = new GitWrapper();
-    }
-
     public listen(): void {
-        ipcMain.on('open-repo', (event, arg) => {
-            // console.log(arg); // prints "ping"
-            this.nodeGit.openRepo(arg).subscribe((data) => {
-                event.sender.send('open-repo', data);
+        ipcMain.on('open-repo', (event, projectDetails: ProjectPathDetails) => {
+            walk(projectDetails.path, (commit) => {
+                event.sender.send('commit', {
+                    projectName: projectDetails.name,
+                    commit: commit,
+                } as CommitIPCData);
+            });
+        });
+
+        ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
+            status(projectDetails.path, (statuses) => {
+                event.sender.send('statuses', {
+                    projectName: projectDetails.name,
+                    statuses: statuses,
+                } as StatusIPCData);
             });
         });
     }

@@ -25,18 +25,17 @@ describe('DataComponent', () => {
             author: {
                 name: 'string',
                 email: 'string',
-                date: 'string',
             },
-            commit: {
+            committer: {
                 name: 'string',
                 email: 'string',
-                date: 'string',
             },
             sha: {
                 current: 'string',
                 parents: ['string'],
             },
             message: 'string',
+            date: new Date(),
         });
 
         const path = new Path(
