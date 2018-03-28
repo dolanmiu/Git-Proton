@@ -13,7 +13,13 @@ export class CommitViewComponent implements OnInit {
     public statuses$: Observable<StatusData[]>;
 
     constructor(store: Store<AppState>) {
-        this.statuses$ = store.select(getCurrentProject).map((project) => project.statuses);
+        this.statuses$ = store.select(getCurrentProject).map((project) => {
+            if (!project) {
+                return [];
+            }
+            console.log(project.statuses);
+            return project.statuses;
+        });
     }
 
     public ngOnInit(): void {}

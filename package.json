@@ -14,6 +14,7 @@
     "serve.electron.only": "electron dist --serve",
     "build.electron": "nge build",
     "build.electron.main": "nge build --main",
+    "build.electron.after": "npm run build.electron.main && npm run build.electron.package",
     "build.electron.package": "nge build --package",
     "build.electron.renderer": "nge build --renderer",
     "electron": "npm run pre-electron && npm run build.electron && electron dist --serve",

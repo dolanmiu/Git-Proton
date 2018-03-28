@@ -6,34 +6,38 @@ import * as R from 'ramda';
 import { ElectronSwitchService } from 'app/common/electron-switch.service';
 import { ProjectPathService } from 'app/common/project-path.service';
 import { Observable } from 'rxjs/Observable';
+import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
-export class GitStatusService extends ElectronSwitchService<void, string> {
+export class GitStatusService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(private projectPathService: ProjectPathService, private store: Store<AppState>) {
         super();
+
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
         }
+
+        this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
+            (directory) => {
+                const projectDetails = this.projectPathService.getProjectDetails(directory);
+
+                this.ipcRenderer.send('get-status', projectDetails);
+            },
+            (directory) => {},
+        );
     }
 
     public getStatus(): void {
-        Observable.interval(1000)
+        Observable.interval(10000)
             .switchMap(() => this.store.select('projects'))
             .map((projects) => R.values(projects))
             .flatMap((arr) => arr)
             .do((project) => {
-                this.switch(project.path);
+                this.ipcRendererSwitcheroo.execute(project.path);
             })
             .subscribe();
     }
-
-    protected electron(directory: string): void {
-        const projectDetails = this.projectPathService.getProjectDetails(directory);
-
-        this.ipcRenderer.send('get-status', projectDetails);
-    }
-
-    protected web(directory: string): void {}
 }

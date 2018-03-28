@@ -5,12 +5,14 @@ import * as fs from 'fs';
 
 import { AddCommitAction, SetStatusesAction } from 'app/store/projects/projects.actions';
 import { ElectronSwitchService } from '../electron-switch.service';
+import { ElectronSwitcheroo } from '../electron-switcheroo';
 import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
-export class GitService extends ElectronSwitchService<void, string> {
+export class GitService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private fs: typeof fs;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(store: Store<AppState>, private projectPathService: ProjectPathService) {
         super();
@@ -23,34 +25,36 @@ export class GitService extends ElectronSwitchService<void, string> {
             });
 
             this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
+                console.log(data);
                 store.dispatch(new SetStatusesAction(data.projectName, data.statuses));
             });
         }
+
+        this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
+            (directory) => {
+                console.log(directory);
+
+                this.fs.stat(`${directory}/.git`, (err, stats) => {
+                    console.log(err);
+                    console.log(stats);
+
+                    if (err || !stats.isDirectory()) {
+                        throw new Error(`${directory} is not a Git project`);
+                    }
+
+                    const projectDetails = this.projectPathService.getProjectDetails(directory);
+
+                    this.ipcRenderer.send('open-repo', projectDetails);
+                });
+            },
+            (directory) => {
+                // const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
+                // const tree = this.treeBuilder.createTree(commitModel);
+            },
+        );
     }
 
     public getCommits(directory: string): void {
-        return this.switch(directory);
-    }
-
-    protected electron(directory: string): void {
-        console.log(directory);
-
-        this.fs.stat(`${directory}/.git`, (err, stats) => {
-            console.log(err);
-            console.log(stats);
-
-            if (err || !stats.isDirectory()) {
-                throw new Error(`${directory} is not a Git project`);
-            }
-
-            const projectDetails = this.projectPathService.getProjectDetails(directory);
-
-            this.ipcRenderer.send('open-repo', projectDetails);
-        });
-    }
-
-    protected web(directory: string): void {
-        // const commitModel = this.modelFactory.create(NG_CLI_ELECTRON);
-        // const tree = this.treeBuilder.createTree(commitModel);
+        return this.ipcRendererSwitcheroo.execute(directory);
     }
 }

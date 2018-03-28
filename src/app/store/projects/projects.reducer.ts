@@ -14,13 +14,9 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
 
             return state;
         case ProjectsActions.ProjectsActionTypes.SET_STATUSES:
-            return {
-                ...state,
-                [action.projectName]: {
-                    ...state[action.projectName],
-                    statuses: action.statuses,
-                },
-            };
+            state[action.projectName].statuses = action.statuses;
+
+            return state;
         default:
             return state;
     }
