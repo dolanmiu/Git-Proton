@@ -171,6 +171,42 @@
   dependencies:
     tslib "^1.7.1"
 
+"@fortawesome/angular-fontawesome@^0.1.0-8":
+  version "0.1.0-8"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/angular-fontawesome/-/angular-fontawesome-0.1.0-8.tgz#c2bcb0155781fa91282e146b3bdb7877231ea7f6"
+
+"@fortawesome/fontawesome-common-types@^0.1.3":
+  version "0.1.3"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.1.3.tgz#8475e0f2d1ad1f858c4ec2e76ed9a2456a09ad83"
+
+"@fortawesome/fontawesome-common-types@^0.2.0-2":
+  version "0.2.0-5"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.0-5.tgz#95a4ad12c0d85c6e50334d9dc0301d71fbd466e3"
+
+"@fortawesome/fontawesome-pro-light@^5.0.9":
+  version "5.0.9"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/fontawesome-pro-light/-/fontawesome-pro-light-5.0.9.tgz#47ccd35d2f22d07441bee12689b1eae2894853ed"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.1.3"
+
+"@fortawesome/fontawesome-svg-core@^1.2.0-7":
+  version "1.2.0-7"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.0-7.tgz#1bbe0d087c101ab76d7680f3c8928411c348ab5b"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.0-2"
+
+"@fortawesome/fontawesome@^1.1.5":
+  version "1.1.5"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/fontawesome/-/fontawesome-1.1.5.tgz#c7cfafdd3364245626293cc670357f9fb8487170"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.1.3"
+
+"@fortawesome/pro-light-svg-icons@^5.1.0-4":
+  version "5.1.0-4"
+  resolved "https://npm.fontawesome.com/845F39CA-28FE-496C-9ED6-D48CC8251B3A/@fortawesome/pro-light-svg-icons/-/pro-light-svg-icons-5.1.0-4.tgz#1b4fdaae2b95701fa44e65e38acb9f68c3468b1f"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.0-2"
+
 "@ngrx/effects@^5.1.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-5.2.0.tgz#aa762b69cb6fd4644d724a1cecd265caa42baf09"
@@ -246,7 +282,7 @@
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
-"@types/node@*", "@types/node@~9.4.0":
+"@types/node@*":
   version "9.4.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
 
@@ -257,6 +293,10 @@
 "@types/node@^8.0.17", "@types/node@^8.0.24":
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
+
+"@types/node@~9.6.0":
+  version "9.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.1.tgz#e2d374ef15b315b48e7efc308fa1a7cd51faa06c"
 
 "@types/q@^0.0.32":
   version "0.0.32"
