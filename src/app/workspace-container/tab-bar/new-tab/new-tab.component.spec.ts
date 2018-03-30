@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NewTabComponent } from './new-tab.component';
 
@@ -10,6 +11,7 @@ describe('NewTabComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [NewTabComponent],
+                imports: [FontAwesomeModule],
             }).compileComponents();
         }),
     );

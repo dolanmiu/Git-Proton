@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +9,7 @@ import { WorkspaceContainerModule } from './workspace-container/workspace-contai
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, AppStoreModule, WorkspaceContainerModule, GitProtonCommonModule],
+    imports: [BrowserModule, AppRoutingModule, AppStoreModule, WorkspaceContainerModule, GitProtonCommonModule],
     providers: [],
     bootstrap: [AppComponent],
 })

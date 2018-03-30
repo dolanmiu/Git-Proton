@@ -17,10 +17,10 @@ import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/zip';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee } from '@fortawesome/pro-light-svg-icons';
+import { fal } from '@fortawesome/pro-light-svg-icons';
 
 // Add an icon to the library for convenient access in other components
-library.add(faCoffee);
+library.add(fal);
 
 if (environment.production) {
     enableProdMode();

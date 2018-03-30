@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CloseButtonComponent } from './close-button.component';
 
@@ -10,6 +11,7 @@ describe('CloseButtonComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [CloseButtonComponent],
+                imports: [FontAwesomeModule],
             }).compileComponents();
         }),
     );

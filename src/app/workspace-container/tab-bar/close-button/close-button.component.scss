@@ -1,0 +1,18 @@
+$hover-color: #fff;
+$hover-background-color: #f00;
+
+:host {
+    border-radius: 50%;
+    height: 20px;
+
+    &:hover {
+        background-color: $hover-background-color;
+        color: $hover-color;
+    }
+}
+
+::ng-deep {
+    svg {
+        transform: translateY(2px);
+    }
+}

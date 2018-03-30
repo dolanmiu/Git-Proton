@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CloseButtonComponent } from '../close-button/close-button.component';
 import { TabComponent } from './tab.component';
@@ -11,6 +12,7 @@ describe('TabComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [TabComponent, CloseButtonComponent],
+                imports: [FontAwesomeModule],
             }).compileComponents();
         }),
     );
