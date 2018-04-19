@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 
+import getReferences from './references';
 import status from './status';
 import walk from './walk';
 
@@ -20,6 +21,15 @@ export class NodeGitIPC {
                     projectName: projectDetails.name,
                     statuses: statuses,
                 } as StatusIPCData);
+            });
+        });
+
+        ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
+            getReferences(projectDetails.path, (references) => {
+                event.sender.send('references', {
+                    projectName: projectDetails.name,
+                    references: references,
+                } as ReferenceIPCData);
             });
         });
     }

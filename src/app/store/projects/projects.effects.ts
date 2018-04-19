@@ -10,7 +10,7 @@ import * as ProjectsActions from './projects.actions';
 export class ProjectsEffects {
     @Effect({ dispatch: false })
     public addProjectToTab$: Observable<void> = this.actions$
-        .ofType(ProjectsActions.ProjectsActionTypes.ADD_PROJECT)
+        .ofType(ProjectsActions.ProjectsActionTypes.AddProject)
         .map((action: ProjectsActions.AddProjectAction) => action.projectName)
         .flatMap((projectName) => {
             const route = this.router.config.find((page) => page.path === 'workspace');

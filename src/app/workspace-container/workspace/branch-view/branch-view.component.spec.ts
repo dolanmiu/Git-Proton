@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
 import { BranchViewComponent } from './branch-view.component';
@@ -13,6 +15,14 @@ describe('BranchViewComponent', () => {
             TestBed.configureTestingModule({
                 declarations: [BranchViewComponent],
                 imports: [NoopAnimationsModule, MaterialModule],
+                providers: [
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => Observable.empty(),
+                        },
+                    },
+                ],
             }).compileComponents();
         }),
     );
