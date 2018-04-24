@@ -14,7 +14,7 @@ interface Tab {
     selector: 'app-tab-bar',
     templateUrl: './tab-bar.component.html',
     styleUrls: ['./tab-bar.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabBarComponent {
     public tabs$: Observable<Tab[]>;
