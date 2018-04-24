@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { getProjectsArray } from 'app/store';
+
 interface Tab {
     link: string;
     name: string;
@@ -12,7 +14,7 @@ interface Tab {
     selector: 'app-tab-bar',
     templateUrl: './tab-bar.component.html',
     styleUrls: ['./tab-bar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabBarComponent {
     public tabs$: Observable<Tab[]>;
@@ -23,10 +25,7 @@ export class TabBarComponent {
 
     constructor(private location: Location, store: Store<AppState>) {
         this.tabs$ = store
-            .select('projects')
-            .map((project) => {
-                return Object.keys(project).map((i) => project[i]);
-            })
+            .select(getProjectsArray)
             .map((projects) => {
                 return projects.map((project) => {
                     return {

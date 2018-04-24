@@ -7,6 +7,14 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
                 ...state,
                 [action.projectName]: { name: action.projectName, path: action.projectPath, commits: [], statuses: [], references: [] },
             };
+        case ProjectsActions.ProjectsActionTypes.RemoveProject:
+            const { [action.projectName]: project, ...rest } = state;
+
+            console.log(state);
+
+            return {
+                ...rest,
+            };
         case ProjectsActions.ProjectsActionTypes.AddCommit:
             const commits = [...state[action.projectName].commits, action.commit];
             // TODO make it immutable

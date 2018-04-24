@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum ProjectsActionTypes {
     AddProject = '[Projects] Add Project',
+    RemoveProject = '[Projects] Remove Project',
     AddCommit = '[Projects] Add Project Commit',
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
@@ -11,6 +12,12 @@ export class AddProjectAction implements Action {
     public readonly type = ProjectsActionTypes.AddProject;
 
     constructor(public projectName: string, public projectPath: string) {}
+}
+
+export class RemoveProjectAction implements Action {
+    public readonly type = ProjectsActionTypes.RemoveProject;
+
+    constructor(public projectName: string) {}
 }
 
 export class AddCommitAction implements Action {
@@ -31,4 +38,4 @@ export class SetReferencesAction implements Action {
     constructor(public projectName: string, public references: ReferenceData[]) {}
 }
 
-export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction;
+export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction | RemoveProjectAction;
