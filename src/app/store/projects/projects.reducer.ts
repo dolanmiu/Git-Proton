@@ -10,8 +10,6 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
         case ProjectsActions.ProjectsActionTypes.RemoveProject:
             const { [action.projectName]: project, ...rest } = state;
 
-            console.log(state);
-
             return {
                 ...rest,
             };

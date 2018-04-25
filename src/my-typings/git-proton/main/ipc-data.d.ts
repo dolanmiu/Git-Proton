@@ -12,3 +12,8 @@ interface ReferenceIPCData {
     projectName: string;
     references: ReferenceData[];
 }
+
+interface FetchIPCData {
+    projectName: string;
+    fetch: FetchData[];
+}

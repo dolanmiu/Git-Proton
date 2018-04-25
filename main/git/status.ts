@@ -23,10 +23,6 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
                 }
             }
 
-            statuses.forEach((file) => {
-                console.log(file.path() + ' ' + statusToText(file));
-            });
-
             fn(
                 statuses.map((status) => {
                     return {
