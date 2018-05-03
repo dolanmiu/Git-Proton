@@ -37,6 +37,7 @@ body {
 }
 
 // sass-lint:disable-all
+// https://github.com/electron/electron/issues/2538
 :not(input):not(textarea),
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before {
