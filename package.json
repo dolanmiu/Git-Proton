@@ -62,7 +62,7 @@
   "devDependencies": {
     "@angular/cli": "1.6.8",
     "@angular/compiler-cli": "^5.1.2",
-    "@types/jasmine": "2.8.6",
+    "@types/jasmine": "2.8.7",
     "@types/node": "~9.6.0",
     "awesome-typescript-loader": "^3.5.0",
     "codelyzer": "^4.0.0",
