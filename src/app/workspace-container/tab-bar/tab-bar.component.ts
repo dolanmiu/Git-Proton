@@ -24,16 +24,14 @@ export class TabBarComponent {
     @Output() public pageStateChanged = new EventEmitter();
 
     constructor(private location: Location, store: Store<AppState>) {
-        this.tabs$ = store
-            .select(getProjectsArray)
-            .map((projects) => {
-                return projects.map((project) => {
-                    return {
-                        name: project.name,
-                        link: project.name,
-                    };
-                });
+        this.tabs$ = store.select(getProjectsArray).map((projects) => {
+            return projects.map((project) => {
+                return {
+                    name: project.name,
+                    link: project.name,
+                };
             });
+        });
     }
 
     public switchTab(tab: Tab): void {

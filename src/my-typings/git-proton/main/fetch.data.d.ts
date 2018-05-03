@@ -1,3 +1,1 @@
-interface FetchData {
-
-}
+interface FetchData {}
