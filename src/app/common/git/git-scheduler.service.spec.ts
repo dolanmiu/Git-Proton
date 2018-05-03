@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { ProjectPathService } from '../project-path.service';
+import { GitFetchService } from './git-fetch.service';
 import { GitReferenceService } from './git-reference.service';
 import { GitSchedulerService } from './git-scheduler.service';
 import { GitStatusService } from './git-status.service';
@@ -14,6 +15,7 @@ describe('GitSchedulerService', () => {
                 GitReferenceService,
                 GitSchedulerService,
                 GitStatusService,
+                GitFetchService,
                 ProjectPathService,
                 {
                     provide: Store,

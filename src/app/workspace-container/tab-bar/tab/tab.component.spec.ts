@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { CloseButtonComponent } from '../close-button/close-button.component';
 import { TabComponent } from './tab.component';
@@ -13,6 +15,14 @@ describe('TabComponent', () => {
             TestBed.configureTestingModule({
                 declarations: [TabComponent, CloseButtonComponent],
                 imports: [FontAwesomeModule],
+                providers: [
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => Observable.empty(),
+                        },
+                    },
+                ],
             }).compileComponents();
         }),
     );
