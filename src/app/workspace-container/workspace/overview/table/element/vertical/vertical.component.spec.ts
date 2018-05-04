@@ -6,13 +6,11 @@ describe('VerticalComponent', () => {
     let component: VerticalComponent;
     let fixture: ComponentFixture<VerticalComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [VerticalComponent],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [VerticalComponent],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(VerticalComponent);

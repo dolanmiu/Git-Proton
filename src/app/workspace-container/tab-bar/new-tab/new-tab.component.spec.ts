@@ -7,14 +7,12 @@ describe('NewTabComponent', () => {
     let component: NewTabComponent;
     let fixture: ComponentFixture<NewTabComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [NewTabComponent],
-                imports: [FontAwesomeModule],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [NewTabComponent],
+            imports: [FontAwesomeModule],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NewTabComponent);

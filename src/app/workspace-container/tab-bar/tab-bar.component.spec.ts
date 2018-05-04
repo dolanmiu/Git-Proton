@@ -13,22 +13,20 @@ describe('TabBarComponent', () => {
     let component: TabBarComponent;
     let fixture: ComponentFixture<TabBarComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [TabBarComponent, TabComponent, NewTabComponent, CloseButtonComponent],
-                imports: [RouterTestingModule, FontAwesomeModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TabBarComponent, TabComponent, NewTabComponent, CloseButtonComponent],
+            imports: [RouterTestingModule, FontAwesomeModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TabBarComponent);

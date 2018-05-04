@@ -9,22 +9,20 @@ describe('CloseButtonComponent', () => {
     let component: CloseButtonComponent;
     let fixture: ComponentFixture<CloseButtonComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [CloseButtonComponent],
-                imports: [FontAwesomeModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CloseButtonComponent],
+            imports: [FontAwesomeModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CloseButtonComponent);

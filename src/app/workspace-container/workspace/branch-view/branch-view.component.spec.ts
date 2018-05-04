@@ -10,22 +10,20 @@ describe('BranchViewComponent', () => {
     let component: BranchViewComponent;
     let fixture: ComponentFixture<BranchViewComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [BranchViewComponent],
-                imports: [NoopAnimationsModule, MaterialModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [BranchViewComponent],
+            imports: [NoopAnimationsModule, MaterialModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BranchViewComponent);

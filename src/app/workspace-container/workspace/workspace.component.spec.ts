@@ -15,30 +15,28 @@ describe('WorkspaceComponent', () => {
     let component: WorkspaceComponent;
     let fixture: ComponentFixture<WorkspaceComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [WorkspaceComponent],
-                imports: [
-                    RouterTestingModule,
-                    NoopAnimationsModule,
-                    ToolBarModule,
-                    BranchViewModule,
-                    CommitViewModule,
-                    OverviewModule,
-                    FooterModule,
-                ],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [WorkspaceComponent],
+            imports: [
+                RouterTestingModule,
+                NoopAnimationsModule,
+                ToolBarModule,
+                BranchViewModule,
+                CommitViewModule,
+                OverviewModule,
+                FooterModule,
+            ],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(WorkspaceComponent);

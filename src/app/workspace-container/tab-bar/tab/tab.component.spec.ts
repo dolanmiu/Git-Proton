@@ -10,22 +10,20 @@ describe('TabComponent', () => {
     let component: TabComponent;
     let fixture: ComponentFixture<TabComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [TabComponent, CloseButtonComponent],
-                imports: [FontAwesomeModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TabComponent, CloseButtonComponent],
+            imports: [FontAwesomeModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TabComponent);
