@@ -1,5 +1,7 @@
 import { ipcMain } from 'electron';
 
+import { fetch, fetchAll } from './fetch';
+import getReferences from './references';
 import status from './status';
 import walk from './walk';
 
@@ -21,6 +23,23 @@ export class NodeGitIPC {
                     statuses: statuses,
                 } as StatusIPCData);
             });
+        });
+
+        ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
+            getReferences(projectDetails.path, (references) => {
+                event.sender.send('references', {
+                    projectName: projectDetails.name,
+                    references: references,
+                } as ReferenceIPCData);
+            });
+        });
+
+        ipcMain.on('fetch', (event, projectDetails: ProjectPathDetails) => {
+            fetch(projectDetails.path);
+        });
+
+        ipcMain.on('fetch-all', (event, projectDetails: ProjectPathDetails) => {
+            fetchAll(projectDetails.path);
         });
     }
 }

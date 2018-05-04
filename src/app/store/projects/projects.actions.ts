@@ -1,27 +1,41 @@
 import { Action } from '@ngrx/store';
 
 export enum ProjectsActionTypes {
-    ADD_PROJECT = '[Projects] ADD_PROJECT',
-    ADD_COMMIT = '[Projects] ADD_PROJECT_COMMIT',
-    SET_STATUSES = '[Projects] SET_STATUSES',
+    AddProject = '[Projects] Add Project',
+    RemoveProject = '[Projects] Remove Project',
+    AddCommit = '[Projects] Add Project Commit',
+    SetStatuses = '[Projects] Set Statuses',
+    SetReferences = '[Projects] Set References',
 }
 
 export class AddProjectAction implements Action {
-    public readonly type = ProjectsActionTypes.ADD_PROJECT;
+    public readonly type = ProjectsActionTypes.AddProject;
 
     constructor(public projectName: string, public projectPath: string) {}
 }
 
+export class RemoveProjectAction implements Action {
+    public readonly type = ProjectsActionTypes.RemoveProject;
+
+    constructor(public projectName: string) {}
+}
+
 export class AddCommitAction implements Action {
-    public readonly type = ProjectsActionTypes.ADD_COMMIT;
+    public readonly type = ProjectsActionTypes.AddCommit;
 
     constructor(public projectName: string, public commit: GitCommitModel) {}
 }
 
 export class SetStatusesAction implements Action {
-    public readonly type = ProjectsActionTypes.SET_STATUSES;
+    public readonly type = ProjectsActionTypes.SetStatuses;
 
     constructor(public projectName: string, public statuses: StatusData[]) {}
 }
 
-export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction;
+export class SetReferencesAction implements Action {
+    public readonly type = ProjectsActionTypes.SetReferences;
+
+    constructor(public projectName: string, public references: ReferenceData[]) {}
+}
+
+export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction | RemoveProjectAction;

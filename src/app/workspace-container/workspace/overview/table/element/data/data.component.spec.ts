@@ -9,13 +9,11 @@ describe('DataComponent', () => {
     let component: DataComponent;
     let fixture: ComponentFixture<DataComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [DataComponent],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [DataComponent],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataComponent);

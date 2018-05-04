@@ -13,7 +13,10 @@ export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
         }
 
         const { params } = state;
-        const workspaceName = url.split('/').splice(-1)[0].replace(/%20/g, ' ');
+        const workspaceName = url
+            .split('/')
+            .splice(-1)[0]
+            .replace(/%20/g, ' ');
 
         return { url, queryParams, params, workspaceName };
     }

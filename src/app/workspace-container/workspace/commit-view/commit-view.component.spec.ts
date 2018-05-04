@@ -11,22 +11,20 @@ describe('CommitViewComponent', () => {
     let component: CommitViewComponent;
     let fixture: ComponentFixture<CommitViewComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [CommitViewComponent, FileSelectComponent],
-                imports: [NoopAnimationsModule, MaterialModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CommitViewComponent, FileSelectComponent],
+            imports: [NoopAnimationsModule, MaterialModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CommitViewComponent);

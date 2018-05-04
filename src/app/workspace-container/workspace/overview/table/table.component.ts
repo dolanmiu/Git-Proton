@@ -15,8 +15,6 @@ export class TableComponent {
     public dataSource$: Observable<GitCommitModel[]>;
 
     constructor(store: Store<AppState>) {
-        this.dataSource$ = store
-            .select(getCurrentProject)
-            .map((project) => project ? project.commits : []);
+        this.dataSource$ = store.select(getCurrentProject).map((project) => (project ? project.commits : []));
     }
 }
