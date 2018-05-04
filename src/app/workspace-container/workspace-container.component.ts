@@ -1,7 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { GitStatusService } from 'app/common/git/git-status.service';
+import { GitSchedulerService } from 'app/common/git/git-scheduler.service';
 
 const left = [
     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -44,10 +44,10 @@ const right = [
 export class WorkspaceContainerComponent implements OnInit {
     public pageState: string;
 
-    constructor(private statusService: GitStatusService) {}
+    constructor(private schedulerService: GitSchedulerService) {}
 
     public ngOnInit(): void {
-        this.statusService.getStatus();
+        this.schedulerService.start();
     }
 
     public setPageState(pageState: string): void {

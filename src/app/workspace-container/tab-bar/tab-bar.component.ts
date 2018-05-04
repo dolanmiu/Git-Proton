@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { getProjectsArray } from 'app/store';
+
 interface Tab {
     link: string;
     name: string;
@@ -22,19 +24,14 @@ export class TabBarComponent {
     @Output() public pageStateChanged = new EventEmitter();
 
     constructor(private location: Location, store: Store<AppState>) {
-        this.tabs$ = store
-            .select('projects')
-            .map((project) => {
-                return Object.keys(project).map((i) => project[i]);
-            })
-            .map((projects) => {
-                return projects.map((project) => {
-                    return {
-                        name: project.name,
-                        link: project.name,
-                    };
-                });
+        this.tabs$ = store.select(getProjectsArray).map((projects) => {
+            return projects.map((project) => {
+                return {
+                    name: project.name,
+                    link: project.name,
+                };
             });
+        });
     }
 
     public switchTab(tab: Tab): void {

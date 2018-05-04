@@ -43,7 +43,7 @@ export default function walk(directory: string, commitFn: (data: GitCommitModel)
 
             history.on('end', (commits) => {
                 // Use commits
-                console.log(commits.length);
+                // console.log(commits.length);
             });
 
             // Don't forget to call `start()`!
