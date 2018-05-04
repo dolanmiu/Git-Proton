@@ -7,7 +7,9 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class TabComponent {
     @Input() public text: string;
-    @HostBinding('style.background-color') public color = 'red';
+    @HostBinding('style.background-color') public color: string;
 
-    constructor() {}
+    constructor() {
+        this.color = 'green';
+    }
 }

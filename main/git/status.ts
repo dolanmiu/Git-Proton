@@ -5,7 +5,7 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
     nodegit.Repository.open(directory).then((repo) => {
         repo.getStatus().then((statuses) => {
             // tslint:disable-next-line:no-any
-            function statusToText(status: any): string {
+            function statusToText(status: any): StatusType {
                 if (status.isNew()) {
                     return 'NEW';
                 }
@@ -22,10 +22,6 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
                     return 'IGNORED';
                 }
             }
-
-            statuses.forEach((file) => {
-                console.log(file.path() + ' ' + statusToText(file));
-            });
 
             fn(
                 statuses.map((status) => {

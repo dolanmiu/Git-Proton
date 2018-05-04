@@ -7,14 +7,12 @@ describe('FileSelectComponent', () => {
     let component: FileSelectComponent;
     let fixture: ComponentFixture<FileSelectComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [FileSelectComponent],
-                imports: [MaterialModule],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [FileSelectComponent],
+            imports: [MaterialModule],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FileSelectComponent);

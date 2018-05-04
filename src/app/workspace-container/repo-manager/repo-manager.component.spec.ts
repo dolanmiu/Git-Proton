@@ -9,18 +9,16 @@ describe('RepoManagerComponent', () => {
     let component: RepoManagerComponent;
     let fixture: ComponentFixture<RepoManagerComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [RepoManagerComponent],
-                imports: [
-                    NoopAnimationsModule,
-                    RouterTestingModule.withRoutes([{ path: '', component: RepoManagerComponent }]),
-                    MaterialModule,
-                ],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [RepoManagerComponent],
+            imports: [
+                NoopAnimationsModule,
+                RouterTestingModule.withRoutes([{ path: '', component: RepoManagerComponent }]),
+                MaterialModule,
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(RepoManagerComponent);

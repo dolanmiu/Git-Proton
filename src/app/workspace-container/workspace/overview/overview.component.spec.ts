@@ -11,24 +11,22 @@ describe('OverviewComponent', () => {
     let component: OverviewComponent;
     let fixture: ComponentFixture<OverviewComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [OverviewComponent],
-                imports: [NoopAnimationsModule, MaterialModule, TableModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => {
-                                return Observable.never();
-                            },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [OverviewComponent],
+            imports: [NoopAnimationsModule, MaterialModule, TableModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => {
+                            return Observable.never();
                         },
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OverviewComponent);

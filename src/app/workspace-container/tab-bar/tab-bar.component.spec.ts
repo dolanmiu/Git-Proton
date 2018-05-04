@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -12,22 +13,20 @@ describe('TabBarComponent', () => {
     let component: TabBarComponent;
     let fixture: ComponentFixture<TabBarComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [TabBarComponent, TabComponent, NewTabComponent, CloseButtonComponent],
-                imports: [RouterTestingModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TabBarComponent, TabComponent, NewTabComponent, CloseButtonComponent],
+            imports: [RouterTestingModule, FontAwesomeModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TabBarComponent);
