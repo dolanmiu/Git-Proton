@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { GitStagingService } from 'app/common/git/git-staging.service';
 import { ProjectPathService } from 'app/common/project-path.service';
@@ -12,7 +14,16 @@ describe('UnstagedFilesContainerComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [UnstagedFilesContainerComponent],
-                providers: [GitStagingService, ProjectPathService],
+                providers: [
+                    GitStagingService,
+                    ProjectPathService,
+                    {
+                        provide: Store,
+                        useValue: {
+                            select: () => Observable.empty(),
+                        },
+                    },
+                ],
             }).compileComponents();
         }),
     );

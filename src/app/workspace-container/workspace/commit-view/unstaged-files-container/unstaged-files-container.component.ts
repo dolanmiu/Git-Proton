@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { GitStagingService } from '../../../../common/git/git-staging.service';
+import { GitStagingService } from 'app/common/git/git-staging.service';
+import { getCurrentProject } from 'app/store';
 
 @Component({
     selector: 'app-unstaged-files-container',
@@ -10,9 +12,15 @@ import { GitStagingService } from '../../../../common/git/git-staging.service';
 export class UnstagedFilesContainerComponent {
     @Input() public files: StatusData[];
 
-    constructor(private gitStagingService: GitStagingService) {}
+    constructor(private store: Store<AppState>, private gitStagingService: GitStagingService) {}
 
-    public stageFile(): void {
-        this.gitStagingService.stage('');
+    public stageFile(file: StatusData): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitStagingService.stage(project.path, [file.path]);
+            })
+            .take(1)
+            .subscribe();
     }
 }

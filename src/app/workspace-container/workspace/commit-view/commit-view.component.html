@@ -1,7 +1,7 @@
 <div fxLayout="column">
-    <app-unstaged-files-container [files]="stagedFiles$ | async"></app-unstaged-files-container>
-    <hr>
-    <app-staged-files-container [files]="unstagedFiles$ | async"></app-staged-files-container>
+    <app-unstaged-files-container [files]="unstagedFiles$ | async"></app-unstaged-files-container>
+    <hr>{{stagedFiles$ | async}}
+    <app-staged-files-container [files]="stagedFiles$ | async"></app-staged-files-container>
 
     <mat-input-container>
         <textarea class="commit-message" matInput rows="4" cols="50" placeholder="Commit Message"></textarea>

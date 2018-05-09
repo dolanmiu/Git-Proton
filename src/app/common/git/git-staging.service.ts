@@ -8,8 +8,8 @@ import { ProjectPathService } from '../project-path.service';
 @Injectable()
 export class GitStagingService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private stageSwitcheroo: ElectronSwitcheroo<void, string>;
-    private unstageSwitcheroo: ElectronSwitcheroo<void, string>;
+    private stageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
+    private unstageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
 
     constructor(private projectPathService: ProjectPathService) {
         super();
@@ -19,29 +19,29 @@ export class GitStagingService extends ElectronSwitchService {
         }
 
         this.stageSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
+            (directory, files) => {
                 const projectDetails = this.projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('stage', projectDetails);
+                this.ipcRenderer.send('stage', projectDetails, files);
             },
             (directory) => {},
         );
 
         this.unstageSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
+            (directory, files) => {
                 const projectDetails = this.projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('stage', projectDetails);
+                this.ipcRenderer.send('stage', projectDetails, files);
             },
-            (directory) => {},
+            (directory, files) => {},
         );
     }
 
-    public stage(path: string): void {
-        this.stageSwitcheroo.execute(path);
+    public stage(path: string, files: string[]): void {
+        this.stageSwitcheroo.execute(path, files);
     }
 
-    public unstage(path: string): void {
-        this.unstageSwitcheroo.execute(path);
+    public unstage(path: string, files: string[]): void {
+        this.unstageSwitcheroo.execute(path, files);
     }
 }

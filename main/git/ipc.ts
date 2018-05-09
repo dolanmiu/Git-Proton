@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron';
 
 import { fetch, fetchAll } from './fetch';
+import stage from './git-stage';
 import getReferences from './references';
 import status from './status';
 import walk from './walk';
@@ -40,6 +41,11 @@ export class NodeGitIPC {
 
         ipcMain.on('fetch-all', (event, projectDetails: ProjectPathDetails) => {
             fetchAll(projectDetails.path);
+        });
+
+        ipcMain.on('stage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            console.log(files);
+            stage(projectDetails.path, files, () => {});
         });
     }
 }

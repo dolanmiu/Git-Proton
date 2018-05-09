@@ -21,16 +21,19 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
                 if (status.isIgnored()) {
                     return 'IGNORED';
                 }
+                if (status.isDeleted()) {
+                    return 'DELETED';
+                }
             }
 
             fn(
                 statuses.map((status) => {
-                    console.log('checking');
-                    console.log(status.status()[0]);
+                    const statusText = status.status()[0];
                     return {
                         path: status.path(),
                         changeType: statusToText(status),
-                        status: status.status()[0] || 'UNKNOWN',
+                        status: statusText || 'UNKNOWN',
+                        isStaged: statusText.split('_')[0] === 'INDEX' ? true : false,
                     } as StatusData;
                 }),
             );

@@ -24,17 +24,11 @@ export class CommitViewComponent implements OnInit {
         });
 
         this.unstagedFiles$ = this.statuses$.map((statuses) => {
-            console.log(statuses);
-            return statuses.filter((status) => {
-                return status.status !== 'INDEX_MODIFIED';
-            });
+            return statuses.filter((status) => !status.isStaged);
         });
 
         this.stagedFiles$ = this.statuses$.map((statuses) => {
-            console.log(statuses);
-            return statuses.filter((status) => {
-                return status.status === 'INDEX_MODIFIED';
-            });
+            return statuses.filter((status) => status.isStaged);
         });
     }
 
