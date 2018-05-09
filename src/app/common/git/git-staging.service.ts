@@ -24,14 +24,14 @@ export class GitStagingService extends ElectronSwitchService {
 
                 this.ipcRenderer.send('stage', projectDetails, files);
             },
-            (directory) => {},
+            (directory, files) => {},
         );
 
         this.unstageSwitcheroo = new ElectronSwitcheroo(
             (directory, files) => {
                 const projectDetails = this.projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('stage', projectDetails, files);
+                this.ipcRenderer.send('unstage', projectDetails, files);
             },
             (directory, files) => {},
         );

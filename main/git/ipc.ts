@@ -2,6 +2,7 @@ import { ipcMain } from 'electron';
 
 import { fetch, fetchAll } from './fetch';
 import stage from './git-stage';
+import unstage from './git-unstage';
 import getReferences from './references';
 import status from './status';
 import walk from './walk';
@@ -44,8 +45,11 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('stage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            console.log(files);
             stage(projectDetails.path, files, () => {});
+        });
+
+        ipcMain.on('unstage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            unstage(projectDetails.path, files, () => {});
         });
     }
 }
