@@ -11,6 +11,8 @@ import { getCurrentProject } from 'app/store';
 })
 export class CommitViewComponent implements OnInit {
     public statuses$: Observable<StatusData[]>;
+    public unstagedFiles$: Observable<StatusData[]>;
+    public stagedFiles$: Observable<StatusData[]>;
 
     constructor(store: Store<AppState>) {
         this.statuses$ = store.select(getCurrentProject).map((project) => {
@@ -19,6 +21,20 @@ export class CommitViewComponent implements OnInit {
             }
             console.log(project.statuses);
             return project.statuses;
+        });
+
+        this.unstagedFiles$ = this.statuses$.map((statuses) => {
+            console.log(statuses);
+            return statuses.filter((status) => {
+                return status.status !== 'INDEX_MODIFIED';
+            });
+        });
+
+        this.stagedFiles$ = this.statuses$.map((statuses) => {
+            console.log(statuses);
+            return statuses.filter((status) => {
+                return status.status === 'INDEX_MODIFIED';
+            });
         });
     }
 

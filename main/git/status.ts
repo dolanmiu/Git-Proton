@@ -5,7 +5,7 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
     nodegit.Repository.open(directory).then((repo) => {
         repo.getStatus().then((statuses) => {
             // tslint:disable-next-line:no-any
-            function statusToText(status: any): StatusType {
+            function statusToText(status: any): StatusChangeType {
                 if (status.isNew()) {
                     return 'NEW';
                 }
@@ -25,10 +25,13 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
 
             fn(
                 statuses.map((status) => {
+                    console.log('checking');
+                    console.log(status.status()[0]);
                     return {
                         path: status.path(),
-                        status: statusToText(status),
-                    };
+                        changeType: statusToText(status),
+                        status: status.status()[0] || 'UNKNOWN',
+                    } as StatusData;
                 }),
             );
         });

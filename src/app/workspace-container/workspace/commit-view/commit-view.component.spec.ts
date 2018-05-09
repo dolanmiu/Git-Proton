@@ -3,9 +3,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { GitStagingService } from 'app/common/git/git-staging.service';
+import { ProjectPathService } from 'app/common/project-path.service';
 import { MaterialModule } from 'app/material.module';
 import { CommitViewComponent } from './commit-view.component';
-import { FileSelectComponent } from './file-select/file-select.component';
+import { StagedFilesContainerComponent } from './staged-files-container/staged-files-container.component';
+import { UnstagedFilesContainerComponent } from './unstaged-files-container/unstaged-files-container.component';
 
 describe('CommitViewComponent', () => {
     let component: CommitViewComponent;
@@ -13,9 +16,11 @@ describe('CommitViewComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CommitViewComponent, FileSelectComponent],
+            declarations: [CommitViewComponent, StagedFilesContainerComponent, UnstagedFilesContainerComponent],
             imports: [NoopAnimationsModule, MaterialModule],
             providers: [
+                GitStagingService,
+                ProjectPathService,
                 {
                     provide: Store,
                     useValue: {

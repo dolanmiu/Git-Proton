@@ -1,13 +1,7 @@
 <div fxLayout="column">
-    {{statuses$ | async | json}}
-    <app-file-select></app-file-select>
-    <app-file-select></app-file-select>
-    <mat-list>
-        <mat-list-item>
-            <mat-icon mat-list-icon>folder</mat-icon>
-            <h3 mat-line> asdf </h3>
-        </mat-list-item>
-    </mat-list>
+    <app-unstaged-files-container [files]="stagedFiles$ | async"></app-unstaged-files-container>
+    <hr>
+    <app-staged-files-container [files]="unstagedFiles$ | async"></app-staged-files-container>
 
     <mat-input-container>
         <textarea class="commit-message" matInput rows="4" cols="50" placeholder="Commit Message"></textarea>
