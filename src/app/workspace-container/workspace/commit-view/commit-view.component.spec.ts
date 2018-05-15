@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { GitStagingService } from 'app/common/git/git-staging.service';
 import { ProjectPathService } from 'app/common/project-path.service';
 import { MaterialModule } from 'app/material.module';
+import { GitCommitService } from '../../../common/git/git-commit.service';
 import { CommitViewComponent } from './commit-view.component';
 import { StagedFilesContainerComponent } from './staged-files-container/staged-files-container.component';
 import { UnstagedFilesContainerComponent } from './unstaged-files-container/unstaged-files-container.component';
@@ -20,6 +21,7 @@ describe('CommitViewComponent', () => {
             imports: [NoopAnimationsModule, MaterialModule],
             providers: [
                 GitStagingService,
+                GitCommitService,
                 ProjectPathService,
                 {
                     provide: Store,

@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron';
 
 import { fetch, fetchAll } from './fetch';
+import commit from './git-commit';
 import stage from './git-stage';
 import unstage from './git-unstage';
 import getReferences from './references';
@@ -10,10 +11,10 @@ import walk from './walk';
 export class NodeGitIPC {
     public listen(): void {
         ipcMain.on('open-repo', (event, projectDetails: ProjectPathDetails) => {
-            walk(projectDetails.path, (commit) => {
+            walk(projectDetails.path, (data) => {
                 event.sender.send('commit', {
                     projectName: projectDetails.name,
-                    commit: commit,
+                    commit: data,
                 } as CommitIPCData);
             });
         });
@@ -45,11 +46,17 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('stage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            stage(projectDetails.path, files, () => {});
+            stage(projectDetails.path, files, (oid) => {
+                console.log(oid);
+            });
         });
 
         ipcMain.on('unstage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
             unstage(projectDetails.path, files, () => {});
+        });
+
+        ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            commit(projectDetails.path, '', '', () => {});
         });
     }
 }

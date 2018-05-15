@@ -1,7 +1,7 @@
 import * as nodegit from 'nodegit';
 
 // This function adds files to staging area (index)
-export default function stage(directory: string, filePaths: string[], fn: (data: StatusData[]) => void): void {
+export default function stage(directory: string, filePaths: string[], fn: (data: string) => void): void {
     let index;
 
     nodegit.Repository.open(directory)
@@ -22,5 +22,8 @@ export default function stage(directory: string, filePaths: string[], fn: (data:
         .then(() => {
             console.log('written to index');
             return index.writeTree();
+        })
+        .then((oidResult) => {
+            fn(oidResult.tostrS());
         });
 }

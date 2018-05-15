@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { getCurrentProject } from 'app/store';
+import { GitCommitService } from '../../../common/git/git-commit.service';
 
 @Component({
     selector: 'app-commit-view',
@@ -14,7 +15,7 @@ export class CommitViewComponent implements OnInit {
     public unstagedFiles$: Observable<StatusData[]>;
     public stagedFiles$: Observable<StatusData[]>;
 
-    constructor(store: Store<AppState>) {
+    constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
         this.statuses$ = store.select(getCurrentProject).map((project) => {
             if (!project) {
                 return [];
@@ -33,4 +34,14 @@ export class CommitViewComponent implements OnInit {
     }
 
     public ngOnInit(): void {}
+
+    public commit(): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitCommitService.commit(project.path);
+            })
+            .take(1)
+            .subscribe();
+    }
 }
