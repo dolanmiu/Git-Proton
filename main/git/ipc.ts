@@ -2,6 +2,7 @@ import { ipcMain } from 'electron';
 
 import { fetch, fetchAll } from './fetch';
 import commit from './git-commit';
+import diff from './git-diff';
 import stage from './git-stage';
 import unstage from './git-unstage';
 import getReferences from './references';
@@ -57,6 +58,10 @@ export class NodeGitIPC {
 
         ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, files: string[]) => {
             commit(projectDetails.path, '', '', () => {});
+        });
+
+        ipcMain.on('diff', (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            diff(projectDetails.path, () => {});
         });
     }
 }

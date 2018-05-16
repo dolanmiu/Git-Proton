@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { getCurrentProject, getUnselectedProjectsArray } from 'app/store';
+import { GitDiffService } from './git-diff.service';
 import { GitFetchService } from './git-fetch.service';
 import { GitReferenceService } from './git-reference.service';
 import { GitStatusService } from './git-status.service';
@@ -14,6 +15,7 @@ export class GitSchedulerService {
         private statusService: GitStatusService,
         private referenceService: GitReferenceService,
         private gitFetchService: GitFetchService,
+        private gitDiffService: GitDiffService,
     ) {}
 
     public start(): void {
@@ -41,5 +43,6 @@ export class GitSchedulerService {
         this.statusService.getStatus(project.path);
         this.referenceService.getBranches(project.path);
         this.gitFetchService.fetch(project.path);
+        this.gitDiffService.diff(project.path);
     }
 }
