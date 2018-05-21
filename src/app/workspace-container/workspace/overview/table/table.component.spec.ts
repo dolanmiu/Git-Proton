@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
@@ -30,7 +31,7 @@ describe('TableComponent', () => {
                 BottomLeftComponent,
                 DataComponent,
             ],
-            imports: [MaterialModule],
+            imports: [MaterialModule, InfiniteScrollModule],
             providers: [
                 {
                     provide: Store,
