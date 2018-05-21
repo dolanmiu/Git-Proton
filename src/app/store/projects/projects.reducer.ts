@@ -21,8 +21,6 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
             return state;
         case ProjectsActions.ProjectsActionTypes.SetStatuses:
             state[action.projectName].statuses = action.statuses;
-            console.log('setting');
-            console.log(state);
 
             // return {
             //     ...state,

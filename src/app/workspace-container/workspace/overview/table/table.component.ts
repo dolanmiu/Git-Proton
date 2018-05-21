@@ -17,4 +17,8 @@ export class TableComponent {
     constructor(store: Store<AppState>) {
         this.dataSource$ = store.select(getCurrentProject).map((project) => (project ? project.commits : []));
     }
+
+    public onScroll(): void {
+        console.log('scrolled');
+    }
 }

@@ -25,7 +25,6 @@ export class GitService extends ElectronSwitchService {
             });
 
             this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
-                console.log(data);
                 store.dispatch(new SetStatusesAction(data.projectName, data.statuses));
             });
 

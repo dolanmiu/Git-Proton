@@ -1,20 +1,15 @@
-$branch-view-color: #f00;
-
 :host {
     display: block;
     height: 100%;
-}
-
-.branch-view-container {
-    background-color: $branch-view-color;
 }
 
 .workspace-container {
     height: 100%;
 }
 
-// .overview-container {
-// }
+.overview-container {
+    max-height: 80vh;
+}
 
 // .commit-view-container {
 // }
