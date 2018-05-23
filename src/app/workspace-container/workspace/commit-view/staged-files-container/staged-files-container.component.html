@@ -1,0 +1,7 @@
+<h3>Staged files</h3>
+
+<ng-container *ngFor="let file of files">
+    <div>
+        <button (click)="unstageFile(file)">+</button> {{file.path}}
+    </div>
+</ng-container>

@@ -6,13 +6,11 @@ describe('CloneRepoComponent', () => {
     let component: CloneRepoComponent;
     let fixture: ComponentFixture<CloneRepoComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [CloneRepoComponent],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CloneRepoComponent],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CloneRepoComponent);

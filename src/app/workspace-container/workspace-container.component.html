@@ -1,4 +1,6 @@
-<app-tab-bar (pageStateChanged)="setPageState($event)"></app-tab-bar>
-<div [@animRoutes]="pageState">
-    <router-outlet></router-outlet>
+<div fxLayout="column" style="height:100%">
+    <app-tab-bar (pageStateChanged)="setPageState($event)" fxFlex="30px"></app-tab-bar>
+    <div [@animRoutes]="pageState" fxFill>
+        <router-outlet></router-outlet>
+    </div>
 </div>

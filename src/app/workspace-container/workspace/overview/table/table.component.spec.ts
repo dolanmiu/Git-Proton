@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
@@ -17,34 +18,32 @@ describe('TableComponent', () => {
     let component: TableComponent;
     let fixture: ComponentFixture<TableComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [
-                    TableComponent,
-                    ElementComponent,
-                    BottomRightComponent,
-                    VerticalComponent,
-                    TopLeftComponent,
-                    TopRightComponent,
-                    HorizontalComponent,
-                    BottomLeftComponent,
-                    DataComponent,
-                ],
-                imports: [MaterialModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => {
-                                return Observable.never();
-                            },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                TableComponent,
+                ElementComponent,
+                BottomRightComponent,
+                VerticalComponent,
+                TopLeftComponent,
+                TopRightComponent,
+                HorizontalComponent,
+                BottomLeftComponent,
+                DataComponent,
+            ],
+            imports: [MaterialModule, InfiniteScrollModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => {
+                            return Observable.never();
                         },
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableComponent);

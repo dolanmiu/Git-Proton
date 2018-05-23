@@ -3,30 +3,35 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { GitStagingService } from 'app/common/git/git-staging.service';
+import { ProjectPathService } from 'app/common/project-path.service';
 import { MaterialModule } from 'app/material.module';
+import { GitCommitService } from '../../../common/git/git-commit.service';
 import { CommitViewComponent } from './commit-view.component';
-import { FileSelectComponent } from './file-select/file-select.component';
+import { StagedFilesContainerComponent } from './staged-files-container/staged-files-container.component';
+import { UnstagedFilesContainerComponent } from './unstaged-files-container/unstaged-files-container.component';
 
 describe('CommitViewComponent', () => {
     let component: CommitViewComponent;
     let fixture: ComponentFixture<CommitViewComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [CommitViewComponent, FileSelectComponent],
-                imports: [NoopAnimationsModule, MaterialModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CommitViewComponent, StagedFilesContainerComponent, UnstagedFilesContainerComponent],
+            imports: [NoopAnimationsModule, MaterialModule],
+            providers: [
+                GitStagingService,
+                GitCommitService,
+                ProjectPathService,
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CommitViewComponent);

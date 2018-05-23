@@ -2,25 +2,11 @@
     <app-tool-bar></app-tool-bar>
 
     <div class="workspace-container" fxLayout="row" fxFlex="1 1 auto">
-        <div class="branch-view-container" fxFlex="0 0 250px">
-            <app-branch-view></app-branch-view>
-        </div>
+        <app-branch-view fxFlex="0 0 250px"></app-branch-view>
 
-        <div class="overview-container" fxFlex="1 1 auto">
-            <app-overview></app-overview>
-            <h1>
-                Title
-            </h1>
+        <app-overview fxFlex="1 1 auto"></app-overview>
 
-            <button mat-raised-button color="primary">TOGGLE DARK THEME</button>
-            <button mat-raised-button color="primary">PRIMARY</button>
-            <button mat-raised-button color="accent">ACCENT</button>
-            <button mat-raised-button color="warn">WARN</button>
-        </div>
-
-        <div class="commit-view-container" fxFlex="0 1 300px">
-            <app-commit-view></app-commit-view>
-        </div>
+        <app-commit-view fxFlex="0 0 300px"></app-commit-view>
     </div>
 
     <app-footer></app-footer>

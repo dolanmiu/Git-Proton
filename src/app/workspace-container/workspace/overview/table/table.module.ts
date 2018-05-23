@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { MaterialModule } from 'app/material.module';
 import { BottomLeftComponent } from './element/bottom-left/bottom-left.component';
@@ -13,7 +14,7 @@ import { VerticalComponent } from './element/vertical/vertical.component';
 import { TableComponent } from './table.component';
 
 @NgModule({
-    imports: [CommonModule, MaterialModule],
+    imports: [CommonModule, MaterialModule, InfiniteScrollModule],
     declarations: [
         TableComponent,
         ElementComponent,

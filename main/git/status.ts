@@ -5,7 +5,7 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
     nodegit.Repository.open(directory).then((repo) => {
         repo.getStatus().then((statuses) => {
             // tslint:disable-next-line:no-any
-            function statusToText(status: any): string {
+            function statusToText(status: any): StatusChangeType {
                 if (status.isNew()) {
                     return 'NEW';
                 }
@@ -21,18 +21,20 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
                 if (status.isIgnored()) {
                     return 'IGNORED';
                 }
+                if (status.isDeleted()) {
+                    return 'DELETED';
+                }
             }
-
-            statuses.forEach((file) => {
-                console.log(file.path() + ' ' + statusToText(file));
-            });
 
             fn(
                 statuses.map((status) => {
+                    const statusText = status.status()[0];
+
                     return {
-                        path: status.path(),
-                        status: statusToText(status),
-                    };
+                        changeType: statusToText(status),
+                        status: statusText || 'UNKNOWN',
+                        isStaged: statusText.split('_')[0] === 'INDEX' ? true : false,
+                    } as StatusData;
                 }),
             );
         });
