@@ -29,22 +29,8 @@ export default function walk(directory: string, fn: (data: StatusData[]) => void
             fn(
                 statuses.map((status) => {
                     const statusText = status.status()[0];
-                    console.log('status');
-                    console.log(status.hunks());
-                    status.hunks().then((hunks) => {
-                        hunks.forEach((hunk) => {
-                            hunk.lines().then((lines) => {
-                                console.log('diff', status.oldFile().path(), status.newFile().path());
-                                console.log(hunk.header().trim());
-                                lines.forEach((line) => {
-                                    console.log(String.fromCharCode(line.origin()) + line.content().trim());
-                                });
-                            });
-                        });
-                    });
 
                     return {
-                        path: status.path(),
                         changeType: statusToText(status),
                         status: statusText || 'UNKNOWN',
                         isStaged: statusText.split('_')[0] === 'INDEX' ? true : false,

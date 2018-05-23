@@ -13,12 +13,22 @@ import { getCurrentProject } from 'app/store';
 export class TableComponent {
     public displayedColumns = ['description', 'date', 'name', 'sha'];
     public dataSource$: Observable<GitCommitModel[]>;
+    private allCommits$: Observable<GitCommitModel>;
+    private takeCount: number;
 
     constructor(store: Store<AppState>) {
-        this.dataSource$ = store.select(getCurrentProject).map((project) => (project ? project.commits : []));
+        this.takeCount = 30;
+        this.allCommits$ = store
+            .select(getCurrentProject)
+            .map((project) => project.commits)
+            .flatMap((commits) => commits);
+
+        this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
     }
 
     public onScroll(): void {
+        this.takeCount += 30;
+        this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
         console.log('scrolled');
     }
 }

@@ -19,8 +19,14 @@ declare enum StatusType {
 }
 
 interface StatusData {
-    path: string;
     changeType: StatusChangeType;
     status: StatusType;
     isStaged: boolean;
+    oldFile: {
+        path: string;
+    };
+    newFile: {
+        path: string;
+    };
+    hunks: any;
 }
