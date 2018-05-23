@@ -1,5 +1,4 @@
 [![Chat on Gitter][gitter-image]][gitter-url]
-[![Dependency Status][gemnasium-image]][gemnasium-url]
 [![dependencies Status][daviddm-image]][daviddm-url]
 [![Build Status][travis-image]][travis-url]
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
@@ -49,9 +48,6 @@ Made with 💖
 
 [gitter-image]: https://badges.gitter.im/dolanmiu/awesome-alexa.svg
 [gitter-url]: https://gitter.im/awesome-alexa/Lobby
-
-[gemnasium-image]: https://gemnasium.com/badges/github.com/dolanmiu/Git-Proton.svg
-[gemnasium-url]: https://gemnasium.com/github.com/dolanmiu/Git-Proton
 
 [travis-image]: https://travis-ci.org/dolanmiu/Git-Proton.svg?branch=master
 [travis-url]: https://travis-ci.org/dolanmiu/Git-Proton
