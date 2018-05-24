@@ -25,22 +25,19 @@ export class GitService extends ElectronSwitchService {
             });
 
             this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
+                console.log('dispatching commit');
                 store.dispatch(new SetStatusesAction(data.projectName, data.statuses));
             });
 
             this.ipcRenderer.on('references', (event, data: ReferenceIPCData) => {
+                console.log('dispatching ref');
                 store.dispatch(new SetReferencesAction(data.projectName, data.references));
             });
         }
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
             (directory) => {
-                console.log(directory);
-
                 this.fs.stat(`${directory}/.git`, (err, stats) => {
-                    console.log(err);
-                    console.log(stats);
-
                     if (err || !stats.isDirectory()) {
                         throw new Error(`${directory} is not a Git project`);
                     }

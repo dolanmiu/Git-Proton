@@ -17,7 +17,6 @@ export class BranchViewComponent implements OnInit {
             if (!project) {
                 return [];
             }
-            console.log(project.references);
             return project.references;
         });
     }

@@ -1,6 +1,7 @@
 import * as ProjectsActions from './projects.actions';
 
 export function projectsReducer(state: ProjectsState = {}, action: ProjectsActions.Actions): ProjectsState {
+    console.log(action);
     switch (action.type) {
         case ProjectsActions.ProjectsActionTypes.AddProject:
             return {
@@ -15,28 +16,32 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
             };
         case ProjectsActions.ProjectsActionTypes.AddCommit:
             const commits = [...state[action.projectName].commits, action.commit];
-            // TODO make it immutable
-            state[action.projectName].commits = commits;
 
-            return state;
+            return {
+                ...state,
+                [action.projectName]: {
+                    ...state[action.projectName],
+                    commits: commits,
+                },
+            };
         case ProjectsActions.ProjectsActionTypes.SetStatuses:
             state[action.projectName].statuses = action.statuses;
 
-            console.log(state[action.projectName].statuses);
-
-            // return {
-            //     ...state,
-            //     [action.projectName]: {
-            //         ...state[action.projectName],
-            //         statuses: action.statuses,
-            //     },
-            // };
-
-            return state;
+            return {
+                ...state,
+                [action.projectName]: {
+                    ...state[action.projectName],
+                    statuses: action.statuses,
+                },
+            };
         case ProjectsActions.ProjectsActionTypes.SetReferences:
-            state[action.projectName].references = action.references;
-
-            return state;
+            return {
+                ...state,
+                [action.projectName]: {
+                    ...state[action.projectName],
+                    references: action.references,
+                },
+            };
         default:
             return state;
     }

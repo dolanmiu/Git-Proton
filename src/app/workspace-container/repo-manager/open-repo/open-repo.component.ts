@@ -17,7 +17,6 @@ export class OpenRepoComponent implements OnInit {
 
     public openDialog(): void {
         this.dialogService.openDialog((folderDetails) => {
-            console.log(folderDetails);
             this.store.dispatch(new AddProjectAction(folderDetails.name, folderDetails.path));
             this.gitService.getCommits(folderDetails.path);
         });

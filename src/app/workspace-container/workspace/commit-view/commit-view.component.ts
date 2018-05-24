@@ -20,7 +20,6 @@ export class CommitViewComponent implements OnInit {
             if (!project) {
                 return [];
             }
-            console.log(project.statuses);
             return project.statuses;
         });
 

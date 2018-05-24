@@ -17,7 +17,6 @@ export class CloseButtonComponent implements OnInit {
 
     @HostListener('click', ['$event'])
     public onClick(e: Event): void {
-        console.log(e);
         this.store.dispatch(new RemoveProjectAction(this.projectName));
         event.stopPropagation();
     }

@@ -29,6 +29,5 @@ export class TableComponent {
     public onScroll(): void {
         this.takeCount += 30;
         this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
-        console.log('scrolled');
     }
 }

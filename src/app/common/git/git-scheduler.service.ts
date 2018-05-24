@@ -20,7 +20,7 @@ export class GitSchedulerService {
 
     public start(): void {
         Observable.interval(10000)
-            .switchMap(() => this.store.select(getUnselectedProjectsArray))
+            .switchMap(() => this.store.select(getUnselectedProjectsArray).take(1))
             .flatMap((arr) => arr)
             .do((project) => {
                 this.poll(project);
@@ -28,7 +28,7 @@ export class GitSchedulerService {
             .subscribe();
 
         Observable.interval(1000)
-            .switchMap(() => this.store.select(getCurrentProject))
+            .switchMap(() => this.store.select(getCurrentProject).take(1))
             .do((project) => {
                 console.log('scheduling');
                 if (!project) {
