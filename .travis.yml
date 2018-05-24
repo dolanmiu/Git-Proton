@@ -22,6 +22,7 @@ script:
 - npm run ng test -- --watch=false
 - npm run style
 - npm run spell
+- npm run build.electron.after
 # - npm run e2e
 - npm run build
 after_success:
