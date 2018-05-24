@@ -21,20 +21,22 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
-            status(projectDetails.path).then((statuses) => {});
+            status(projectDetails.path)
+                .then((statuses) => {})
+                .catch(console.error);
         });
 
         ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
-            getReferences(projectDetails.path, (references) => {
+            getReferences(projectDetails.path).then((references) => {
                 event.sender.send('references', {
                     projectName: projectDetails.name,
                     references: references,
                 } as ReferenceIPCData);
-            });
+            }).catch(console.error);
         });
 
         ipcMain.on('fetch', (event, projectDetails: ProjectPathDetails) => {
-            fetch(projectDetails.path);
+            fetch(projectDetails.path).catch(console.error);
         });
 
         ipcMain.on('fetch-all', (event, projectDetails: ProjectPathDetails) => {
