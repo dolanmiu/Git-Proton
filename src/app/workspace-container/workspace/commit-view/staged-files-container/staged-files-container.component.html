@@ -2,6 +2,6 @@
 
 <ng-container *ngFor="let file of files">
     <div>
-        <button (click)="unstageFile(file)">+</button> {{file.path}}
+        <button (click)="unstageFile(file)">+</button> {{file.newFile.path}}
     </div>
 </ng-container>

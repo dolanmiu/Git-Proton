@@ -21,7 +21,7 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
-            // status(projectDetails.path, (statuses) => {});
+            status(projectDetails.path).then((statuses) => {});
         });
 
         ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
@@ -56,13 +56,16 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('diff', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            diff(projectDetails.path).then((statuses) => {
-                console.log('status response');
-                event.sender.send('statuses', {
-                    projectName: projectDetails.name,
-                    statuses: statuses,
-                } as StatusIPCData);
-            });
+            diff(projectDetails.path)
+                .then((statuses) => {
+                    event.sender.send('statuses', {
+                        projectName: projectDetails.name,
+                        statuses: statuses,
+                    } as StatusIPCData);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
         });
     }
 }
