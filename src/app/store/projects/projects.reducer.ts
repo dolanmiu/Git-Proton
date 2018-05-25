@@ -1,7 +1,6 @@
 import * as ProjectsActions from './projects.actions';
 
 export function projectsReducer(state: ProjectsState = {}, action: ProjectsActions.Actions): ProjectsState {
-    console.log(action);
     switch (action.type) {
         case ProjectsActions.ProjectsActionTypes.AddProject:
             return {

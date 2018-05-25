@@ -30,7 +30,6 @@ export class GitSchedulerService {
         Observable.interval(1000)
             .switchMap(() => this.store.select(getCurrentProject).take(1))
             .do((project) => {
-                console.log('scheduling');
                 if (!project) {
                     return;
                 }
