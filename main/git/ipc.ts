@@ -17,7 +17,7 @@ export class NodeGitIPC {
                     projectName: projectDetails.name,
                     commit: data,
                 } as CommitIPCData);
-            });
+            }).then().catch(console.error);
         });
 
         ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
