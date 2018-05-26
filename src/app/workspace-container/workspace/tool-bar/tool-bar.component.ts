@@ -15,8 +15,12 @@ export class ToolBarComponent implements OnInit {
     public ngOnInit(): void {}
 
     public createBranch(): void {
-        this.store.select(getCurrentProject).do((project) => {
-            this.gitReferenceService.createBranch(project.path, 'test');
-        });
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitReferenceService.createBranch(project.path, 'test');
+            })
+            .take(1)
+            .subscribe();
     }
 }
