@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { GitReferenceService } from 'app/common/git/git-reference.service';
+import { getCurrentProject } from '../../../store';
 
 @Component({
     selector: 'app-tool-bar',
@@ -6,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    constructor() {}
+    constructor(private store: Store<AppState>, private gitReferenceService: GitReferenceService) {}
 
     public ngOnInit(): void {}
+
+    public createBranch(): void {
+        this.store.select(getCurrentProject).do((project) => {
+            this.gitReferenceService.createBranch(project.path, 'test');
+        });
+    }
 }

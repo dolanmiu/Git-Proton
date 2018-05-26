@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 
+import branch from './branch';
 import { fetch, fetchAll } from './fetch';
 import commit from './git-commit';
 import diff from './git-diff';
@@ -55,6 +56,10 @@ export class NodeGitIPC {
 
         ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, files: string[]) => {
             commit(projectDetails.path, '', '', () => {});
+        });
+
+        ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, branchName: string) => {
+            branch(projectDetails.path, branchName).then((reference) => {}).catch(console.error);
         });
 
         ipcMain.on('diff', (event, projectDetails: ProjectPathDetails, files: string[]) => {

@@ -9,6 +9,7 @@ import { ProjectPathService } from '../project-path.service';
 export class GitReferenceService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private createBranchSwitcheroo: ElectronSwitcheroo<void, string, string>;
 
     constructor(private projectPathService: ProjectPathService) {
         super();
@@ -24,9 +25,22 @@ export class GitReferenceService extends ElectronSwitchService {
             },
             (directory) => {},
         );
+
+        this.createBranchSwitcheroo = new ElectronSwitcheroo(
+            (directory, branchName) => {
+                const projectDetails = this.projectPathService.getProjectDetails(directory);
+
+                this.ipcRenderer.send('create-branch', projectDetails, branchName);
+            },
+            (directory, branchName) => {},
+        );
     }
 
     public getBranches(path: string): void {
         this.ipcRendererSwitcheroo.execute(path);
+    }
+
+    public createBranch(path: string, branchName: string): void {
+        this.createBranchSwitcheroo.execute(path, branchName);
     }
 }
