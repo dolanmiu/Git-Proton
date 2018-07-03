@@ -20,7 +20,7 @@ export class ToolBarComponent implements OnInit {
             .do((project) => {
                 this.gitReferenceService.createBranch(project.path, 'test');
             })
-            .take(1)
+            .take(2)
             .subscribe();
     }
 }

@@ -11,7 +11,7 @@ export class GitStagingService extends ElectronSwitchService {
     private stageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
     private unstageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
 
-    constructor(private projectPathService: ProjectPathService) {
+    constructor(projectPathService: ProjectPathService) {
         super();
 
         if (this.IsElectron) {
@@ -20,7 +20,7 @@ export class GitStagingService extends ElectronSwitchService {
 
         this.stageSwitcheroo = new ElectronSwitcheroo(
             (directory, files) => {
-                const projectDetails = this.projectPathService.getProjectDetails(directory);
+                const projectDetails = projectPathService.getProjectDetails(directory);
 
                 this.ipcRenderer.send('stage', projectDetails, files);
             },
@@ -29,7 +29,7 @@ export class GitStagingService extends ElectronSwitchService {
 
         this.unstageSwitcheroo = new ElectronSwitcheroo(
             (directory, files) => {
-                const projectDetails = this.projectPathService.getProjectDetails(directory);
+                const projectDetails = projectPathService.getProjectDetails(directory);
 
                 this.ipcRenderer.send('unstage', projectDetails, files);
             },

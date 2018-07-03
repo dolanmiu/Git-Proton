@@ -10,7 +10,7 @@ export class GitDiffService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
-    constructor(private projectPathService: ProjectPathService) {
+    constructor(projectPathService: ProjectPathService) {
         super();
 
         if (this.IsElectron) {
@@ -19,7 +19,7 @@ export class GitDiffService extends ElectronSwitchService {
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
             (directory) => {
-                const projectDetails = this.projectPathService.getProjectDetails(directory);
+                const projectDetails = projectPathService.getProjectDetails(directory);
 
                 this.ipcRenderer.send('diff', projectDetails);
             },

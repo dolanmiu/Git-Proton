@@ -6,10 +6,10 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
-export class GitReferenceService extends ElectronSwitchService {
+export class GitStashService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private getBranchesSwitcheroo: ElectronSwitcheroo<void, string>;
-    private createBranchSwitcheroo: ElectronSwitcheroo<void, string, string>;
+    private stashSwitcheroo: ElectronSwitcheroo<void, string>;
+    private popSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(projectPathService: ProjectPathService) {
         super();
@@ -17,30 +17,31 @@ export class GitReferenceService extends ElectronSwitchService {
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
         }
-        this.getBranchesSwitcheroo = new ElectronSwitcheroo(
+
+        this.stashSwitcheroo = new ElectronSwitcheroo(
             (directory) => {
                 const projectDetails = projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('get-references', projectDetails);
+                this.ipcRenderer.send('stash', projectDetails);
             },
             (directory) => {},
         );
 
-        this.createBranchSwitcheroo = new ElectronSwitcheroo(
-            (directory, branchName) => {
+        this.popSwitcheroo = new ElectronSwitcheroo(
+            (directory) => {
                 const projectDetails = projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('create-branch', projectDetails, branchName);
+                this.ipcRenderer.send('pop', projectDetails);
             },
-            (directory, branchName) => {},
+            (directory) => {},
         );
     }
 
-    public getBranches(path: string): void {
-        this.getBranchesSwitcheroo.execute(path);
+    public stash(path: string): void {
+        this.stashSwitcheroo.execute(path);
     }
 
-    public createBranch(path: string, branchName: string): void {
-        this.createBranchSwitcheroo.execute(path, branchName);
+    public pop(path: string): void {
+        this.popSwitcheroo.execute(path);
     }
 }

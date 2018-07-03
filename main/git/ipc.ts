@@ -7,6 +7,7 @@ import diff from './git-diff';
 import stage from './git-stage';
 import unstage from './git-unstage';
 import getReferences from './references';
+import { pop, stash } from './stash';
 import status from './status';
 import walk from './walk';
 
@@ -73,6 +74,14 @@ export class NodeGitIPC {
                 .catch((err) => {
                     console.error(err);
                 });
+        });
+
+        ipcMain.on('stash', (event, projectDetails: ProjectPathDetails) => {
+            stash(projectDetails.path).then((oid) => {}).catch(console.error);
+        });
+
+        ipcMain.on('stash', (event, projectDetails: ProjectPathDetails) => {
+            pop(projectDetails.path).then((result) => {}).catch(console.error);
         });
     }
 }
