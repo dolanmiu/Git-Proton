@@ -3,45 +3,40 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitPushService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private pushViaSshSwitcheroo: ElectronSwitcheroo<void, string, string, string>;
-    private pushViaHttpSwitcheroo: ElectronSwitcheroo<void, string, string, string, string>;
+    private pushViaSshSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
+    private pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
         }
         this.pushViaSshSwitcheroo = new ElectronSwitcheroo(
-            (directory, remoteName, gitUrl) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('push-via-ssh', projectDetails, remoteName, gitUrl);
+            (projectState, remoteName, gitUrl) => {
+                this.ipcRenderer.send('push-via-ssh', projectState, remoteName, gitUrl);
             },
             (directory) => {},
         );
 
         this.pushViaHttpSwitcheroo = new ElectronSwitcheroo(
-            (directory, origin, userName, password) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('push-via-http', projectDetails, origin, userName, password);
+            (projectState, origin, userName, password) => {
+                this.ipcRenderer.send('push-via-http', projectState, origin, userName, password);
             },
             (directory) => {},
         );
     }
 
-    public pushViaSsh(project: ProjectState): void {
-        this.pushViaSshSwitcheroo.execute(project.path, 'origin', 'git@github.com:dolanmiu/test-repo.git');
+    public pushViaSsh(projectState: ProjectState): void {
+        this.pushViaSshSwitcheroo.execute(projectState, 'origin', 'git@github.com:dolanmiu/test-repo.git');
         // this.pushViaSshSwitcheroo.execute(project.path, 'origin', project.urls.git);
     }
 
-    public pushViaHttp(project: ProjectState): void {
-        this.pushViaHttpSwitcheroo.execute(project.path, 'origin', 'dolanmiu', 'password');
+    public pushViaHttp(projectState: ProjectState): void {
+        this.pushViaHttpSwitcheroo.execute(projectState, 'origin', 'dolanmiu', 'password');
     }
 }

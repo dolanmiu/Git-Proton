@@ -14,6 +14,7 @@ export class CommitViewComponent implements OnInit {
     public statuses$: Observable<StatusData[]>;
     public unstagedFiles$: Observable<StatusData[]>;
     public stagedFiles$: Observable<StatusData[]>;
+    public message: string;
 
     constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
         this.statuses$ = store.select(getCurrentProject).map((project) => {
@@ -38,7 +39,7 @@ export class CommitViewComponent implements OnInit {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitCommitService.commit(project.path);
+                this.gitCommitService.commit(project, 'Dolan Dolan', 'dolan@dolan.com', this.message);
             })
             .take(1)
             .subscribe();

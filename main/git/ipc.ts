@@ -56,8 +56,8 @@ export class NodeGitIPC {
             unstage(projectDetails.path, files, () => {});
         });
 
-        ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            commit(projectDetails.path, '', '', () => {});
+        ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, name: string, email: string, message: string) => {
+            commit(projectDetails.path, name, email, message, () => {});
         });
 
         ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, branchName: string) => {

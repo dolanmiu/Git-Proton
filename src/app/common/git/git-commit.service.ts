@@ -3,14 +3,13 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitCommitService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
@@ -18,16 +17,15 @@ export class GitCommitService extends ElectronSwitchService {
         }
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
+            (projectState, name, email, message) => {
 
-                this.ipcRenderer.send('commit', projectDetails, 'John Doe', 'john_doe@gmail.com', 'Test');
+                this.ipcRenderer.send('commit', projectState, name, email, message);
             },
             (directory) => {},
         );
     }
 
-    public commit(path: string): void {
-        this.ipcRendererSwitcheroo.execute(path);
+    public commit(projectState: ProjectState, name: string, email: string, message: string): void {
+        this.ipcRendererSwitcheroo.execute(projectState, name, email, message);
     }
 }
