@@ -80,7 +80,7 @@ export class NodeGitIPC {
             stash(projectDetails.path).then((oid) => {}).catch(console.error);
         });
 
-        ipcMain.on('stash', (event, projectDetails: ProjectPathDetails) => {
+        ipcMain.on('pop', (event, projectDetails: ProjectPathDetails) => {
             pop(projectDetails.path).then((result) => {}).catch(console.error);
         });
     }

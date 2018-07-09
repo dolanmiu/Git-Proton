@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { GitReferenceService } from 'app/common/git/git-reference.service';
+import { GitStashService } from 'app/common/git/git-stash.service';
 import { getCurrentProject } from '../../../store';
 
 @Component({
@@ -10,7 +11,11 @@ import { getCurrentProject } from '../../../store';
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    constructor(private store: Store<AppState>, private gitReferenceService: GitReferenceService) {}
+    constructor(
+        private store: Store<AppState>,
+        private gitReferenceService: GitReferenceService,
+        private gitStashService: GitStashService,
+    ) {}
 
     public ngOnInit(): void {}
 
@@ -20,7 +25,27 @@ export class ToolBarComponent implements OnInit {
             .do((project) => {
                 this.gitReferenceService.createBranch(project.path, 'test');
             })
-            .take(2)
+            .take(1)
+            .subscribe();
+    }
+
+    public stash(): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitStashService.stash(project.path);
+            })
+            .take(1)
+            .subscribe();
+    }
+
+    public pop(): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitStashService.pop(project.path);
+            })
+            .take(1)
             .subscribe();
     }
 }

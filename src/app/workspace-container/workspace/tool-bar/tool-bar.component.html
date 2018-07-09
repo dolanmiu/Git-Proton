@@ -21,9 +21,14 @@
         <span>Branch</span>
     </button>
 
-    <button mat-button color="accent">
+    <button mat-button color="accent" (click)="stash()">
         <mat-icon>favorite</mat-icon>
         <span>Stash</span>
+    </button>
+
+    <button mat-button color="accent" (click)="pop()">
+        <mat-icon>favorite</mat-icon>
+        <span>Pop</span>
     </button>
 
     <button mat-button color="accent">
