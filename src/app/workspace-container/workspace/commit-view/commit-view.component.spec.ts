@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +19,7 @@ describe('CommitViewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [CommitViewComponent, StagedFilesContainerComponent, UnstagedFilesContainerComponent],
-            imports: [NoopAnimationsModule, MaterialModule],
+            imports: [FormsModule, NoopAnimationsModule, MaterialModule],
             providers: [
                 GitStagingService,
                 GitCommitService,
