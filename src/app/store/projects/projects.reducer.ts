@@ -5,7 +5,16 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
         case ProjectsActions.ProjectsActionTypes.AddProject:
             return {
                 ...state,
-                [action.projectName]: { name: action.projectName, path: action.projectPath, commits: [], statuses: [], references: [] },
+                [action.projectName]: {
+                    name: action.projectName,
+                    path: action.projectPath,
+                    commits: [],
+                    statuses: [],
+                    references: [],
+                    urls: {
+                        git: '',
+                    },
+                },
             };
         case ProjectsActions.ProjectsActionTypes.RemoveProject:
             const { [action.projectName]: project, ...rest } = state;

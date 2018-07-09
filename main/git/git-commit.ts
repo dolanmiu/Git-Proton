@@ -10,8 +10,8 @@ export default function commit(directory: string, oid: string, message: string, 
                 return repo.getCommit(head);
             })
             .then((parent) => {
-                const author = nodegit.Signature.create('Scott Chacon', 'schacon@gmail.com', epochSeconds, 0);
-                const committer = nodegit.Signature.create('Scott A Chacon', 'scott@github.com', epochSeconds, 0);
+                const author = nodegit.Signature.create('Dolan Miu', 'dolan_miu@hotmail.com', epochSeconds, 0);
+                const committer = nodegit.Signature.create('Dolan Miu', 'dolan_miu@hotmail.com', epochSeconds, 0);
 
                 // return repo.createCommit('HEAD', author, committer, 'message', oid, [parent]);
                 return repo.createCommitOnHead([], author, committer, 'message');

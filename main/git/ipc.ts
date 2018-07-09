@@ -6,6 +6,7 @@ import commit from './git-commit';
 import diff from './git-diff';
 import stage from './git-stage';
 import unstage from './git-unstage';
+import { pushViaSsh, pushViaHttp } from './push';
 import getReferences from './references';
 import { pop, stash } from './stash';
 import status from './status';
@@ -82,6 +83,14 @@ export class NodeGitIPC {
 
         ipcMain.on('pop', (event, projectDetails: ProjectPathDetails) => {
             pop(projectDetails.path).then((result) => {}).catch(console.error);
+        });
+
+        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, remoteName: string, gitUrl: string) => {
+            pushViaSsh(projectDetails.path, remoteName, gitUrl).then((result) => {}).catch(console.error);
+        });
+
+        ipcMain.on('push-via-http', (event, projectDetails: ProjectPathDetails, remoteName: string, userName: string, password: string) => {
+            pushViaHttp(projectDetails.path, remoteName, userName, password).then((result) => {}).catch(console.error);
         });
     }
 }

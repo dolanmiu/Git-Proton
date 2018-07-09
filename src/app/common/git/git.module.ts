@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { GitCommitService } from './git-commit.service';
 import { GitDiffService } from './git-diff.service';
 import { GitFetchService } from './git-fetch.service';
+import { GitPushService } from './git-push.service';
 import { GitReferenceService } from './git-reference.service';
 import { GitSchedulerService } from './git-scheduler.service';
 import { GitStashService } from './git-stash.service';
@@ -23,6 +24,7 @@ import { TreeModule } from './tree/tree.module';
         GitCommitService,
         GitDiffService,
         GitStashService,
+        GitPushService,
     ],
 })
 export class GitModule {}

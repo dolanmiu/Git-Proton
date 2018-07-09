@@ -4,4 +4,7 @@ interface ProjectState {
     commits: GitCommitModel[];
     statuses: StatusData[];
     references: ReferenceData[];
+    urls: {
+        git: string;
+    };
 }
