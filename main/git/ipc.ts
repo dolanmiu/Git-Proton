@@ -6,7 +6,7 @@ import commit from './git-commit';
 import diff from './git-diff';
 import stage from './git-stage';
 import unstage from './git-unstage';
-import { pushViaSsh, pushViaHttp } from './push';
+import { pushViaHttp, pushViaSsh } from './push';
 import getReferences from './references';
 import { pop, stash } from './stash';
 import status from './status';
