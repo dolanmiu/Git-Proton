@@ -1,23 +1,23 @@
 import * as nodegit from 'nodegit';
 
 // tslint:disable-next-line:no-any
-function statusToText(status: any): StatusChangeType {
-    if (status.isModified()) {
-        return 'MODIFIED';
-    }
-    if (status.isTypechange()) {
-        return 'TYPECHANGE';
-    }
-    if (status.isRenamed()) {
-        return 'RENAMED';
-    }
-    if (status.isIgnored()) {
-        return 'IGNORED';
-    }
-    if (status.isDeleted()) {
-        return 'DELETED';
-    }
-}
+// function statusToText(status: any): StatusChangeType {
+//     if (status.isModified()) {
+//         return 'MODIFIED';
+//     }
+//     if (status.isTypechange()) {
+//         return 'TYPECHANGE';
+//     }
+//     if (status.isRenamed()) {
+//         return 'RENAMED';
+//     }
+//     if (status.isIgnored()) {
+//         return 'IGNORED';
+//     }
+//     if (status.isDeleted()) {
+//         return 'DELETED';
+//     }
+// }
 
 // This function finds the diff. Similar to 'git show'
 async function diffWorkdir(directory: string): Promise<StatusData[]> {
