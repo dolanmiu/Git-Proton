@@ -6,7 +6,6 @@
 
 # GitProton
 
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
 ## Development server
@@ -42,21 +41,21 @@ For MacOS, you need `libgcrypt` for `nodegit` to install, https://github.com/nod
 $ brew install libgcrypt
 ```
 
------
+## Quirks
+
+`webpack-cli` is needed for `npm run build.electron.after` to work, as webpack migrated their CLI to that package.
+
+---
 
 Made with 💖
 
 [gitter-image]: https://badges.gitter.im/dolanmiu/awesome-alexa.svg
 [gitter-url]: https://gitter.im/awesome-alexa/Lobby
-
 [travis-image]: https://travis-ci.org/dolanmiu/Git-Proton.svg?branch=master
 [travis-url]: https://travis-ci.org/dolanmiu/Git-Proton
-
 [daviddm-image]: https://david-dm.org/dolanmiu/Git-Proton/status.svg
 [daviddm-url]: https://david-dm.org/dolanmiu/Git-Proton
-
 [greenkeeper-image]: https://badges.greenkeeper.io/dolanmiu/Git-Proton.svg
 [greenkeeper-url]: https://greenkeeper.io/
-
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
