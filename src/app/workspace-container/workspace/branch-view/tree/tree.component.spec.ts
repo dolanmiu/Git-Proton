@@ -1,21 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { TreeModule } from 'angular-tree-component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { MaterialModule } from 'app/material.module';
-import { BranchViewComponent } from './branch-view.component';
-import { TreeComponent } from './tree/tree.component';
+import { TreeComponent } from './tree.component';
 
-describe('BranchViewComponent', () => {
-    let component: BranchViewComponent;
-    let fixture: ComponentFixture<BranchViewComponent>;
+describe('TreeComponent', () => {
+    let component: TreeComponent;
+    let fixture: ComponentFixture<TreeComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [BranchViewComponent, TreeComponent],
-            imports: [NoopAnimationsModule, MaterialModule, TreeModule],
+            declarations: [TreeComponent],
+            imports: [TreeModule],
             providers: [
                 {
                     provide: Store,
@@ -28,7 +25,7 @@ describe('BranchViewComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(BranchViewComponent);
+        fixture = TestBed.createComponent(TreeComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

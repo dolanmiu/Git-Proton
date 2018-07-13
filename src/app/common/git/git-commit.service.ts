@@ -18,7 +18,6 @@ export class GitCommitService extends ElectronSwitchService {
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
             (projectState, name, email, message) => {
-
                 this.ipcRenderer.send('commit', projectState, name, email, message);
             },
             (directory) => {},

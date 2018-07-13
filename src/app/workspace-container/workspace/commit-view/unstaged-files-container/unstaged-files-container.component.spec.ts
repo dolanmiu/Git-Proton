@@ -10,23 +10,21 @@ describe('UnstagedFilesContainerComponent', () => {
     let component: UnstagedFilesContainerComponent;
     let fixture: ComponentFixture<UnstagedFilesContainerComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [UnstagedFilesContainerComponent],
-                providers: [
-                    GitStagingService,
-                    ProjectPathService,
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [UnstagedFilesContainerComponent],
+            providers: [
+                GitStagingService,
+                ProjectPathService,
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UnstagedFilesContainerComponent);

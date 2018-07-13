@@ -20,7 +20,7 @@ export class TableComponent {
         this.takeCount = 30;
         this.allCommits$ = store
             .select(getCurrentProject)
-            .map((project) => project ? project.commits : [])
+            .map((project) => (project ? project.commits : []))
             .flatMap((commits) => commits);
 
         this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
