@@ -3,37 +3,32 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitReferenceService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private getBranchesSwitcheroo: ElectronSwitcheroo<void, string>;
-    private createBranchSwitcheroo: ElectronSwitcheroo<void, string, string>;
+    private getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
     private checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
         }
         this.getBranchesSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('get-references', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('get-references', project);
             },
-            (directory) => {},
+            (project) => {},
         );
 
         this.createBranchSwitcheroo = new ElectronSwitcheroo(
-            (directory, reference) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('create-branch', projectDetails, reference);
+            (project, reference) => {
+                this.ipcRenderer.send('create-branch', project, reference);
             },
-            (directory, reference) => {},
+            (project, reference) => {},
         );
 
         this.checkoutBranchSwitcheroo = new ElectronSwitcheroo(
@@ -44,12 +39,12 @@ export class GitReferenceService extends ElectronSwitchService {
         );
     }
 
-    public getBranches(path: string): void {
-        this.getBranchesSwitcheroo.execute(path);
+    public getBranches(project: ProjectState): void {
+        this.getBranchesSwitcheroo.execute(project);
     }
 
-    public createBranch(path: string, reference: string): void {
-        this.createBranchSwitcheroo.execute(path, reference);
+    public createBranch(project: ProjectState, reference: string): void {
+        this.createBranchSwitcheroo.execute(project, reference);
     }
 
     public checkoutBranch(project: ProjectState, reference: string): void {

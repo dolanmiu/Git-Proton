@@ -25,7 +25,7 @@ export class ToolBarComponent implements OnInit {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitReferenceService.createBranch(project.path, 'test');
+                this.gitReferenceService.createBranch(project, 'test');
             })
             .take(1)
             .subscribe();

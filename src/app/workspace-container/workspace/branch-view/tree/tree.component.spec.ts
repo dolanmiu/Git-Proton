@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { TreeModule } from 'angular-tree-component';
 import { Observable } from 'rxjs';
 
+import { GitReferenceService } from '../../../../common/git/git-reference.service';
 import { TreeComponent } from './tree.component';
 
 describe('TreeComponent', () => {
@@ -20,6 +21,7 @@ describe('TreeComponent', () => {
                         select: () => Observable.empty(),
                     },
                 },
+                GitReferenceService,
             ],
         }).compileComponents();
     }));

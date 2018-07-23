@@ -1,12 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 
-import { ProjectPathService } from '../project-path.service';
 import { GitReferenceService } from './git-reference.service';
 
 describe('GitReferenceService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [GitReferenceService, ProjectPathService],
+            providers: [GitReferenceService],
         });
     });
 

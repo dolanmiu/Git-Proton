@@ -27,7 +27,7 @@ export class GitSchedulerService {
             })
             .subscribe();
 
-        Observable.interval(1000)
+        Observable.interval(5000)
             .switchMap(() => this.store.select(getCurrentProject).take(1))
             .do((project) => {
                 if (!project) {
@@ -41,7 +41,7 @@ export class GitSchedulerService {
 
     private poll(project: ProjectState): void {
         this.statusService.getStatus(project.path);
-        this.referenceService.getBranches(project.path);
+        this.referenceService.getBranches(project);
         this.gitFetchService.fetch(project.path);
         this.gitDiffService.diff(project.path);
     }
