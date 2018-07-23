@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 
-import branch from './branch';
+import { branch, checkoutBranch } from './branch';
 import { fetch, fetchAll } from './fetch';
 import commit from './git-commit';
 import diff from './git-diff';
@@ -20,7 +20,9 @@ export class NodeGitIPC {
                     projectName: projectDetails.name,
                     commit: data,
                 } as CommitIPCData);
-            }).then().catch(console.error);
+            })
+                .then()
+                .catch(console.error);
         });
 
         ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
@@ -30,12 +32,14 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
-            getReferences(projectDetails.path).then((references) => {
-                event.sender.send('references', {
-                    projectName: projectDetails.name,
-                    references: references,
-                } as ReferenceIPCData);
-            }).catch(console.error);
+            getReferences(projectDetails.path)
+                .then((references) => {
+                    event.sender.send('references', {
+                        projectName: projectDetails.name,
+                        references: references,
+                    } as ReferenceIPCData);
+                })
+                .catch(console.error);
         });
 
         ipcMain.on('fetch', (event, projectDetails: ProjectPathDetails) => {
@@ -60,8 +64,16 @@ export class NodeGitIPC {
             commit(projectDetails.path, name, email, message, () => {});
         });
 
-        ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, branchName: string) => {
-            branch(projectDetails.path, branchName).then((reference) => {}).catch(console.error);
+        ipcMain.on('checkout-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
+            checkoutBranch(projectDetails.path, referenceName)
+                .then((reference) => {})
+                .catch(console.error);
+        });
+
+        ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
+            branch(projectDetails.path, referenceName)
+                .then((reference) => {})
+                .catch(console.error);
         });
 
         ipcMain.on('diff', (event, projectDetails: ProjectPathDetails, files: string[]) => {
@@ -78,19 +90,27 @@ export class NodeGitIPC {
         });
 
         ipcMain.on('stash', (event, projectDetails: ProjectPathDetails) => {
-            stash(projectDetails.path).then((oid) => {}).catch(console.error);
+            stash(projectDetails.path)
+                .then((oid) => {})
+                .catch(console.error);
         });
 
         ipcMain.on('pop', (event, projectDetails: ProjectPathDetails) => {
-            pop(projectDetails.path).then((result) => {}).catch(console.error);
+            pop(projectDetails.path)
+                .then((result) => {})
+                .catch(console.error);
         });
 
         ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, remoteName: string, gitUrl: string) => {
-            pushViaSsh(projectDetails.path, remoteName, gitUrl).then((result) => {}).catch(console.error);
+            pushViaSsh(projectDetails.path, remoteName, gitUrl)
+                .then((result) => {})
+                .catch(console.error);
         });
 
         ipcMain.on('push-via-http', (event, projectDetails: ProjectPathDetails, remoteName: string, userName: string, password: string) => {
-            pushViaHttp(projectDetails.path, remoteName, userName, password).then((result) => {}).catch(console.error);
+            pushViaHttp(projectDetails.path, remoteName, userName, password)
+                .then((result) => {})
+                .catch(console.error);
         });
     }
 }

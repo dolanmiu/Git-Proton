@@ -10,6 +10,7 @@ export class GitReferenceService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private getBranchesSwitcheroo: ElectronSwitcheroo<void, string>;
     private createBranchSwitcheroo: ElectronSwitcheroo<void, string, string>;
+    private checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
 
     constructor(projectPathService: ProjectPathService) {
         super();
@@ -27,12 +28,19 @@ export class GitReferenceService extends ElectronSwitchService {
         );
 
         this.createBranchSwitcheroo = new ElectronSwitcheroo(
-            (directory, branchName) => {
+            (directory, reference) => {
                 const projectDetails = projectPathService.getProjectDetails(directory);
 
-                this.ipcRenderer.send('create-branch', projectDetails, branchName);
+                this.ipcRenderer.send('create-branch', projectDetails, reference);
             },
-            (directory, branchName) => {},
+            (directory, reference) => {},
+        );
+
+        this.checkoutBranchSwitcheroo = new ElectronSwitcheroo(
+            (project, reference) => {
+                this.ipcRenderer.send('checkout-branch', project, reference);
+            },
+            (project, reference) => {},
         );
     }
 
@@ -40,7 +48,11 @@ export class GitReferenceService extends ElectronSwitchService {
         this.getBranchesSwitcheroo.execute(path);
     }
 
-    public createBranch(path: string, branchName: string): void {
-        this.createBranchSwitcheroo.execute(path, branchName);
+    public createBranch(path: string, reference: string): void {
+        this.createBranchSwitcheroo.execute(path, reference);
+    }
+
+    public checkoutBranch(project: ProjectState, reference: string): void {
+        this.checkoutBranchSwitcheroo.execute(project, reference);
     }
 }

@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ITreeOptions, TREE_ACTIONS, TreeNode } from 'angular-tree-component';
 import { Observable } from 'rxjs/Observable';
 
 import { getCurrentProject } from 'app/store';
+import { GitReferenceService } from '../../../../common/git/git-reference.service';
 
 interface NodeData {
     id: number;
     name: string;
     children: NodeData[];
+    reference: string;
 }
 
 @Component({
@@ -17,9 +20,22 @@ interface NodeData {
 })
 export class TreeComponent {
     public nodes$: Observable<NodeData[]>;
-    public options = {};
+    public options: ITreeOptions = {
+        actionMapping: {
+            mouse: {
+                dblClick: (tree, node: TreeNode, $event) => {
+                    if (node.hasChildren) {
+                        TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+                    } else {
+                        console.log(node.data.reference);
+                        this.checkoutBranch(node.data.reference);
+                    }
+                },
+            },
+        },
+    };
 
-    constructor(store: Store<AppState>) {
+    constructor(private store: Store<AppState>, private gitReferenceService: GitReferenceService) {
         this.nodes$ = store
             .select(getCurrentProject)
             .map((project) => {
@@ -27,6 +43,9 @@ export class TreeComponent {
                     return [];
                 }
                 return project.references;
+            })
+            .map((references) => {
+                return references.sort();
             })
             .map((references) => {
                 return references.map((reference) => {
@@ -49,6 +68,7 @@ export class TreeComponent {
             id: currentId,
             name: 'root',
             children: [],
+            reference: 'root',
         };
 
         for (const path of paths) {
@@ -65,6 +85,7 @@ export class TreeComponent {
                         id: ++currentId,
                         name: pathToken,
                         children: [],
+                        reference: path.reference,
                     });
                 }
 
@@ -92,5 +113,15 @@ export class TreeComponent {
         }
 
         throw Error(`${key} is not found`);
+    }
+
+    private checkoutBranch(reference: string): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitReferenceService.checkoutBranch(project, reference);
+            })
+            .take(1)
+            .subscribe();
     }
 }
