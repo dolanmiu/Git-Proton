@@ -8,8 +8,8 @@ import { ProjectPathService } from '../project-path.service';
 @Injectable()
 export class GitStagingService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private stageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
-    private unstageSwitcheroo: ElectronSwitcheroo<void, string, string[]>;
+    private stageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
+    private unstageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
 
     constructor(projectPathService: ProjectPathService) {
         super();
@@ -19,29 +19,25 @@ export class GitStagingService extends ElectronSwitchService {
         }
 
         this.stageSwitcheroo = new ElectronSwitcheroo(
-            (directory, files) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('stage', projectDetails, files);
+            (project, files) => {
+                this.ipcRenderer.send('stage', project, files);
             },
-            (directory, files) => {},
+            (project, files) => {},
         );
 
         this.unstageSwitcheroo = new ElectronSwitcheroo(
-            (directory, files) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('unstage', projectDetails, files);
+            (project, files) => {
+                this.ipcRenderer.send('unstage', project, files);
             },
-            (directory, files) => {},
+            (project, files) => {},
         );
     }
 
-    public stage(path: string, files: string[]): void {
-        this.stageSwitcheroo.execute(path, files);
+    public stage(project: ProjectState, files: string[]): void {
+        this.stageSwitcheroo.execute(project, files);
     }
 
-    public unstage(path: string, files: string[]): void {
-        this.unstageSwitcheroo.execute(path, files);
+    public unstage(project: ProjectState, files: string[]): void {
+        this.unstageSwitcheroo.execute(project, files);
     }
 }

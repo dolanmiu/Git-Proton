@@ -18,7 +18,7 @@ export class UnstagedFilesContainerComponent {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitStagingService.stage(project.path, [file.newFile.path]);
+                this.gitStagingService.stage(project, [file.newFile.path]);
             })
             .take(1)
             .subscribe();
