@@ -7,4 +7,5 @@ interface ProjectState {
     urls: {
         git: string;
     };
+    remotes: RemoteData[];
 }

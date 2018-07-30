@@ -14,6 +14,7 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
                     urls: {
                         git: '',
                     },
+                    remotes: [],
                 },
             };
         case ProjectsActions.ProjectsActionTypes.RemoveProject:
@@ -48,6 +49,14 @@ export function projectsReducer(state: ProjectsState = {}, action: ProjectsActio
                 [action.projectName]: {
                     ...state[action.projectName],
                     references: action.references,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.SetRemotes:
+            return {
+                ...state,
+                [action.projectName]: {
+                    ...state[action.projectName],
+                    remotes: action.remotes,
                 },
             };
         default:

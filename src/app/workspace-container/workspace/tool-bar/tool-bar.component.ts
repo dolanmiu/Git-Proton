@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { GitReferenceService } from 'app/common/git/git-reference.service';
 import { GitStashService } from 'app/common/git/git-stash.service';
 import { GitPushService } from '../../../common/git/git-push.service';
+import { GitRemoteService } from '../../../common/git/git-remote.service';
 import { getCurrentProject } from '../../../store';
 
 @Component({
@@ -17,6 +18,7 @@ export class ToolBarComponent implements OnInit {
         private gitReferenceService: GitReferenceService,
         private gitStashService: GitStashService,
         private gitPushService: GitPushService,
+        private gitRemoteService: GitRemoteService,
     ) {}
 
     public ngOnInit(): void {}
@@ -56,6 +58,14 @@ export class ToolBarComponent implements OnInit {
             .select(getCurrentProject)
             .do((project) => {
                 this.gitPushService.pushViaHttp(project);
+            })
+            .take(1)
+            .subscribe();
+
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitRemoteService.getRemotes(project);
             })
             .take(1)
             .subscribe();

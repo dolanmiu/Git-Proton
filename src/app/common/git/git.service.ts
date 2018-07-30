@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
 
-import { AddCommitAction, SetReferencesAction, SetStatusesAction } from 'app/store/projects/projects.actions';
+import { AddCommitAction, SetReferencesAction, SetRemotesAction, SetStatusesAction } from 'app/store/projects/projects.actions';
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
 import { ProjectPathService } from '../project-path.service';
@@ -30,6 +30,10 @@ export class GitService extends ElectronSwitchService {
 
             this.ipcRenderer.on('references', (event, data: ReferenceIPCData) => {
                 store.dispatch(new SetReferencesAction(data.projectName, data.references));
+            });
+
+            this.ipcRenderer.on('remotes', (event, data: RemoteIPCData) => {
+                store.dispatch(new SetRemotesAction(data.projectName, data.remotes));
             });
         }
 

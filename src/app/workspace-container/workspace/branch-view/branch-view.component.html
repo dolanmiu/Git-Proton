@@ -24,3 +24,9 @@
     </mat-expansion-panel>
 </mat-accordion> -->
 <app-tree></app-tree>
+
+<h2>Remotes</h2>
+<div *ngFor="let remote of remotes$ | async">
+    {{remote.name}}
+    {{remote.url}}
+</div>

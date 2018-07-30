@@ -17,3 +17,8 @@ interface FetchIPCData {
     projectName: string;
     fetch: FetchData[];
 }
+
+interface RemoteIPCData {
+    projectName: string;
+    remotes: RemoteData[];
+}

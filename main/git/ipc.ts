@@ -8,6 +8,7 @@ import stage from './git-stage';
 import unstage from './git-unstage';
 import { pushViaHttp, pushViaSsh } from './push';
 import getReferences from './references';
+import { getRemotes } from './remote';
 import { pop, stash } from './stash';
 import status from './status';
 import walk from './walk';
@@ -101,15 +102,30 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, remoteName: string, gitUrl: string) => {
-            pushViaSsh(projectDetails.path, remoteName, gitUrl)
+        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, branchName: string, gitUrl: string) => {
+            pushViaSsh(projectDetails.path, branchName, gitUrl)
                 .then((result) => {})
                 .catch(console.error);
         });
 
-        ipcMain.on('push-via-http', (event, projectDetails: ProjectPathDetails, remoteName: string, userName: string, password: string) => {
-            pushViaHttp(projectDetails.path, remoteName, userName, password)
+        ipcMain.on('push-via-http', (event, projectDetails: ProjectPathDetails, branchName: string, userName: string, password: string) => {
+            pushViaHttp(projectDetails.path, branchName, userName, password)
                 .then((result) => {})
+                .catch(console.error);
+        });
+
+        ipcMain.on('get-remotes', (event, projectDetails: ProjectPathDetails) => {
+            getRemotes(projectDetails.path)
+                .then((result) => {
+                    const remotes: RemoteData[] = result.map((remote) => ({
+                        url: remote.url(),
+                        name: remote.name(),
+                    }));
+                    event.sender.send('remotes', {
+                        projectName: projectDetails.name,
+                        remotes: remotes,
+                    } as RemoteIPCData);
+                })
                 .catch(console.error);
         });
     }

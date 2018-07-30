@@ -6,6 +6,7 @@ export enum ProjectsActionTypes {
     AddCommit = '[Projects] Add Project Commit',
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
+    SetRemotes = '[Projects] SetRemotes',
 }
 
 export class AddProjectAction implements Action {
@@ -38,4 +39,10 @@ export class SetReferencesAction implements Action {
     constructor(public projectName: string, public references: ReferenceData[]) {}
 }
 
-export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction | RemoveProjectAction;
+export class SetRemotesAction implements Action {
+    public readonly type = ProjectsActionTypes.SetRemotes;
+
+    constructor(public projectName: string, public remotes: RemoteData[]) {}
+}
+
+export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction | RemoveProjectAction | SetRemotesAction;

@@ -3,30 +3,27 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitFetchService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
         }
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('fetch', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('fetch', project);
             },
-            (directory) => {},
+            (project) => {},
         );
     }
 
-    public fetch(path: string): void {
-        this.ipcRendererSwitcheroo.execute(path);
+    public fetch(project: ProjectState): void {
+        this.ipcRendererSwitcheroo.execute(project);
     }
 }

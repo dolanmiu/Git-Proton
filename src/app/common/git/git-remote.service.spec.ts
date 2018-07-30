@@ -1,17 +1,17 @@
 import { inject, TestBed } from '@angular/core/testing';
 
-import { GitStatusService } from './git-status.service';
+import { GitRemoteService } from './git-remote.service';
 
-describe('GitStatusService', () => {
+describe('GitRemoteService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [GitStatusService],
+            providers: [GitRemoteService],
         });
     });
 
     it(
         'should be created',
-        inject([GitStatusService], (service: GitStatusService) => {
+        inject([GitRemoteService], (service: GitRemoteService) => {
             expect(service).toBeTruthy();
         }),
     );

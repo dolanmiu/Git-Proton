@@ -3,14 +3,13 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitDiffService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
@@ -18,16 +17,14 @@ export class GitDiffService extends ElectronSwitchService {
         }
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('diff', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('diff', project);
             },
-            (directory) => {},
+            (project) => {},
         );
     }
 
-    public diff(path: string): void {
-        this.ipcRendererSwitcheroo.execute(path);
+    public diff(project: ProjectState): void {
+        this.ipcRendererSwitcheroo.execute(project);
     }
 }

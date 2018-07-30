@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from 'app/common/electron-switch.service';
-import { ProjectPathService } from 'app/common/project-path.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitStatusService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor() {
         super();
 
         if (this.IsElectron) {
@@ -18,16 +17,14 @@ export class GitStatusService extends ElectronSwitchService {
         }
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('get-status', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('get-status', project);
             },
-            (directory) => {},
+            (project) => {},
         );
     }
 
-    public getStatus(path: string): void {
-        this.ipcRendererSwitcheroo.execute(path);
+    public getStatus(project: ProjectState): void {
+        this.ipcRendererSwitcheroo.execute(project);
     }
 }

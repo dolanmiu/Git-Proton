@@ -11,6 +11,7 @@ import { getCurrentProject } from 'app/store';
 })
 export class BranchViewComponent implements OnInit {
     public references$: Observable<ReferenceData[]>;
+    public remotes$: Observable<RemoteData[]>;
 
     constructor(store: Store<AppState>) {
         this.references$ = store.select(getCurrentProject).map((project) => {
@@ -18,6 +19,13 @@ export class BranchViewComponent implements OnInit {
                 return [];
             }
             return project.references;
+        });
+
+        this.remotes$ = store.select(getCurrentProject).map((project) => {
+            if (!project) {
+                return [];
+            }
+            return project.remotes;
         });
     }
 

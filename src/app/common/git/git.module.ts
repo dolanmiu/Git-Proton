@@ -6,6 +6,7 @@ import { GitDiffService } from './git-diff.service';
 import { GitFetchService } from './git-fetch.service';
 import { GitPushService } from './git-push.service';
 import { GitReferenceService } from './git-reference.service';
+import { GitRemoteService } from './git-remote.service';
 import { GitSchedulerService } from './git-scheduler.service';
 import { GitStashService } from './git-stash.service';
 import { GitStatusService } from './git-status.service';
@@ -25,6 +26,7 @@ import { TreeModule } from './tree/tree.module';
         GitDiffService,
         GitStashService,
         GitPushService,
+        GitRemoteService,
     ],
 })
 export class GitModule {}
