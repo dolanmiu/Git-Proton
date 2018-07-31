@@ -15,9 +15,10 @@ export async function getRemotes(directory: string): Promise<any> {
 }
 
 // tslint:disable-next-line:no-any
-// export async function addRemote(directory: string, referenceName: string): Promise<any> {
-//     const repo = await nodegit.Repository.open(directory);
+export async function createRemote(directory: string, name: string, url: string): Promise<any> {
+    const repo = await nodegit.Repository.open(directory);
 
-//     const reference = await repo.checkoutBranch(referenceName);
-//     return reference;
-// }
+    const remote = await nodegit.Remote.create(repo, name, url);
+
+    return remote;
+}

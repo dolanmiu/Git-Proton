@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { getCurrentProject } from 'app/store';
+import { GitRemoteService } from '../../../common/git/git-remote.service';
 
 @Component({
     selector: 'app-branch-view',
@@ -13,7 +14,7 @@ export class BranchViewComponent implements OnInit {
     public references$: Observable<ReferenceData[]>;
     public remotes$: Observable<RemoteData[]>;
 
-    constructor(store: Store<AppState>) {
+    constructor(private store: Store<AppState>, private gitRemoteService: GitRemoteService) {
         this.references$ = store.select(getCurrentProject).map((project) => {
             if (!project) {
                 return [];
@@ -30,4 +31,14 @@ export class BranchViewComponent implements OnInit {
     }
 
     public ngOnInit(): void {}
+
+    public createRemote(): void {
+        this.store
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitRemoteService.createRemote(project, 'dench', 'http://www.dench.com');
+            })
+            .take(1)
+            .subscribe();
+    }
 }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/material.module';
 import { GitReferenceService } from '../../../common/git/git-reference.service';
+import { GitRemoteService } from '../../../common/git/git-remote.service';
 import { BranchViewComponent } from './branch-view.component';
 import { TreeComponent } from './tree/tree.component';
 
@@ -25,6 +26,7 @@ describe('BranchViewComponent', () => {
                     },
                 },
                 GitReferenceService,
+                GitRemoteService
             ],
         }).compileComponents();
     }));

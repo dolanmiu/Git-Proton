@@ -8,7 +8,7 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 export class GitRemoteService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private getRemotesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
-    private setRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
+    private createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
 
     constructor() {
         super();
@@ -25,11 +25,11 @@ export class GitRemoteService extends ElectronSwitchService {
             (project) => {},
         );
 
-        this.setRemoteSwitcheroo = new ElectronSwitcheroo(
-            (project, remoteName) => {
-                this.ipcRenderer.send('set-remote', project, remoteName);
+        this.createRemoteSwitcheroo = new ElectronSwitcheroo(
+            (project, remoteName, url) => {
+                this.ipcRenderer.send('create-remote', project, remoteName, url);
             },
-            (project, remoteName) => {},
+            (project, remoteName, url) => {},
         );
     }
 
@@ -37,7 +37,7 @@ export class GitRemoteService extends ElectronSwitchService {
         this.getRemotesSwitcheroo.execute(project);
     }
 
-    public setRemote(project: ProjectState, remoteName: string): void {
-        this.setRemoteSwitcheroo.execute(project, remoteName);
+    public createRemote(project: ProjectState, remoteName: string, url: string): void {
+        this.createRemoteSwitcheroo.execute(project, remoteName, url);
     }
 }
