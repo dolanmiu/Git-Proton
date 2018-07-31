@@ -3,7 +3,6 @@ import { ipcRenderer } from 'electron';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitStagingService extends ElectronSwitchService {
@@ -11,7 +10,7 @@ export class GitStagingService extends ElectronSwitchService {
     private stageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
     private unstageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
 
-    constructor() {
+    constructor( ) {
         super();
 
         if (this.IsElectron) {
