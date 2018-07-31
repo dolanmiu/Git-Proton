@@ -1,1 +1,6 @@
-<tree-root [nodes]="nodes$ | async" [options]="options"></tree-root>
+<tree-root [nodes]="nodes$ | async" [options]="options">
+    <ng-template #treeNodeTemplate let-node let-index="index">
+        <span [ngClass]="{'active': node.data.reference.isHead}">{{node.data.name}}</span>
+        <button (click)="go($event)">Custom Action</button>
+    </ng-template>
+</tree-root>

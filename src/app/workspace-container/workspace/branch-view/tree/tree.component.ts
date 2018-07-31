@@ -10,7 +10,7 @@ interface NodeData {
     id: number;
     name: string;
     children: NodeData[];
-    reference: string;
+    reference: ReferenceData;
 }
 
 @Component({
@@ -24,11 +24,13 @@ export class TreeComponent {
         actionMapping: {
             mouse: {
                 dblClick: (tree, node: TreeNode, $event) => {
+                    const data = node.data as ReferenceData;
+
                     if (node.hasChildren) {
                         TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
                     } else {
-                        console.log(node.data.reference);
-                        this.checkoutBranch(node.data.reference);
+                        console.log(data.name);
+                        this.checkoutBranch(data.name);
                     }
                 },
             },
@@ -68,7 +70,7 @@ export class TreeComponent {
             id: currentId,
             name: 'root',
             children: [],
-            reference: 'root',
+            reference: undefined,
         };
 
         for (const path of paths) {
@@ -85,7 +87,7 @@ export class TreeComponent {
                         id: ++currentId,
                         name: pathToken,
                         children: [],
-                        reference: path.name,
+                        reference: path,
                     });
                 }
 

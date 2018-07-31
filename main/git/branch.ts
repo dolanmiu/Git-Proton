@@ -17,6 +17,7 @@ export async function checkoutBranch(directory: string, referenceName: string): 
     return reference;
 }
 
+// Maybe not needed
 // tslint:disable-next-line:no-any
 export async function getCurrentBranch(directory: string): Promise<any> {
     const repo = await nodegit.Repository.open(directory);
