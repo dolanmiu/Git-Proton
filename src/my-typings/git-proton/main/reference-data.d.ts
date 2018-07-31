@@ -1,5 +1,5 @@
 interface ReferenceData {
-    reference: string;
+    name: string;
     isBranch: boolean;
     isConcrete: boolean;
     isHead: boolean;

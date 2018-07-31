@@ -32,7 +32,7 @@ export class GitPushService extends ElectronSwitchService {
     }
 
     public pushViaSsh(projectState: ProjectState): void {
-        this.pushViaSshSwitcheroo.execute(projectState, 'origin', 'git@github.com:dolanmiu/test-repo.git');
+        this.pushViaSshSwitcheroo.execute(projectState, 'refs/', 'git@github.com:dolanmiu/test-repo.git');
         // this.pushViaSshSwitcheroo.execute(project.path, 'origin', project.urls.git);
     }
 

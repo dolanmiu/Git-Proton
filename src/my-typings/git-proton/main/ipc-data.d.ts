@@ -8,7 +8,7 @@ interface StatusIPCData {
     statuses: StatusData[];
 }
 
-interface ReferenceIPCData {
+interface ReferencesIPCData {
     projectName: string;
     references: ReferenceData[];
 }
@@ -21,4 +21,9 @@ interface FetchIPCData {
 interface RemoteIPCData {
     projectName: string;
     remotes: RemoteData[];
+}
+
+interface ReferenceIPCData {
+    projectName: string;
+    reference: ReferenceData;
 }

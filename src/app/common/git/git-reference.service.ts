@@ -10,6 +10,7 @@ export class GitReferenceService extends ElectronSwitchService {
     private getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
     private createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
     private checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
+    private getCurrentBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
     constructor() {
         super();
@@ -37,6 +38,13 @@ export class GitReferenceService extends ElectronSwitchService {
             },
             (project, reference) => {},
         );
+
+        this.getCurrentBranchSwitcheroo = new ElectronSwitcheroo(
+            (project) => {
+                this.ipcRenderer.send('get-current-branch', project);
+            },
+            (project) => {},
+        );
     }
 
     public getBranches(project: ProjectState): void {
@@ -49,5 +57,9 @@ export class GitReferenceService extends ElectronSwitchService {
 
     public checkoutBranch(project: ProjectState, reference: string): void {
         this.checkoutBranchSwitcheroo.execute(project, reference);
+    }
+
+    public getCurrentBranch(project: ProjectState): void {
+        this.getCurrentBranchSwitcheroo.execute(project);
     }
 }

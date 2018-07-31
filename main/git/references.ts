@@ -7,7 +7,7 @@ export default async function getReferences(directory: string): Promise<Referenc
 
     return references.map((reference) => {
         return {
-            reference: reference.name(),
+            name: reference.name(),
             isBranch: !!reference.isBranch(),
             isConcrete: !!reference.isConcrete(),
             isHead: !!reference.isHead(),

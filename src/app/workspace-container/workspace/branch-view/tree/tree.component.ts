@@ -51,8 +51,8 @@ export class TreeComponent {
                 return references.map((reference) => {
                     return {
                         ...reference,
-                        reference: reference.reference.replace('refs/', ''),
-                    };
+                        name: reference.name.replace('refs/', ''),
+                    } as ReferenceData;
                 });
             })
             .map((references) => {
@@ -73,7 +73,7 @@ export class TreeComponent {
 
         for (const path of paths) {
             let position = parsed;
-            const split = path.reference.split('/');
+            const split = path.name.split('/');
 
             for (const pathToken of split) {
                 if (pathToken === '') {
@@ -85,7 +85,7 @@ export class TreeComponent {
                         id: ++currentId,
                         name: pathToken,
                         children: [],
-                        reference: path.reference,
+                        reference: path.name,
                     });
                 }
 

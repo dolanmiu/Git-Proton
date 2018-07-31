@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 
-import { branch, checkoutBranch } from './branch';
+import { branch, checkoutBranch, getCurrentBranch } from './branch';
 import { fetch, fetchAll } from './fetch';
 import commit from './git-commit';
 import diff from './git-diff';
@@ -38,7 +38,7 @@ export class NodeGitIPC {
                     event.sender.send('references', {
                         projectName: projectDetails.name,
                         references: references,
-                    } as ReferenceIPCData);
+                    } as ReferencesIPCData);
                 })
                 .catch(console.error);
         });
@@ -74,6 +74,17 @@ export class NodeGitIPC {
         ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
             branch(projectDetails.path, referenceName)
                 .then((reference) => {})
+                .catch(console.error);
+        });
+
+        ipcMain.on('get-current-branch', (event, projectDetails: ProjectPathDetails) => {
+            getCurrentBranch(projectDetails.path)
+                .then((currentBranch) => {
+                    event.sender.send('current-branch', {
+                        projectName: projectDetails.name,
+                        reference: currentBranch,
+                    } as ReferenceIPCData);
+                })
                 .catch(console.error);
         });
 

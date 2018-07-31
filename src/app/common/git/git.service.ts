@@ -28,12 +28,16 @@ export class GitService extends ElectronSwitchService {
                 store.dispatch(new SetStatusesAction(data.projectName, data.statuses));
             });
 
-            this.ipcRenderer.on('references', (event, data: ReferenceIPCData) => {
+            this.ipcRenderer.on('references', (event, data: ReferencesIPCData) => {
                 store.dispatch(new SetReferencesAction(data.projectName, data.references));
             });
 
             this.ipcRenderer.on('remotes', (event, data: RemoteIPCData) => {
                 store.dispatch(new SetRemotesAction(data.projectName, data.remotes));
+            });
+
+            this.ipcRenderer.on('current-branch', (event, data: ReferenceIPCData) => {
+                console.log(data);
             });
         }
 
