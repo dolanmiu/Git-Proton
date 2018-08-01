@@ -113,17 +113,27 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, branchName: string, gitUrl: string) => {
-            pushViaSsh(projectDetails.path, branchName, gitUrl)
+        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, referenceName: string, gitUrl: string) => {
+            pushViaSsh(projectDetails.path, referenceName, gitUrl)
                 .then((result) => {})
                 .catch(console.error);
         });
 
-        ipcMain.on('push-via-http', (event, projectDetails: ProjectPathDetails, branchName: string, userName: string, password: string) => {
-            pushViaHttp(projectDetails.path, branchName, userName, password)
-                .then((result) => {})
-                .catch(console.error);
-        });
+        ipcMain.on(
+            'push-via-http',
+            (
+                event,
+                projectDetails: ProjectPathDetails,
+                referenceName: string,
+                headReferenceName: string,
+                userName: string,
+                password: string,
+            ) => {
+                pushViaHttp(projectDetails.path, referenceName, headReferenceName, userName, password)
+                    .then((result) => {})
+                    .catch(console.error);
+            },
+        );
 
         ipcMain.on('get-remotes', (event, projectDetails: ProjectPathDetails) => {
             getRemotes(projectDetails.path)

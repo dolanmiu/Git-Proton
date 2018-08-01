@@ -8,7 +8,7 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 export class GitPushService extends ElectronSwitchService {
     private ipcRenderer: typeof ipcRenderer;
     private pushViaSshSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
-    private pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string>;
+    private pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string, string>;
 
     constructor() {
         super();
@@ -24,10 +24,10 @@ export class GitPushService extends ElectronSwitchService {
         );
 
         this.pushViaHttpSwitcheroo = new ElectronSwitcheroo(
-            (projectState, origin, userName, password) => {
-                this.ipcRenderer.send('push-via-http', projectState, origin, userName, password);
+            (projectState, referenceName, headReferenceName, userName, password) => {
+                this.ipcRenderer.send('push-via-http', projectState, referenceName, headReferenceName, userName, password);
             },
-            (directory) => {},
+            (projectState, referenceName, headReferenceName, userName, password) => {},
         );
     }
 
@@ -36,7 +36,13 @@ export class GitPushService extends ElectronSwitchService {
         // this.pushViaSshSwitcheroo.execute(project.path, 'origin', project.urls.git);
     }
 
-    public pushViaHttp(projectState: ProjectState): void {
-        this.pushViaHttpSwitcheroo.execute(projectState, 'origin', 'dolanmiu', 'password');
+    public pushViaHttp(
+        projectState: ProjectState,
+        referenceName: string,
+        headReferenceName: string,
+        username: string,
+        password: string,
+    ): void {
+        this.pushViaHttpSwitcheroo.execute(projectState, referenceName, headReferenceName, username, password);
     }
 }

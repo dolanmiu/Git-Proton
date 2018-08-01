@@ -57,7 +57,7 @@ export class ToolBarComponent implements OnInit {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitPushService.pushViaHttp(project);
+                this.gitPushService.pushViaHttp(project, 'refs/remotes/origin/master', 'refs/heads/master', 'dolanmiu', 'password');
             })
             .take(1)
             .subscribe();
