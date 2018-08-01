@@ -26,7 +26,7 @@ describe('BranchViewComponent', () => {
                     },
                 },
                 GitReferenceService,
-                GitRemoteService
+                GitRemoteService,
             ],
         }).compileComponents();
     }));
