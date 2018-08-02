@@ -46,7 +46,7 @@
     "@ngrx/effects": "^5.1.0",
     "@ngrx/router-store": "^5.2.0",
     "@ngrx/store": "^5.0.0",
-    "@ngrx/store-devtools": "^5.2.0",
+    "@ngrx/store-devtools": "^6.0.0",
     "@types/electron-settings": "^3.1.1",
     "@types/lodash": "^4.14.94",
     "@types/shelljs": "^0.8.0",
