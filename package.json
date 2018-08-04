@@ -50,7 +50,7 @@
     "@types/electron-settings": "^3.1.1",
     "@types/lodash": "^4.14.94",
     "@types/shelljs": "^0.8.0",
-    "angular-tree-component": "^7.2.0",
+    "angular-tree-component": "^8.0.0",
     "core-js": "^2.4.1",
     "electron": "^1.7.12",
     "electron-settings": "^3.1.4",
