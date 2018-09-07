@@ -38,7 +38,7 @@
     "@angular/platform-browser": "6.0.7",
     "@angular/platform-browser-dynamic": "6.0.7",
     "@angular/router": "6.0.7",
-    "@fortawesome/angular-fontawesome": "^0.1.0-8",
+    "@fortawesome/angular-fontawesome": "^0.2.0",
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-pro-light": "^5.0.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.0-10",
