@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SettingsComponent } from './settings/settings.component';
 import { WorkspaceContainerComponent } from './workspace-container.component';
 
 @NgModule({
@@ -13,7 +12,7 @@ import { WorkspaceContainerComponent } from './workspace-container.component';
                 children: [
                     {
                         path: 'settings',
-                        component: SettingsComponent,
+                        loadChildren: './settings/settings.module#SettingsModule',
                     },
                     {
                         path: 'new',
