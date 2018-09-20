@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsModule } from './settings/settings.module';
 import { TabBarModule } from './tab-bar/tab-bar.module';
 import { WorkspaceContainerRoutingModule } from './workspace-container-routing.module';
 import { WorkspaceContainerComponent } from './workspace-container.component';
@@ -18,8 +18,9 @@ import { WorkspaceModule } from './workspace/workspace.module';
         WorkspaceModule,
         WorkspaceContainerRoutingModule,
         TabBarModule,
+        SettingsModule,
         FlexLayoutModule,
     ],
-    declarations: [WorkspaceContainerComponent, SettingsComponent],
+    declarations: [WorkspaceContainerComponent],
 })
 export class WorkspaceContainerModule {}
