@@ -74,7 +74,7 @@
     "@types/node": "~10.10.1",
     "awesome-typescript-loader": "5.2.0",
     "codelyzer": "^4.0.0",
-    "cspell": "^2.1.1",
+    "cspell": "^3.0.2",
     "electron-rebuild": "^1.7.3",
     "electron-reload": "^1.2.2",
     "fs-extra": "^7.0.0",
