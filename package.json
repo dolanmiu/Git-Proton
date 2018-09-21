@@ -79,7 +79,7 @@
     "electron-reload": "^1.2.2",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.2",
-    "jasmine-core": "~2.99.0",
+    "jasmine-core": "~3.0.0",
     "jasmine-spec-reporter": "~4.2.0",
     "karma": "~3.0.0",
     "karma-chrome-launcher": "~2.2.0",
