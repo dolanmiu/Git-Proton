@@ -1,9 +1,12 @@
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
 .workspace-container {
+    display: flex;
+    flex-direction: row;
     height: 100%;
 }
 
@@ -11,9 +14,14 @@
     max-height: 80vh;
 }
 
-// .commit-view-container {
-// }
+app-branch-view {
+    flex: 0 0 250px;
+}
 
-.main-container {
-    height: 100%;
+app-overview {
+    flex: 1 1 auto;
+}
+
+app-commit-view {
+    flex: 0 0 300px;
 }

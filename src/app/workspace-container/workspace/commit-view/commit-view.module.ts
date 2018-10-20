@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 
 import { GitStagingService } from 'app/common/git/git-staging.service';
@@ -14,7 +13,7 @@ import { UnstagedFilesContainerComponent } from './unstaged-files-container/unst
 @NgModule({
     declarations: [CommitViewComponent, StagedFilesContainerComponent, UnstagedFilesContainerComponent],
     providers: [GitStagingService, ProjectPathService],
-    imports: [CommonModule, FormsModule, MaterialModule, FlexLayoutModule, GitModule],
+    imports: [CommonModule, FormsModule, MaterialModule, GitModule],
     exports: [CommitViewComponent],
 })
 export class CommitViewModule {}

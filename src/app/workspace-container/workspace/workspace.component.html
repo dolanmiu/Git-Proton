@@ -1,13 +1,9 @@
-<div class="main-container" fxLayout="column">
-    <app-tool-bar></app-tool-bar>
+<app-tool-bar></app-tool-bar>
 
-    <div class="workspace-container" fxLayout="row" fxFlex="1 1 auto">
-        <app-branch-view fxFlex="0 0 250px"></app-branch-view>
-
-        <app-overview fxFlex="1 1 auto"></app-overview>
-
-        <app-commit-view fxFlex="0 0 300px"></app-commit-view>
-    </div>
-
-    <app-footer></app-footer>
+<div class="workspace-container">
+    <app-branch-view></app-branch-view>
+    <app-overview></app-overview>
+    <app-commit-view></app-commit-view>
 </div>
+
+<app-footer></app-footer>

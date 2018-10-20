@@ -1,4 +1,17 @@
+$bg-color: #ff0;
+
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    position: relative;
+}
+
+app-tab-bar {
+    flex: 0 0 30px;
+}
+
+.router-container {
+    background-color: $bg-color;
+    flex: 1 1 auto;
 }
