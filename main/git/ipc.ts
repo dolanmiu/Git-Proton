@@ -71,7 +71,7 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('create-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
+        ipcMain.on('git:create-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
             branch(projectDetails.path, referenceName)
                 .then((reference) => {})
                 .catch(console.error);

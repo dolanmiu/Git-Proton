@@ -11,7 +11,7 @@ import { getCurrentProject } from 'app/store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
-    public displayedColumns = ['description', 'date', 'name', 'sha'];
+    public displayedColumns: string[] = ['description', 'date', 'name', 'sha'];
     public dataSource$: Observable<GitCommitModel[]>;
     private allCommits$: Observable<GitCommitModel>;
     private takeCount: number;

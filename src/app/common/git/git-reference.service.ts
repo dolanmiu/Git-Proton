@@ -27,7 +27,7 @@ export class GitReferenceService extends ElectronSwitchService {
 
         this.createBranchSwitcheroo = new ElectronSwitcheroo(
             (project, reference) => {
-                this.ipcRenderer.send('create-branch', project, reference);
+                this.ipcRenderer.send('git:create-branch', project, reference);
             },
             (project, reference) => {},
         );

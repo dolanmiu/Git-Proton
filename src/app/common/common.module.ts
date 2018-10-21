@@ -10,4 +10,4 @@ import { ProjectPathService } from './project-path.service';
     imports: [CommonModule, ElectronModule, GitModule, RouterModule],
     providers: [ProjectPathService],
 })
-export class GitProtonCommonModule {}
+export class AppCommonModule {}

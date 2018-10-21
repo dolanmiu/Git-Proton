@@ -10,37 +10,37 @@ export enum ProjectsActionTypes {
 }
 
 export class AddProjectAction implements Action {
-    public readonly type = ProjectsActionTypes.AddProject;
+    public readonly type: string = ProjectsActionTypes.AddProject;
 
     constructor(public projectName: string, public projectPath: string) {}
 }
 
 export class RemoveProjectAction implements Action {
-    public readonly type = ProjectsActionTypes.RemoveProject;
+    public readonly type: string = ProjectsActionTypes.RemoveProject;
 
     constructor(public projectName: string) {}
 }
 
 export class AddCommitAction implements Action {
-    public readonly type = ProjectsActionTypes.AddCommit;
+    public readonly type: string = ProjectsActionTypes.AddCommit;
 
     constructor(public projectName: string, public commit: GitCommitModel) {}
 }
 
 export class SetStatusesAction implements Action {
-    public readonly type = ProjectsActionTypes.SetStatuses;
+    public readonly type: string = ProjectsActionTypes.SetStatuses;
 
     constructor(public projectName: string, public statuses: StatusData[]) {}
 }
 
 export class SetReferencesAction implements Action {
-    public readonly type = ProjectsActionTypes.SetReferences;
+    public readonly type: string = ProjectsActionTypes.SetReferences;
 
     constructor(public projectName: string, public references: ReferenceData[]) {}
 }
 
 export class SetRemotesAction implements Action {
-    public readonly type = ProjectsActionTypes.SetRemotes;
+    public readonly type: string = ProjectsActionTypes.SetRemotes;
 
     constructor(public projectName: string, public remotes: RemoteData[]) {}
 }

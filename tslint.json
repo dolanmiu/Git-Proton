@@ -138,7 +138,8 @@
       true,
       "call-signature",
       "parameter",
-      "property-declaration"
+      "property-declaration",
+      "member-variable-declaration"
     ],
     "member-ordering": [
       true,

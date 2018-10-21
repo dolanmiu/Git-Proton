@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { GitProtonCommonModule } from '../common/common.module';
+import { AppCommonModule } from '../common/common.module';
 import { TabBarModule } from './tab-bar/tab-bar.module';
 import { WorkspaceContainerComponent } from './workspace-container.component';
 
@@ -16,7 +16,7 @@ describe('WorkspaceContainerComponent', () => {
         async(() => {
             TestBed.configureTestingModule({
                 declarations: [WorkspaceContainerComponent],
-                imports: [RouterTestingModule, NoopAnimationsModule, TabBarModule, GitProtonCommonModule],
+                imports: [RouterTestingModule, NoopAnimationsModule, TabBarModule, AppCommonModule],
                 providers: [
                     {
                         provide: Store,

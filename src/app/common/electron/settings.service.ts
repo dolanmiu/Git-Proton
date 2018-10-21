@@ -7,8 +7,10 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 @Injectable()
 export class SettingsService extends ElectronSwitchService {
     private settings: typeof settings;
-    private setSettingSwitcheroo: ElectronSwitcheroo<void, string>;
-    private getSettingSwitcheroo: ElectronSwitcheroo<void, string>;
+    // tslint:disable-next-line:no-any
+    private setSettingSwitcheroo: ElectronSwitcheroo<void, string, any>;
+    // tslint:disable-next-line:no-any
+    private getSettingSwitcheroo: ElectronSwitcheroo<any, string>;
 
     constructor() {
         super();
@@ -18,11 +20,8 @@ export class SettingsService extends ElectronSwitchService {
         }
 
         this.setSettingSwitcheroo = new ElectronSwitcheroo(
-            (property) => {
-                this.settings.set('name', {
-                    first: 'Cosmo',
-                    last: 'Kramer',
-                });
+            (key, payload) => {
+                this.settings.set(key, payload);
             },
             (a) => {
                 console.log('pretending to set setting');
@@ -30,8 +29,8 @@ export class SettingsService extends ElectronSwitchService {
         );
 
         this.getSettingSwitcheroo = new ElectronSwitcheroo(
-            (property) => {
-                this.settings.get(property);
+            (key) => {
+                return this.settings.get(key);
             },
             () => {
                 console.log('Pretending to get settings');
@@ -39,11 +38,11 @@ export class SettingsService extends ElectronSwitchService {
         );
     }
 
-    public getSetting(property: string): void {
+    public getSetting<T>(property: string): T {
         return this.getSettingSwitcheroo.execute(property);
     }
 
-    public setSetting(property: string): void {
-        return this.setSettingSwitcheroo.execute(property);
+    public setSetting<T>(property: string, payload: T): void {
+        this.setSettingSwitcheroo.execute(property, payload);
     }
 }
