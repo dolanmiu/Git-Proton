@@ -38,8 +38,18 @@ export class SettingsService extends ElectronSwitchService {
         );
     }
 
-    public getSetting<T>(property: string): T {
-        return this.getSettingSwitcheroo.execute(property);
+    public getSetting<
+        a extends keyof PersistanceData,
+        b extends keyof PersistanceData[a],
+        c extends keyof PersistanceData[a][b],
+        d extends keyof PersistanceData[a][b][c],
+        e extends keyof PersistanceData[a][b][c][d],
+        f extends keyof PersistanceData[a][b][c][d][e]
+    // tslint:disable-next-line:no-any
+    >(key1: a, key2?: b, key3?: c, key4?: d, key5?: e, key6?: f): any {
+        const path = [key1, key2, key3, key4, key5, key6].filter((el) => el !== undefined).join('.');
+
+        return this.getSettingSwitcheroo.execute(path);
     }
 
     public setSetting<T>(property: string, payload: T): void {

@@ -14,7 +14,7 @@ export class AuthenticationComponent implements OnInit {
     constructor(private settingsService: SettingsService) {}
 
     public ngOnInit(): void {
-        const privateKey = this.settingsService.getSetting<string>('credentials.ssh.privateKey');
+        const privateKey = this.settingsService.getSetting('credentials', 'ssh', 'privateKey');
 
         this.form = new FormGroup({
             privateSshKey: new FormControl(privateKey),
