@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Observable } from 'rxjs/Observable';
 
-import { MaterialModule } from 'app/material.module';
 import { BottomLeftComponent } from './element/bottom-left/bottom-left.component';
 import { BottomRightComponent } from './element/bottom-right/bottom-right.component';
 import { DataComponent } from './element/data/data.component';
@@ -31,7 +30,7 @@ describe('TableComponent', () => {
                 BottomLeftComponent,
                 DataComponent,
             ],
-            imports: [MaterialModule, InfiniteScrollModule],
+            imports: [InfiniteScrollModule],
             providers: [
                 {
                     provide: Store,

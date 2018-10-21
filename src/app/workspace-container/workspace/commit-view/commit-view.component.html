@@ -3,9 +3,7 @@
     <hr>{{stagedFiles$ | async}}
     <app-staged-files-container [files]="stagedFiles$ | async"></app-staged-files-container>
 
-    <mat-input-container>
-        <textarea class="commit-message" matInput rows="4" cols="50" placeholder="Commit Message" [(ngModel)]="message"></textarea>
-    </mat-input-container>
+    <textarea class="commit-message" matInput rows="4" cols="50" placeholder="Commit Message" [(ngModel)]="message"></textarea>
 
-    <button mat-raised-button color="primary" (click)="commit()">Commit</button>
+    <button color="primary" (click)="commit()">Commit</button>
 </div>

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from '../material.module';
 import { SettingsModule } from './settings/settings.module';
 import { TabBarModule } from './tab-bar/tab-bar.module';
 import { WorkspaceContainerRoutingModule } from './workspace-container-routing.module';
@@ -13,7 +12,6 @@ import { WorkspaceModule } from './workspace/workspace.module';
     imports: [
         CommonModule,
         BrowserAnimationsModule,
-        MaterialModule,
         WorkspaceModule,
         WorkspaceContainerRoutingModule,
         TabBarModule,

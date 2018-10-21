@@ -1,4 +1,5 @@
 $bg-color: #ff0;
+$nav-height: 30px;
 
 :host {
     display: flex;
@@ -8,10 +9,10 @@ $bg-color: #ff0;
 }
 
 app-tab-bar {
-    flex: 0 0 30px;
+    flex: 0 0 $nav-height;
 }
 
 .router-container {
     background-color: $bg-color;
-    flex: 1 1 auto;
+    height: calc(100vh - #{$nav-height});
 }

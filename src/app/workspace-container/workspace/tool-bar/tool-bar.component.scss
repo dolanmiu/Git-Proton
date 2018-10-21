@@ -1,0 +1,7 @@
+$bg-color: rgb(124, 10, 153);
+
+:host {
+    align-items: center;
+    background-color: $bg-color;
+    display: flex;
+}

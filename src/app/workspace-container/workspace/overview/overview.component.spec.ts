@@ -3,7 +3,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { MaterialModule } from 'app/material.module';
 import { OverviewComponent } from './overview.component';
 import { TableModule } from './table/table.module';
 
@@ -14,7 +13,7 @@ describe('OverviewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [OverviewComponent],
-            imports: [NoopAnimationsModule, MaterialModule, TableModule],
+            imports: [NoopAnimationsModule, TableModule],
             providers: [
                 {
                     provide: Store,

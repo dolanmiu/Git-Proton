@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { TreeModule } from 'angular-tree-component';
 import { Observable } from 'rxjs/Observable';
 
-import { MaterialModule } from 'app/material.module';
 import { GitReferenceService } from '../../../common/git/git-reference.service';
 import { GitRemoteService } from '../../../common/git/git-remote.service';
 import { BranchViewComponent } from './branch-view.component';
@@ -17,7 +16,7 @@ describe('BranchViewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [BranchViewComponent, TreeComponent],
-            imports: [NoopAnimationsModule, MaterialModule, TreeModule],
+            imports: [NoopAnimationsModule, TreeModule],
             providers: [
                 {
                     provide: Store,

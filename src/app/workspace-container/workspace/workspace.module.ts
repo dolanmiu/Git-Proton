@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from 'app/material.module';
 import { BranchViewModule } from './branch-view/branch-view.module';
 import { CommitViewModule } from './commit-view/commit-view.module';
 import { FooterModule } from './footer/footer.module';
@@ -15,7 +14,6 @@ import { WorkspaceComponent } from './workspace.component';
     imports: [
         BrowserAnimationsModule,
         CommonModule,
-        MaterialModule,
         ToolBarModule,
         BranchViewModule,
         CommitViewModule,

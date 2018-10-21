@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { GitModule } from 'app/common/git/git.module';
 import { ProjectPathService } from 'app/common/project-path.service';
-import { MaterialModule } from 'app/material.module';
 import { ToolBarComponent } from './tool-bar.component';
 
 describe('ToolBarComponent', () => {
@@ -14,7 +13,7 @@ describe('ToolBarComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ToolBarComponent],
-            imports: [MaterialModule, GitModule],
+            imports: [GitModule],
             providers: [
                 ProjectPathService,
                 {

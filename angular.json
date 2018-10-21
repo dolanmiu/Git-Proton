@@ -21,7 +21,6 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/material-design-icons/iconfont/material-icons.css",
               "node_modules/@fortawesome/fontawesome-pro/css/all.css",
               "src/global-styles/index.scss"
             ],
@@ -73,7 +72,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/material-design-icons/iconfont/material-icons.css",
               "src/global-styles/index.scss"
             ],
             "assets": [

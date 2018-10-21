@@ -1,53 +1,33 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button routerLink="/repo-manager">
-        <i class="material-icons">folder</i>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-        <i class="material-icons">face</i>
-    </button>
+<button (click)="push()">
+    <i class="fal fa-cloud-upload fa-fw fa-lg"></i>
+    <span>Push</span>
+</button>
 
-    <button mat-button color="accent" (click)="push()">
-        <mat-icon>favorite</mat-icon>
-        <span>Push</span>
-    </button>
+<button>
+    <i class="fal fa-cloud-download fa-fw fa-lg"></i>
+    <span>Pull</span>
+</button>
 
-    <button mat-button color="accent">
-        <mat-icon>favorite</mat-icon>
-        <span>Pull</span>
-    </button>
+<button (click)="createBranch()">
+    <i class="fal fa-code-branch fa-fw fa-lg"></i>
+    <span>Branch</span>
+</button>
 
-    <button mat-button color="accent" (click)="createBranch()">
-        <mat-icon>favorite</mat-icon>
-        <span>Branch</span>
-    </button>
+<button (click)="stash()">
+    <i class="fal fa-box-full fa-fw fa-lg"></i>
+    <span>Stash</span>
+</button>
 
-    <button mat-button color="accent" (click)="stash()">
-        <mat-icon>favorite</mat-icon>
-        <span>Stash</span>
-    </button>
+<button (click)="pop()">
+    <i class="fal fa-box-open fa-fw fa-lg"></i>
+    <span>Pop</span>
+</button>
 
-    <button mat-button color="accent" (click)="pop()">
-        <mat-icon>favorite</mat-icon>
-        <span>Pop</span>
-    </button>
+<button>
+    <i class="fal fa-tag fa-fw fa-lg"></i>
+    <span>Tag</span>
+</button>
 
-    <button mat-button color="accent">
-        <mat-icon>favorite</mat-icon>
-        <span>Tag</span>
-    </button>
-
-    <button mat-icon-button color="warn">
-        <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item> Refresh </button>
-        <button mat-menu-item> Settings </button>
-        <button mat-menu-item> Help </button>
-        <button mat-menu-item disabled> Sign Out </button>
-    </mat-menu>
-
-    <button mat-icon-button routerLink="/workspace/settings">
-        <i class="material-icons">settings</i>
-    </button>
-</mat-toolbar>
+<button routerLink="/workspace/settings">
+    <i class="fal fa-cog fa-fw fa-lg"></i>
+</button>
