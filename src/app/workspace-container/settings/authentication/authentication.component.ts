@@ -20,10 +20,8 @@ export class AuthenticationComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        console.log('on init');
         this.credentials$
             .do((credentials) => {
-                console.log('credentials', credentials);
                 this.form = new FormGroup({
                     privateSshKey: new FormControl(credentials.ssh.privateKey),
                     publicSshKey: new FormControl(credentials.ssh.publicKey),

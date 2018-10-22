@@ -12,9 +12,7 @@ export class MockStore {
     public dispatch(_: any): void {}
 
     public select(selector: Function): Observable<any> {
-        console.log('selecting', selector);
         const subject = this.selectStreams.get(selector);
-        console.log('subject', subject);
 
         return subject.asObservable();
     }
