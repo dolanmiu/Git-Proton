@@ -12,12 +12,11 @@ export class ProjectsEffects {
     public addProjectToTab$: Observable<void> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.AddProject)
         .map((action: ProjectsActions.AddProjectAction) => action.projectName)
-        .flatMap((projectName) => {
+        .do((projectName) => {
             const route = this.router.config.find((page) => page.path === 'workspace');
             route.children.splice(1, 0, { path: projectName, component: WorkspaceComponent });
-
-            return Observable.empty();
-        });
+        })
+        .map(() => undefined);
 
     constructor(private actions$: Actions, private router: Router) {}
 }

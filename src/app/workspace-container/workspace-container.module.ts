@@ -9,14 +9,7 @@ import { WorkspaceContainerComponent } from './workspace-container.component';
 import { WorkspaceModule } from './workspace/workspace.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        BrowserAnimationsModule,
-        WorkspaceModule,
-        WorkspaceContainerRoutingModule,
-        TabBarModule,
-        SettingsModule,
-    ],
+    imports: [CommonModule, BrowserAnimationsModule, WorkspaceModule, WorkspaceContainerRoutingModule, TabBarModule, SettingsModule],
     declarations: [WorkspaceContainerComponent],
 })
 export class WorkspaceContainerModule {}

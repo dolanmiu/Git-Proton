@@ -10,7 +10,7 @@ export class GitStagingService extends ElectronSwitchService {
     private stageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
     private unstageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
 
-    constructor( ) {
+    constructor() {
         super();
 
         if (this.IsElectron) {

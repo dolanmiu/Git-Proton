@@ -12,22 +12,20 @@ describe('WorkspaceContainerComponent', () => {
     let component: WorkspaceContainerComponent;
     let fixture: ComponentFixture<WorkspaceContainerComponent>;
 
-    beforeEach(
-        async(() => {
-            TestBed.configureTestingModule({
-                declarations: [WorkspaceContainerComponent],
-                imports: [RouterTestingModule, NoopAnimationsModule, TabBarModule, AppCommonModule],
-                providers: [
-                    {
-                        provide: Store,
-                        useValue: {
-                            select: () => Observable.empty(),
-                        },
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [WorkspaceContainerComponent],
+            imports: [RouterTestingModule, NoopAnimationsModule, TabBarModule, AppCommonModule],
+            providers: [
+                {
+                    provide: Store,
+                    useValue: {
+                        select: () => Observable.empty(),
                     },
-                ],
-            }).compileComponents();
-        }),
-    );
+                },
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(WorkspaceContainerComponent);

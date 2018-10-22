@@ -11,10 +11,7 @@ describe('RepoManagerComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [RepoManagerComponent],
-            imports: [
-                NoopAnimationsModule,
-                RouterTestingModule.withRoutes([{ path: '', component: RepoManagerComponent }]),
-            ],
+            imports: [NoopAnimationsModule, RouterTestingModule.withRoutes([{ path: '', component: RepoManagerComponent }])],
         }).compileComponents();
     }));
 

@@ -1,6 +1,10 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { SettingsService } from 'app/common/electron/settings.service';
+import { SetPersistanceAction } from 'app/store/persistance/persistance.actions';
 
 @Component({
     selector: 'app-root',
@@ -26,8 +30,16 @@ import { RouterOutlet } from '@angular/router';
         ]),
     ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+    constructor(private settingsService: SettingsService, private store: Store<AppState>) {}
+
     public getPage(outlet: RouterOutlet): object {
         return outlet.activatedRouteData.page;
+    }
+
+    public ngOnInit(): void {
+        const data = this.settingsService.getSetting();
+
+        this.store.dispatch(new SetPersistanceAction(data));
     }
 }

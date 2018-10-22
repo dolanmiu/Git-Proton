@@ -11,15 +11,7 @@ import { WorkspaceComponent } from './workspace.component';
 
 @NgModule({
     declarations: [WorkspaceComponent],
-    imports: [
-        BrowserAnimationsModule,
-        CommonModule,
-        ToolBarModule,
-        BranchViewModule,
-        CommitViewModule,
-        OverviewModule,
-        FooterModule,
-    ],
+    imports: [BrowserAnimationsModule, CommonModule, ToolBarModule, BranchViewModule, CommitViewModule, OverviewModule, FooterModule],
     entryComponents: [WorkspaceComponent],
 })
 export class WorkspaceModule {}

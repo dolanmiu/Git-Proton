@@ -38,21 +38,35 @@ export class SettingsService extends ElectronSwitchService {
         );
     }
 
+    // tslint:disable:no-any
     public getSetting<
-        a extends keyof PersistanceData,
-        b extends keyof PersistanceData[a],
-        c extends keyof PersistanceData[a][b],
-        d extends keyof PersistanceData[a][b][c],
-        e extends keyof PersistanceData[a][b][c][d],
-        f extends keyof PersistanceData[a][b][c][d][e]
-    // tslint:disable-next-line:no-any
-    >(key1: a, key2?: b, key3?: c, key4?: d, key5?: e, key6?: f): any {
-        const path = [key1, key2, key3, key4, key5, key6].filter((el) => el !== undefined).join('.');
+        a extends keyof PersistanceState,
+        b extends keyof PersistanceState[a],
+        c extends keyof PersistanceState[a][b],
+        d extends keyof PersistanceState[a][b][c],
+        e extends keyof PersistanceState[a][b][c][d],
+        f extends keyof PersistanceState[a][b][c][d][e]
+    >(key1?: a, key2?: b, key3?: c, key4?: d, key5?: e, key6?: f): any {
+        const path = this.arrayToStringPath(key1, key2, key3, key4, key5, key6);
 
         return this.getSettingSwitcheroo.execute(path);
     }
 
-    public setSetting<T>(property: string, payload: T): void {
-        this.setSettingSwitcheroo.execute(property, payload);
+    public setSetting<
+        a extends keyof PersistanceState,
+        b extends keyof PersistanceState[a],
+        c extends keyof PersistanceState[a][b],
+        d extends keyof PersistanceState[a][b][c],
+        e extends keyof PersistanceState[a][b][c][d],
+        f extends keyof PersistanceState[a][b][c][d][e]
+    >(payload: any, key1: a, key2?: b, key3?: c, key4?: d, key5?: e, key6?: f): void {
+        const path = this.arrayToStringPath(key1, key2, key3, key4, key5, key6);
+
+        this.setSettingSwitcheroo.execute(path, payload);
     }
+
+    private arrayToStringPath(...keys: any[]): string {
+        return keys.filter((el) => el !== undefined).join('.');
+    }
+    // tslint:enable:no-any
 }

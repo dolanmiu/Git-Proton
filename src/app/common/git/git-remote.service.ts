@@ -19,7 +19,6 @@ export class GitRemoteService extends ElectronSwitchService {
 
         this.getRemotesSwitcheroo = new ElectronSwitcheroo(
             (project) => {
-
                 this.ipcRenderer.send('get-remotes', project);
             },
             (project) => {},

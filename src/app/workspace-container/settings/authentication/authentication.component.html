@@ -1,9 +1,7 @@
-<p>
-    authentication works!
-</p>
 <form [formGroup]="form" (ngSubmit)="update()">
     <textarea formControlName="privateSshKey" placeholder="Your Private Key"></textarea>
+    <textarea formControlName="publicSshKey" placeholder="Your Public Key"></textarea>
     <button type="submit">Update</button>
 </form>
 
-{{form.value | json}}
+{{credentials$ | async | json}}
