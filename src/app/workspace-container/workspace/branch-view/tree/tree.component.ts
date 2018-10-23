@@ -41,12 +41,8 @@ export class TreeComponent {
         this.nodes$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)
-            .map((project) => {
-                return project.references;
-            })
-            .map((references) => {
-                return references.sort();
-            })
+            .map((project) => project.references)
+            .map((references) => references.sort((a, b) => (a.name > b.name ? 1 : -1)))
             .map((references) => {
                 return references.map((reference) => {
                     return {
@@ -55,9 +51,7 @@ export class TreeComponent {
                     } as ReferenceData;
                 });
             })
-            .map((references) => {
-                return this.createTree(references).children;
-            });
+            .map((references) => this.createTree(references).children);
     }
 
     private createTree(paths: ReferenceData[]): NodeData {
