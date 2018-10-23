@@ -15,19 +15,19 @@ export class BranchViewComponent implements OnInit {
     public remotes$: Observable<RemoteData[]>;
 
     constructor(private store: Store<AppState>, private gitRemoteService: GitRemoteService) {
-        this.references$ = store.select(getCurrentProject).map((project) => {
-            if (!project) {
-                return [];
-            }
-            return project.references;
-        });
+        this.references$ = store
+            .select(getCurrentProject)
+            .filter((x) => !!x)
+            .map((project) => {
+                return project.references;
+            });
 
-        this.remotes$ = store.select(getCurrentProject).map((project) => {
-            if (!project) {
-                return [];
-            }
-            return project.remotes;
-        });
+        this.remotes$ = store
+            .select(getCurrentProject)
+            .filter((x) => !!x)
+            .map((project) => {
+                return project.remotes;
+            });
     }
 
     public ngOnInit(): void {}

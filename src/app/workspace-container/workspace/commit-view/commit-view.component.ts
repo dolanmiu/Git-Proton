@@ -17,12 +17,12 @@ export class CommitViewComponent implements OnInit {
     public message: string;
 
     constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
-        this.statuses$ = store.select(getCurrentProject).map((project) => {
-            if (!project) {
-                return [];
-            }
-            return project.statuses;
-        });
+        this.statuses$ = store
+            .select(getCurrentProject)
+            .filter((x) => !!x)
+            .map((project) => {
+                return project.statuses;
+            });
 
         this.unstagedFiles$ = this.statuses$.map((statuses) => {
             return statuses.filter((status) => !status.isStaged);

@@ -40,10 +40,8 @@ export class TreeComponent {
     constructor(private store: Store<AppState>, private gitReferenceService: GitReferenceService) {
         this.nodes$ = store
             .select(getCurrentProject)
+            .filter((x) => !!x)
             .map((project) => {
-                if (!project) {
-                    return [];
-                }
                 return project.references;
             })
             .map((references) => {

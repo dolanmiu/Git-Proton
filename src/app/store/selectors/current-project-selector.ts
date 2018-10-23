@@ -6,10 +6,6 @@ export const getCurrentProject = createSelector(
     (projects, workspaceName) => {
         const project = projects[workspaceName];
 
-        if (!project) {
-            return;
-        }
-
         return project;
     },
 );
