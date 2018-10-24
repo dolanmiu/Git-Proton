@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { getCredentials } from 'app/store';
-import { SetSshCredentialsAction } from 'app/store/persistance/persistance.actions';
+import { SetHttpsCredentialsAction, SetSshCredentialsAction } from 'app/store/persistance/persistance.actions';
 
 @Component({
     selector: 'app-authentication',
@@ -25,6 +25,8 @@ export class AuthenticationComponent implements OnInit {
                 this.form = new FormGroup({
                     privateSshKey: new FormControl(credentials.ssh.privateKey),
                     publicSshKey: new FormControl(credentials.ssh.publicKey),
+                    httpsUsername: new FormControl(credentials.https.username),
+                    httpsPassword: new FormControl(credentials.https.password),
                 });
             })
             .take(1)
@@ -37,6 +39,12 @@ export class AuthenticationComponent implements OnInit {
                 privateKey: this.form.get('privateSshKey').value,
                 publicKey: this.form.get('publicSshKey').value,
                 default: true,
+            }),
+        );
+        this.store.dispatch(
+            new SetHttpsCredentialsAction({
+                username: this.form.get('httpsUsername').value,
+                password: this.form.get('httpsPassword').value,
             }),
         );
     }

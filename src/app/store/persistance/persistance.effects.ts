@@ -8,11 +8,20 @@ import * as PersistanceActions from './persistance.actions';
 @Injectable()
 export class PersistanceEffects {
     @Effect({ dispatch: false })
-    public addProjectToTab$: Observable<void> = this.actions$
+    public setSshCredentials$: Observable<void> = this.actions$
         .ofType(PersistanceActions.PersistanceActionType.SetSshCredentials)
         .map((action: PersistanceActions.SetSshCredentialsAction) => action.credentials)
         .do((credentials) => {
             this.settingsService.setSetting(credentials, 'credentials', 'ssh');
+        })
+        .map(() => undefined);
+
+    @Effect({ dispatch: false })
+    public setHttpsCredentials$: Observable<void> = this.actions$
+        .ofType(PersistanceActions.PersistanceActionType.SetHttpsCredentials)
+        .map((action: PersistanceActions.SetHttpsCredentialsAction) => action.credentials)
+        .do((credentials) => {
+            this.settingsService.setSetting(credentials, 'credentials', 'https');
         })
         .map(() => undefined);
 

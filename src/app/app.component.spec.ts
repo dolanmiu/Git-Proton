@@ -5,13 +5,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppCommonModule } from './common/common.module';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AppComponent],
-            imports: [AppRoutingModule, AppCommonModule],
+            imports: [AppRoutingModule],
             providers: [
                 { provide: APP_BASE_HREF, useValue: '/' },
                 {

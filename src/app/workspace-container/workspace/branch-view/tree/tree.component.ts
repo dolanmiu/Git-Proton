@@ -42,7 +42,7 @@ export class TreeComponent {
             .select(getCurrentProject)
             .filter((x) => !!x)
             .map((project) => project.references)
-            .map((references) => references.sort((a, b) => (a.name > b.name ? 1 : -1)))
+            .map((references) => [...references].sort((a, b) => (a.name > b.name ? 1 : -1)))
             .map((references) => {
                 return references.map((reference) => {
                     return {

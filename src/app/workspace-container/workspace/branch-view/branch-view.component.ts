@@ -19,7 +19,7 @@ export class BranchViewComponent implements OnInit {
             .select(getCurrentProject)
             .filter((x) => !!x)
             .map((project) => project.remotes)
-            .map((remotes) => remotes.sort((a, b) => (a.name > b.name ? 1 : -1)));
+            .map((remotes) => [...remotes].sort((a, b) => (a.name > b.name ? 1 : -1)));
     }
 
     public ngOnInit(): void {}

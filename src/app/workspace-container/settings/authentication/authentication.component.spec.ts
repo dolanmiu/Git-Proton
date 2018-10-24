@@ -17,6 +17,10 @@ describe('AuthenticationComponent', () => {
             publicKey: '',
             default: true,
         },
+        https: {
+            username: '',
+            password: '',
+        },
     } as PersistanceCredentials);
 
     beforeEach(async(() => {

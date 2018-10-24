@@ -1,6 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="update()">
     <textarea formControlName="privateSshKey" placeholder="Your Private Key"></textarea>
     <textarea formControlName="publicSshKey" placeholder="Your Public Key"></textarea>
+    <input formControlName="httpsUsername" placeholder="Username">
+    <input type="password" formControlName="httpsPassword" placeholder="Password">
     <button type="submit">Update</button>
 </form>
 
