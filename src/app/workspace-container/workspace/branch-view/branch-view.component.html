@@ -6,4 +6,8 @@
     {{remote.url}}
 </div>
 
-<button (click)="createRemote()">Add remote</button>
+<form [formGroup]="remoteForm" (ngSubmit)="createRemote()">
+    <input formControlName="name" placeholder="Remote name">
+    <input formControlName="url" placeholder="Remote URL">
+    <button type="submit">Add remote</button>
+</form>

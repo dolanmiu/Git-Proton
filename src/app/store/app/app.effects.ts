@@ -10,7 +10,6 @@ import { SetPersistanceAction } from '../persistance/persistance.actions';
 export class AppEffects {
     @Effect()
     public init$: Observable<Action> = defer(() => {
-        console.log('laoding');
         const data = this.settingsService.getSetting();
 
         return Observable.of(new SetPersistanceAction(data));

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { TreeModule } from 'angular-tree-component';
@@ -16,7 +17,7 @@ describe('BranchViewComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [BranchViewComponent, TreeComponent],
-            imports: [NoopAnimationsModule, TreeModule],
+            imports: [NoopAnimationsModule, ReactiveFormsModule, TreeModule],
             providers: [
                 {
                     provide: Store,

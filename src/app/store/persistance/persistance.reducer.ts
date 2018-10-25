@@ -1,7 +1,6 @@
 import * as PersistanceActions from './persistance.actions';
 
 export function persistanceReducer(state: PersistanceState, action: PersistanceActions.Actions): PersistanceState {
-    console.log(state);
     switch (action.type) {
         case PersistanceActions.PersistanceActionType.SetSshCredentials:
             return {

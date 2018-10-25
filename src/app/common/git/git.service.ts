@@ -37,7 +37,7 @@ export class GitService extends ElectronSwitchService {
             });
 
             this.ipcRenderer.on('current-branch', (event, data: ReferenceIPCData) => {
-                console.log(data);
+                // TODO: unused
             });
         }
 
