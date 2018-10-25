@@ -1,10 +1,10 @@
-import { GitProtonPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('git-proton App', () => {
-    let page: GitProtonPage;
+describe('main App', () => {
+    let page: AppPage;
 
     beforeEach(() => {
-        page = new GitProtonPage();
+        page = new AppPage();
     });
 
     it('should display message saying app works', () => {
