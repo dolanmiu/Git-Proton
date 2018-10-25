@@ -21,6 +21,10 @@ export function persistanceReducer(state: PersistanceState, action: PersistanceA
         case PersistanceActions.PersistanceActionType.Set:
             const payload = action.payload;
 
+            if (!payload.credentials) {
+                return state;
+            }
+
             return {
                 ...state,
                 credentials: {
