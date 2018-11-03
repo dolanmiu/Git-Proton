@@ -6,7 +6,7 @@ export enum ProjectsActionTypes {
     AddCommit = '[Projects] Add Project Commit',
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
-    SetRemotes = '[Projects] SetRemotes',
+    SetRemotes = '[Projects] Set Remotes',
 }
 
 export class AddProjectAction implements Action {
