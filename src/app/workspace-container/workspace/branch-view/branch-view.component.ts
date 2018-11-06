@@ -41,4 +41,14 @@ export class BranchViewComponent implements OnInit {
             .take(1)
             .subscribe();
     }
+
+    public deleteRemote(name: string): void {
+        this.store
+        .select(getCurrentProject)
+        .do((project) => {
+            this.gitRemoteService.deleteRemote(project, name);
+        })
+        .take(1)
+        .subscribe();
+    }
 }

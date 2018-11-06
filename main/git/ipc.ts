@@ -8,7 +8,7 @@ import stage from './git-stage';
 import unstage from './git-unstage';
 import { pushViaHttp, pushViaSsh } from './push';
 import getReferences from './references';
-import { createRemote, getRemotes } from './remote';
+import { createRemote, getRemotes, deleteRemote } from './remote';
 import { pop, stash } from './stash';
 import status from './status';
 import walk from './walk';
@@ -152,6 +152,12 @@ export class NodeGitIPC {
 
         ipcMain.on('create-remote', (event, projectDetails: ProjectPathDetails, name: string, url: string) => {
             createRemote(projectDetails.path, name, url)
+                .then((result) => {})
+                .catch(console.error);
+        });
+
+        ipcMain.on('delete-remote', (event, projectDetails: ProjectPathDetails, name: string) => {
+            deleteRemote(projectDetails.path, name)
                 .then((result) => {})
                 .catch(console.error);
         });
