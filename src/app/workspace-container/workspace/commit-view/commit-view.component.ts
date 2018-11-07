@@ -14,7 +14,8 @@ export class CommitViewComponent implements OnInit {
     public readonly statuses$: Observable<StatusData[]>;
     public readonly unstagedFiles$: Observable<StatusData[]>;
     public readonly stagedFiles$: Observable<StatusData[]>;
-    public readonly message: string;
+    // tslint:disable-next-line:readonly-keyword
+    public message: string;
 
     constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
         this.statuses$ = store
