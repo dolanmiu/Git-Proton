@@ -9,7 +9,7 @@ export class ElectronSwitcheroo<T, R = void, S = void, Q = void, U = void, V = v
         }
     }
 
-    private get IsElectron(): void {
+    private get IsElectron(): boolean {
         return window && window.process && window.process.type;
     }
 }
