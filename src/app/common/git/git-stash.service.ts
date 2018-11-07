@@ -7,9 +7,9 @@ import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitStashService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private stashSwitcheroo: ElectronSwitcheroo<void, string>;
-    private popSwitcheroo: ElectronSwitcheroo<void, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly stashSwitcheroo: ElectronSwitcheroo<void, string>;
+    private readonly popSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(projectPathService: ProjectPathService) {
         super();

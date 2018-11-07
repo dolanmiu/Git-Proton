@@ -7,10 +7,10 @@ import { getCurrentProject } from 'app/store';
 import { GitReferenceService } from '../../../../common/git/git-reference.service';
 
 interface NodeData {
-    id: number;
-    name: string;
-    children: NodeData[];
-    reference: ReferenceData;
+    readonly id: number;
+    readonly name: string;
+    readonly children: NodeData[];
+    readonly reference: ReferenceData;
 }
 
 @Component({
@@ -19,8 +19,8 @@ interface NodeData {
     styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
-    public nodes$: Observable<NodeData[]>;
-    public options: ITreeOptions = {
+    public readonly nodes$: Observable<NodeData[]>;
+    public readonly options: ITreeOptions = {
         actionMapping: {
             mouse: {
                 dblClick: (tree, node: TreeNode, $event) => {

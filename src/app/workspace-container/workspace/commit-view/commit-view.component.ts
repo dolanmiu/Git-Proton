@@ -11,10 +11,10 @@ import { GitCommitService } from '../../../common/git/git-commit.service';
     styleUrls: ['./commit-view.component.scss'],
 })
 export class CommitViewComponent implements OnInit {
-    public statuses$: Observable<StatusData[]>;
-    public unstagedFiles$: Observable<StatusData[]>;
-    public stagedFiles$: Observable<StatusData[]>;
-    public message: string;
+    public readonly statuses$: Observable<StatusData[]>;
+    public readonly unstagedFiles$: Observable<StatusData[]>;
+    public readonly stagedFiles$: Observable<StatusData[]>;
+    public readonly message: string;
 
     constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
         this.statuses$ = store

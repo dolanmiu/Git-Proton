@@ -11,9 +11,11 @@ import { getCurrentProject } from 'app/store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
-    public displayedColumns: string[] = ['description', 'date', 'name', 'sha'];
+    public readonly displayedColumns: string[] = ['description', 'date', 'name', 'sha'];
+    // tslint:disable-next-line:readonly-keyword
     public dataSource$: Observable<GitCommitModel[]>;
-    private allCommits$: Observable<GitCommitModel>;
+    private readonly allCommits$: Observable<GitCommitModel>;
+    // tslint:disable-next-line:readonly-keyword
     private takeCount: number;
 
     constructor(store: Store<AppState>) {
@@ -27,7 +29,9 @@ export class TableComponent {
     }
 
     public onScroll(): void {
+        // tslint:disable-next-line:no-object-mutation
         this.takeCount += 30;
+        // tslint:disable-next-line:no-object-mutation
         this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
     }
 }

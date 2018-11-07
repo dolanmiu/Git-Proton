@@ -6,10 +6,10 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitRemoteService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private getRemotesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
-    private createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
-    private deleteRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly getRemotesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private readonly createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
+    private readonly deleteRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
 
     constructor() {
         super();

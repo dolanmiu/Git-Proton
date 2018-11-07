@@ -13,9 +13,10 @@ const FAKE_DIALOGS: ProjectPathDetails[] = [
 
 @Injectable()
 export class DialogService extends ElectronSwitchService {
-    private remote: typeof remote;
+    private readonly remote: typeof remote;
+    // tslint:disable-next-line:readonly-keyword
     private accessCounter: number;
-    private dialogSwitcheroo: ElectronSwitcheroo<void, (details: ProjectPathDetails) => void>;
+    private readonly dialogSwitcheroo: ElectronSwitcheroo<void, (details: ProjectPathDetails) => void>;
 
     constructor(private zone: NgZone, private projectPathService: ProjectPathService) {
         super();
@@ -47,6 +48,7 @@ export class DialogService extends ElectronSwitchService {
                 console.log('Pretending to open dialog');
                 cb(FAKE_DIALOGS[this.accessCounter]);
 
+                // tslint:disable-next-line:no-object-mutation
                 this.accessCounter++;
             },
         );

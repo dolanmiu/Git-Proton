@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit {
-    public tree$: Observable<TreeState>;
+    public readonly tree$: Observable<TreeState>;
 
     constructor(store: Store<AppState>) {
         this.tree$ = store.select('tree');

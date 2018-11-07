@@ -6,8 +6,8 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitCommitService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly ipcRendererSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string>;
 
     constructor() {
         super();

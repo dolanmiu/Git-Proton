@@ -12,9 +12,9 @@ import { GitRemoteService } from '../../../common/git/git-remote.service';
     styleUrls: ['./branch-view.component.scss'],
 })
 export class BranchViewComponent implements OnInit {
-    public references$: Observable<ReferenceData[]>;
-    public remotes$: Observable<RemoteData[]>;
-    public remoteForm: FormGroup;
+    public readonly references$: Observable<ReferenceData[]>;
+    public readonly remotes$: Observable<RemoteData[]>;
+    public readonly remoteForm: FormGroup;
 
     constructor(private store: Store<AppState>, private gitRemoteService: GitRemoteService) {
         this.remotes$ = store

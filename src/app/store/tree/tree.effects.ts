@@ -7,7 +7,7 @@ import * as TreeActions from './tree.actions';
 @Injectable()
 export class TreeEffects {
     @Effect({ dispatch: false })
-    public addTreeData$: Observable<void> = this.actions$
+    public readonly addTreeData$: Observable<void> = this.actions$
         .ofType(TreeActions.ADD_DATA)
         .map((action: TreeActions.AddDataAction) => action.payload)
         .flatMap((payload) => {

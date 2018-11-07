@@ -8,7 +8,7 @@ import stage from './git-stage';
 import unstage from './git-unstage';
 import { pushViaHttp, pushViaSsh } from './push';
 import getReferences from './references';
-import { createRemote, getRemotes, deleteRemote } from './remote';
+import { createRemote, deleteRemote, getRemotes } from './remote';
 import { pop, stash } from './stash';
 import status from './status';
 import walk from './walk';

@@ -42,19 +42,9 @@ const right = [
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceContainerComponent implements OnInit {
-    public pageState: string;
-
     constructor(private schedulerService: GitSchedulerService) {}
 
     public ngOnInit(): void {
         this.schedulerService.start();
-    }
-
-    public setPageState(pageState: string): void {
-        this.pageState = pageState;
-    }
-
-    public goToAdd(): void {
-        this.pageState = this.pageState === 'right' ? 'right1' : 'right';
     }
 }

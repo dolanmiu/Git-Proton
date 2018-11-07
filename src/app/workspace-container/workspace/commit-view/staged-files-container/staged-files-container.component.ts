@@ -10,7 +10,7 @@ import { getCurrentProject } from 'app/store';
     styleUrls: ['./staged-files-container.component.scss'],
 })
 export class StagedFilesContainerComponent {
-    @Input() public files: StatusData[];
+    @Input() public readonly files: StatusData[];
 
     constructor(private store: Store<AppState>, private gitStagingService: GitStagingService) {}
 
