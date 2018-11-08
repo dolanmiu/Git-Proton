@@ -6,8 +6,8 @@ import { ElectronSwitcheroo } from './electron-switcheroo';
 @Injectable()
 export class ProjectPathService extends ElectronSwitchService {
     // tslint:disable-next-line:no-any
-    private path: any;
-    private baseNameSwitcheroo: ElectronSwitcheroo<ProjectPathDetails, string>;
+    private readonly path: any;
+    private readonly baseNameSwitcheroo: ElectronSwitcheroo<ProjectPathDetails, string>;
 
     constructor() {
         super();

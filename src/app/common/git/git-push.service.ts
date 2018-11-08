@@ -6,9 +6,9 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitPushService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private pushViaSshSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
-    private pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly pushViaSshSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
+    private readonly pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string, string>;
 
     constructor() {
         super();

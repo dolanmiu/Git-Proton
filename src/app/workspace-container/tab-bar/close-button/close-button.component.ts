@@ -9,7 +9,7 @@ import { RemoveProjectAction } from 'app/store/projects/projects.actions';
     styleUrls: ['./close-button.component.scss'],
 })
 export class CloseButtonComponent implements OnInit {
-    @Input() private projectName: string;
+    @Input() private readonly projectName: string;
 
     constructor(private store: Store<AppState>) {}
 

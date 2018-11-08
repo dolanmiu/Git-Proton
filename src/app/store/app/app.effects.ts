@@ -9,7 +9,7 @@ import { SetPersistanceAction } from '../persistance/persistance.actions';
 @Injectable()
 export class AppEffects {
     @Effect()
-    public init$: Observable<Action> = defer(() => {
+    public readonly init$: Observable<Action> = defer(() => {
         const data = this.settingsService.getSetting();
 
         return Observable.of(new SetPersistanceAction(data));

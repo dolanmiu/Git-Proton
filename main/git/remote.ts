@@ -22,3 +22,12 @@ export async function createRemote(directory: string, name: string, url: string)
 
     return remote;
 }
+
+// tslint:disable-next-line:no-any
+export async function deleteRemote(directory: string, name: string): Promise<any> {
+    const repo = await nodegit.Repository.open(directory);
+
+    const remote = await nodegit.Remote.delete(repo, name);
+
+    return remote;
+}

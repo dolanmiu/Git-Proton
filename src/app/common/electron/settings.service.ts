@@ -6,11 +6,11 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class SettingsService extends ElectronSwitchService {
-    private settings: typeof settings;
+    private readonly settings: typeof settings;
     // tslint:disable-next-line:no-any
-    private setSettingSwitcheroo: ElectronSwitcheroo<void, string, any>;
+    private readonly setSettingSwitcheroo: ElectronSwitcheroo<void, string, any>;
     // tslint:disable-next-line:no-any
-    private getSettingSwitcheroo: ElectronSwitcheroo<any, string>;
+    private readonly getSettingSwitcheroo: ElectronSwitcheroo<any, string>;
 
     constructor() {
         super();

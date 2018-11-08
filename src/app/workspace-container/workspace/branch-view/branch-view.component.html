@@ -4,6 +4,7 @@
 <div *ngFor="let remote of remotes$ | async">
     {{remote.name}}
     {{remote.url}}
+    <button (click)="deleteRemote(remote.name)">Delete</button>
 </div>
 
 <form [formGroup]="remoteForm" (ngSubmit)="createRemote()">

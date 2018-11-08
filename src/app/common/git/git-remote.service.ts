@@ -6,9 +6,10 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitRemoteService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private getRemotesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
-    private createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly getRemotesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private readonly createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
+    private readonly deleteRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
 
     constructor() {
         super();
@@ -30,6 +31,13 @@ export class GitRemoteService extends ElectronSwitchService {
             },
             (project, remoteName, url) => {},
         );
+
+        this.deleteRemoteSwitcheroo = new ElectronSwitcheroo(
+            (project, remoteName) => {
+                this.ipcRenderer.send('delete-remote', project, remoteName);
+            },
+            (project, remoteName) => {},
+        );
     }
 
     public getRemotes(project: ProjectState): void {
@@ -38,5 +46,9 @@ export class GitRemoteService extends ElectronSwitchService {
 
     public createRemote(project: ProjectState, remoteName: string, url: string): void {
         this.createRemoteSwitcheroo.execute(project, remoteName, url);
+    }
+
+    public deleteRemote(project: ProjectState, remoteName: string): void {
+        this.deleteRemoteSwitcheroo.execute(project, remoteName);
     }
 }

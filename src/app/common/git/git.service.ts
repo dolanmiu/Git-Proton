@@ -10,9 +10,9 @@ import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private fs: typeof fs;
-    private ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly fs: typeof fs;
+    private readonly ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(store: Store<AppState>, private projectPathService: ProjectPathService) {
         super();

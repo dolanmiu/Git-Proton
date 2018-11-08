@@ -9,7 +9,7 @@ import * as ProjectsActions from './projects.actions';
 @Injectable()
 export class ProjectsEffects {
     @Effect({ dispatch: false })
-    public addProjectToTab$: Observable<void> = this.actions$
+    public readonly addProjectToTab$: Observable<void> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.AddProject)
         .map((action: ProjectsActions.AddProjectAction) => action.projectName)
         .do((projectName) => {
