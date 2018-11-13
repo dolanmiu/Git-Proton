@@ -65,7 +65,7 @@
     "@angular/cli": "6.0.8",
     "@angular/compiler-cli": "6.0.7",
     "@types/jasmine": "2.8.9",
-    "@types/node": "10.12.4",
+    "@types/node": "10.12.6",
     "awesome-typescript-loader": "5.2.0",
     "codelyzer": "4.0.0",
     "cspell": "2.1.1",
