@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-repo-button',
     templateUrl: './repo-button.component.html',
     styleUrls: ['./repo-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepoButtonComponent implements OnInit {
-    @Input() public directory: string;
-    public projectName: string;
-    public parentFolder: string;
+    @Input() public readonly directory: string;
+    public readonly projectName: string;
+    public readonly parentFolder: string;
 
     constructor() {}
 

@@ -20,9 +20,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Ac
         case ProjectsActions.ProjectsActionTypes.RemoveProject:
             const { [action.projectName]: project, ...rest } = state;
 
-            return {
-                ...rest,
-            };
+            return rest;
         case ProjectsActions.ProjectsActionTypes.AddCommit:
             const commits = [...state[action.projectName].commits, action.commit];
 

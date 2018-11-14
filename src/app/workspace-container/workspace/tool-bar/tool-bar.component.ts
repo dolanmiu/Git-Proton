@@ -14,7 +14,7 @@ import { getCredentials, getCurrentProject } from 'app/store';
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    private credentials$: Observable<PersistanceCredentials>;
+    private readonly credentials$: Observable<PersistanceCredentials>;
 
     constructor(
         private store: Store<AppState>,

@@ -12,8 +12,9 @@ import { SetHttpsCredentialsAction, SetSshCredentialsAction } from 'app/store/pe
     styleUrls: ['./authentication.component.scss'],
 })
 export class AuthenticationComponent implements OnInit {
+    // tslint:disable-next-line:readonly-keyword
     public form: FormGroup;
-    public credentials$: Observable<PersistanceCredentials>;
+    public readonly credentials$: Observable<PersistanceCredentials>;
 
     constructor(private store: Store<AppState>) {
         this.credentials$ = store.select(getCredentials);
@@ -22,6 +23,7 @@ export class AuthenticationComponent implements OnInit {
     public ngOnInit(): void {
         this.credentials$
             .do((credentials) => {
+                // tslint:disable-next-line:no-object-mutation
                 this.form = new FormGroup({
                     privateSshKey: new FormControl(credentials.ssh.privateKey),
                     publicSshKey: new FormControl(credentials.ssh.publicKey),

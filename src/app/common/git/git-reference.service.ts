@@ -6,11 +6,11 @@ import { ElectronSwitcheroo } from '../electron-switcheroo';
 
 @Injectable()
 export class GitReferenceService extends ElectronSwitchService {
-    private ipcRenderer: typeof ipcRenderer;
-    private getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
-    private createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
-    private checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
-    private getCurrentBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private readonly ipcRenderer: typeof ipcRenderer;
+    private readonly getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private readonly createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
+    private readonly checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
+    private readonly getCurrentBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
     constructor() {
         super();

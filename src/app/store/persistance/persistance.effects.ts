@@ -8,7 +8,7 @@ import * as PersistanceActions from './persistance.actions';
 @Injectable()
 export class PersistanceEffects {
     @Effect({ dispatch: false })
-    public setSshCredentials$: Observable<void> = this.actions$
+    public readonly setSshCredentials$: Observable<void> = this.actions$
         .ofType(PersistanceActions.PersistanceActionType.SetSshCredentials)
         .map((action: PersistanceActions.SetSshCredentialsAction) => action.credentials)
         .do((credentials) => {
@@ -17,7 +17,7 @@ export class PersistanceEffects {
         .map(() => undefined);
 
     @Effect({ dispatch: false })
-    public setHttpsCredentials$: Observable<void> = this.actions$
+    public readonly setHttpsCredentials$: Observable<void> = this.actions$
         .ofType(PersistanceActions.PersistanceActionType.SetHttpsCredentials)
         .map((action: PersistanceActions.SetHttpsCredentialsAction) => action.credentials)
         .do((credentials) => {

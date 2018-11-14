@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 export class MockStore {
-    private selectStreams: Map<Function, BehaviorSubject<any>>;
+    private readonly selectStreams: Map<Function, BehaviorSubject<any>>;
 
     constructor() {
         this.selectStreams = new Map();
@@ -12,9 +12,9 @@ export class MockStore {
     public dispatch(_: any): void {}
 
     public select(selector: Function): Observable<any> {
-        const subject = this.selectStreams.get(selector);
+        const subject$ = this.selectStreams.get(selector);
 
-        return subject.asObservable();
+        return subject$.asObservable();
     }
 
     public getSubjectFromSelector<T>(selector: Function): BehaviorSubject<T> {

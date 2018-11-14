@@ -11,9 +11,10 @@ import { GitCommitService } from '../../../common/git/git-commit.service';
     styleUrls: ['./commit-view.component.scss'],
 })
 export class CommitViewComponent implements OnInit {
-    public statuses$: Observable<StatusData[]>;
-    public unstagedFiles$: Observable<StatusData[]>;
-    public stagedFiles$: Observable<StatusData[]>;
+    public readonly statuses$: Observable<StatusData[]>;
+    public readonly unstagedFiles$: Observable<StatusData[]>;
+    public readonly stagedFiles$: Observable<StatusData[]>;
+    // tslint:disable-next-line:readonly-keyword
     public message: string;
 
     constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {

@@ -11,11 +11,10 @@ import { GitSchedulerService } from './git-scheduler.service';
 import { GitStashService } from './git-stash.service';
 import { GitStatusService } from './git-status.service';
 import { GitService } from './git.service';
-import { TreeModule } from './tree/tree.module';
 
 @NgModule({
     declarations: [],
-    imports: [CommonModule, TreeModule],
+    imports: [CommonModule],
     providers: [
         GitService,
         GitStatusService,
