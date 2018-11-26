@@ -1,3 +1,8 @@
 interface ProjectsState {
-    [key: string]: ProjectState;
+    projects: {
+        [key: string]: ProjectState;
+    };
+    loading: {
+        remotes: boolean;
+    };
 }

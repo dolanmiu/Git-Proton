@@ -19,7 +19,12 @@ import { TreeEffects } from './tree/tree.effects';
         StoreModule.forRoot(REDUCERS, {
             metaReducers: META_REDUCERS,
             initialState: {
-                projects: {},
+                projects: {
+                    projects: {},
+                    loading: {
+                        remotes: false,
+                    },
+                },
                 persistance: {
                     credentials: {
                         ssh: {

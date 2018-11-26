@@ -121,6 +121,13 @@
             ],
             "severity": "error"
         },
+        "rxjs-no-unsafe-takeuntil": {
+            "options": [
+                {
+                    "allow": ["publish", "publishBehavior", "publishLast", "publishReplay", "share", "shareReplay"]
+                }
+            ]
+        },
         // immutable rules
         "no-mixed-interface": true,
         "readonly-keyword": true,

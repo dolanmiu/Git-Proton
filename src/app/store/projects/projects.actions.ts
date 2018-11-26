@@ -7,42 +7,64 @@ export enum ProjectsActionTypes {
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
     SetRemotes = '[Projects] Set Remotes',
+    LoadRemote = '[Projects] Load Remote',
+    AddRemote = '[Projects] Add Remote',
 }
 
 export class AddProjectAction implements Action {
     public readonly type = ProjectsActionTypes.AddProject;
 
-    constructor(public projectName: string, public projectPath: string) {}
+    constructor(public readonly projectName: string, public readonly projectPath: string) {}
 }
 
 export class RemoveProjectAction implements Action {
     public readonly type = ProjectsActionTypes.RemoveProject;
 
-    constructor(public projectName: string) {}
+    constructor(public readonly projectName: string) {}
 }
 
 export class AddCommitAction implements Action {
     public readonly type = ProjectsActionTypes.AddCommit;
 
-    constructor(public projectName: string, public commit: GitCommitModel) {}
+    constructor(public readonly projectName: string, public readonly commit: GitCommitModel) {}
 }
 
 export class SetStatusesAction implements Action {
     public readonly type = ProjectsActionTypes.SetStatuses;
 
-    constructor(public projectName: string, public statuses: StatusData[]) {}
+    constructor(public readonly projectName: string, public readonly statuses: StatusData[]) {}
 }
 
 export class SetReferencesAction implements Action {
     public readonly type = ProjectsActionTypes.SetReferences;
 
-    constructor(public projectName: string, public references: ReferenceData[]) {}
+    constructor(public readonly projectName: string, public readonly references: ReferenceData[]) {}
 }
 
 export class SetRemotesAction implements Action {
     public readonly type = ProjectsActionTypes.SetRemotes;
 
-    constructor(public projectName: string, public remotes: RemoteData[]) {}
+    constructor(public readonly projectName: string, public readonly remotes: RemoteData[]) {}
 }
 
-export type Actions = AddProjectAction | AddCommitAction | SetStatusesAction | SetReferencesAction | RemoveProjectAction | SetRemotesAction;
+export class LoadRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.LoadRemote;
+
+    constructor(public readonly remote: RemoteData) {}
+}
+
+export class AddRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.AddRemote;
+
+    constructor(public readonly projectName: string, public readonly remote: RemoteData) {}
+}
+
+export type ProjectActions =
+    | AddProjectAction
+    | AddCommitAction
+    | SetStatusesAction
+    | SetReferencesAction
+    | RemoveProjectAction
+    | SetRemotesAction
+    | LoadRemoteAction
+    | AddRemoteAction;

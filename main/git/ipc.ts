@@ -152,8 +152,13 @@ export class NodeGitIPC {
 
         ipcMain.on('create-remote', (event, projectDetails: ProjectPathDetails, name: string, url: string) => {
             createRemote(projectDetails.path, name, url)
-                .then((result) => {})
-                .catch(console.error);
+                .then((remote) =>
+                    event.sender.send('create-remote-result', undefined, {
+                        name,
+                        url,
+                    } as RemoteData),
+                )
+                .catch((e) => event.sender.send('create-remote-result', e));
         });
 
         ipcMain.on('delete-remote', (event, projectDetails: ProjectPathDetails, name: string) => {

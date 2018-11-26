@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ipcRenderer } from 'electron';
+import { Observable } from 'rxjs';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
@@ -11,7 +12,7 @@ export class GitRemoteService extends ElectronSwitchService {
     private readonly createRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
     private readonly deleteRemoteSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
 
-    constructor() {
+    constructor(private readonly zone: NgZone) {
         super();
 
         if (this.IsElectron) {
@@ -44,8 +45,22 @@ export class GitRemoteService extends ElectronSwitchService {
         this.getRemotesSwitcheroo.execute(project);
     }
 
-    public createRemote(project: ProjectState, remoteName: string, url: string): void {
+    public createRemote(project: ProjectState, remoteName: string, url: string): Observable<RemoteData> {
         this.createRemoteSwitcheroo.execute(project, remoteName, url);
+
+        return new Observable<RemoteData>((observer) => {
+            this.ipcRenderer.once('create-remote-result', (event, error: Error, data: RemoteData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 
     public deleteRemote(project: ProjectState, remoteName: string): void {

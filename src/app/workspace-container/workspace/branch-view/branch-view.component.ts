@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { getCurrentProject } from 'app/store';
-import { GitRemoteService } from '../../../common/git/git-remote.service';
+import { GitRemoteService } from 'app/common/git/git-remote.service';
+import { getCurrentProject, LoadRemoteAction } from 'app/store';
 
 @Component({
     selector: 'app-branch-view',
@@ -32,23 +32,21 @@ export class BranchViewComponent implements OnInit {
     public ngOnInit(): void {}
 
     public createRemote(): void {
-        console.log('doing so', this.remoteForm.get('name').value);
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitRemoteService.createRemote(project, this.remoteForm.get('name').value, this.remoteForm.get('url').value);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(
+            new LoadRemoteAction({
+                name: this.remoteForm.get('name').value,
+                url: this.remoteForm.get('url').value,
+            }),
+        );
     }
 
     public deleteRemote(name: string): void {
         this.store
-        .select(getCurrentProject)
-        .do((project) => {
-            this.gitRemoteService.deleteRemote(project, name);
-        })
-        .take(1)
-        .subscribe();
+            .select(getCurrentProject)
+            .do((project) => {
+                this.gitRemoteService.deleteRemote(project, name);
+            })
+            .take(1)
+            .subscribe();
     }
 }

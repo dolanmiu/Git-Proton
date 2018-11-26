@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import { GitRemoteService } from 'app/common/git/git-remote.service';
+import { getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
 import * as ProjectsActions from './projects.actions';
 
@@ -18,5 +21,19 @@ export class ProjectsEffects {
         })
         .map(() => undefined);
 
-    constructor(private actions$: Actions, private router: Router) {}
+    @Effect()
+    public readonly addRemote$: Observable<ProjectsActions.AddRemoteAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.LoadRemote)
+        .map((action: ProjectsActions.LoadRemoteAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitRemoteService.createRemote(project, action.remote.name, action.remote.url))
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .map(([remoteData, project]) => new ProjectsActions.AddRemoteAction(project.name, remoteData));
+
+    constructor(
+        private readonly actions$: Actions,
+        private readonly router: Router,
+        private readonly store: Store<AppState>,
+        private readonly gitRemoteService: GitRemoteService,
+    ) {}
 }
