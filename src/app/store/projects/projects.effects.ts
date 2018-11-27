@@ -24,8 +24,8 @@ export class ProjectsEffects {
 
     @Effect()
     public readonly addRemote$: Observable<ProjectsActions.AddRemoteAction> = this.actions$
-        .ofType(ProjectsActions.ProjectsActionTypes.LoadRemote)
-        .map((action: ProjectsActions.LoadRemoteAction) => action)
+        .ofType(ProjectsActions.ProjectsActionTypes.StartAddRemote)
+        .map((action: ProjectsActions.StartAddRemoteAction) => action)
         .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([action, project]) => this.gitRemoteService.createRemote(project, action.remote.name, action.remote.url))
         .withLatestFrom(this.store.select(getCurrentProject))
@@ -33,8 +33,8 @@ export class ProjectsEffects {
 
     @Effect()
     public readonly deleteRemote$: Observable<ProjectsActions.DeleteRemoteAction> = this.actions$
-        .ofType(ProjectsActions.ProjectsActionTypes.LoadDeleteRemote)
-        .map((action: ProjectsActions.LoadDeleteRemoteAction) => action)
+        .ofType(ProjectsActions.ProjectsActionTypes.StartDeleteRemote)
+        .map((action: ProjectsActions.StartDeleteRemoteAction) => action)
         .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([action, project]) => this.gitRemoteService.deleteRemote(project, action.remoteName))
         .withLatestFrom(this.store.select(getCurrentProject))

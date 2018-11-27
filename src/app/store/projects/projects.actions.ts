@@ -7,9 +7,9 @@ export enum ProjectsActionTypes {
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
     SetRemotes = '[Projects] Set Remotes',
-    LoadRemote = '[Projects] Load Remote',
+    StartAddRemote = '[Projects] Load Remote',
     AddRemote = '[Projects] Add Remote',
-    LoadDeleteRemote = '[Projects] Load Delete Remote',
+    StartDeleteRemote = '[Projects] Load Delete Remote',
     DeleteRemote = '[Projects] Delete Remote',
     StartStage = '[Projects] Start Stage',
     Stage = '[Projects] Stage',
@@ -53,8 +53,8 @@ export class SetRemotesAction implements Action {
     constructor(public readonly projectName: string, public readonly remotes: RemoteData[]) {}
 }
 
-export class LoadRemoteAction implements Action {
-    public readonly type = ProjectsActionTypes.LoadRemote;
+export class StartAddRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.StartAddRemote;
 
     constructor(public readonly remote: RemoteData) {}
 }
@@ -65,8 +65,8 @@ export class AddRemoteAction implements Action {
     constructor(public readonly projectName: string, public readonly remote: RemoteData) {}
 }
 
-export class LoadDeleteRemoteAction implements Action {
-    public readonly type = ProjectsActionTypes.LoadDeleteRemote;
+export class StartDeleteRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.StartDeleteRemote;
 
     constructor(public readonly remoteName: string) {}
 }
@@ -108,9 +108,9 @@ export type ProjectActions =
     | SetReferencesAction
     | RemoveProjectAction
     | SetRemotesAction
-    | LoadRemoteAction
+    | StartAddRemoteAction
     | AddRemoteAction
-    | LoadDeleteRemoteAction
+    | StartDeleteRemoteAction
     | DeleteRemoteAction
     | StartStageAction
     | StageAction

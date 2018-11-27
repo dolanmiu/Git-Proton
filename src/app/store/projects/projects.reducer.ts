@@ -77,8 +77,8 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     },
                 },
             };
-        case ProjectsActions.ProjectsActionTypes.LoadDeleteRemote:
-        case ProjectsActions.ProjectsActionTypes.LoadRemote:
+        case ProjectsActions.ProjectsActionTypes.StartDeleteRemote:
+        case ProjectsActions.ProjectsActionTypes.StartAddRemote:
             return {
                 ...state,
                 loading: {

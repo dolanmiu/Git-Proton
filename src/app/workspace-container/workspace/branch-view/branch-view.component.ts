@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { getCurrentProject, LoadDeleteRemoteAction, LoadRemoteAction } from 'app/store';
+import { getCurrentProject, StartAddRemoteAction, StartDeleteRemoteAction } from 'app/store';
 
 @Component({
     selector: 'app-branch-view',
@@ -32,7 +32,7 @@ export class BranchViewComponent implements OnInit {
 
     public createRemote(): void {
         this.store.dispatch(
-            new LoadRemoteAction({
+            new StartAddRemoteAction({
                 name: this.remoteForm.get('name').value,
                 url: this.remoteForm.get('url').value,
             }),
@@ -41,6 +41,6 @@ export class BranchViewComponent implements OnInit {
     }
 
     public deleteRemote(name: string): void {
-        this.store.dispatch(new LoadDeleteRemoteAction(name));
+        this.store.dispatch(new StartDeleteRemoteAction(name));
     }
 }
