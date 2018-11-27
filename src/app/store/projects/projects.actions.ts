@@ -11,6 +11,10 @@ export enum ProjectsActionTypes {
     AddRemote = '[Projects] Add Remote',
     LoadDeleteRemote = '[Projects] Load Delete Remote',
     DeleteRemote = '[Projects] Delete Remote',
+    StartStage = '[Projects] Start Stage',
+    Stage = '[Projects] Stage',
+    StartUnStage = '[Projects] Start Un-Stage',
+    UnStage = '[Projects] Un-Stage',
 }
 
 export class AddProjectAction implements Action {
@@ -73,6 +77,30 @@ export class DeleteRemoteAction implements Action {
     constructor(public readonly projectName: string, public readonly remoteName: string) {}
 }
 
+export class StartStageAction implements Action {
+    public readonly type = ProjectsActionTypes.StartStage;
+
+    constructor(public readonly files: string[]) {}
+}
+
+export class StageAction implements Action {
+    public readonly type = ProjectsActionTypes.Stage;
+
+    constructor(public readonly payload: StatusIPCData) {}
+}
+
+export class StartUnStageAction implements Action {
+    public readonly type = ProjectsActionTypes.StartUnStage;
+
+    constructor(public readonly files: string[]) {}
+}
+
+export class UnStageAction implements Action {
+    public readonly type = ProjectsActionTypes.UnStage;
+
+    constructor(public readonly payload: StatusIPCData) {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | AddCommitAction
@@ -83,4 +111,8 @@ export type ProjectActions =
     | LoadRemoteAction
     | AddRemoteAction
     | LoadDeleteRemoteAction
-    | DeleteRemoteAction;
+    | DeleteRemoteAction
+    | StartStageAction
+    | StageAction
+    | StartUnStageAction
+    | UnStageAction;

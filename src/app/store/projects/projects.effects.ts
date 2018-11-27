@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { GitRemoteService } from 'app/common/git/git-remote.service';
+import { GitStagingService } from 'app/common/git/git-staging.service';
 import { getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
 import * as ProjectsActions from './projects.actions';
@@ -39,10 +40,27 @@ export class ProjectsEffects {
         .withLatestFrom(this.store.select(getCurrentProject))
         .map(([remoteName, project]) => new ProjectsActions.DeleteRemoteAction(project.name, remoteName));
 
+    @Effect()
+    public readonly stageFiles$: Observable<ProjectsActions.StageAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartStage)
+        .map((action: ProjectsActions.StartStageAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitStagingService.stage(project, action.files))
+        .map((payload) => new ProjectsActions.StageAction(payload));
+
+    @Effect()
+    public readonly unstageFiles$: Observable<ProjectsActions.UnStageAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartUnStage)
+        .map((action: ProjectsActions.StartStageAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitStagingService.unstage(project, action.files))
+        .map((payload) => new ProjectsActions.UnStageAction(payload));
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,
         private readonly store: Store<AppState>,
         private readonly gitRemoteService: GitRemoteService,
+        private readonly gitStagingService: GitStagingService,
     ) {}
 }

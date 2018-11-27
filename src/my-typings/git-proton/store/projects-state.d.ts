@@ -4,5 +4,6 @@ interface ProjectsState {
     };
     loading: {
         remotes: boolean;
+        staging: boolean;
     };
 }

@@ -29,7 +29,7 @@ export class GitSchedulerService {
             })
             .subscribe();
 
-        Observable.interval(50000)
+        Observable.interval(10000)
             .switchMap(() => this.store.select(getCurrentProject).take(1))
             .filter((x) => !!x)
             .do((project) => {

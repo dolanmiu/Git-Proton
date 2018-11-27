@@ -23,6 +23,7 @@ import { TreeEffects } from './tree/tree.effects';
                     projects: {},
                     loading: {
                         remotes: false,
+                        staging: false,
                     },
                 },
                 persistance: {

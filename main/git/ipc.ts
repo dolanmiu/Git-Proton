@@ -4,8 +4,7 @@ import { branch, checkoutBranch, getCurrentBranch } from './branch';
 import { fetch, fetchAll } from './fetch';
 import commit from './git-commit';
 import diff from './git-diff';
-import stage from './git-stage';
-import unstage from './git-unstage';
+import { stage, unstage } from './git-stage';
 import { pushViaHttp, pushViaSsh } from './push';
 import getReferences from './references';
 import { createRemote, deleteRemote, getRemotes } from './remote';
@@ -51,14 +50,33 @@ export class NodeGitIPC {
             fetchAll(projectDetails.path);
         });
 
-        ipcMain.on('stage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            stage(projectDetails.path, files, (oid) => {
+        ipcMain.on('stage', async (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            try {
+                const oid = await stage(projectDetails.path, files);
+                const statuses = await diff(projectDetails.path);
+
                 console.log(oid);
-            });
+                event.sender.send('stage-result', undefined, {
+                    projectName: projectDetails.name,
+                    statuses: statuses,
+                } as StatusIPCData);
+            } catch (e) {
+                event.send('stage-result', e);
+            }
         });
 
-        ipcMain.on('unstage', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            unstage(projectDetails.path, files, () => {});
+        ipcMain.on('unstage', async (event, projectDetails: ProjectPathDetails, files: string[]) => {
+            try {
+                await unstage(projectDetails.path, files);
+                const statuses = await diff(projectDetails.path);
+
+                event.sender.send('stage-result', undefined, {
+                    projectName: projectDetails.name,
+                    statuses: statuses,
+                } as StatusIPCData);
+            } catch (e) {
+                event.send('stage-result', e);
+            }
         });
 
         ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, name: string, email: string, message: string) => {

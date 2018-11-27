@@ -118,6 +118,31 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     remotes: false,
                 },
             };
+        case ProjectsActions.ProjectsActionTypes.StartStage:
+        case ProjectsActions.ProjectsActionTypes.StartUnStage:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    staging: true,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.UnStage:
+        case ProjectsActions.ProjectsActionTypes.Stage:
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        statuses: action.payload.statuses,
+                    },
+                },
+                loading: {
+                    ...state.loading,
+                    staging: false,
+                },
+            };
         default:
             return state;
     }

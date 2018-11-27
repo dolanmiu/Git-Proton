@@ -15,7 +15,7 @@ export class BranchViewComponent implements OnInit {
     public readonly remotes$: Observable<RemoteData[]>;
     public readonly remoteForm: FormGroup;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private readonly store: Store<AppState>) {
         this.remotes$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)
@@ -37,6 +37,7 @@ export class BranchViewComponent implements OnInit {
                 url: this.remoteForm.get('url').value,
             }),
         );
+        this.remoteForm.reset();
     }
 
     public deleteRemote(name: string): void {

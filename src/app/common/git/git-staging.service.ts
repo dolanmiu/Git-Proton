@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ipcRenderer } from 'electron';
+import { Observable } from 'rxjs';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
@@ -10,7 +11,7 @@ export class GitStagingService extends ElectronSwitchService {
     private readonly stageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
     private readonly unstageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
 
-    constructor() {
+    constructor(private readonly zone: NgZone) {
         super();
 
         if (this.IsElectron) {
@@ -32,11 +33,41 @@ export class GitStagingService extends ElectronSwitchService {
         );
     }
 
-    public stage(project: ProjectState, files: string[]): void {
+    public stage(project: ProjectState, files: string[]): Observable<StatusIPCData> {
         this.stageSwitcheroo.execute(project, files);
+
+        return new Observable<StatusIPCData>((observer) => {
+            this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 
-    public unstage(project: ProjectState, files: string[]): void {
+    public unstage(project: ProjectState, files: string[]): Observable<StatusIPCData> {
         this.unstageSwitcheroo.execute(project, files);
+        console.log('unstaging');
+
+        return new Observable<StatusIPCData>((observer) => {
+            this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
+                console.log(data);
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 }
