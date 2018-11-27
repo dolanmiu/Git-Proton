@@ -3,8 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { GitRemoteService } from 'app/common/git/git-remote.service';
-import { getCurrentProject, LoadRemoteAction } from 'app/store';
+import { getCurrentProject, LoadDeleteRemoteAction, LoadRemoteAction } from 'app/store';
 
 @Component({
     selector: 'app-branch-view',
@@ -16,7 +15,7 @@ export class BranchViewComponent implements OnInit {
     public readonly remotes$: Observable<RemoteData[]>;
     public readonly remoteForm: FormGroup;
 
-    constructor(private store: Store<AppState>, private gitRemoteService: GitRemoteService) {
+    constructor(private store: Store<AppState>) {
         this.remotes$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)
@@ -41,12 +40,6 @@ export class BranchViewComponent implements OnInit {
     }
 
     public deleteRemote(name: string): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitRemoteService.deleteRemote(project, name);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new LoadDeleteRemoteAction(name));
     }
 }

@@ -63,7 +63,21 @@ export class GitRemoteService extends ElectronSwitchService {
         });
     }
 
-    public deleteRemote(project: ProjectState, remoteName: string): void {
+    public deleteRemote(project: ProjectState, remoteName: string): Observable<string> {
         this.deleteRemoteSwitcheroo.execute(project, remoteName);
+
+        return new Observable<string>((observer) => {
+            this.ipcRenderer.once('delete-remote-result', (event, error: Error, data: string) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 }

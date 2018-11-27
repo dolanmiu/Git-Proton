@@ -77,6 +77,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     },
                 },
             };
+        case ProjectsActions.ProjectsActionTypes.LoadDeleteRemote:
         case ProjectsActions.ProjectsActionTypes.LoadRemote:
             return {
                 ...state,
@@ -93,6 +94,23 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     [action.projectName]: {
                         ...state.projects[action.projectName],
                         remotes: [...state.projects[action.projectName].remotes, action.remote],
+                    },
+                },
+                loading: {
+                    ...state.loading,
+                    remotes: false,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.DeleteRemote:
+            const newRemotes = state.projects[action.projectName].remotes.filter((r) => r.name !== action.remoteName);
+
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.projectName]: {
+                        ...state.projects[action.projectName],
+                        remotes: newRemotes,
                     },
                 },
                 loading: {

@@ -163,8 +163,10 @@ export class NodeGitIPC {
 
         ipcMain.on('delete-remote', (event, projectDetails: ProjectPathDetails, name: string) => {
             deleteRemote(projectDetails.path, name)
-                .then((result) => {})
-                .catch(console.error);
+                .then((result) => {
+                    event.sender.send('delete-remote-result', undefined, name);
+                })
+                .catch((e) => event.sender.send('delete-remote-result', e));
         });
     }
 }

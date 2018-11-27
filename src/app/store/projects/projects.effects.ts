@@ -30,6 +30,15 @@ export class ProjectsEffects {
         .withLatestFrom(this.store.select(getCurrentProject))
         .map(([remoteData, project]) => new ProjectsActions.AddRemoteAction(project.name, remoteData));
 
+    @Effect()
+    public readonly deleteRemote$: Observable<ProjectsActions.DeleteRemoteAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.LoadDeleteRemote)
+        .map((action: ProjectsActions.LoadDeleteRemoteAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitRemoteService.deleteRemote(project, action.remoteName))
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .map(([remoteName, project]) => new ProjectsActions.DeleteRemoteAction(project.name, remoteName));
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,

@@ -9,6 +9,8 @@ export enum ProjectsActionTypes {
     SetRemotes = '[Projects] Set Remotes',
     LoadRemote = '[Projects] Load Remote',
     AddRemote = '[Projects] Add Remote',
+    LoadDeleteRemote = '[Projects] Load Delete Remote',
+    DeleteRemote = '[Projects] Delete Remote',
 }
 
 export class AddProjectAction implements Action {
@@ -59,6 +61,18 @@ export class AddRemoteAction implements Action {
     constructor(public readonly projectName: string, public readonly remote: RemoteData) {}
 }
 
+export class LoadDeleteRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.LoadDeleteRemote;
+
+    constructor(public readonly remoteName: string) {}
+}
+
+export class DeleteRemoteAction implements Action {
+    public readonly type = ProjectsActionTypes.DeleteRemote;
+
+    constructor(public readonly projectName: string, public readonly remoteName: string) {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | AddCommitAction
@@ -67,4 +81,6 @@ export type ProjectActions =
     | RemoveProjectAction
     | SetRemotesAction
     | LoadRemoteAction
-    | AddRemoteAction;
+    | AddRemoteAction
+    | LoadDeleteRemoteAction
+    | DeleteRemoteAction;
