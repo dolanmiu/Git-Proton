@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ipcRenderer } from 'electron';
+import { Observable } from 'rxjs';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
 
 @Injectable()
 export class GitStashService extends ElectronSwitchService {
     private readonly ipcRenderer: typeof ipcRenderer;
-    private readonly stashSwitcheroo: ElectronSwitcheroo<void, string>;
-    private readonly popSwitcheroo: ElectronSwitcheroo<void, string>;
+    private readonly stashSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
+    private readonly popSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
-    constructor(projectPathService: ProjectPathService) {
+    constructor(private readonly zone: NgZone) {
         super();
 
         if (this.IsElectron) {
@@ -19,29 +19,53 @@ export class GitStashService extends ElectronSwitchService {
         }
 
         this.stashSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('stash', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('stash', project);
             },
-            (directory) => {},
+            (project) => {},
         );
 
         this.popSwitcheroo = new ElectronSwitcheroo(
-            (directory) => {
-                const projectDetails = projectPathService.getProjectDetails(directory);
-
-                this.ipcRenderer.send('pop', projectDetails);
+            (project) => {
+                this.ipcRenderer.send('pop', project);
             },
-            (directory) => {},
+            (project) => {},
         );
     }
 
-    public stash(path: string): void {
-        this.stashSwitcheroo.execute(path);
+    public stash(project: ProjectState): Observable<StatusIPCData> {
+        this.stashSwitcheroo.execute(project);
+
+        return new Observable<StatusIPCData>((observer) => {
+            this.ipcRenderer.once('stash-result', (_, error: Error, data: StatusIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 
-    public pop(path: string): void {
-        this.popSwitcheroo.execute(path);
+    public pop(project: ProjectState): Observable<StatusIPCData> {
+        this.popSwitcheroo.execute(project);
+
+        return new Observable<StatusIPCData>((observer) => {
+            this.ipcRenderer.once('pop-result', (_, error: Error, data: StatusIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 }

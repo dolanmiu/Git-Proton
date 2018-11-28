@@ -40,7 +40,7 @@ export class ToolBarComponent implements OnInit {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitStashService.stash(project.path);
+                this.gitStashService.stash(project);
             })
             .take(1)
             .subscribe();
@@ -50,7 +50,7 @@ export class ToolBarComponent implements OnInit {
         this.store
             .select(getCurrentProject)
             .do((project) => {
-                this.gitStashService.pop(project.path);
+                this.gitStashService.pop(project);
             })
             .take(1)
             .subscribe();

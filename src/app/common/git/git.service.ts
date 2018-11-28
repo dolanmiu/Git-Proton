@@ -14,7 +14,7 @@ export class GitService extends ElectronSwitchService {
     private readonly fs: typeof fs;
     private readonly ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
-    constructor(store: Store<AppState>, private projectPathService: ProjectPathService) {
+    constructor(readonly store: Store<AppState>, private readonly projectPathService: ProjectPathService) {
         super();
         if (this.IsElectron) {
             this.ipcRenderer = window.require('electron').ipcRenderer;
