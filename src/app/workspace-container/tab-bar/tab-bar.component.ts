@@ -25,7 +25,7 @@ export class TabBarComponent {
     public pageState: string;
     @Output() public readonly pageStateChanged: EventEmitter<{}> = new EventEmitter();
 
-    constructor(private location: Location, store: Store<AppState>) {
+    constructor(private readonly location: Location, readonly store: Store<AppState>) {
         this.tabs$ = store.select(getProjectsArray).map((projects) => {
             return projects.map((project) => {
                 return {
