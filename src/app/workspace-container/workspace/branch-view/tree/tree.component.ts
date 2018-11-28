@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ITreeOptions, TREE_ACTIONS, TreeNode } from 'angular-tree-component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { getCurrentProject } from 'app/store';
 import { GitReferenceService } from '../../../../common/git/git-reference.service';

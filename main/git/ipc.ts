@@ -2,7 +2,7 @@ import { ipcMain } from 'electron';
 
 import { branch, checkoutBranch, getCurrentBranch } from './branch';
 import { fetch, fetchAll } from './fetch';
-import commit from './git-commit';
+import { commit } from './git-commit';
 import diff from './git-diff';
 import { stage, unstage } from './git-stage';
 import { pushViaHttp, pushViaSsh } from './push';
@@ -79,8 +79,27 @@ export class NodeGitIPC {
             }
         });
 
-        ipcMain.on('commit', (event, projectDetails: ProjectPathDetails, name: string, email: string, message: string) => {
-            commit(projectDetails.path, name, email, message, () => {});
+        ipcMain.on('commit', async (event, projectDetails: ProjectPathDetails, name: string, email: string, message: string) => {
+            try {
+                console.log('committing');
+                await commit(projectDetails.path, name, email, message);
+                event.sender.send('commit-result', undefined, {
+                    projectName: projectDetails.name,
+                    commit: undefined,
+                } as CommitIPCData);
+
+                const statuses = await diff(projectDetails.path);
+
+                console.log('committed');
+
+                event.sender.send('stage-result', undefined, {
+                    projectName: projectDetails.name,
+                    statuses: statuses,
+                } as StatusIPCData);
+            } catch (e) {
+                event.send('stage-result', e);
+                event.send('commit-result', e);
+            }
         });
 
         ipcMain.on('checkout-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {

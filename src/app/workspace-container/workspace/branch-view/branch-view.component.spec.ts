@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngrx/store';
 import { TreeModule } from 'angular-tree-component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { GitReferenceService } from '../../../common/git/git-reference.service';
 import { BranchViewComponent } from './branch-view.component';

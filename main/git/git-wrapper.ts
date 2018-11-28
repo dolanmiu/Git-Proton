@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as shell from 'shelljs';
 import * as which from 'which';
 
@@ -19,6 +19,7 @@ export class GitWrapper {
         }).flatMap((stdout) => {
             const res = stdout.split('\ncommit');
             for (let i = 1; i < res.length; i++) {
+                // tslint:disable-next-line:no-object-mutation
                 res[i] = `commit${res[i]}`;
             }
             return res;

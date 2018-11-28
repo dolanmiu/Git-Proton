@@ -24,6 +24,7 @@ import { TreeEffects } from './tree/tree.effects';
                     loading: {
                         remotes: false,
                         staging: false,
+                        commit: false,
                     },
                 },
                 persistance: {

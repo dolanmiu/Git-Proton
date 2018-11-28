@@ -3,7 +3,8 @@ import { Action } from '@ngrx/store';
 export enum ProjectsActionTypes {
     AddProject = '[Projects] Add Project',
     RemoveProject = '[Projects] Remove Project',
-    AddCommit = '[Projects] Add Project Commit',
+    StartCommit = '[Projects] Start Commit',
+    Commit = '[Projects] Commit',
     SetStatuses = '[Projects] Set Statuses',
     SetReferences = '[Projects] Set References',
     SetRemotes = '[Projects] Set Remotes',
@@ -29,16 +30,22 @@ export class RemoveProjectAction implements Action {
     constructor(public readonly projectName: string) {}
 }
 
-export class AddCommitAction implements Action {
-    public readonly type = ProjectsActionTypes.AddCommit;
+export class StartCommitAction implements Action {
+    public readonly type = ProjectsActionTypes.StartCommit;
 
-    constructor(public readonly projectName: string, public readonly commit: GitCommitModel) {}
+    constructor(public readonly name: string, public readonly email: string, public readonly message: string) {}
+}
+
+export class CommitAction implements Action {
+    public readonly type = ProjectsActionTypes.Commit;
+
+    constructor(public readonly payload: CommitIPCData) {}
 }
 
 export class SetStatusesAction implements Action {
     public readonly type = ProjectsActionTypes.SetStatuses;
 
-    constructor(public readonly projectName: string, public readonly statuses: StatusData[]) {}
+    constructor(public readonly payload: StatusIPCData) {}
 }
 
 export class SetReferencesAction implements Action {
@@ -103,7 +110,8 @@ export class UnStageAction implements Action {
 
 export type ProjectActions =
     | AddProjectAction
-    | AddCommitAction
+    | StartCommitAction
+    | CommitAction
     | SetStatusesAction
     | SetReferencesAction
     | RemoveProjectAction

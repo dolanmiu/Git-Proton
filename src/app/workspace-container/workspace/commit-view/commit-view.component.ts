@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { getCurrentProject } from 'app/store';
-import { GitCommitService } from '../../../common/git/git-commit.service';
+import { getCurrentProject, StartCommitAction } from 'app/store';
 
 @Component({
     selector: 'app-commit-view',
@@ -17,7 +16,7 @@ export class CommitViewComponent implements OnInit {
     // tslint:disable-next-line:readonly-keyword
     public message: string;
 
-    constructor(private store: Store<AppState>, private gitCommitService: GitCommitService) {
+    constructor(private readonly store: Store<AppState>) {
         this.statuses$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)
@@ -37,12 +36,6 @@ export class CommitViewComponent implements OnInit {
     public ngOnInit(): void {}
 
     public commit(): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitCommitService.commit(project, 'Dolan Dolan', 'dolan@dolan.com', this.message);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartCommitAction('Dolan Dolan', 'dolan@dolan.com', this.message));
     }
 }

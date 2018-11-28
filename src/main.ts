@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 
 import 'rxjs/add/observable/bindCallback';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';

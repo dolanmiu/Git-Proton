@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
+import { GitCommitService } from 'app/common/git/git-commit.service';
 import { GitRemoteService } from 'app/common/git/git-remote.service';
 import { GitStagingService } from 'app/common/git/git-staging.service';
 import { getCurrentProject } from 'app/store';
@@ -51,10 +52,18 @@ export class ProjectsEffects {
     @Effect()
     public readonly unstageFiles$: Observable<ProjectsActions.UnStageAction> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.StartUnStage)
-        .map((action: ProjectsActions.StartStageAction) => action)
+        .map((action: ProjectsActions.StartUnStageAction) => action)
         .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([action, project]) => this.gitStagingService.unstage(project, action.files))
         .map((payload) => new ProjectsActions.UnStageAction(payload));
+
+    @Effect()
+    public readonly commit$: Observable<ProjectsActions.CommitAction | ProjectsActions.SetStatusesAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartCommit)
+        .map((action: ProjectsActions.StartCommitAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitCommitService.commit(project, action.name, action.email, action.message))
+        .switchMap(([payload, status]) => [new ProjectsActions.CommitAction(payload), new ProjectsActions.SetStatusesAction(status)]);
 
     constructor(
         private readonly actions$: Actions,
@@ -62,5 +71,6 @@ export class ProjectsEffects {
         private readonly store: Store<AppState>,
         private readonly gitRemoteService: GitRemoteService,
         private readonly gitStagingService: GitStagingService,
+        private readonly gitCommitService: GitCommitService,
     ) {}
 }

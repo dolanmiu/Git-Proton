@@ -53,11 +53,9 @@ export class GitStagingService extends ElectronSwitchService {
 
     public unstage(project: ProjectState, files: string[]): Observable<StatusIPCData> {
         this.unstageSwitcheroo.execute(project, files);
-        console.log('unstaging');
 
         return new Observable<StatusIPCData>((observer) => {
             this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
-                console.log(data);
                 this.zone.run(() => {
                     if (error) {
                         observer.complete();

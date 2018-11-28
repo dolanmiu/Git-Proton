@@ -31,17 +31,29 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     ...rest,
                 },
             };
-        case ProjectsActions.ProjectsActionTypes.AddCommit:
-            const commits = [...state.projects[action.projectName].commits, action.commit];
+        case ProjectsActions.ProjectsActionTypes.StartCommit:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    commit: true,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.Commit:
+            const commits = [...state.projects[action.payload.projectName].commits, action.payload.commit];
 
             return {
                 ...state,
                 projects: {
                     ...state.projects,
-                    [action.projectName]: {
-                        ...state.projects[action.projectName],
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
                         commits: commits,
                     },
+                },
+                loading: {
+                    ...state.loading,
+                    commit: false,
                 },
             };
         case ProjectsActions.ProjectsActionTypes.SetStatuses:
@@ -49,9 +61,9 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                 ...state,
                 projects: {
                     ...state.projects,
-                    [action.projectName]: {
-                        ...state.projects[action.projectName],
-                        statuses: action.statuses,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        statuses: action.payload.statuses,
                     },
                 },
             };
