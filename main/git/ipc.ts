@@ -14,10 +14,10 @@ import walk from './walk';
 
 export class NodeGitIPC {
     public listen(): void {
-        ipcMain.on('open-repo', (event, projectDetails: ProjectPathDetails) => {
-            walk(projectDetails.path, (data) => {
+        ipcMain.on('open-repo', (event, project: ProjectState) => {
+            walk(project.path, (data) => {
                 event.sender.send('commit', {
-                    projectName: projectDetails.name,
+                    projectName: project.name,
                     commit: data,
                 } as CommitIPCData);
             })
@@ -25,111 +25,108 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('get-status', (event, projectDetails: ProjectPathDetails) => {
-            status(projectDetails.path)
+        ipcMain.on('get-status', (event, project: ProjectState) => {
+            status(project.path)
                 .then((statuses) => {})
                 .catch(console.error);
         });
 
-        ipcMain.on('get-references', (event, projectDetails: ProjectPathDetails) => {
-            getReferences(projectDetails.path)
+        ipcMain.on('get-references', (event, project: ProjectState) => {
+            getReferences(project.path)
                 .then((references) => {
                     event.sender.send('references', {
-                        projectName: projectDetails.name,
+                        projectName: project.name,
                         references: references,
                     } as ReferencesIPCData);
                 })
                 .catch(console.error);
         });
 
-        ipcMain.on('fetch', (event, projectDetails: ProjectPathDetails) => {
-            fetch(projectDetails.path).catch(console.error);
+        ipcMain.on('fetch', (event, project: ProjectState) => {
+            fetch(project.path).catch(console.error);
         });
 
-        ipcMain.on('fetch-all', (event, projectDetails: ProjectPathDetails) => {
-            fetchAll(projectDetails.path);
+        ipcMain.on('fetch-all', (event, project: ProjectState) => {
+            fetchAll(project.path);
         });
 
-        ipcMain.on('stage', async (event, projectDetails: ProjectPathDetails, files: string[]) => {
+        ipcMain.on('stage', async (event, project: ProjectState, files: string[]) => {
             try {
-                const oid = await stage(projectDetails.path, files);
-                const statuses = await diff(projectDetails.path);
+                const oid = await stage(project.path, files);
+                const statuses = await diff(project.path);
 
                 console.log(oid);
                 event.sender.send('stage-result', undefined, {
-                    projectName: projectDetails.name,
+                    projectName: project.name,
                     statuses: statuses,
                 } as StatusIPCData);
             } catch (e) {
-                event.send('stage-result', e);
+                event.sender.send('stage-result', e);
             }
         });
 
-        ipcMain.on('unstage', async (event, projectDetails: ProjectPathDetails, files: string[]) => {
+        ipcMain.on('unstage', async (event, project: ProjectState, files: string[]) => {
             try {
-                await unstage(projectDetails.path, files);
-                const statuses = await diff(projectDetails.path);
+                await unstage(project.path, files);
+                const statuses = await diff(project.path);
 
                 event.sender.send('stage-result', undefined, {
-                    projectName: projectDetails.name,
+                    projectName: project.name,
                     statuses: statuses,
                 } as StatusIPCData);
             } catch (e) {
-                event.send('stage-result', e);
+                event.sender.send('stage-result', e);
             }
         });
 
-        ipcMain.on('commit', async (event, projectDetails: ProjectPathDetails, name: string, email: string, message: string) => {
+        ipcMain.on('commit', async (event, project: ProjectState, name: string, email: string, message: string) => {
             try {
-                console.log('committing');
-                await commit(projectDetails.path, name, email, message);
+                await commit(project.path, name, email, message);
                 event.sender.send('commit-result', undefined, {
-                    projectName: projectDetails.name,
+                    projectName: project.name,
                     commit: undefined,
                 } as CommitIPCData);
 
-                const statuses = await diff(projectDetails.path);
-
-                console.log('committed');
+                const statuses = await diff(project.path);
 
                 event.sender.send('stage-result', undefined, {
-                    projectName: projectDetails.name,
+                    projectName: project.name,
                     statuses: statuses,
                 } as StatusIPCData);
             } catch (e) {
-                event.send('stage-result', e);
-                event.send('commit-result', e);
+                event.sender.send('stage-result', e);
+                event.sender.send('commit-result', e);
             }
         });
 
-        ipcMain.on('checkout-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
-            checkoutBranch(projectDetails.path, referenceName)
+        ipcMain.on('checkout-branch', (event, project: ProjectState, referenceName: string) => {
+            checkoutBranch(project.path, referenceName)
                 .then((reference) => {})
                 .catch(console.error);
         });
 
-        ipcMain.on('git:create-branch', (event, projectDetails: ProjectPathDetails, referenceName: string) => {
-            branch(projectDetails.path, referenceName)
+        ipcMain.on('git:create-branch', (event, project: ProjectState, referenceName: string) => {
+            branch(project.path, referenceName)
                 .then((reference) => {})
                 .catch(console.error);
         });
 
-        ipcMain.on('get-current-branch', (event, projectDetails: ProjectPathDetails) => {
-            getCurrentBranch(projectDetails.path)
+        ipcMain.on('get-current-branch', (event, project: ProjectState) => {
+            getCurrentBranch(project.path)
                 .then((currentBranch) => {
                     event.sender.send('current-branch', {
-                        projectName: projectDetails.name,
+                        projectName: project.name,
                         reference: currentBranch,
                     } as ReferenceIPCData);
                 })
                 .catch(console.error);
         });
 
-        ipcMain.on('diff', (event, projectDetails: ProjectPathDetails, files: string[]) => {
-            diff(projectDetails.path)
+        ipcMain.on('diff', (event, project: ProjectState, files: string[]) => {
+            diff(project.path)
                 .then((statuses) => {
                     event.sender.send('statuses', {
-                        projectName: projectDetails.name,
+                        projectName: project.name,
                         statuses: statuses,
                     } as StatusIPCData);
                 })
@@ -138,57 +135,60 @@ export class NodeGitIPC {
                 });
         });
 
-        ipcMain.on('stash', (event, projectDetails: ProjectPathDetails) => {
-            stash(projectDetails.path)
-                .then((oid) => {})
-                .catch(console.error);
+        ipcMain.on('stash', async (event, project: ProjectState) => {
+            try {
+                const oid = await stash(project.path);
+                console.log(oid);
+
+                event.sender.send('stage-result', undefined, {});
+            } catch (e) {
+                event.sender.send('stage-result', e);
+            }
         });
 
-        ipcMain.on('pop', (event, projectDetails: ProjectPathDetails) => {
-            pop(projectDetails.path)
-                .then((result) => {})
-                .catch(console.error);
+        ipcMain.on('pop', async (event, project: ProjectState) => {
+            try {
+                const result = await pop(project.path);
+                console.log(result);
+
+                event.sender.send('pop-result', undefined, {});
+            } catch (e) {
+                event.sender.send('pop-result', e);
+            }
         });
 
-        ipcMain.on('push-via-ssh', (event, projectDetails: ProjectPathDetails, referenceName: string, gitUrl: string) => {
-            pushViaSsh(projectDetails.path, referenceName, gitUrl)
+        ipcMain.on('push-via-ssh', (event, project: ProjectState, referenceName: string, gitUrl: string) => {
+            pushViaSsh(project.path, referenceName, gitUrl)
                 .then((result) => {})
                 .catch(console.error);
         });
 
         ipcMain.on(
             'push-via-http',
-            (
-                event,
-                projectDetails: ProjectPathDetails,
-                referenceName: string,
-                headReferenceName: string,
-                userName: string,
-                password: string,
-            ) => {
-                pushViaHttp(projectDetails.path, referenceName, headReferenceName, userName, password)
+            (event, project: ProjectState, referenceName: string, headReferenceName: string, userName: string, password: string) => {
+                pushViaHttp(project.path, referenceName, headReferenceName, userName, password)
                     .then((result) => {})
                     .catch(console.error);
             },
         );
 
-        ipcMain.on('get-remotes', (event, projectDetails: ProjectPathDetails) => {
-            getRemotes(projectDetails.path)
+        ipcMain.on('get-remotes', (event, project: ProjectState) => {
+            getRemotes(project.path)
                 .then((result) => {
                     const remotes: RemoteData[] = result.map((remote) => ({
                         url: remote.url(),
                         name: remote.name(),
                     }));
                     event.sender.send('remotes', {
-                        projectName: projectDetails.name,
+                        projectName: project.name,
                         remotes: remotes,
                     } as RemoteIPCData);
                 })
                 .catch(console.error);
         });
 
-        ipcMain.on('create-remote', (event, projectDetails: ProjectPathDetails, name: string, url: string) => {
-            createRemote(projectDetails.path, name, url)
+        ipcMain.on('create-remote', (event, project: ProjectState, name: string, url: string) => {
+            createRemote(project.path, name, url)
                 .then((remote) =>
                     event.sender.send('create-remote-result', undefined, {
                         name,
@@ -198,8 +198,8 @@ export class NodeGitIPC {
                 .catch((e) => event.sender.send('create-remote-result', e));
         });
 
-        ipcMain.on('delete-remote', (event, projectDetails: ProjectPathDetails, name: string) => {
-            deleteRemote(projectDetails.path, name)
+        ipcMain.on('delete-remote', (event, project: ProjectState, name: string) => {
+            deleteRemote(project.path, name)
                 .then((result) => {
                     event.sender.send('delete-remote-result', undefined, name);
                 })
