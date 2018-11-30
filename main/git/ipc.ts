@@ -165,10 +165,13 @@ export class NodeGitIPC {
 
         ipcMain.on(
             'push-via-http',
-            (event, project: ProjectState, referenceName: string, headReferenceName: string, userName: string, password: string) => {
-                pushViaHttp(project.path, referenceName, headReferenceName, userName, password)
-                    .then((result) => {})
-                    .catch(console.error);
+            async (event, project: ProjectState, referenceName: string, headReferenceName: string, userName: string, password: string) => {
+                try {
+                    await pushViaHttp(project.path, referenceName, headReferenceName, userName, password);
+                    event.sender.send('push-via-http-result');
+                } catch (e) {
+                    event.sender.send('push-via-http-result', e);
+                }
             },
         );
 

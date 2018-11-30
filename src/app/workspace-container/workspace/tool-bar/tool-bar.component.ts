@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
 
-import { GitPushService } from 'app/common/git/git-push.service';
 import { GitReferenceService } from 'app/common/git/git-reference.service';
 import { GitStashService } from 'app/common/git/git-stash.service';
-import { getCredentials, getCurrentProject } from 'app/store';
+import { getCurrentProject, StartPushViaHttpAction } from 'app/store';
 
 @Component({
     selector: 'app-tool-bar',
@@ -13,16 +11,11 @@ import { getCredentials, getCurrentProject } from 'app/store';
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    private readonly credentials$: Observable<PersistanceCredentials>;
-
     constructor(
         private store: Store<AppState>,
         private gitReferenceService: GitReferenceService,
         private gitStashService: GitStashService,
-        private gitPushService: GitPushService,
-    ) {
-        this.credentials$ = store.select(getCredentials);
-    }
+    ) {}
 
     public ngOnInit(): void {}
 
@@ -57,17 +50,6 @@ export class ToolBarComponent implements OnInit {
     }
 
     public push(): void {
-        combineLatest(this.store.select(getCurrentProject), this.credentials$)
-            .do(([project, credentials]) => {
-                this.gitPushService.pushViaHttp(
-                    project,
-                    'refs/remotes/origin/master',
-                    'refs/heads/master',
-                    credentials.https.username,
-                    credentials.https.password,
-                );
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartPushViaHttpAction('refs/remotes/origin/master', 'refs/heads/master'));
     }
 }

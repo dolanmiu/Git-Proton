@@ -25,6 +25,7 @@ import { TreeEffects } from './tree/tree.effects';
                         remotes: false,
                         staging: false,
                         commit: false,
+                        push: false,
                     },
                 },
                 persistance: {

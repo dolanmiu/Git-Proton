@@ -155,6 +155,22 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     staging: false,
                 },
             };
+        case ProjectsActions.ProjectsActionTypes.StartPushViaHttp:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    push: true,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.PushViaHttp:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    push: false,
+                },
+            };
         default:
             return state;
     }

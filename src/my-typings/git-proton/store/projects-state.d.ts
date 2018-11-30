@@ -6,5 +6,6 @@ interface ProjectsState {
         remotes: boolean;
         staging: boolean;
         commit: boolean;
+        push: boolean;
     };
 }

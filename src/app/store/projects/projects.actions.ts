@@ -16,6 +16,8 @@ export enum ProjectsActionTypes {
     Stage = '[Projects] Stage',
     StartUnStage = '[Projects] Start Un-Stage',
     UnStage = '[Projects] Un-Stage',
+    StartPushViaHttp = '[Projects] Start Push via HTTP',
+    PushViaHttp = '[Projects] Push',
 }
 
 export class AddProjectAction implements Action {
@@ -108,6 +110,18 @@ export class UnStageAction implements Action {
     constructor(public readonly payload: StatusIPCData) {}
 }
 
+export class StartPushViaHttpAction implements Action {
+    public readonly type = ProjectsActionTypes.StartPushViaHttp;
+
+    constructor(public readonly remote: string, public readonly reference: string) {}
+}
+
+export class PushViaHttpAction implements Action {
+    public readonly type = ProjectsActionTypes.PushViaHttp;
+
+    constructor() {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | StartCommitAction
@@ -123,4 +137,6 @@ export type ProjectActions =
     | StartStageAction
     | StageAction
     | StartUnStageAction
-    | UnStageAction;
+    | UnStageAction
+    | StartPushViaHttpAction
+    | PushViaHttpAction;

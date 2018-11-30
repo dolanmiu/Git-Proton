@@ -5,10 +5,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { GitCommitService } from 'app/common/git/git-commit.service';
+import { GitPushService } from 'app/common/git/git-push.service';
 import { GitRemoteService } from 'app/common/git/git-remote.service';
 import { GitStagingService } from 'app/common/git/git-staging.service';
-import { getCurrentProject } from 'app/store';
+import { getCredentials, getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
+
 import * as ProjectsActions from './projects.actions';
 
 @Injectable()
@@ -65,6 +67,22 @@ export class ProjectsEffects {
         .switchMap(([action, project]) => this.gitCommitService.commit(project, action.name, action.email, action.message))
         .switchMap(([payload, status]) => [new ProjectsActions.CommitAction(payload), new ProjectsActions.SetStatusesAction(status)]);
 
+    @Effect()
+    public readonly push$: Observable<ProjectsActions.PushViaHttpAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartPushViaHttp)
+        .map((action: ProjectsActions.StartPushViaHttpAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .switchMap(([action, project, credentials]) =>
+            this.gitPushService.pushViaHttp(
+                project,
+                action.remote,
+                action.reference,
+                credentials.https.username,
+                credentials.https.password,
+            ),
+        )
+        .map(() => new ProjectsActions.PushViaHttpAction());
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,
@@ -72,5 +90,6 @@ export class ProjectsEffects {
         private readonly gitRemoteService: GitRemoteService,
         private readonly gitStagingService: GitStagingService,
         private readonly gitCommitService: GitCommitService,
+        private readonly gitPushService: GitPushService,
     ) {}
 }
