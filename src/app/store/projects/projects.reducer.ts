@@ -171,6 +171,48 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     push: false,
                 },
             };
+        case ProjectsActions.ProjectsActionTypes.StartStash:
+        case ProjectsActions.ProjectsActionTypes.StartPop:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    stash: true,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.Stash:
+        case ProjectsActions.ProjectsActionTypes.Pop:
+            // TODO
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    stash: false,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.StartCreateBranch:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    references: true,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.CreateBranch:
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        references: [...state.projects[action.payload.projectName].references, action.payload.reference],
+                    },
+                },
+                loading: {
+                    ...state.loading,
+                    references: false,
+                },
+            };
         default:
             return state;
     }

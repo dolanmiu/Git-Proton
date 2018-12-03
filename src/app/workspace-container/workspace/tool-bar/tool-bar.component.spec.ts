@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GitModule } from 'app/common/git/git.module';
 import { ToolBarComponent } from './tool-bar.component';
 
 describe('ToolBarComponent', () => {
@@ -12,7 +11,6 @@ describe('ToolBarComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ToolBarComponent],
-            imports: [GitModule],
             providers: [
                 {
                     provide: Store,

@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 
 import { GitCommitService } from 'app/common/git/git-commit.service';
 import { GitPushService } from 'app/common/git/git-push.service';
+import { GitReferenceService } from 'app/common/git/git-reference.service';
 import { GitRemoteService } from 'app/common/git/git-remote.service';
 import { GitStagingService } from 'app/common/git/git-staging.service';
+import { GitStashService } from 'app/common/git/git-stash.service';
 import { getCredentials, getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
 
@@ -83,6 +85,30 @@ export class ProjectsEffects {
         )
         .map(() => new ProjectsActions.PushViaHttpAction());
 
+    @Effect()
+    public readonly stash$: Observable<ProjectsActions.StashAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartStash)
+        .map((action: ProjectsActions.StartStashAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .switchMap(([_, project]) => this.gitStashService.stash(project))
+        .map((count) => new ProjectsActions.StashAction(count));
+
+    @Effect()
+    public readonly pop$: Observable<ProjectsActions.PopAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartPop)
+        .map((action: ProjectsActions.StartPopAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .switchMap(([_, project]) => this.gitStashService.pop(project))
+        .map((count) => new ProjectsActions.PopAction(count));
+
+    @Effect()
+    public readonly createBranch$: Observable<ProjectsActions.CreateBranchAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartCreateBranch)
+        .map((action: ProjectsActions.StartCreateBranchAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .switchMap(([action, project]) => this.gitReferenceService.createBranch(project, action.branchName))
+        .map((branchName) => new ProjectsActions.CreateBranchAction(branchName));
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,
@@ -91,5 +117,7 @@ export class ProjectsEffects {
         private readonly gitStagingService: GitStagingService,
         private readonly gitCommitService: GitCommitService,
         private readonly gitPushService: GitPushService,
+        private readonly gitStashService: GitStashService,
+        private readonly gitReferenceService: GitReferenceService,
     ) {}
 }

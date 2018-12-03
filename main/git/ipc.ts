@@ -105,10 +105,16 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('git:create-branch', (event, project: ProjectState, referenceName: string) => {
-            branch(project.path, referenceName)
-                .then((reference) => {})
-                .catch(console.error);
+        ipcMain.on('git:create-branch', async (event, project: ProjectState, referenceName: string) => {
+            try {
+                const reference = await branch(project.path, referenceName);
+                event.sender.send('git:create-branch-result', undefined, {
+                    projectName: project.name,
+                    reference: reference,
+                } as ReferenceIPCData);
+            } catch (e) {
+                event.sender.send('git:create-branch-result', e);
+            }
         });
 
         ipcMain.on('get-current-branch', (event, project: ProjectState) => {
@@ -137,12 +143,12 @@ export class NodeGitIPC {
 
         ipcMain.on('stash', async (event, project: ProjectState) => {
             try {
-                const oid = await stash(project.path);
-                console.log(oid);
+                const stashCount = await stash(project.path);
+                console.log(stashCount);
 
-                event.sender.send('stage-result', undefined, {});
+                event.sender.send('stash-result', undefined, stashCount);
             } catch (e) {
-                event.sender.send('stage-result', e);
+                event.sender.send('stash-result', e);
             }
         });
 

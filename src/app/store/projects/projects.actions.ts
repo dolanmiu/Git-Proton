@@ -17,7 +17,13 @@ export enum ProjectsActionTypes {
     StartUnStage = '[Projects] Start Un-Stage',
     UnStage = '[Projects] Un-Stage',
     StartPushViaHttp = '[Projects] Start Push via HTTP',
-    PushViaHttp = '[Projects] Push',
+    PushViaHttp = '[Projects] Push via HTTP',
+    StartPop = '[Projects] Start Pop',
+    Pop = '[Projects] Pop',
+    StartStash = '[Projects] Start Stash',
+    Stash = '[Projects] Stash',
+    StartCreateBranch = '[Projects] Start Create Branch',
+    CreateBranch = '[Projects] Create Branch',
 }
 
 export class AddProjectAction implements Action {
@@ -122,6 +128,42 @@ export class PushViaHttpAction implements Action {
     constructor() {}
 }
 
+export class StartPopAction implements Action {
+    public readonly type = ProjectsActionTypes.StartPop;
+
+    constructor() {}
+}
+
+export class PopAction implements Action {
+    public readonly type = ProjectsActionTypes.Pop;
+
+    constructor(public readonly stashCount: number) {}
+}
+
+export class StartStashAction implements Action {
+    public readonly type = ProjectsActionTypes.StartStash;
+
+    constructor() {}
+}
+
+export class StashAction implements Action {
+    public readonly type = ProjectsActionTypes.Stash;
+
+    constructor(public readonly stashCount: number) {}
+}
+
+export class StartCreateBranchAction implements Action {
+    public readonly type = ProjectsActionTypes.StartCreateBranch;
+
+    constructor(public readonly branchName: string) {}
+}
+
+export class CreateBranchAction implements Action {
+    public readonly type = ProjectsActionTypes.CreateBranch;
+
+    constructor(public readonly payload: ReferenceIPCData) {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | StartCommitAction
@@ -139,4 +181,10 @@ export type ProjectActions =
     | StartUnStageAction
     | UnStageAction
     | StartPushViaHttpAction
-    | PushViaHttpAction;
+    | PushViaHttpAction
+    | StartPopAction
+    | PopAction
+    | StartStashAction
+    | StashAction
+    | StartCreateBranchAction
+    | CreateBranchAction;

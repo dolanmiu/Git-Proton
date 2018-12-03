@@ -7,5 +7,7 @@ interface ProjectsState {
         staging: boolean;
         commit: boolean;
         push: boolean;
+        stash: boolean;
+        references: boolean;
     };
 }

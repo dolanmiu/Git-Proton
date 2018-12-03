@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { GitReferenceService } from 'app/common/git/git-reference.service';
-import { GitStashService } from 'app/common/git/git-stash.service';
-import { getCurrentProject, StartPushViaHttpAction } from 'app/store';
+import { StartCreateBranchAction, StartPopAction, StartPushViaHttpAction, StartStashAction } from 'app/store';
 
 @Component({
     selector: 'app-tool-bar',
@@ -11,42 +9,20 @@ import { getCurrentProject, StartPushViaHttpAction } from 'app/store';
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    constructor(
-        private store: Store<AppState>,
-        private gitReferenceService: GitReferenceService,
-        private gitStashService: GitStashService,
-    ) {}
+    constructor(private store: Store<AppState>) {}
 
     public ngOnInit(): void {}
 
     public createBranch(): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitReferenceService.createBranch(project, 'test');
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartCreateBranchAction('test'));
     }
 
     public stash(): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitStashService.stash(project);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartStashAction());
     }
 
     public pop(): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitStashService.pop(project);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartPopAction());
     }
 
     public push(): void {

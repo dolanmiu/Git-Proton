@@ -33,11 +33,11 @@ export class GitStashService extends ElectronSwitchService {
         );
     }
 
-    public stash(project: ProjectState): Observable<StatusIPCData> {
+    public stash(project: ProjectState): Observable<number> {
         this.stashSwitcheroo.execute(project);
 
-        return new Observable<StatusIPCData>((observer) => {
-            this.ipcRenderer.once('stash-result', (_, error: Error, data: StatusIPCData) => {
+        return new Observable<number>((observer) => {
+            this.ipcRenderer.once('stash-result', (_, error: Error, data: number) => {
                 this.zone.run(() => {
                     if (error) {
                         observer.complete();
@@ -51,11 +51,11 @@ export class GitStashService extends ElectronSwitchService {
         });
     }
 
-    public pop(project: ProjectState): Observable<StatusIPCData> {
+    public pop(project: ProjectState): Observable<number> {
         this.popSwitcheroo.execute(project);
 
-        return new Observable<StatusIPCData>((observer) => {
-            this.ipcRenderer.once('pop-result', (_, error: Error, data: StatusIPCData) => {
+        return new Observable<number>((observer) => {
+            this.ipcRenderer.once('pop-result', (_, error: Error, data: number) => {
                 this.zone.run(() => {
                     if (error) {
                         observer.complete();

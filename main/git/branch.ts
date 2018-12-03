@@ -6,7 +6,9 @@ export async function branch(directory: string, referenceName: string): Promise<
 
     const commit = await repo.getHeadCommit();
     const reference = await repo.createBranch(referenceName, commit, false);
-    return reference;
+    return {
+        name: reference.name(),
+    };
 }
 
 // tslint:disable-next-line:no-any

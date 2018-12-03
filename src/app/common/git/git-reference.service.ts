@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ipcRenderer } from 'electron';
+import { Observable } from 'rxjs';
 
 import { ElectronSwitchService } from '../electron-switch.service';
 import { ElectronSwitcheroo } from '../electron-switcheroo';
@@ -12,7 +13,7 @@ export class GitReferenceService extends ElectronSwitchService {
     private readonly checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
     private readonly getCurrentBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
-    constructor() {
+    constructor(private readonly zone: NgZone) {
         super();
 
         if (this.IsElectron) {
@@ -51,8 +52,22 @@ export class GitReferenceService extends ElectronSwitchService {
         this.getBranchesSwitcheroo.execute(project);
     }
 
-    public createBranch(project: ProjectState, reference: string): void {
+    public createBranch(project: ProjectState, reference: string): Observable<ReferenceIPCData> {
         this.createBranchSwitcheroo.execute(project, reference);
+
+        return new Observable<ReferenceIPCData>((observer) => {
+            this.ipcRenderer.once('git:create-branch-result', (_, error: Error, data: ReferenceIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 
     public checkoutBranch(project: ProjectState, reference: string): void {
