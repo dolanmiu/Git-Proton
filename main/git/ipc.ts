@@ -1,12 +1,11 @@
 import { ipcMain } from 'electron';
 
-import { branch, checkoutBranch, getCurrentBranch } from './branch';
 import { fetch, fetchAll } from './fetch';
 import { commit } from './git-commit';
 import diff from './git-diff';
 import { stage, unstage } from './git-stage';
 import { pushViaHttp, pushViaSsh } from './push';
-import getReferences from './references';
+import { branch, checkoutBranch, getCurrentBranch, getReferences } from './references';
 import { createRemote, deleteRemote, getRemotes } from './remote';
 import { pop, stash } from './stash';
 import status from './status';
