@@ -10,8 +10,7 @@ export async function getReferences(directory: string): Promise<ReferenceData[]>
     });
 }
 
-// tslint:disable-next-line:no-any
-export async function branch(directory: string, referenceName: string): Promise<any> {
+export async function branch(directory: string, referenceName: string): Promise<ReferenceData> {
     const repo = await nodegit.Repository.open(directory);
 
     const commit = await repo.getHeadCommit();
@@ -19,21 +18,11 @@ export async function branch(directory: string, referenceName: string): Promise<
     return mapReference(reference);
 }
 
-// tslint:disable-next-line:no-any
-export async function checkoutBranch(directory: string, referenceName: string): Promise<any> {
+export async function checkoutBranch(directory: string, referenceName: string): Promise<void> {
     const repo = await nodegit.Repository.open(directory);
 
-    const reference = await repo.checkoutBranch(referenceName);
-    return mapReference(reference);
-}
-
-// Maybe not needed
-// tslint:disable-next-line:no-any
-export async function getCurrentBranch(directory: string): Promise<any> {
-    const repo = await nodegit.Repository.open(directory);
-
-    const reference = await repo.getCurrentBranch();
-    return mapReference(reference);
+    await repo.checkoutBranch(referenceName);
+    return;
 }
 
 // tslint:disable-next-line:no-any

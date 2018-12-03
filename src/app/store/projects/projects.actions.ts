@@ -24,6 +24,8 @@ export enum ProjectsActionTypes {
     Stash = '[Projects] Stash',
     StartCreateBranch = '[Projects] Start Create Branch',
     CreateBranch = '[Projects] Create Branch',
+    StartCheckoutBranch = '[Projects] Start Checkout Branch',
+    CheckoutBranch = '[Projects] Checkout Branch',
 }
 
 export class AddProjectAction implements Action {
@@ -164,6 +166,18 @@ export class CreateBranchAction implements Action {
     constructor(public readonly payload: ReferenceIPCData) {}
 }
 
+export class StartCheckoutBranchAction implements Action {
+    public readonly type = ProjectsActionTypes.StartCheckoutBranch;
+
+    constructor(public readonly branchName: string) {}
+}
+
+export class CheckoutBranchAction implements Action {
+    public readonly type = ProjectsActionTypes.CheckoutBranch;
+
+    constructor(public readonly payload: ReferencesIPCData) {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | StartCommitAction
@@ -187,4 +201,6 @@ export type ProjectActions =
     | StartStashAction
     | StashAction
     | StartCreateBranchAction
-    | CreateBranchAction;
+    | CreateBranchAction
+    | StartCheckoutBranchAction
+    | CheckoutBranchAction;

@@ -89,7 +89,7 @@ export class ProjectsEffects {
     public readonly stash$: Observable<ProjectsActions.StashAction> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.StartStash)
         .map((action: ProjectsActions.StartStashAction) => action)
-        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([_, project]) => this.gitStashService.stash(project))
         .map((count) => new ProjectsActions.StashAction(count));
 
@@ -97,7 +97,7 @@ export class ProjectsEffects {
     public readonly pop$: Observable<ProjectsActions.PopAction> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.StartPop)
         .map((action: ProjectsActions.StartPopAction) => action)
-        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([_, project]) => this.gitStashService.pop(project))
         .map((count) => new ProjectsActions.PopAction(count));
 
@@ -105,9 +105,17 @@ export class ProjectsEffects {
     public readonly createBranch$: Observable<ProjectsActions.CreateBranchAction> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.StartCreateBranch)
         .map((action: ProjectsActions.StartCreateBranchAction) => action)
-        .withLatestFrom(this.store.select(getCurrentProject), this.store.select(getCredentials))
+        .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([action, project]) => this.gitReferenceService.createBranch(project, action.branchName))
         .map((branchName) => new ProjectsActions.CreateBranchAction(branchName));
+
+    @Effect()
+    public readonly checkoutBranch$: Observable<ProjectsActions.CheckoutBranchAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartCheckoutBranch)
+        .map((action: ProjectsActions.StartCheckoutBranchAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([action, project]) => this.gitReferenceService.checkoutBranch(project, action.branchName))
+        .map((branchName) => new ProjectsActions.CheckoutBranchAction(branchName));
 
     constructor(
         private readonly actions$: Actions,

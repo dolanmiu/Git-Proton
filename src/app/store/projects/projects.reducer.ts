@@ -191,6 +191,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                 },
             };
         case ProjectsActions.ProjectsActionTypes.StartCreateBranch:
+        case ProjectsActions.ProjectsActionTypes.StartCheckoutBranch:
             return {
                 ...state,
                 loading: {
@@ -206,6 +207,21 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     [action.payload.projectName]: {
                         ...state.projects[action.payload.projectName],
                         references: [...state.projects[action.payload.projectName].references, action.payload.reference],
+                    },
+                },
+                loading: {
+                    ...state.loading,
+                    references: false,
+                },
+            };
+        case ProjectsActions.ProjectsActionTypes.CheckoutBranch:
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        references: action.payload.references,
                     },
                 },
                 loading: {

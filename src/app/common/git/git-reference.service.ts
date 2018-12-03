@@ -11,7 +11,6 @@ export class GitReferenceService extends ElectronSwitchService {
     private readonly getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
     private readonly createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
     private readonly checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
-    private readonly getCurrentBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
     constructor(private readonly zone: NgZone) {
         super();
@@ -39,13 +38,6 @@ export class GitReferenceService extends ElectronSwitchService {
             },
             (project, reference) => {},
         );
-
-        this.getCurrentBranchSwitcheroo = new ElectronSwitcheroo(
-            (project) => {
-                this.ipcRenderer.send('get-current-branch', project);
-            },
-            (project) => {},
-        );
     }
 
     public getBranches(project: ProjectState): void {
@@ -70,11 +62,21 @@ export class GitReferenceService extends ElectronSwitchService {
         });
     }
 
-    public checkoutBranch(project: ProjectState, reference: string): void {
+    public checkoutBranch(project: ProjectState, reference: string): Observable<ReferencesIPCData> {
         this.checkoutBranchSwitcheroo.execute(project, reference);
-    }
 
-    public getCurrentBranch(project: ProjectState): void {
-        this.getCurrentBranchSwitcheroo.execute(project);
+        return new Observable<ReferencesIPCData>((observer) => {
+            this.ipcRenderer.once('checkout-branch-result', (_, error: Error, data: ReferencesIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 }

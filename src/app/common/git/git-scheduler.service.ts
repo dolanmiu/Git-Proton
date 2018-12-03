@@ -44,6 +44,5 @@ export class GitSchedulerService {
         this.gitFetchService.fetch(project);
         this.gitDiffService.diff(project);
         this.gitRemoteService.getRemotes(project);
-        this.referenceService.getCurrentBranch(project);
     }
 }

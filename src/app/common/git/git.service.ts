@@ -35,10 +35,6 @@ export class GitService extends ElectronSwitchService {
             this.ipcRenderer.on('remotes', (event, data: RemoteIPCData) => {
                 store.dispatch(new SetRemotesAction(data.projectName, data.remotes));
             });
-
-            this.ipcRenderer.on('current-branch', (event, data: ReferenceIPCData) => {
-                // TODO: unused
-            });
         }
 
         this.ipcRendererSwitcheroo = new ElectronSwitcheroo(

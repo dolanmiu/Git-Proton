@@ -5,7 +5,7 @@ import { commit } from './git-commit';
 import diff from './git-diff';
 import { stage, unstage } from './git-stage';
 import { pushViaHttp, pushViaSsh } from './push';
-import { branch, checkoutBranch, getCurrentBranch, getReferences } from './references';
+import { branch, checkoutBranch, getReferences } from './references';
 import { createRemote, deleteRemote, getRemotes } from './remote';
 import { pop, stash } from './stash';
 import status from './status';
@@ -98,10 +98,19 @@ export class NodeGitIPC {
             }
         });
 
-        ipcMain.on('checkout-branch', (event, project: ProjectState, referenceName: string) => {
-            checkoutBranch(project.path, referenceName)
-                .then((reference) => {})
-                .catch(console.error);
+        ipcMain.on('checkout-branch', async (event, project: ProjectState, referenceName: string) => {
+            try {
+                await checkoutBranch(project.path, referenceName);
+                const references = await getReferences(project.path);
+
+                event.sender.send('checkout-branch-result', undefined, {
+                    projectName: project.name,
+                    references: references,
+                } as ReferencesIPCData);
+            } catch (e) {
+                console.log(e);
+                event.sender.send('checkout-branch-result', e);
+            }
         });
 
         ipcMain.on('git:create-branch', async (event, project: ProjectState, referenceName: string) => {
@@ -114,17 +123,6 @@ export class NodeGitIPC {
             } catch (e) {
                 event.sender.send('git:create-branch-result', e);
             }
-        });
-
-        ipcMain.on('get-current-branch', (event, project: ProjectState) => {
-            getCurrentBranch(project.path)
-                .then((currentBranch) => {
-                    event.sender.send('current-branch', {
-                        projectName: project.name,
-                        reference: currentBranch,
-                    } as ReferenceIPCData);
-                })
-                .catch(console.error);
         });
 
         ipcMain.on('diff', (event, project: ProjectState, files: string[]) => {
