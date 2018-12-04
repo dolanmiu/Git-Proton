@@ -41,7 +41,7 @@
     "@ngrx/store": "6.1.2",
     "@ngrx/store-devtools": "6.1.1",
     "@types/electron-settings": "3.1.1",
-    "@types/lodash": "4.14.118",
+    "@types/lodash": "4.14.119",
     "@types/shelljs": "0.8.0",
     "angular-tree-component": "7.2.0",
     "core-js": "2.4.1",
