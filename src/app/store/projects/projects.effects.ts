@@ -4,7 +4,15 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GitCommitService, GitPushService, GitReferenceService, GitRemoteService, GitStagingService, GitStashService } from 'app/git';
+import {
+    GitCommitService,
+    GitPushService,
+    GitReferenceService,
+    GitRemoteService,
+    GitService,
+    GitStagingService,
+    GitStashService,
+} from 'app/git';
 import { getCredentials, getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
 
@@ -15,10 +23,13 @@ export class ProjectsEffects {
     @Effect({ dispatch: false })
     public readonly addProjectToTab$: Observable<void> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.AddProject)
-        .map((action: ProjectsActions.AddProjectAction) => action.projectName)
-        .do((projectName) => {
+        .map((action: ProjectsActions.AddProjectAction) => action)
+        .do((action) => {
+            this.gitService.getCommits(action.projectPath);
+        })
+        .do((action) => {
             const route = this.router.config.find((page) => page.path === 'workspace');
-            route.children.splice(1, 0, { path: projectName, component: WorkspaceComponent });
+            route.children.splice(1, 0, { path: action.projectName, component: WorkspaceComponent });
         })
         .map(() => undefined);
 
@@ -122,5 +133,6 @@ export class ProjectsEffects {
         private readonly gitPushService: GitPushService,
         private readonly gitStashService: GitStashService,
         private readonly gitReferenceService: GitReferenceService,
+        private readonly gitService: GitService,
     ) {}
 }

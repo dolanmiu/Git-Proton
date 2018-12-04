@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 
-import { GitModule } from 'app/git/git.module';
-
-import { AppCommonModule } from '../../../common/common.module';
+import { AppCommonModule } from 'app/common/common.module';
 import { OpenRepoComponent } from './open-repo.component';
 import { RepoButtonComponent } from './repo-button/repo-button.component';
 
@@ -14,7 +12,7 @@ describe('OpenRepoComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [OpenRepoComponent, RepoButtonComponent],
-            imports: [AppCommonModule, StoreModule.forRoot({}), GitModule],
+            imports: [AppCommonModule, StoreModule.forRoot({})],
         }).compileComponents();
     }));
 
