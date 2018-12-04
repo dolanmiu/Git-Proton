@@ -5,6 +5,7 @@ import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { GitModule } from 'app/git/git.module';
 import { environment } from 'environments/environment';
 import { AppEffects } from './app/app.effects';
 import { PersistanceEffects } from './persistance/persistance.effects';
@@ -51,6 +52,7 @@ import { TreeEffects } from './tree/tree.effects';
             logOnly: environment.production, // Restrict extension to log-only mode
         }),
         StoreRouterConnectingModule,
+        GitModule,
     ],
     declarations: [],
     providers: [

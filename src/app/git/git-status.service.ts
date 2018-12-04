@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
 
-import { ElectronSwitchService } from 'app/common/electron-switch.service';
-import { ElectronSwitcheroo } from '../electron-switcheroo';
+import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class GitStatusService extends ElectronSwitchService {

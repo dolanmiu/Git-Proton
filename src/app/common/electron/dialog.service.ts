@@ -1,8 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { remote } from 'electron';
 
-import { ElectronSwitchService } from '../electron-switch.service';
-import { ElectronSwitcheroo } from '../electron-switcheroo';
+import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 import { ProjectPathService } from '../project-path.service';
 
 const FAKE_DIALOGS: ProjectPathDetails[] = [

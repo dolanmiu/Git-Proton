@@ -1,7 +1,5 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
-import { GitSchedulerService } from 'app/common/git/git-scheduler.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 const left = [
     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
@@ -41,10 +39,4 @@ const right = [
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkspaceContainerComponent implements OnInit {
-    constructor(private schedulerService: GitSchedulerService) {}
-
-    public ngOnInit(): void {
-        this.schedulerService.start();
-    }
-}
+export class WorkspaceContainerComponent {}

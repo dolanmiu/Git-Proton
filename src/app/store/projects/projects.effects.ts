@@ -4,12 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GitCommitService } from 'app/common/git/git-commit.service';
-import { GitPushService } from 'app/common/git/git-push.service';
-import { GitReferenceService } from 'app/common/git/git-reference.service';
-import { GitRemoteService } from 'app/common/git/git-remote.service';
-import { GitStagingService } from 'app/common/git/git-staging.service';
-import { GitStashService } from 'app/common/git/git-stash.service';
+import { GitCommitService, GitPushService, GitReferenceService, GitRemoteService, GitStagingService, GitStashService } from 'app/git';
 import { getCredentials, getCurrentProject } from 'app/store';
 import { WorkspaceComponent } from 'app/workspace-container/workspace/workspace.component';
 

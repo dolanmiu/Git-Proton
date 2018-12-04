@@ -8,6 +8,7 @@ import { GitPushService } from './git-push.service';
 import { GitReferenceService } from './git-reference.service';
 import { GitRemoteService } from './git-remote.service';
 import { GitSchedulerService } from './git-scheduler.service';
+import { GitStagingService } from './git-staging.service';
 import { GitStashService } from './git-stash.service';
 import { GitStatusService } from './git-status.service';
 import { GitService } from './git.service';
@@ -26,6 +27,7 @@ import { GitService } from './git.service';
         GitStashService,
         GitPushService,
         GitRemoteService,
+        GitStagingService,
     ],
 })
 export class GitModule {}

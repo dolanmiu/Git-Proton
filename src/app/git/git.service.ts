@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
 
-import { CommitAction, SetReferencesAction, SetRemotesAction, SetStatusesAction } from 'app/store/projects/projects.actions';
-import { ElectronSwitchService } from '../electron-switch.service';
-import { ElectronSwitcheroo } from '../electron-switcheroo';
-import { ProjectPathService } from '../project-path.service';
+import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
+import { CommitAction, SetReferencesAction, SetRemotesAction, SetStatusesAction } from 'app/store';
+
+import { ProjectPathService } from 'app/common/project-path.service';
 
 @Injectable()
 export class GitService extends ElectronSwitchService {

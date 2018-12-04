@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as settings from 'electron-settings';
 
-import { ElectronSwitchService } from '../electron-switch.service';
-import { ElectronSwitcheroo } from '../electron-switcheroo';
+import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class SettingsService extends ElectronSwitchService {

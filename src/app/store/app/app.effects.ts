@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 import { defer, Observable } from 'rxjs';
 
 import { SettingsService } from 'app/common/electron/settings.service';
+import { GitSchedulerService } from 'app/git/git-scheduler.service';
 import { SetPersistanceAction } from '../persistance/persistance.actions';
 
 @Injectable()
@@ -12,8 +13,10 @@ export class AppEffects {
     public readonly init$: Observable<Action> = defer(() => {
         const data = this.settingsService.getSetting();
 
+        this.schedulerService.start();
+
         return Observable.of(new SetPersistanceAction(data));
     });
 
-    constructor(private settingsService: SettingsService) {}
+    constructor(private readonly settingsService: SettingsService, private readonly schedulerService: GitSchedulerService) {}
 }

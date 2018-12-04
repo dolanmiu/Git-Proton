@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DialogService } from 'app/common/electron/dialog.service';
-import { GitService } from 'app/common/git/git.service';
-import { AddProjectAction } from 'app/store/projects/projects.actions';
+import { GitService } from 'app/git/git.service';
+import { AddProjectAction } from 'app/store';
 
 @Component({
     selector: 'app-open-repo',
