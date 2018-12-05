@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
 
 import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
@@ -10,14 +9,12 @@ import { ProjectPathService } from 'app/common/project-path.service';
 
 @Injectable()
 export class GitService extends ElectronSwitchService {
-    private readonly ipcRenderer: typeof ipcRenderer;
     private readonly fs: typeof fs;
     private readonly ipcRendererSwitcheroo: ElectronSwitcheroo<void, string>;
 
     constructor(readonly store: Store<AppState>, private readonly projectPathService: ProjectPathService) {
         super();
         if (this.IsElectron) {
-            this.ipcRenderer = window.require('electron').ipcRenderer;
             this.fs = window.require('fs');
 
             this.ipcRenderer.on('commit', (event, data: CommitIPCData) => {

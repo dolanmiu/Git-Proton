@@ -1,21 +1,16 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ipcRenderer } from 'electron';
 import { Observable } from 'rxjs';
 
 import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class GitPushService extends ElectronSwitchService {
-    private readonly ipcRenderer: typeof ipcRenderer;
     private readonly pushViaSshSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string>;
     private readonly pushViaHttpSwitcheroo: ElectronSwitcheroo<void, ProjectState, string, string, string, string>;
 
     constructor(private readonly zone: NgZone) {
         super();
 
-        if (this.IsElectron) {
-            this.ipcRenderer = window.require('electron').ipcRenderer;
-        }
         this.pushViaSshSwitcheroo = new ElectronSwitcheroo(
             (project, remoteName, gitUrl) => {
                 this.ipcRenderer.send('push-via-ssh', project, remoteName, gitUrl);

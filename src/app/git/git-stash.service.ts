@@ -1,21 +1,15 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ipcRenderer } from 'electron';
 import { Observable } from 'rxjs';
 
 import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class GitStashService extends ElectronSwitchService {
-    private readonly ipcRenderer: typeof ipcRenderer;
     private readonly stashSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
     private readonly popSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
 
     constructor(private readonly zone: NgZone) {
         super();
-
-        if (this.IsElectron) {
-            this.ipcRenderer = window.require('electron').ipcRenderer;
-        }
 
         this.stashSwitcheroo = new ElectronSwitcheroo(
             (project) => {

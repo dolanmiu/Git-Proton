@@ -1,12 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ipcRenderer } from 'electron';
 import { Observable } from 'rxjs';
 
 import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class GitReferenceService extends ElectronSwitchService {
-    private readonly ipcRenderer: typeof ipcRenderer;
     private readonly getBranchesSwitcheroo: ElectronSwitcheroo<void, ProjectState>;
     private readonly createBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
     private readonly checkoutBranchSwitcheroo: ElectronSwitcheroo<void, ProjectState, string>;
@@ -14,9 +12,6 @@ export class GitReferenceService extends ElectronSwitchService {
     constructor(private readonly zone: NgZone) {
         super();
 
-        if (this.IsElectron) {
-            this.ipcRenderer = window.require('electron').ipcRenderer;
-        }
         this.getBranchesSwitcheroo = new ElectronSwitcheroo(
             (project) => {
                 this.ipcRenderer.send('get-references', project);
