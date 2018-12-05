@@ -9,7 +9,7 @@ import { StartCreateBranchAction, StartPopAction, StartPushViaHttpAction, StartS
     styleUrls: ['./tool-bar.component.scss'],
 })
 export class ToolBarComponent implements OnInit {
-    constructor(private store: Store<AppState>) {}
+    constructor(private readonly store: Store<AppState>) {}
 
     public ngOnInit(): void {}
 

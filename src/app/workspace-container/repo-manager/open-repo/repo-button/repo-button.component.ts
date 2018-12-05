@@ -11,8 +11,6 @@ export class RepoButtonComponent implements OnInit {
     public readonly projectName: string;
     public readonly parentFolder: string;
 
-    constructor() {}
-
     public ngOnInit(): void {
         if (!this.directory) {
             console.warn('"directory" is not set as the input!');

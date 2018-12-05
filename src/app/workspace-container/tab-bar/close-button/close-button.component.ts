@@ -11,7 +11,7 @@ import { RemoveProjectAction } from 'app/store/projects/projects.actions';
 export class CloseButtonComponent implements OnInit {
     @Input() private readonly projectName: string;
 
-    constructor(private store: Store<AppState>) {}
+    constructor(private readonly store: Store<AppState>) {}
 
     public ngOnInit(): void {}
 

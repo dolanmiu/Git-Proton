@@ -17,7 +17,7 @@ export class DialogService extends ElectronSwitchService {
     private accessCounter: number;
     private readonly dialogSwitcheroo: ElectronSwitcheroo<void, (details: ProjectPathDetails) => void>;
 
-    constructor(private zone: NgZone, private projectPathService: ProjectPathService) {
+    constructor(readonly zone: NgZone, readonly projectPathService: ProjectPathService) {
         super();
 
         if (this.IsElectron) {

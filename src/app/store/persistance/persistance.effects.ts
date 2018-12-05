@@ -25,5 +25,5 @@ export class PersistanceEffects {
         })
         .map(() => undefined);
 
-    constructor(private actions$: Actions, private settingsService: SettingsService) {}
+    constructor(private readonly actions$: Actions, private readonly settingsService: SettingsService) {}
 }

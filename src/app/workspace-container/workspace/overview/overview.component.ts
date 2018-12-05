@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class OverviewComponent implements OnInit {
     public readonly tree$: Observable<TreeState>;
 
-    constructor(store: Store<AppState>) {
+    constructor(readonly store: Store<AppState>) {
         this.tree$ = store.select('tree');
     }
 

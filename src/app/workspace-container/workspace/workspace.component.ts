@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'app-workspace',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['./workspace.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkspaceComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class WorkspaceComponent {}

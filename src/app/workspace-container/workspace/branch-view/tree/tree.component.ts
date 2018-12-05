@@ -36,7 +36,7 @@ export class TreeComponent {
         },
     };
 
-    constructor(private store: Store<AppState>) {
+    constructor(private readonly store: Store<AppState>) {
         this.nodes$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)

@@ -10,7 +10,7 @@ import { AddProjectAction } from 'app/store';
     styleUrls: ['./open-repo.component.scss'],
 })
 export class OpenRepoComponent implements OnInit {
-    constructor(private dialogService: DialogService, private store: Store<AppState>) {}
+    constructor(private readonly dialogService: DialogService, private readonly store: Store<AppState>) {}
 
     public ngOnInit(): void {}
 

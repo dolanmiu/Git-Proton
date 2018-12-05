@@ -16,7 +16,7 @@ export class AuthenticationComponent implements OnInit {
     public form: FormGroup;
     public readonly credentials$: Observable<PersistanceCredentials>;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private readonly store: Store<AppState>) {
         this.credentials$ = store.select(getCredentials);
     }
 

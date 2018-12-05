@@ -15,5 +15,5 @@ export class TreeEffects {
             return Observable.empty();
         });
 
-    constructor(private actions$: Actions) {}
+    constructor(private readonly actions$: Actions) {}
 }
