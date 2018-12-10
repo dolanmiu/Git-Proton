@@ -8,7 +8,6 @@ import { pushViaHttp, pushViaSsh } from './push';
 import { branch, checkoutBranch, getReferences } from './references';
 import { createRemote, deleteRemote, getRemotes } from './remote';
 import { pop, stash } from './stash';
-import status from './status';
 import walk from './walk';
 
 export class NodeGitIPC {
@@ -24,11 +23,11 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('get-status', (event, project: ProjectState) => {
-            status(project.path)
-                .then((statuses) => {})
-                .catch(console.error);
-        });
+        // ipcMain.on('get-status', (event, project: ProjectState) => {
+        //     status(project.path)
+        //         .then((statuses) => {})
+        //         .catch(console.error);
+        // });
 
         ipcMain.on('get-references', async (event, project: ProjectState) => {
             try {
@@ -127,17 +126,17 @@ export class NodeGitIPC {
             }
         });
 
-        ipcMain.on('diff', (event, project: ProjectState, files: string[]) => {
-            diff(project.path)
-                .then((statuses) => {
-                    event.sender.send('statuses', {
-                        projectName: project.name,
-                        statuses: statuses,
-                    } as StatusIPCData);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+        ipcMain.on('get-diff', async (event, project: ProjectState, files: string[]) => {
+            try {
+                const statuses = await diff(project.path);
+
+                event.sender.send('get-diff-result', undefined, {
+                    projectName: project.name,
+                    statuses: statuses,
+                } as StatusIPCData);
+            } catch (e) {
+                event.sender.send('get-diff-result', e);
+            }
         });
 
         ipcMain.on('stash', async (event, project: ProjectState) => {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import {
     GitCommitService,
+    GitDiffService,
     GitPushService,
     GitReferenceService,
     GitRemoteService,
@@ -57,7 +58,7 @@ export class ProjectsEffects {
         .map((action: ProjectsActions.StartStageAction) => action)
         .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([action, project]) => this.gitStagingService.stage(project, action.files))
-        .map((payload) => new ProjectsActions.StageAction(payload));
+        .map((statuses) => new ProjectsActions.StageAction(statuses));
 
     @Effect()
     public readonly unstageFiles$: Observable<ProjectsActions.UnStageAction> = this.actions$
@@ -139,6 +140,14 @@ export class ProjectsEffects {
         .switchMap(([_, project]) => this.gitRemoteService.getRemotes(project))
         .map((remotes) => new ProjectsActions.SetRemotesAction(remotes));
 
+        @Effect()
+    public readonly getStatus$: Observable<ProjectsActions.GetDiffAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartGetDiff)
+        .map((action: ProjectsActions.StartGetDiffAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([_, project]) => this.gitDiffService.diff(project))
+        .map((statuses) => new ProjectsActions.GetDiffAction(statuses));
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,
@@ -150,5 +159,6 @@ export class ProjectsEffects {
         private readonly gitStashService: GitStashService,
         private readonly gitReferenceService: GitReferenceService,
         private readonly gitService: GitService,
+        private readonly gitDiffService: GitDiffService,
     ) {}
 }

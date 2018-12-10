@@ -91,6 +91,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
             };
         case ProjectsActions.ProjectsActionTypes.StartDeleteRemote:
         case ProjectsActions.ProjectsActionTypes.StartAddRemote:
+        case ProjectsActions.ProjectsActionTypes.StartSetRemotes:
             return {
                 ...state,
                 loading: {
@@ -130,8 +131,24 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                     remotes: false,
                 },
             };
+        case ProjectsActions.ProjectsActionTypes.SetRemotes:
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        remotes: action.payload.remotes,
+                    },
+                },
+                loading: {
+                    ...state.loading,
+                    remotes: false,
+                },
+            };
         case ProjectsActions.ProjectsActionTypes.StartStage:
         case ProjectsActions.ProjectsActionTypes.StartUnStage:
+        case ProjectsActions.ProjectsActionTypes.StartGetDiff:
             return {
                 ...state,
                 loading: {
@@ -141,6 +158,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
             };
         case ProjectsActions.ProjectsActionTypes.UnStage:
         case ProjectsActions.ProjectsActionTypes.Stage:
+        case ProjectsActions.ProjectsActionTypes.GetDiff:
             return {
                 ...state,
                 projects: {
@@ -192,6 +210,7 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
             };
         case ProjectsActions.ProjectsActionTypes.StartCreateBranch:
         case ProjectsActions.ProjectsActionTypes.StartCheckoutBranch:
+        case ProjectsActions.ProjectsActionTypes.StartSetReferences:
             return {
                 ...state,
                 loading: {

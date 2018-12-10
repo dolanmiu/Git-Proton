@@ -39,4 +39,8 @@ const right = [
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkspaceContainerComponent {}
+export class WorkspaceContainerComponent {
+    public doNothing(): void {
+        console.log('Change detection fired');
+    }
+}

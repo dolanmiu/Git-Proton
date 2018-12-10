@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import * as fs from 'fs';
 
 import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
-import { CommitAction, SetStatusesAction } from 'app/store';
+import { CommitAction } from 'app/store';
 
 import { ProjectPathService } from 'app/common/project-path.service';
 
@@ -19,10 +19,6 @@ export class GitService extends ElectronSwitchService {
 
             this.ipcRenderer.on('commit', (event, data: CommitIPCData) => {
                 store.dispatch(new CommitAction(data));
-            });
-
-            this.ipcRenderer.on('statuses', (event, data: StatusIPCData) => {
-                store.dispatch(new SetStatusesAction(data));
             });
         }
 

@@ -28,6 +28,8 @@ export enum ProjectsActionTypes {
     CreateBranch = '[Projects] Create Branch',
     StartCheckoutBranch = '[Projects] Start Checkout Branch',
     CheckoutBranch = '[Projects] Checkout Branch',
+    StartGetDiff = '[Projects] Start Get Diff',
+    GetDiff = '[Projects] Get Diff',
 }
 
 export class AddProjectAction implements Action {
@@ -192,6 +194,18 @@ export class CheckoutBranchAction implements Action {
     constructor(public readonly payload: ReferencesIPCData) {}
 }
 
+export class StartGetDiffAction implements Action {
+    public readonly type = ProjectsActionTypes.StartGetDiff;
+
+    constructor() {}
+}
+
+export class GetDiffAction implements Action {
+    public readonly type = ProjectsActionTypes.GetDiff;
+
+    constructor(public readonly payload: StatusIPCData) {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | StartCommitAction
@@ -219,4 +233,6 @@ export type ProjectActions =
     | StartCreateBranchAction
     | CreateBranchAction
     | StartCheckoutBranchAction
-    | CheckoutBranchAction;
+    | CheckoutBranchAction
+    | StartGetDiffAction
+    | GetDiffAction;
