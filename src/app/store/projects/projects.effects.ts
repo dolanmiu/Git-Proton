@@ -123,6 +123,22 @@ export class ProjectsEffects {
         .switchMap(([action, project]) => this.gitReferenceService.checkoutBranch(project, action.branchName))
         .map((branchName) => new ProjectsActions.CheckoutBranchAction(branchName));
 
+    @Effect()
+    public readonly getReferences$: Observable<ProjectsActions.SetReferencesAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartSetReferences)
+        .map((action: ProjectsActions.StartSetReferencesAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([_, project]) => this.gitReferenceService.getBranches(project))
+        .map((references) => new ProjectsActions.SetReferencesAction(references));
+
+    @Effect()
+    public readonly setRemotes$: Observable<ProjectsActions.SetRemotesAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartSetRemotes)
+        .map((action: ProjectsActions.StartSetRemotesAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([_, project]) => this.gitRemoteService.getRemotes(project))
+        .map((remotes) => new ProjectsActions.SetRemotesAction(remotes));
+
     constructor(
         private readonly actions$: Actions,
         private readonly router: Router,

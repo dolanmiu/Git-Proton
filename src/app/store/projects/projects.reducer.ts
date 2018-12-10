@@ -72,9 +72,9 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                 ...state,
                 projects: {
                     ...state.projects,
-                    [action.projectName]: {
-                        ...state.projects[action.projectName],
-                        references: action.references,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        references: action.payload.references,
                     },
                 },
             };
@@ -83,9 +83,9 @@ export function projectsReducer(state: ProjectsState, action: ProjectsActions.Pr
                 ...state,
                 projects: {
                     ...state.projects,
-                    [action.projectName]: {
-                        ...state.projects[action.projectName],
-                        remotes: action.remotes,
+                    [action.payload.projectName]: {
+                        ...state.projects[action.payload.projectName],
+                        remotes: action.payload.remotes,
                     },
                 },
             };

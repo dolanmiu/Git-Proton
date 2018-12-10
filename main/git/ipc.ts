@@ -30,15 +30,17 @@ export class NodeGitIPC {
                 .catch(console.error);
         });
 
-        ipcMain.on('get-references', (event, project: ProjectState) => {
-            getReferences(project.path)
-                .then((references) => {
-                    event.sender.send('references', {
-                        projectName: project.name,
-                        references: references,
-                    } as ReferencesIPCData);
-                })
-                .catch(console.error);
+        ipcMain.on('get-references', async (event, project: ProjectState) => {
+            try {
+                const references = await getReferences(project.path);
+
+                event.sender.send('get-references-result', undefined, {
+                    projectName: project.name,
+                    references: references,
+                } as ReferencesIPCData);
+            } catch (e) {
+                event.sender.send('get-references-result', e);
+            }
         });
 
         ipcMain.on('fetch', (event, project: ProjectState) => {
@@ -178,19 +180,21 @@ export class NodeGitIPC {
             },
         );
 
-        ipcMain.on('get-remotes', (event, project: ProjectState) => {
-            getRemotes(project.path)
-                .then((result) => {
-                    const remotes: RemoteData[] = result.map((remote) => ({
-                        url: remote.url(),
-                        name: remote.name(),
-                    }));
-                    event.sender.send('remotes', {
-                        projectName: project.name,
-                        remotes: remotes,
-                    } as RemoteIPCData);
-                })
-                .catch(console.error);
+        ipcMain.on('get-remotes', async (event, project: ProjectState) => {
+            try {
+                const result = await getRemotes(project.path);
+
+                const remotes: RemoteData[] = result.map((remote) => ({
+                    url: remote.url(),
+                    name: remote.name(),
+                }));
+                event.sender.send('get-remotes-result', undefined, {
+                    projectName: project.name,
+                    remotes: remotes,
+                } as RemoteIPCData);
+            } catch (e) {
+                event.sender.send('get-remotes-result', e);
+            }
         });
 
         ipcMain.on('create-remote', (event, project: ProjectState, name: string, url: string) => {

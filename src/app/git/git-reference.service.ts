@@ -34,8 +34,22 @@ export class GitReferenceService extends ElectronSwitchService {
         );
     }
 
-    public getBranches(project: ProjectState): void {
+    public getBranches(project: ProjectState): Observable<ReferencesIPCData> {
         this.getBranchesSwitcheroo.execute(project);
+
+        return new Observable<ReferencesIPCData>((observer) => {
+            this.ipcRenderer.once('get-references-result', (_, error: Error, data: ReferencesIPCData) => {
+                this.zone.run(() => {
+                    if (error) {
+                        observer.complete();
+                        return console.error(error);
+                    }
+
+                    observer.next(data);
+                    observer.complete();
+                });
+            });
+        });
     }
 
     public createBranch(project: ProjectState, reference: string): Observable<ReferenceIPCData> {

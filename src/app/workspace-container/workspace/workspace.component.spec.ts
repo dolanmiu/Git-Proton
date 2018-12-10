@@ -32,6 +32,7 @@ describe('WorkspaceComponent', () => {
                     provide: Store,
                     useValue: {
                         select: () => Observable.empty(),
+                        dispatch: () => {},
                     },
                 },
             ],

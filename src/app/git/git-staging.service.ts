@@ -5,60 +5,68 @@ import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 
 @Injectable()
 export class GitStagingService extends ElectronSwitchService {
-    private readonly stageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
-    private readonly unstageSwitcheroo: ElectronSwitcheroo<void, ProjectState, string[]>;
+    private readonly stageSwitcheroo: ElectronSwitcheroo<Observable<StatusIPCData>, ProjectState, string[]>;
+    private readonly unstageSwitcheroo: ElectronSwitcheroo<Observable<StatusIPCData>, ProjectState, string[]>;
 
     constructor(private readonly zone: NgZone) {
         super();
 
         this.stageSwitcheroo = new ElectronSwitcheroo(
             (project, files) => {
-                this.ipcRenderer.send('stage', project, files);
+                return new Observable<StatusIPCData>((observer) => {
+                    this.ipcRenderer.send('stage', project, files);
+
+                    this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
+                        this.zone.run(() => {
+                            if (error) {
+                                observer.complete();
+                                return console.error(error);
+                            }
+
+                            observer.next(data);
+                            observer.complete();
+                        });
+                    });
+                });
             },
-            (project, files) => {},
+            (project, files) =>
+                Observable.of({
+                    projectName: project.name,
+                    statuses: [],
+                }),
         );
 
         this.unstageSwitcheroo = new ElectronSwitcheroo(
             (project, files) => {
-                this.ipcRenderer.send('unstage', project, files);
+                return new Observable<StatusIPCData>((observer) => {
+                    this.ipcRenderer.send('unstage', project, files);
+
+                    this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
+                        this.zone.run(() => {
+                            if (error) {
+                                observer.complete();
+                                return console.error(error);
+                            }
+
+                            observer.next(data);
+                            observer.complete();
+                        });
+                    });
+                });
             },
-            (project, files) => {},
+            (project, files) =>
+                Observable.of({
+                    projectName: project.name,
+                    statuses: [],
+                }),
         );
     }
 
     public stage(project: ProjectState, files: string[]): Observable<StatusIPCData> {
-        this.stageSwitcheroo.execute(project, files);
-
-        return new Observable<StatusIPCData>((observer) => {
-            this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
-                this.zone.run(() => {
-                    if (error) {
-                        observer.complete();
-                        return console.error(error);
-                    }
-
-                    observer.next(data);
-                    observer.complete();
-                });
-            });
-        });
+        return this.stageSwitcheroo.execute(project, files);
     }
 
     public unstage(project: ProjectState, files: string[]): Observable<StatusIPCData> {
-        this.unstageSwitcheroo.execute(project, files);
-
-        return new Observable<StatusIPCData>((observer) => {
-            this.ipcRenderer.once('stage-result', (_, error: Error, data: StatusIPCData) => {
-                this.zone.run(() => {
-                    if (error) {
-                        observer.complete();
-                        return console.error(error);
-                    }
-
-                    observer.next(data);
-                    observer.complete();
-                });
-            });
-        });
+        return this.unstageSwitcheroo.execute(project, files);
     }
 }

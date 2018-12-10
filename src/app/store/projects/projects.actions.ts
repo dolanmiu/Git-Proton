@@ -6,7 +6,9 @@ export enum ProjectsActionTypes {
     StartCommit = '[Projects] Start Commit',
     Commit = '[Projects] Commit',
     SetStatuses = '[Projects] Set Statuses',
+    StartSetReferences = '[Projects] Start Set References',
     SetReferences = '[Projects] Set References',
+    StartSetRemotes = '[Projects] Start Set Remotes',
     SetRemotes = '[Projects] Set Remotes',
     StartAddRemote = '[Projects] Load Remote',
     AddRemote = '[Projects] Add Remote',
@@ -58,16 +60,28 @@ export class SetStatusesAction implements Action {
     constructor(public readonly payload: StatusIPCData) {}
 }
 
+export class StartSetReferencesAction implements Action {
+    public readonly type = ProjectsActionTypes.StartSetReferences;
+
+    constructor() {}
+}
+
 export class SetReferencesAction implements Action {
     public readonly type = ProjectsActionTypes.SetReferences;
 
-    constructor(public readonly projectName: string, public readonly references: ReferenceData[]) {}
+    constructor(public readonly payload: ReferencesIPCData) {}
+}
+
+export class StartSetRemotesAction implements Action {
+    public readonly type = ProjectsActionTypes.StartSetRemotes;
+
+    constructor() {}
 }
 
 export class SetRemotesAction implements Action {
     public readonly type = ProjectsActionTypes.SetRemotes;
 
-    constructor(public readonly projectName: string, public readonly remotes: RemoteData[]) {}
+    constructor(public readonly payload: RemoteIPCData) {}
 }
 
 export class StartAddRemoteAction implements Action {
@@ -183,8 +197,10 @@ export type ProjectActions =
     | StartCommitAction
     | CommitAction
     | SetStatusesAction
+    | StartSetReferencesAction
     | SetReferencesAction
     | RemoveProjectAction
+    | StartSetRemotesAction
     | SetRemotesAction
     | StartAddRemoteAction
     | AddRemoteAction
