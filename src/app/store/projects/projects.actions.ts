@@ -10,9 +10,9 @@ export enum ProjectsActionTypes {
     SetReferences = '[Projects] Set References',
     StartSetRemotes = '[Projects] Start Set Remotes',
     SetRemotes = '[Projects] Set Remotes',
-    StartAddRemote = '[Projects] Load Remote',
+    StartAddRemote = '[Projects] Start Add Remote',
     AddRemote = '[Projects] Add Remote',
-    StartDeleteRemote = '[Projects] Load Delete Remote',
+    StartDeleteRemote = '[Projects] Start Delete Remote',
     DeleteRemote = '[Projects] Delete Remote',
     StartStage = '[Projects] Start Stage',
     Stage = '[Projects] Stage',
@@ -30,6 +30,8 @@ export enum ProjectsActionTypes {
     CheckoutBranch = '[Projects] Checkout Branch',
     StartGetDiff = '[Projects] Start Get Diff',
     GetDiff = '[Projects] Get Diff',
+    StartFetch = '[Projects] Start Fetch',
+    Fetch = '[Projects] Fetch',
 }
 
 export class AddProjectAction implements Action {
@@ -206,6 +208,18 @@ export class GetDiffAction implements Action {
     constructor(public readonly payload: StatusIPCData) {}
 }
 
+export class StartFetchAction implements Action {
+    public readonly type = ProjectsActionTypes.StartFetch;
+
+    constructor() {}
+}
+
+export class FetchAction implements Action {
+    public readonly type = ProjectsActionTypes.Fetch;
+
+    constructor() {}
+}
+
 export type ProjectActions =
     | AddProjectAction
     | StartCommitAction
@@ -235,4 +249,5 @@ export type ProjectActions =
     | StartCheckoutBranchAction
     | CheckoutBranchAction
     | StartGetDiffAction
-    | GetDiffAction;
+    | GetDiffAction
+    | StartFetchAction;

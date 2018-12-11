@@ -2,36 +2,32 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { getCurrentProject, getUnselectedProjectsArray } from 'app/store';
-import { GitFetchService } from './git-fetch.service';
+import { getUnselectedProjectsArray, StartFetchAction } from 'app/store';
 
 @Injectable()
 export class GitSchedulerService {
     constructor(
         private store: Store<AppState>,
-        private gitFetchService: GitFetchService,
     ) {}
 
     public start(): void {
         Observable.interval(10000)
             .switchMap(() => this.store.select(getUnselectedProjectsArray).take(1))
             .flatMap((arr) => arr)
-            .do((project) => {
-                this.poll(project);
+            .do(() => {
+                this.poll();
             })
             .subscribe();
 
         Observable.interval(10000)
-            .switchMap(() => this.store.select(getCurrentProject).take(1))
-            .filter((x) => !!x)
-            .do((project) => {
-                this.poll(project);
+            .do(() => {
+                this.poll();
             })
             .subscribe();
     }
 
-    private poll(project: ProjectState): void {
+    private poll(): void {
         // this.statusService.getStatus(project);
-        this.gitFetchService.fetch(project);
+        this.store.dispatch(new StartFetchAction());
     }
 }

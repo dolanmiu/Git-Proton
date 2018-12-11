@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import {
     GitCommitService,
     GitDiffService,
+    GitFetchService,
     GitPushService,
     GitReferenceService,
     GitRemoteService,
@@ -140,13 +141,21 @@ export class ProjectsEffects {
         .switchMap(([_, project]) => this.gitRemoteService.getRemotes(project))
         .map((remotes) => new ProjectsActions.SetRemotesAction(remotes));
 
-        @Effect()
+    @Effect()
     public readonly getStatus$: Observable<ProjectsActions.GetDiffAction> = this.actions$
         .ofType(ProjectsActions.ProjectsActionTypes.StartGetDiff)
         .map((action: ProjectsActions.StartGetDiffAction) => action)
         .withLatestFrom(this.store.select(getCurrentProject))
         .switchMap(([_, project]) => this.gitDiffService.diff(project))
         .map((statuses) => new ProjectsActions.GetDiffAction(statuses));
+
+    @Effect()
+    public readonly fetch$: Observable<ProjectsActions.FetchAction> = this.actions$
+        .ofType(ProjectsActions.ProjectsActionTypes.StartFetch)
+        .map((action: ProjectsActions.StartFetchAction) => action)
+        .withLatestFrom(this.store.select(getCurrentProject))
+        .switchMap(([_, project]) => this.gitFetchService.fetch(project))
+        .map(() => new ProjectsActions.FetchAction());
 
     constructor(
         private readonly actions$: Actions,
@@ -160,5 +169,6 @@ export class ProjectsEffects {
         private readonly gitReferenceService: GitReferenceService,
         private readonly gitService: GitService,
         private readonly gitDiffService: GitDiffService,
+        private readonly gitFetchService: GitFetchService,
     ) {}
 }
