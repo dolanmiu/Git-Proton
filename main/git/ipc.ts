@@ -42,8 +42,15 @@ export class NodeGitIPC {
             }
         });
 
-        ipcMain.on('fetch', (event, project: ProjectState) => {
-            fetch(project.path).catch(console.error);
+        ipcMain.on('fetch', async (event, project: ProjectState) => {
+            try {
+                const result = await fetch(project.path);
+
+                console.log(result);
+                event.sender.send('fetch-result', undefined, result);
+            } catch (e) {
+                event.sender.send('fetch-result', e);
+            }
         });
 
         ipcMain.on('fetch-all', (event, project: ProjectState) => {
