@@ -1,23 +1,20 @@
 import * as nodegit from 'nodegit';
 
-// This function commits code to repository
-export default function commit(directory: string, name: string, email: string, message: string, fn: (data: StatusData[]) => void): void {
+export async function commit(directory: string, name: string, email: string, message: string): Promise<string> {
     const epochSeconds = Math.round(new Date().getTime() / 1000);
 
-    nodegit.Repository.open(directory).then((repo) => {
-        nodegit.Reference.nameToId(repo, 'HEAD')
-            .then((head) => {
-                return repo.getCommit(head);
-            })
-            .then((parent) => {
-                const author = nodegit.Signature.create(name, email, epochSeconds, 0);
-                const committer = nodegit.Signature.create(name, email, epochSeconds, 0);
+    const repo = await nodegit.Repository.open(directory);
+    const head = await nodegit.Reference.nameToId(repo, 'HEAD');
+    // const parent = await repo.getCommit(head);
+    await repo.getCommit(head);
 
-                // return repo.createCommit('HEAD', author, committer, 'message', oid, [parent]);
-                return repo.createCommitOnHead([], author, committer, message);
-            })
-            .done((commitId) => {
-                console.log('New Commit: ', commitId);
-            });
-    });
+    const author = nodegit.Signature.create(name, email, epochSeconds, 0);
+    const committer = nodegit.Signature.create(name, email, epochSeconds, 0);
+
+    // return repo.createCommit('HEAD', author, committer, 'message', oid, [parent]);
+    const oid = await repo.createCommitOnHead([], author, committer, message);
+    return oid;
+    // .done((commitId) => {
+    //     console.log('New Commit: ', commitId);
+    // });
 }

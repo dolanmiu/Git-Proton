@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { SettingsService } from 'app/common/electron/settings.service';
 import * as PersistanceActions from './persistance.actions';
@@ -25,5 +25,5 @@ export class PersistanceEffects {
         })
         .map(() => undefined);
 
-    constructor(private actions$: Actions, private settingsService: SettingsService) {}
+    constructor(private readonly actions$: Actions, private readonly settingsService: SettingsService) {}
 }

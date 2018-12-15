@@ -1,7 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

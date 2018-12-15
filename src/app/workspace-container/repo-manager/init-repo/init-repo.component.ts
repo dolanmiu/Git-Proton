@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-init-repo',
     templateUrl: './init-repo.component.html',
     styleUrls: ['./init-repo.component.scss'],
 })
-export class InitRepoComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class InitRepoComponent {}

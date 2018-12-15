@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { getCurrentProject } from 'app/store';
 
@@ -18,7 +18,7 @@ export class TableComponent {
     // tslint:disable-next-line:readonly-keyword
     private takeCount: number;
 
-    constructor(store: Store<AppState>) {
+    constructor(readonly store: Store<AppState>) {
         this.takeCount = 30;
         this.allCommits$ = store
             .select(getCurrentProject)

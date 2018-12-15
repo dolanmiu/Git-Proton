@@ -9,19 +9,19 @@ export enum PersistanceActionType {
 export class SetSshCredentialsAction implements Action {
     public readonly type = PersistanceActionType.SetSshCredentials;
 
-    constructor(public credentials: PersistanceSshCredentialsData) {}
+    constructor(public readonly credentials: PersistanceSshCredentialsData) {}
 }
 
 export class SetHttpsCredentialsAction implements Action {
     public readonly type = PersistanceActionType.SetHttpsCredentials;
 
-    constructor(public credentials: PersistanceHttpsCredentialsData) {}
+    constructor(public readonly credentials: PersistanceHttpsCredentialsData) {}
 }
 
 export class SetPersistanceAction implements Action {
     public readonly type = PersistanceActionType.Set;
 
-    constructor(public payload: PersistanceState) {}
+    constructor(public readonly payload: PersistanceState) {}
 }
 
 export type Actions = SetSshCredentialsAction | SetHttpsCredentialsAction | SetPersistanceAction;

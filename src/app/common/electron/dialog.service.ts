@@ -1,8 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { remote } from 'electron';
 
-import { ElectronSwitchService } from '../electron-switch.service';
-import { ElectronSwitcheroo } from '../electron-switcheroo';
+import { ElectronSwitcheroo, ElectronSwitchService } from 'app/common';
 import { ProjectPathService } from '../project-path.service';
 
 const FAKE_DIALOGS: ProjectPathDetails[] = [
@@ -18,7 +17,7 @@ export class DialogService extends ElectronSwitchService {
     private accessCounter: number;
     private readonly dialogSwitcheroo: ElectronSwitcheroo<void, (details: ProjectPathDetails) => void>;
 
-    constructor(private zone: NgZone, private projectPathService: ProjectPathService) {
+    constructor(readonly zone: NgZone, readonly projectPathService: ProjectPathService) {
         super();
 
         if (this.IsElectron) {

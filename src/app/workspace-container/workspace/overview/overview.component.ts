@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-overview',
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class OverviewComponent implements OnInit {
     public readonly tree$: Observable<TreeState>;
 
-    constructor(store: Store<AppState>) {
+    constructor(readonly store: Store<AppState>) {
         this.tree$ = store.select('tree');
     }
 

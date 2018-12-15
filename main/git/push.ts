@@ -28,7 +28,7 @@ export async function pushViaHttp(
     userName: string,
     password: string,
     // tslint:disable-next-line:no-any
-): Promise<any> {
+): Promise<number> {
     const repo = await nodegit.Repository.open(directory);
 
     const remoteName = await nodegit.Branch.remoteName(repo, referenceName);

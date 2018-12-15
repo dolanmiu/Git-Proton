@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './new-tab.component.html',
     styleUrls: ['./new-tab.component.scss'],
 })
-export class NewTabComponent {
-    constructor() {}
-}
+export class NewTabComponent {}

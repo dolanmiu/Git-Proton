@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 
-import { AppCommonModule } from '../../../common/common.module';
+import { AppCommonModule } from 'app/common/common.module';
 import { OpenRepoComponent } from './open-repo.component';
 import { RepoButtonComponent } from './repo-button/repo-button.component';
 

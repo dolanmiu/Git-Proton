@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ITreeOptions, TREE_ACTIONS, TreeNode } from 'angular-tree-component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { getCurrentProject } from 'app/store';
-import { GitReferenceService } from '../../../../common/git/git-reference.service';
+import { getCurrentProject, StartCheckoutBranchAction } from 'app/store';
 
 interface NodeData {
     readonly id: number;
@@ -37,7 +36,7 @@ export class TreeComponent {
         },
     };
 
-    constructor(private store: Store<AppState>, private gitReferenceService: GitReferenceService) {
+    constructor(private readonly store: Store<AppState>) {
         this.nodes$ = store
             .select(getCurrentProject)
             .filter((x) => !!x)
@@ -110,12 +109,6 @@ export class TreeComponent {
     }
 
     private checkoutBranch(reference: string): void {
-        this.store
-            .select(getCurrentProject)
-            .do((project) => {
-                this.gitReferenceService.checkoutBranch(project, reference);
-            })
-            .take(1)
-            .subscribe();
+        this.store.dispatch(new StartCheckoutBranchAction(reference));
     }
 }

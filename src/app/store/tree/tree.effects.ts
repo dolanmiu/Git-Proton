@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import * as TreeActions from './tree.actions';
 
@@ -15,5 +15,5 @@ export class TreeEffects {
             return Observable.empty();
         });
 
-    constructor(private actions$: Actions) {}
+    constructor(private readonly actions$: Actions) {}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { getCredentials } from 'app/store';
 import { SetHttpsCredentialsAction, SetSshCredentialsAction } from 'app/store/persistance/persistance.actions';
@@ -16,7 +16,7 @@ export class AuthenticationComponent implements OnInit {
     public form: FormGroup;
     public readonly credentials$: Observable<PersistanceCredentials>;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private readonly store: Store<AppState>) {
         this.credentials$ = store.select(getCredentials);
     }
 

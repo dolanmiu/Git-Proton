@@ -1,6 +1,5 @@
 // tslint:disable:no-any
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class MockStore {
     private readonly selectStreams: Map<Function, BehaviorSubject<any>>;

@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ElectronModule } from './electron/electron.module';
-import { GitModule } from './git/git.module';
 import { ProjectPathService } from './project-path.service';
 
 @NgModule({
-    imports: [CommonModule, ElectronModule, GitModule, RouterModule],
+    imports: [CommonModule, ElectronModule, RouterModule],
     providers: [ProjectPathService],
 })
 export class AppCommonModule {}
