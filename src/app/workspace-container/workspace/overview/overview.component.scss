@@ -1,5 +1,6 @@
 :host {
-    display: block;
+    display: flex;
+    flex-direction: row;
     height: 100%;
 }
 
@@ -15,4 +16,12 @@
     min-height: 64px;
     padding: 8px 24px 0;
     padding-left: 24px;
+}
+
+.table {
+    width: 100%;
+}
+
+gg-core {
+    width: 300px;
 }

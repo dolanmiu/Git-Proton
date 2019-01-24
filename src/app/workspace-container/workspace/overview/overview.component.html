@@ -1,1 +1,8 @@
-<app-table></app-table>
+<gg-graph [core]="core">
+    <ng-template #dot>
+        <svg:g dot><svg:circle cx="10" cy="10" r="20" stroke="black" stroke-width="3" fill="red" /></svg:g>
+    </ng-template>
+</gg-graph>
+
+<app-table class="table"></app-table>
+<!-- <button (click)="commit()"></button> -->

@@ -24,7 +24,8 @@
               "node_modules/@fortawesome/fontawesome-pro/css/all.css",
               "src/global-styles/index.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {

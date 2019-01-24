@@ -1,5 +1,31 @@
-<div class="table" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
+<table class="table">
+    <tr>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Author</th>
+    </tr>
+    <tr *ngFor="let x of (dataSource$ | async)">
+        <td>{{ x.message }}</td>
+        <td>{{ x.date | date }}</td>
+        <td>{{ x.author.name }}</td>
+    </tr>
+</table>
 
-    <div *ngFor="let x of dataSource$ | async">{{x | json}}</div>
-
-</div>
+<!-- {
+    "author": {
+      "email": "dolan@dolan.com",
+      "name": "Dolan Dolan"
+    },
+    "committer": {
+      "email": "dolan@dolan.com",
+      "name": "Dolan Dolan"
+    },
+    "date": "2018-08-01T00:36:32.000Z",
+    "message": "Story",
+    "sha": {
+      "current": "781de2fdb273d9991b66cfa5627346bc8a67545e",
+      "parents": [
+        "9d343b9fbef1a6bf43ab73e247cb92ee242a04bd"
+      ]
+    }
+  } -->
