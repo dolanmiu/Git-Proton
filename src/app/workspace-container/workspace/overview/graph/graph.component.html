@@ -1,0 +1,55 @@
+<svg height="10000" width="1000" *ngIf="(rendered$ | async); else loading; let renderered">
+    <ng-container *ngFor="let path of renderered.FullPaths">
+        <ng-container *ngFor="let commit of path; let i = index">
+            <svg:circle
+                *ngIf="commit?.type === 'NODE'"
+                [attr.cx]="30 * commit.laneNumber + 10 + 2"
+                [attr.cy]="30 * commit.rowNumber + 10 + 2"
+                r="10"
+                stroke="black"
+                stroke-width="2"
+                fill="red"
+            />
+
+            <svg:line
+                [attr.x1]="30 * commit.laneNumber + 10 + 2"
+                [attr.y1]="30 * commit.rowNumber + 10 + 2"
+                [attr.x2]="30 * getEndPosition(path, i).laneNumber + 10 + 2"
+                [attr.y2]="30 * getEndPosition(path, i).rowNumber + 10 + 2"
+                style="stroke:rgb(255,0,0);stroke-width:2"
+            />
+        </ng-container>
+    </ng-container>
+    <!-- <ng-container *ngFor="let row of renderered.Rows">
+        <ng-container *ngFor="let commit of row; let i = index">
+            <svg:circle
+                *ngIf="commit?.type === 'NODE'"
+                [attr.cx]="i * 30 + 10 + 2"
+                [attr.cy]="30 * commit.rowNumber + 10 + 2"
+                r="10"
+                stroke="black"
+                stroke-width="2"
+                fill="red"
+            />
+        </ng-container>
+    </ng-container> -->
+
+    <!-- <ng-container *ngFor="let line of renderered.Lines; let j = index">
+        <ng-container *ngFor="let linePoint of line; let i = index">
+            <svg:circle
+                [attr.cx]="30 * linePoint.laneNumber + 10 + 2 + 2"
+                [attr.cy]="30 * linePoint.rowNumber + 10 + 2 + 2"
+                r="10"
+                stroke="black"
+                [attr.fill]="getColor(j)"
+            />
+            <svg:line
+                [attr.x1]="30 * getStartPosition(line, i).laneNumber + 10 + 2"
+                [attr.y1]="30 * getStartPosition(line, i).rowNumber + 10 + 2"
+                [attr.x2]="30 * getEndPosition(line, i).laneNumber + 10 + 2"
+                [attr.y2]="30 * getEndPosition(line, i).rowNumber + 10 + 2"
+                style="stroke:rgb(255,0,0);stroke-width:2"
+            />
+        </ng-container>
+    </ng-container> -->
+</svg>

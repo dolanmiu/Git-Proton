@@ -1,5 +1,5 @@
-<div class="table" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
+<!-- <div class="table" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()">
 
-    <div *ngFor="let x of dataSource$ | async">{{x | json}}</div>
 
-</div>
+</div> -->
+<div class="row" *ngFor="let x of allCommits$ | async">{{x.message}} {{x.sha.current}} {{x.sha.parents}}</div>

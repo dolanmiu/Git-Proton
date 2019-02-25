@@ -14,24 +14,23 @@ export class TableComponent {
     public readonly displayedColumns: string[] = ['description', 'date', 'name', 'sha'];
     // tslint:disable-next-line:readonly-keyword
     public dataSource$: Observable<GitCommitModel[]>;
-    private readonly allCommits$: Observable<GitCommitModel>;
+    public readonly allCommits$: Observable<GitCommitModel[]>;
     // tslint:disable-next-line:readonly-keyword
-    private takeCount: number;
+    // private takeCount: number;
 
     constructor(readonly store: Store<AppState>) {
-        this.takeCount = 30;
+        // this.takeCount = 30;
         this.allCommits$ = store
             .select(getCurrentProject)
-            .map((project) => (project ? project.commits : []))
-            .flatMap((commits) => commits);
+            .map((project) => (project ? project.commits : []));
 
-        this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
+        // this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
     }
 
     public onScroll(): void {
         // tslint:disable-next-line:no-object-mutation
-        this.takeCount += 30;
+        // this.takeCount += 30;
         // tslint:disable-next-line:no-object-mutation
-        this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
+        // this.dataSource$ = this.allCommits$.take(this.takeCount).toArray();
     }
 }
