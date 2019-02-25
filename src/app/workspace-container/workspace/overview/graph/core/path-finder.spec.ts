@@ -1,5 +1,5 @@
 import { PathFinder } from './path-finder';
-import { PathPoint, PointType } from './path-point';
+import { PointType } from './path-point';
 
 const linearCommits: GitCommitModel[] = [
     {
