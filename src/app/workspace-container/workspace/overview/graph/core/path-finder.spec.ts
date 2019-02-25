@@ -232,4 +232,14 @@ describe('PathFinder', () => {
         expect(pathResult.end.sha).toEqual(newCommits[0].sha.current);
         expect(pathResult.total.length).toEqual(1);
     });
+
+    it('should work out a correct path for 5 elements for the shortest route', () => {
+        const pathResult = PathFinder.find(multiParentCommits, new Map<string, boolean>(), multiParentCommits[0]);
+
+        expect(pathResult.start.sha).toEqual(multiParentCommits[0].sha.current);
+        expect(pathResult.start.type).toEqual(PointType.NODE);
+        expect(pathResult.intermediate.length).toEqual(2);
+        expect(pathResult.end!.sha).toEqual(multiParentCommits[multiParentCommits.length - 1].sha.current);
+        expect(pathResult.total.slice().sort()).toEqual(pathResult.total);
+    });
 });
