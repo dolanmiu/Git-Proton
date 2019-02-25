@@ -1,4 +1,4 @@
-<svg height="10000" width="1000" *ngIf="(rendered$ | async); else loading; let renderered">
+<svg height="10000" width="1000" *ngIf="(rendered$ | async); let renderered">
     <ng-container *ngFor="let path of renderered.FullPaths">
         <ng-container *ngFor="let commit of path; let i = index">
             <svg:circle
