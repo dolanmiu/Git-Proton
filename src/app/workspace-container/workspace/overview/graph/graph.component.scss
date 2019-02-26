@@ -1,0 +1,12 @@
+$path-color: #000;
+
+.line {
+    fill: none;
+    stroke: $path-color;
+    stroke-linecap: round;
+    stroke-width: 3;
+}
+
+.node {
+    z-index: 10;
+}

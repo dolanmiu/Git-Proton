@@ -89,9 +89,23 @@ describe('Graph', () => {
         const graph = Graph.of(commits);
         const rendered = graph.render();
 
-        rendered.Rows.forEach((row) => {
-            const nodes = row.filter((item) => item.type === PointType.NODE);
+        const map = new Map<number, string[]>();
 
+        rendered.FullPaths.forEach((path) => {
+            path.forEach((linePoint) => {
+                if (!map.has(linePoint.rowNumber)) {
+                    map.set(linePoint.rowNumber, []);
+                }
+
+                if (linePoint.type === PointType.NODE) {
+                    if (!map.get(linePoint.rowNumber).includes(linePoint.sha)) {
+                        map.get(linePoint.rowNumber).push(linePoint.sha);
+                    }
+                }
+            });
+        });
+
+        map.forEach((nodes) => {
             expect(nodes.length).toEqual(1);
         });
     });

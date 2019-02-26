@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { getCurrentProject } from 'app/store';
 
 import { Graph, Rendered } from './core/graph';
-import { PathLanePoint } from './core/path-point';
+import { PathLanePoint, PathLinePoint } from './core/path-point';
 
 @Component({
     selector: 'app-graph',
@@ -43,5 +43,14 @@ export class GraphComponent implements OnInit {
 
     public getColor(i: number): string {
         return '#' + Math.floor(Math.sin(i) * 16777215).toString(16);
+    }
+
+    public getD(row: number, column: number, path: PathLinePoint[], index: number): string {
+        const fromX = 30 * row + 10 + 2;
+        const fromY = 30 * column + 10 + 2;
+
+        const toX = 30 * this.getEndPosition(path, index).laneNumber + 10 + 2;
+        const toY = 30 * this.getEndPosition(path, index).rowNumber + 10 + 2;
+        return `M${fromX},${fromY} C${fromX},${toY} ${toX},${fromY} ${toX},${toY}`;
     }
 }

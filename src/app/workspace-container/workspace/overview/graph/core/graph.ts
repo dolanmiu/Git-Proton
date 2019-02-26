@@ -23,6 +23,7 @@ export class Rendered {
                 laneNumber: this.rows[pathPoint.rowNumber].length,
             };
 
+            // If the new point isn't added, add it, otherwise add an already existing one in the graph to prevent duplicates
             if (!this.nodesAlreadyAdded.has(newPointPath.sha!)) {
                 this.rows[pathPoint.rowNumber].push(newPointPath);
                 fullPath.push(newPointPath);
@@ -71,10 +72,6 @@ export class Rendered {
         return path;
     }
 
-    public get Rows(): PathPoint[][] {
-        return this.rows;
-    }
-
     public get FullPaths(): PathLanePoint[][] {
         return this.fullPaths;
     }
@@ -87,8 +84,17 @@ export class Graph {
     public static of(commits: GitCommitModel[]): Graph {
         const graph = new Graph();
 
+        // Without this the begining of graph may look off. Need a backbone to it all
+        const backbonePath = PathFinder.find(commits, graph.connectionMap, commits[0]);
+        graph.addPath(backbonePath);
+
         for (const commit of commits) {
             const path = PathFinder.find(commits, graph.connectionMap, commit);
+
+            if (path.total.length <= 1) {
+                continue;
+            }
+
             graph.addPath(path);
         }
 
@@ -101,8 +107,6 @@ export class Graph {
         for (const path of this.paths) {
             rendererd.addPath(path);
         }
-
-        console.log(rendererd.FullPaths);
 
         return rendererd;
     }

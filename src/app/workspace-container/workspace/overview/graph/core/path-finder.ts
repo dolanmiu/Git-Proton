@@ -13,7 +13,6 @@ export class PathFinder {
         const positionMap = this.convertToPositionMap(commits);
 
         const result = this.findLongestPath(start.sha.current, shaToCommitMap, positionMap, connectionMap);
-        console.log(result);
 
         const end = result[result.length - 1];
         const intermediates = result.slice(1, -1);
