@@ -39,7 +39,7 @@
     "@ngrx/effects": "6.1.2",
     "@ngrx/router-store": "7.0.0",
     "@ngrx/store": "7.0.0",
-    "@ngrx/store-devtools": "7.0.0",
+    "@ngrx/store-devtools": "7.4.0",
     "@types/electron-settings": "3.1.1",
     "@types/lodash": "4.14.123",
     "@types/shelljs": "0.8.3",
