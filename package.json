@@ -50,7 +50,7 @@
     "lodash": "4.17.11",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-infinite-scroll": "7.0.0",
-    "nodegit": "0.24.0",
+    "nodegit": "0.24.1",
     "npm-run-all": "4.1.4",
     "ramda": "0.26.1",
     "rxjs": "6.2.1",
